@@ -1,0 +1,1 @@
+{"name":"depsjs","dependencies":{"express":"^4","ghost-pkg-zzz":"^1"},"devDependencies":{"jest":"^29"}}

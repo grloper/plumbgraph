@@ -1,0 +1,5 @@
+high   0.95 dead-code          enum      DeadEnum src/shapes.ts:15
+high   0.95 dead-code          interface DeadShape src/shapes.ts:9
+high   0.95 dead-code          type      DeadAlias src/shapes.ts:13
+medium 0.77 dead-code          class     Circle src/shapes.ts:19
+medium 0.77 dead-code          method    Circle.radius src/shapes.ts:20

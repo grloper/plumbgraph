@@ -1,0 +1,3 @@
+[[allow]]
+symbol = "allowlisted_fn"
+reason = "called by external plugin loader"

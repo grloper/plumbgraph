@@ -1,0 +1,4 @@
+high   0.90 nonexistent-declared-package dependency hallucinated-lib-xyz requirements.txt:3
+medium 0.70 nonexistent-package import    totallyfakepkg app.py:5
+medium 0.70 undeclared-dependency import    numpy app.py:4
+medium 0.80 unresolved-import  import    . app.py:6

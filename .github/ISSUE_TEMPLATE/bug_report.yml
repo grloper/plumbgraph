@@ -1,0 +1,35 @@
+name: Bug report
+description: Wrong, missing or misleading result, crash, or unsafe behaviour
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Security problems: please use a private report (see SECURITY.md), not this form.
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+      description: Output of `plumb --version` or the git commit
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [dead-code, check-deps, weakening, index, mcp, packs, other]
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: A tiny file/repo and the exact command. For false positives/negatives include the finding's `evidence` and `fp_risks`.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs actual
+    validations:
+      required: true

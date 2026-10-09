@@ -1,0 +1,6 @@
+high   0.95 dead-code          function  deadLocal src/index.js:4
+medium 0.77 dead-code          class     Widget src/lib.js:9
+medium 0.77 dead-code          function  exportedUnused src/index.js:8
+medium 0.77 dead-code          method    Widget.unusedMethod src/lib.js:16
+medium 0.80 dead-code          function  a src/lib.js:21
+medium 0.80 dead-code          function  b src/lib.js:25
