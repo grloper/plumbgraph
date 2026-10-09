@@ -415,6 +415,7 @@ use std::time::Duration;
 
 pub const TOOL_NAMES: &[&str] = &["cargo-check", "clippy", "tsc", "ruff", "pyright"];
 
+#[derive(Debug, Clone)]
 pub struct DiagInput {
     pub format: Format,
     /// Where it came from (path, `-`), for the report only.

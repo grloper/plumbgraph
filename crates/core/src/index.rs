@@ -78,7 +78,12 @@ fn text_kind(p: &Path) -> Option<&'static str> {
     let name = p.file_name()?.to_str()?.to_ascii_lowercase();
     if matches!(
         name.as_str(),
-        "package-lock.json" | "yarn.lock" | "pnpm-lock.yaml" | "cargo.lock" | "composer.lock"
+        "package-lock.json"
+            | "yarn.lock"
+            | "pnpm-lock.yaml"
+            | "cargo.lock"
+            | "composer.lock"
+            | "plumb-baseline.json"
     ) || name.ends_with(".min.js")
         || name.ends_with(".lock")
     {
