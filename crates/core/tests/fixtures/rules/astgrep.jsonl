@@ -1,0 +1,1 @@
+{"text": "eval(\"1\")", "range": {"byteOffset": {"start": 4, "end": 13}, "start": {"line": 0, "column": 4}, "end": {"line": 0, "column": 13}}, "file": "e.py", "language": "Python", "ruleId": "no-eval", "severity": "error", "note": null, "message": "do not call eval"}

@@ -188,7 +188,7 @@ fn mcp_stdio_roundtrip() {
         .collect();
     assert_eq!(lines.len(), 4, "notifications get no response");
     assert_eq!(lines[0]["result"]["serverInfo"]["name"], "plumbgraph");
-    assert_eq!(lines[1]["result"]["tools"].as_array().unwrap().len(), 10);
+    assert_eq!(lines[1]["result"]["tools"].as_array().unwrap().len(), 13);
     assert_eq!(
         lines[2]["result"]["structuredContent"]["data"]["findings"][0]["symbol"],
         "_dead"
@@ -477,4 +477,94 @@ fn map_and_impact_commands() {
         .output()
         .unwrap();
     assert_eq!(out.status.code(), Some(2));
+}
+
+// ---------------------------------------------------------------- v1: verify, doctor, init
+
+#[test]
+fn verify_exit_codes_and_baseline_flow() {
+    let t = project();
+    git(t.path(), &["init", "-q"]);
+    git(t.path(), &["add", "-A"]);
+    git(t.path(), &["commit", "-q", "-m", "i"]);
+    let run = |extra: &[&str]| {
+        plumb()
+            .args(["verify"])
+            .arg(t.path())
+            .args(extra)
+            .output()
+            .unwrap()
+    };
+    let out = run(&["--no-such-flag"]);
+    assert_eq!(out.status.code(), Some(2), "unknown flag is a usage error");
+    let out = run(&[]);
+    assert_eq!(
+        out.status.code(),
+        Some(1),
+        "{}",
+        String::from_utf8_lossy(&out.stdout)
+    );
+    assert!(String::from_utf8_lossy(&out.stdout).contains("nothing was executed"));
+    let out = run(&["--update-baseline"]);
+    assert_eq!(out.status.code(), Some(0));
+    assert!(t.path().join("plumb-baseline.json").is_file());
+    let out = run(&[]);
+    assert_eq!(
+        out.status.code(),
+        Some(0),
+        "{}",
+        String::from_utf8_lossy(&out.stdout)
+    );
+    assert!(
+        String::from_utf8_lossy(&out.stdout).contains("VERIFY: PASS")
+            || String::from_utf8_lossy(&out.stdout).contains("verify: PASS")
+    );
+    let out = plumb()
+        .args(["--json", "verify"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    let v: serde_json::Value = serde_json::from_slice(&out.stdout).unwrap();
+    assert_eq!(v["verdict"], "pass");
+    assert_eq!(v["baselined"], 1);
+}
+
+#[test]
+fn doctor_and_init_commands() {
+    let t = project();
+    let out = plumb()
+        .args(["--json", "doctor"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    assert!(out.status.success());
+    let v: serde_json::Value = serde_json::from_slice(&out.stdout).unwrap();
+    assert!(v
+        .as_array()
+        .unwrap()
+        .iter()
+        .any(|p| p["id"] == "scip-python" && p["relevant"] == true));
+    let out = plumb()
+        .args(["init"])
+        .arg(t.path())
+        .args(["--agent", "claude", "--dry-run"])
+        .output()
+        .unwrap();
+    assert!(out.status.success());
+    assert!(
+        !t.path().join("AGENTS.md").exists(),
+        "dry run writes nothing"
+    );
+    let out = plumb()
+        .args(["init"])
+        .arg(t.path())
+        .args(["--agent", "claude"])
+        .output()
+        .unwrap();
+    assert!(
+        out.status.success(),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    assert!(t.path().join("AGENTS.md").is_file() && t.path().join(".mcp.json").is_file());
 }

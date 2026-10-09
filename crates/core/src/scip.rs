@@ -108,15 +108,26 @@ pub fn load(path: &Path) -> Result<ScipIndex> {
     })
 }
 
-/// Index files found without being told: `<root>/index.scip`, `<root>/.plumbgraph/index.scip`.
+/// Index files found without being told: `<root>/index.scip`, `<root>/.plumbgraph/index.scip`
+/// and every `<root>/.plumbgraph/scip/*.scip` (written by `plumb enrich`).
 pub fn discover(root: &Path) -> Vec<PathBuf> {
-    [
+    let mut v: Vec<PathBuf> = [
         root.join("index.scip"),
         root.join(".plumbgraph").join("index.scip"),
     ]
     .into_iter()
     .filter(|p| p.is_file())
-    .collect()
+    .collect();
+    if let Ok(rd) = std::fs::read_dir(root.join(".plumbgraph").join("scip")) {
+        let mut extra: Vec<PathBuf> = rd
+            .flatten()
+            .map(|e| e.path())
+            .filter(|p| p.is_file() && p.extension().map(|x| x == "scip").unwrap_or(false))
+            .collect();
+        extra.sort();
+        v.extend(extra);
+    }
+    v
 }
 
 /// Last descriptor name of a global SCIP symbol (`pkg/Class#method().` -> `method`).

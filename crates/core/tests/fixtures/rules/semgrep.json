@@ -1,0 +1,37 @@
+{
+ "version": "1.180.0",
+ "results": [
+  {
+   "check_id": "no-shell-true",
+   "path": "a.py",
+   "start": {
+    "line": 3,
+    "col": 5,
+    "offset": 32
+   },
+   "end": {
+    "line": 3,
+    "col": 34,
+    "offset": 61
+   },
+   "extra": {
+    "message": "shell=True is dangerous",
+    "metadata": {},
+    "severity": "ERROR",
+    "fingerprint": "requires login",
+    "lines": "requires login",
+    "validation_state": "NO_VALIDATOR",
+    "engine_kind": "OSS"
+   }
+  }
+ ],
+ "errors": [],
+ "paths": {
+  "scanned": [
+   "a.py"
+  ]
+ },
+ "engine_requested": "OSS",
+ "skipped_rules": [],
+ "profiling_results": []
+}

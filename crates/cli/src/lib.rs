@@ -209,6 +209,69 @@ enum Cmd {
         #[command(flatten)]
         scip: ScipArgs,
     },
+    /// One pass/fail gate: dead code, dependency hallucination, test weakening, diagnostics, rule engines.
+    ///
+    /// Only findings that are *new* relative to the baseline (`plumb-baseline.json`) fail.
+    /// Nothing is executed unless `--run` is given (diagnostics tools, semgrep, ast-grep).
+    Verify {
+        #[arg(default_value = ".")]
+        path: PathBuf,
+        /// Diff base for test-weakening (working tree vs this revision)
+        #[arg(long, default_value = "HEAD")]
+        base: String,
+        /// Execute external tools (cargo check/clippy, tsc, ruff, pyright, semgrep, ast-grep). Only on trusted code.
+        #[arg(long)]
+        run: bool,
+        /// Saved diagnostics output to merge in, `FORMAT:FILE` (executes nothing)
+        #[arg(long = "from", value_name = "FORMAT:FILE")]
+        from: Vec<String>,
+        /// Look up packages on PyPI/npm/crates.io (sends package names over the network)
+        #[arg(long)]
+        online: bool,
+        /// Baseline file (default <path>/plumb-baseline.json)
+        #[arg(long)]
+        baseline: Option<PathBuf>,
+        /// Write the current findings as the new baseline (exit 0)
+        #[arg(long)]
+        update_baseline: bool,
+        /// Fail when a new finding of at least this level exists
+        #[arg(long, value_enum, default_value = "medium")]
+        fail_on: FailOn,
+        /// semgrep config (file, dir or registry pack such as p/ci; registry packs need network)
+        #[arg(long)]
+        semgrep_config: Option<String>,
+        #[arg(long)]
+        lib: bool,
+        #[arg(long, default_value_t = 120)]
+        timeout_secs: u64,
+        #[command(flatten)]
+        scip: ScipArgs,
+    },
+    /// List installed providers (SCIP indexers, diagnostics tools, semgrep, ast-grep, LSPs). Executes nothing.
+    Doctor {
+        #[arg(default_value = ".")]
+        path: PathBuf,
+    },
+    /// Run installed SCIP indexers to sharpen the graph (writes .plumbgraph/scip/*.scip). Executes tools: trusted code only.
+    Enrich {
+        #[arg(default_value = ".")]
+        path: PathBuf,
+        /// Indexer ids (see `plumb doctor`); default: every installed indexer relevant to the project
+        #[arg(long = "only")]
+        only: Vec<String>,
+        #[arg(long, default_value_t = 600)]
+        timeout_secs: u64,
+    },
+    /// Write AGENTS.md instructions and MCP config for Claude Code / Cursor (prints the Codex snippet)
+    Init {
+        #[arg(default_value = ".")]
+        path: PathBuf,
+        /// claude, cursor, codex or all (default: whatever is detected)
+        #[arg(long = "agent")]
+        agents: Vec<String>,
+        #[arg(long)]
+        dry_run: bool,
+    },
     /// Serve the tools over MCP (stdio, JSON-RPC)
     Mcp {
         /// Project root the tools are confined to (default: current directory)
@@ -668,6 +731,202 @@ fn run(cli: Cli) -> Result<bool> {
                 }
                 for l in &r.limitations {
                     println!("note: {l}");
+                }
+            }
+            Ok(false)
+        }
+        Cmd::Verify {
+            path,
+            base,
+            run,
+            from,
+            online,
+            baseline,
+            update_baseline,
+            fail_on,
+            semgrep_config,
+            lib,
+            timeout_secs,
+            scip,
+        } => {
+            use plumbgraph_core::verify::{run_verify, VerifyParams};
+            let mut inputs = vec![];
+            for spec in &from {
+                let (fmt, file) = spec
+                    .split_once(':')
+                    .ok_or_else(|| anyhow::anyhow!("--from expects FORMAT:FILE, got `{spec}`"))?;
+                let format: Format = fmt.parse()?;
+                let text = std::fs::read_to_string(file)
+                    .map_err(|e| anyhow::anyhow!("reading {file}: {e}"))?;
+                inputs.push(DiagInput {
+                    format,
+                    label: file.to_string(),
+                    text,
+                });
+            }
+            let r = run_verify(
+                &target(path),
+                &VerifyParams {
+                    base,
+                    run,
+                    online_deps: online,
+                    diag_inputs: inputs,
+                    baseline,
+                    update_baseline,
+                    fail_on: match fail_on {
+                        FailOn::None | FailOn::Low => Level::Low,
+                        FailOn::Medium => Level::Medium,
+                        FailOn::High => Level::High,
+                    },
+                    semgrep_config,
+                    timeout: std::time::Duration::from_secs(timeout_secs),
+                    scip: scip.opts(),
+                    library_mode: lib,
+                },
+            )?;
+            if json {
+                print_json(&r)?;
+            } else {
+                for f in &r.new {
+                    render(f);
+                }
+                println!();
+                for s in &r.steps {
+                    println!(
+                        "  {:<16} {:<8} {} finding(s){}",
+                        s.name,
+                        s.status,
+                        s.findings,
+                        s.note
+                            .as_ref()
+                            .map(|n| format!("  ({n})"))
+                            .unwrap_or_default()
+                    );
+                }
+                println!(
+                    "
+verify: {}  ({} new, {} baselined, {} fixed since baseline; fail-on {})",
+                    r.verdict.to_uppercase(),
+                    r.new.len(),
+                    r.baselined,
+                    r.fixed,
+                    r.fail_on
+                );
+                if r.baseline_updated {
+                    println!(
+                        "baseline written: {}",
+                        r.baseline_path.clone().unwrap_or_default()
+                    );
+                }
+                for l in &r.limitations {
+                    println!("note: {l}");
+                }
+                if !r.executed {
+                    println!("note: nothing was executed (no --run).");
+                }
+            }
+            Ok(r.verdict == "fail" && !matches!(fail_on, FailOn::None))
+        }
+        Cmd::Doctor { path } => {
+            let det = plumbgraph_core::providers::detect(
+                &path,
+                &plumbgraph_core::providers::default_search_path(),
+            );
+            if json {
+                print_json(&det)?;
+            } else {
+                for d in &det {
+                    println!(
+                        "{:<20} {:<16} {:<9} {:<11} {}",
+                        d.id,
+                        format!("{:?}", d.kind),
+                        if d.available { "installed" } else { "missing" },
+                        if d.relevant { "relevant" } else { "-" },
+                        if d.available {
+                            d.path.clone().unwrap_or_default()
+                        } else if d.relevant {
+                            format!("install: {}", d.install_hint)
+                        } else {
+                            String::new()
+                        }
+                    );
+                }
+                println!("
+nothing was executed. `plumb enrich` runs SCIP indexers; `plumb verify --run` runs diagnostics tools and rule engines.");
+            }
+            Ok(false)
+        }
+        Cmd::Enrich {
+            path,
+            only,
+            timeout_secs,
+        } => {
+            let search = plumbgraph_core::providers::default_search_path();
+            let ids: Vec<String> = if only.is_empty() {
+                plumbgraph_core::providers::detect(&path, &search)
+                    .into_iter()
+                    .filter(|d| {
+                        d.kind == plumbgraph_core::providers::Kind::ScipIndexer
+                            && d.available
+                            && d.relevant
+                    })
+                    .map(|d| d.id)
+                    .collect()
+            } else {
+                only
+            };
+            if ids.is_empty() {
+                println!("no relevant SCIP indexer is installed (see `plumb doctor`); analysis stays tier-0");
+                return Ok(false);
+            }
+            let runs = plumbgraph_core::providers::run_scip_indexers(
+                &path,
+                &ids,
+                &search,
+                std::time::Duration::from_secs(timeout_secs),
+            );
+            if json {
+                print_json(&runs)?;
+            } else {
+                for r in &runs {
+                    println!(
+                        "{:<20} {:<8} {} ms {}{}",
+                        r.id,
+                        r.status,
+                        r.duration_ms,
+                        r.output.clone().unwrap_or_default(),
+                        r.note
+                            .as_ref()
+                            .map(|n| format!("  ({n})"))
+                            .unwrap_or_default()
+                    );
+                }
+                println!("indexes in .plumbgraph/scip/ are picked up automatically by map/impact/dead-code/refs.");
+            }
+            Ok(runs
+                .iter()
+                .any(|r| r.status == "failed" || r.status == "timeout"))
+        }
+        Cmd::Init {
+            path,
+            agents,
+            dry_run,
+        } => {
+            let r = plumbgraph_core::init::init(&path, &agents, dry_run)?;
+            if json {
+                print_json(&r)?;
+            } else {
+                for w in &r.written {
+                    println!("{} {w}", if dry_run { "would write" } else { "wrote" });
+                }
+                for u in &r.unchanged {
+                    println!("unchanged {u}");
+                }
+                for n in &r.notes {
+                    println!("note: {n}");
+                }
+                for s in &r.snippets {
+                    println!("\n{s}");
                 }
             }
             Ok(false)
