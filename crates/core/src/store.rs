@@ -6,9 +6,9 @@ use rusqlite::{params, Connection};
 use std::collections::HashMap;
 use std::path::Path;
 
-pub const SCHEMA_VERSION: &str = "1";
+pub const SCHEMA_VERSION: &str = "2";
 /// Bump when extraction logic changes so cached facts are re-extracted.
-pub const EXTRACTOR_VERSION: &str = "2";
+pub const EXTRACTOR_VERSION: &str = "3";
 
 pub struct Store {
     pub conn: Connection,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS meta(key TEXT PRIMARY KEY, value TEXT);
 CREATE TABLE IF NOT EXISTS file(
   id INTEGER PRIMARY KEY, path TEXT UNIQUE NOT NULL, lang TEXT NOT NULL, hash TEXT NOT NULL, size INTEGER,
   is_test INTEGER NOT NULL DEFAULT 0, is_generated INTEGER NOT NULL DEFAULT 0, parse_status TEXT NOT NULL DEFAULT 'ok',
-  dynamic TEXT NOT NULL DEFAULT '[]');
+  dynamic TEXT NOT NULL DEFAULT '[]', mtime_ns INTEGER NOT NULL DEFAULT 0);
 CREATE TABLE IF NOT EXISTS symbol(
   id INTEGER PRIMARY KEY, file_id INTEGER NOT NULL REFERENCES file(id) ON DELETE CASCADE, idx INTEGER NOT NULL,
   kind TEXT NOT NULL, name TEXT NOT NULL, qname TEXT NOT NULL, start_line INTEGER, end_line INTEGER,
@@ -99,6 +99,47 @@ impl Store {
             ))
         })?;
         Ok(rows.collect::<std::result::Result<_, _>>()?)
+    }
+
+    /// `(id, hash, size, mtime_ns)` per path. `mtime_ns == 0` means "not trustworthy, re-hash".
+    pub fn file_stats(&self) -> Result<HashMap<String, (i64, String, i64, i64)>> {
+        let mut st = self
+            .conn
+            .prepare("SELECT path, id, hash, size, mtime_ns FROM file")?;
+        let rows = st.query_map([], |r| {
+            Ok((
+                r.get::<_, String>(0)?,
+                (
+                    r.get::<_, i64>(1)?,
+                    r.get::<_, String>(2)?,
+                    r.get::<_, Option<i64>>(3)?.unwrap_or(-1),
+                    r.get::<_, i64>(4)?,
+                ),
+            ))
+        })?;
+        Ok(rows.collect::<std::result::Result<_, _>>()?)
+    }
+
+    pub fn set_mtime(&self, id: i64, mtime_ns: i64) -> Result<()> {
+        self.conn.execute(
+            "UPDATE file SET mtime_ns=?1 WHERE id=?2",
+            params![mtime_ns, id],
+        )?;
+        Ok(())
+    }
+
+    pub fn meta(&self, key: &str) -> Option<String> {
+        self.conn
+            .query_row("SELECT value FROM meta WHERE key=?1", [key], |r| r.get(0))
+            .ok()
+    }
+
+    pub fn set_meta(&self, key: &str, value: &str) -> Result<()> {
+        self.conn.execute(
+            "INSERT OR REPLACE INTO meta(key,value) VALUES(?1,?2)",
+            params![key, value],
+        )?;
+        Ok(())
     }
 
     pub fn delete_file(&self, id: i64) -> Result<()> {

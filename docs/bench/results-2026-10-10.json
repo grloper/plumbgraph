@@ -1,0 +1,371 @@
+{
+ "date": "2026-10-10 02:47 IDT",
+ "machine": {
+  "cpus": 8,
+  "platform": "Linux-6.12.94+-x86_64-with-glibc2.41",
+  "python": "3.13.5"
+ },
+ "plumb_version": "plumb 0.2.0",
+ "repos": [
+  {
+   "name": "Wraith",
+   "extensions": {
+    ".rs": 23,
+    ".md": 18,
+    ".yml": 12,
+    ".py": 11,
+    ".sh": 7,
+    "": 6
+   },
+   "cold_index_s": 0.115,
+   "index": {
+    "files_seen": 34,
+    "files_parsed": 34,
+    "symbols": 627,
+    "refs": 14338,
+    "edges": 4092
+   },
+   "noop_reindex_s_median": 0.009,
+   "one_file_changed_reindex_s": 0.045,
+   "one_file_changed_parsed": 1,
+   "map_1000": {
+    "seconds": 0.025,
+    "tokens_estimated": 962,
+    "symbols_shown": 87,
+    "symbols_total": 265,
+    "bytes": 3845
+   },
+   "map_2000": {
+    "seconds": 0.026,
+    "tokens_estimated": 1927,
+    "symbols_shown": 168,
+    "symbols_total": 265,
+    "bytes": 7709
+   },
+   "impact_top_symbol": {
+    "symbol": "Severity",
+    "seconds": 0.022,
+    "affected": 170,
+    "tests_to_run": 8,
+    "ok": true
+   },
+   "dead_code": {
+    "seconds": 0.025,
+    "total": 1,
+    "high": 0,
+    "medium": 1,
+    "low": 0
+   },
+   "verify": {
+    "seconds": 0.045,
+    "exit": 1,
+    "new": 2,
+    "executed": false,
+    "steps": {
+     "dead-code": 1,
+     "check-deps": 1,
+     "test-weakening": 0,
+     "diagnostics": 0,
+     "rule-engines": 0
+    }
+   },
+   "seeded": {
+    "language": ".rs",
+    "seeded_dead": 20,
+    "seeded_live": 20,
+    "dead_found_any_confidence": 20,
+    "dead_found_default_threshold": 20,
+    "live_flagged_as_dead": 0
+   },
+   "commit": "37bd689c8343dfd46640004f4dc678d7b3304c55"
+  },
+  {
+   "name": "classroom-archiver",
+   "extensions": {
+    ".js": 61,
+    "": 9,
+    ".md": 9,
+    ".png": 9,
+    ".json": 4,
+    ".yml": 3
+   },
+   "cold_index_s": 0.087,
+   "index": {
+    "files_seen": 61,
+    "files_parsed": 61,
+    "symbols": 364,
+    "refs": 11863,
+    "edges": 1565
+   },
+   "noop_reindex_s_median": 0.011,
+   "one_file_changed_reindex_s": 0.043,
+   "one_file_changed_parsed": 1,
+   "map_1000": {
+    "seconds": 0.022,
+    "tokens_estimated": 955,
+    "symbols_shown": 77,
+    "symbols_total": 305,
+    "bytes": 3818
+   },
+   "map_2000": {
+    "seconds": 0.023,
+    "tokens_estimated": 1923,
+    "symbols_shown": 156,
+    "symbols_total": 305,
+    "bytes": 7692
+   },
+   "impact_top_symbol": {
+    "symbol": "resolve",
+    "seconds": 0.022,
+    "affected": 26,
+    "tests_to_run": 1,
+    "ok": true
+   },
+   "dead_code": {
+    "seconds": 0.03,
+    "total": 3,
+    "high": 0,
+    "medium": 3,
+    "low": 0
+   },
+   "verify": {
+    "seconds": 0.038,
+    "exit": 1,
+    "new": 3,
+    "executed": false,
+    "steps": {
+     "dead-code": 3,
+     "check-deps": 0,
+     "test-weakening": 0,
+     "diagnostics": 0,
+     "rule-engines": 0
+    }
+   },
+   "seeded": {
+    "language": ".js",
+    "seeded_dead": 20,
+    "seeded_live": 20,
+    "dead_found_any_confidence": 20,
+    "dead_found_default_threshold": 20,
+    "live_flagged_as_dead": 0
+   },
+   "commit": "39513089fe9307369a4d3770b69d318390cde5c4"
+  },
+  {
+   "name": "plumbgraph",
+   "extensions": {
+    ".rs": 39,
+    ".scm": 16,
+    ".toml": 15,
+    ".py": 13,
+    ".md": 11,
+    ".txt": 11
+   },
+   "cold_index_s": 0.186,
+   "index": {
+    "files_seen": 59,
+    "files_parsed": 59,
+    "symbols": 696,
+    "refs": 27470,
+    "edges": 8681
+   },
+   "noop_reindex_s_median": 0.009,
+   "one_file_changed_reindex_s": 0.068,
+   "one_file_changed_parsed": 1,
+   "map_1000": {
+    "seconds": 0.035,
+    "tokens_estimated": 958,
+    "symbols_shown": 87,
+    "symbols_total": 362,
+    "bytes": 3829
+   },
+   "map_2000": {
+    "seconds": 0.04,
+    "tokens_estimated": 1922,
+    "symbols_shown": 170,
+    "symbols_total": 362,
+    "bytes": 7686
+   },
+   "impact_top_symbol": {
+    "symbol": "id",
+    "seconds": 0.036,
+    "affected": 56,
+    "tests_to_run": 7,
+    "ok": true
+   },
+   "dead_code": {
+    "seconds": 0.037,
+    "total": 1,
+    "high": 0,
+    "medium": 1,
+    "low": 0
+   },
+   "verify": {
+    "seconds": 0.071,
+    "exit": 1,
+    "new": 11,
+    "executed": false,
+    "steps": {
+     "dead-code": 1,
+     "check-deps": 10,
+     "test-weakening": 0,
+     "diagnostics": 0,
+     "rule-engines": 0
+    }
+   },
+   "seeded": {
+    "language": ".rs",
+    "seeded_dead": 20,
+    "seeded_live": 20,
+    "dead_found_any_confidence": 20,
+    "dead_found_default_threshold": 20,
+    "live_flagged_as_dead": 0
+   },
+   "commit": "fcafd7a30718d6b96f3a334070ac1d61f8aaf9c7"
+  },
+  {
+   "name": "chi",
+   "extensions": {
+    ".go": 84,
+    ".md": 6,
+    "": 3,
+    ".mod": 3,
+    ".yml": 2,
+    ".sum": 2
+   },
+   "cold_index_s": 0.139,
+   "index": {
+    "files_seen": 84,
+    "files_parsed": 84,
+    "symbols": 497,
+    "refs": 20950,
+    "edges": 5495
+   },
+   "noop_reindex_s_median": 0.009,
+   "one_file_changed_reindex_s": 0.053,
+   "one_file_changed_parsed": 1,
+   "map_1000": {
+    "seconds": 0.027,
+    "tokens_estimated": 970,
+    "symbols_shown": 62,
+    "symbols_total": 332,
+    "bytes": 3884
+   },
+   "map_2000": {
+    "seconds": 0.031,
+    "tokens_estimated": 1944,
+    "symbols_shown": 121,
+    "symbols_total": 332,
+    "bytes": 7787
+   },
+   "impact_top_symbol": {
+    "symbol": "Handler",
+    "seconds": 0.027,
+    "affected": 179,
+    "tests_to_run": 7,
+    "ok": true
+   },
+   "dead_code": {
+    "seconds": 0.036,
+    "total": 19,
+    "high": 0,
+    "medium": 19,
+    "low": 0
+   },
+   "verify": {
+    "seconds": 0.056,
+    "exit": 1,
+    "new": 19,
+    "executed": false,
+    "steps": {
+     "dead-code": 19,
+     "check-deps": 0,
+     "test-weakening": 0,
+     "diagnostics": 0,
+     "rule-engines": 0
+    }
+   },
+   "seeded": {
+    "language": ".go",
+    "seeded_dead": 20,
+    "seeded_live": 20,
+    "dead_found_any_confidence": 20,
+    "dead_found_default_threshold": 20,
+    "live_flagged_as_dead": 0
+   },
+   "commit": "167e1e3bd039d060696b99c8da4e876ae04f42c1"
+  },
+  {
+   "name": "gson",
+   "extensions": {
+    ".java": 264,
+    ".md": 16,
+    ".xml": 8,
+    ".yml": 8,
+    "": 5,
+    ".pro": 4
+   },
+   "cold_index_s": 0.61,
+   "index": {
+    "files_seen": 264,
+    "files_parsed": 264,
+    "symbols": 4247,
+    "refs": 74862,
+    "edges": 77237
+   },
+   "noop_reindex_s_median": 0.015,
+   "one_file_changed_reindex_s": 0.367,
+   "one_file_changed_parsed": 1,
+   "map_1000": {
+    "seconds": 0.123,
+    "tokens_estimated": 978,
+    "symbols_shown": 41,
+    "symbols_total": 1331,
+    "bytes": 3912
+   },
+   "map_2000": {
+    "seconds": 0.121,
+    "tokens_estimated": 1957,
+    "symbols_shown": 88,
+    "symbols_total": 1331,
+    "bytes": 7838
+   },
+   "impact_top_symbol": {
+    "symbol": "JsonElement",
+    "seconds": 0.128,
+    "affected": 1288,
+    "tests_to_run": 99,
+    "ok": true
+   },
+   "dead_code": {
+    "seconds": 0.118,
+    "total": 28,
+    "high": 0,
+    "medium": 28,
+    "low": 0
+   },
+   "verify": {
+    "seconds": 0.217,
+    "exit": 1,
+    "new": 28,
+    "executed": false,
+    "steps": {
+     "dead-code": 28,
+     "check-deps": 0,
+     "test-weakening": 0,
+     "diagnostics": 0,
+     "rule-engines": 0
+    }
+   },
+   "seeded": {
+    "language": ".java",
+    "seeded_dead": 20,
+    "seeded_live": 20,
+    "dead_found_any_confidence": 20,
+    "dead_found_default_threshold": 20,
+    "live_flagged_as_dead": 0
+   },
+   "commit": "845664ba1c307e6c1910d07cfed2f622e0ad8df1"
+  }
+ ]
+}

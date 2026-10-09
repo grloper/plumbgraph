@@ -686,7 +686,15 @@ fn resolve_rust(
             .next()
             .unwrap_or("")
             .trim_end_matches(".rs");
-        let base = if matches!(stem, "mod" | "lib" | "main") || file_path.ends_with("build.rs") {
+        // Cargo target roots: tests/x.rs, benches/x.rs, examples/x.rs, src/bin/x.rs are crate roots,
+        // so their child modules live next to them (`tests/common/mod.rs`), like main.rs.
+        let dir_name = dir.rsplit('/').next().unwrap_or("");
+        let is_target_root = matches!(dir_name, "tests" | "benches" | "examples")
+            || (dir_name == "bin" && dir.ends_with("src/bin"));
+        let base = if matches!(stem, "mod" | "lib" | "main")
+            || file_path.ends_with("build.rs")
+            || is_target_root
+        {
             dir.to_string()
         } else if dir.is_empty() {
             stem.to_string()
@@ -1131,5 +1139,28 @@ mod tests {
             (r.class.as_str(), r.package.as_deref()),
             ("external", Some("serde"))
         );
+    }
+
+    #[test]
+    fn rust_cargo_target_roots_resolve_child_modules_like_main_rs() {
+        let v = view(
+            &[
+                ("crates/c/tests/a.rs", "rust"),
+                ("crates/c/tests/common/mod.rs", "rust"),
+                ("crates/c/src/bin/tool.rs", "rust"),
+                ("crates/c/src/bin/helper.rs", "rust"),
+                ("crates/c/src/lib.rs", "rust"),
+                ("crates/c/src/util.rs", "rust"),
+            ],
+            &[],
+            &[],
+        );
+        let r = |from: &str, m: &str| {
+            resolve_import(&v, Family::Rust, from, &imp(m, &[], "mod"), &HashSet::new())
+        };
+        assert_eq!(r("crates/c/tests/a.rs", "common").class, "local");
+        assert_eq!(r("crates/c/src/bin/tool.rs", "helper").class, "local");
+        // a normal module file still looks in its own directory
+        assert_eq!(r("crates/c/src/util.rs", "nope").class, "unresolved");
     }
 }
