@@ -20,7 +20,10 @@ Plumbgraph (CLI: `plumb`) indexes your repository with tree-sitter into a small 
 
 It runs locally, executes none of your project's code, and speaks [MCP](https://modelcontextprotocol.io) over stdio so agents can call it directly.
 
-## What works (v0.2)
+## What works (v1.0 candidate)
+
+New since v0.2: `plumb map`, `plumb impact`, `plumb verify` (baseline-diffing), `plumb doctor`/`enrich` (provider orchestration, execution opt-in), `plumb init`, Go/Java/C# packs, 13 MCP tools. See [CHANGELOG.md](CHANGELOG.md), [docs/LANDSCAPE.md](docs/LANDSCAPE.md) and the measurements in [docs/EVALUATION.md](docs/EVALUATION.md).
+
 
 Everything in this table is covered by tests in this repository (see `scripts/verify.sh`).
 
@@ -89,11 +92,13 @@ Only the stdio protocol basics are implemented and tested against our own client
 ## What does not work yet
 
 - **Precise only where you supply an index.** Without a SCIP index, analysis is tree-sitter and name based: no type information, no cross-language edges, overloaded or common names produce ambiguous, lower-confidence edges. With one, precision depends on the indexer (calls on untyped receivers in JS/Python are often not resolved and stay name-based). Plumbgraph never runs an indexer. See [docs/SCIP.md](docs/SCIP.md).
-- **Diagnostics are passthrough with fixed confidences** (not calibrated), only for cargo/clippy, tsc, pyright, ruff and LSP push diagnostics; no baseline diffing yet ([docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md)).
+- **Diagnostics are passthrough with fixed confidences** (not calibrated), only for cargo/clippy, tsc, pyright, ruff and LSP push diagnostics; baseline diffing is done by `plumb verify` ([docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md)).
 - Dynamic features (reflection, `getattr`, `eval`, DI containers, item-generating macros, framework magic) are invisible; they lower confidence but are not understood.
 - Dead-code recall is **not measured**; precision was only sanity-checked on two small repos, name-based vs SCIP on the same two ([docs/EVALUATION.md](docs/EVALUATION.md)). scip-python was only seen working on a toy and crashed on one real directory.
 - Language packs can only choose among the built-in grammars; runtime-loaded grammars are not implemented ([docs/PACKS.md](docs/PACKS.md)).
-- Only Python, JS/TS, Rust. Monorepo/workspace resolution is basic.
+- Go, Java, C# are tier-0 (name-based) only; C# imports are not resolved to files. Monorepo/workspace resolution is basic.
+- MCP resources/prompts are not implemented (tools only).
+- Benchmarks are small (5 repos, single run); dead-code precision on Go/Java was not hand-reviewed.
 - `weakening` is heuristic (line-based); it cannot know that a deleted test was redundant.
 - MCP: stdio only, tools only (no resources/prompts), protocol version `2024-11-05`.
 - No releases, no packaging, no Windows testing.

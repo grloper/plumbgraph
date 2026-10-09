@@ -427,7 +427,7 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
     let mut raw: Vec<RawDef> = vec![];
     {
         let mut qc = QueryCursor::new();
-        let mut it = qc.matches(&defs_q, root, src);
+        let mut it = qc.matches(defs_q, root, src);
         while let Some(m) = it.next() {
             let mut kind = None;
             let mut def = None;
@@ -843,7 +843,7 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
     let mut name_only: HashMap<usize, Vec<String>> = HashMap::new();
     {
         let mut qc = QueryCursor::new();
-        let mut it = qc.matches(&imports_q, root, src);
+        let mut it = qc.matches(imports_q, root, src);
         while let Some(m) = it.next() {
             let mut stmt: Option<Node> = None;
             let mut module: Option<String> = None;

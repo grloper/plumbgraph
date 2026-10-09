@@ -17,7 +17,7 @@
     ".sh": 7,
     "": 6
    },
-   "cold_index_s": 0.115,
+   "cold_index_s": 0.117,
    "index": {
     "files_seen": 34,
     "files_parsed": 34,
@@ -26,17 +26,17 @@
     "edges": 4092
    },
    "noop_reindex_s_median": 0.009,
-   "one_file_changed_reindex_s": 0.045,
+   "one_file_changed_reindex_s": 0.042,
    "one_file_changed_parsed": 1,
    "map_1000": {
-    "seconds": 0.025,
+    "seconds": 0.027,
     "tokens_estimated": 962,
     "symbols_shown": 87,
     "symbols_total": 265,
     "bytes": 3845
    },
    "map_2000": {
-    "seconds": 0.026,
+    "seconds": 0.028,
     "tokens_estimated": 1927,
     "symbols_shown": 168,
     "symbols_total": 265,
@@ -44,7 +44,7 @@
    },
    "impact_top_symbol": {
     "symbol": "Severity",
-    "seconds": 0.022,
+    "seconds": 0.024,
     "affected": 170,
     "tests_to_run": 8,
     "ok": true
@@ -57,7 +57,7 @@
     "low": 0
    },
    "verify": {
-    "seconds": 0.045,
+    "seconds": 0.044,
     "exit": 1,
     "new": 2,
     "executed": false,
@@ -89,7 +89,7 @@
     ".json": 4,
     ".yml": 3
    },
-   "cold_index_s": 0.087,
+   "cold_index_s": 0.108,
    "index": {
     "files_seen": 61,
     "files_parsed": 61,
@@ -97,18 +97,18 @@
     "refs": 11863,
     "edges": 1565
    },
-   "noop_reindex_s_median": 0.011,
-   "one_file_changed_reindex_s": 0.043,
+   "noop_reindex_s_median": 0.008,
+   "one_file_changed_reindex_s": 0.036,
    "one_file_changed_parsed": 1,
    "map_1000": {
-    "seconds": 0.022,
+    "seconds": 0.025,
     "tokens_estimated": 955,
     "symbols_shown": 77,
     "symbols_total": 305,
     "bytes": 3818
    },
    "map_2000": {
-    "seconds": 0.023,
+    "seconds": 0.021,
     "tokens_estimated": 1923,
     "symbols_shown": 156,
     "symbols_total": 305,
@@ -116,20 +116,20 @@
    },
    "impact_top_symbol": {
     "symbol": "resolve",
-    "seconds": 0.022,
+    "seconds": 0.02,
     "affected": 26,
     "tests_to_run": 1,
     "ok": true
    },
    "dead_code": {
-    "seconds": 0.03,
+    "seconds": 0.021,
     "total": 3,
     "high": 0,
     "medium": 3,
     "low": 0
    },
    "verify": {
-    "seconds": 0.038,
+    "seconds": 0.046,
     "exit": 1,
     "new": 3,
     "executed": false,
@@ -161,7 +161,7 @@
     ".md": 11,
     ".txt": 11
    },
-   "cold_index_s": 0.186,
+   "cold_index_s": 0.176,
    "index": {
     "files_seen": 59,
     "files_parsed": 59,
@@ -169,18 +169,18 @@
     "refs": 27470,
     "edges": 8681
    },
-   "noop_reindex_s_median": 0.009,
-   "one_file_changed_reindex_s": 0.068,
+   "noop_reindex_s_median": 0.01,
+   "one_file_changed_reindex_s": 0.069,
    "one_file_changed_parsed": 1,
    "map_1000": {
-    "seconds": 0.035,
+    "seconds": 0.039,
     "tokens_estimated": 958,
     "symbols_shown": 87,
     "symbols_total": 362,
     "bytes": 3829
    },
    "map_2000": {
-    "seconds": 0.04,
+    "seconds": 0.033,
     "tokens_estimated": 1922,
     "symbols_shown": 170,
     "symbols_total": 362,
@@ -188,20 +188,20 @@
    },
    "impact_top_symbol": {
     "symbol": "id",
-    "seconds": 0.036,
+    "seconds": 0.037,
     "affected": 56,
     "tests_to_run": 7,
     "ok": true
    },
    "dead_code": {
-    "seconds": 0.037,
+    "seconds": 0.034,
     "total": 1,
     "high": 0,
     "medium": 1,
     "low": 0
    },
    "verify": {
-    "seconds": 0.071,
+    "seconds": 0.067,
     "exit": 1,
     "new": 11,
     "executed": false,
@@ -221,7 +221,7 @@
     "dead_found_default_threshold": 20,
     "live_flagged_as_dead": 0
    },
-   "commit": "fcafd7a30718d6b96f3a334070ac1d61f8aaf9c7"
+   "commit": "3f1257fadf22294e4ce1e985927d679717ef95f6"
   },
   {
    "name": "chi",
@@ -233,7 +233,7 @@
     ".yml": 2,
     ".sum": 2
    },
-   "cold_index_s": 0.139,
+   "cold_index_s": 0.132,
    "index": {
     "files_seen": 84,
     "files_parsed": 84,
@@ -241,11 +241,11 @@
     "refs": 20950,
     "edges": 5495
    },
-   "noop_reindex_s_median": 0.009,
-   "one_file_changed_reindex_s": 0.053,
+   "noop_reindex_s_median": 0.008,
+   "one_file_changed_reindex_s": 0.049,
    "one_file_changed_parsed": 1,
    "map_1000": {
-    "seconds": 0.027,
+    "seconds": 0.03,
     "tokens_estimated": 970,
     "symbols_shown": 62,
     "symbols_total": 332,
@@ -260,20 +260,20 @@
    },
    "impact_top_symbol": {
     "symbol": "Handler",
-    "seconds": 0.027,
+    "seconds": 0.028,
     "affected": 179,
     "tests_to_run": 7,
     "ok": true
    },
    "dead_code": {
-    "seconds": 0.036,
+    "seconds": 0.028,
     "total": 19,
     "high": 0,
     "medium": 19,
     "low": 0
    },
    "verify": {
-    "seconds": 0.056,
+    "seconds": 0.052,
     "exit": 1,
     "new": 19,
     "executed": false,
@@ -305,7 +305,7 @@
     "": 5,
     ".pro": 4
    },
-   "cold_index_s": 0.61,
+   "cold_index_s": 0.554,
    "index": {
     "files_seen": 264,
     "files_parsed": 264,
@@ -313,18 +313,18 @@
     "refs": 74862,
     "edges": 77237
    },
-   "noop_reindex_s_median": 0.015,
-   "one_file_changed_reindex_s": 0.367,
+   "noop_reindex_s_median": 0.013,
+   "one_file_changed_reindex_s": 0.384,
    "one_file_changed_parsed": 1,
    "map_1000": {
-    "seconds": 0.123,
+    "seconds": 0.12,
     "tokens_estimated": 978,
     "symbols_shown": 41,
     "symbols_total": 1331,
     "bytes": 3912
    },
    "map_2000": {
-    "seconds": 0.121,
+    "seconds": 0.125,
     "tokens_estimated": 1957,
     "symbols_shown": 88,
     "symbols_total": 1331,
@@ -332,20 +332,20 @@
    },
    "impact_top_symbol": {
     "symbol": "JsonElement",
-    "seconds": 0.128,
+    "seconds": 0.122,
     "affected": 1288,
     "tests_to_run": 99,
     "ok": true
    },
    "dead_code": {
-    "seconds": 0.118,
+    "seconds": 0.122,
     "total": 28,
     "high": 0,
     "medium": 28,
     "low": 0
    },
    "verify": {
-    "seconds": 0.217,
+    "seconds": 0.231,
     "exit": 1,
     "new": 28,
     "executed": false,
