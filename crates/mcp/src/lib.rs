@@ -74,6 +74,10 @@ impl Server {
              "timeout_secs":{"type":"integer","default":120,"maximum":900},
              "min_severity":{"enum":["info","warning","error"],"default":"warning"},
              "max_results":{"type":"integer","default":100,"maximum":1000}},"additionalProperties":false}},
+          {"name":"repo_map","description":"Compact repo map for orientation: the most important symbols (personalised PageRank over resolved reference edges), one signature line each, grouped by file and cut to a hard token budget (estimated as chars/4). Pass `changed` (a git revision, e.g. HEAD) to boost files you are editing. Call this first in a new codebase.",
+           "inputSchema":{"type":"object","properties":{"tokens":{"type":"integer","default":1500,"minimum":100,"maximum":20000},"changed":{"type":"string","description":"Git revision; files changed vs it are boosted"},"focus":{"type":"array","items":{"type":"string"},"description":"Project-relative files to boost"},"include_tests":{"type":"boolean","default":false},"use_scip":{"type":"boolean","default":true}},"additionalProperties":false}},
+          {"name":"impact","description":"What breaks if this changes: transitive callers/referrers of a symbol (`symbol`) or of the symbols touched by the working-tree diff (`diff_base`, default HEAD when `symbol` is absent), with distance, path confidence and source, plus test files that reach the change. Reverse reachability over resolved edges; not a proof.",
+           "inputSchema":{"type":"object","properties":{"symbol":{"type":"string"},"diff_base":{"type":"string"},"depth":{"type":"integer","default":4,"maximum":10},"min_confidence":{"type":"number","default":0.3},"max_results":{"type":"integer","default":100,"maximum":1000},"use_scip":{"type":"boolean","default":true}},"additionalProperties":false}},
           {"name":"detect_test_weakening","description":"Analyse `git diff <base>` (working tree, or <base>..<head>) for deleted tests, added skip/ignore/only markers, reduced or trivial assertions.",
            "inputSchema":{"type":"object","properties":{"base":{"type":"string","default":"HEAD"},"head":{"type":"string"}},"additionalProperties":false}}
         ])
@@ -326,6 +330,47 @@ impl Server {
                 r.findings.truncate(max);
                 let executed = r.executed;
                 Ok(json!({"data": r, "truncated": truncated, "executed": executed}))
+            }
+            "repo_map" => {
+                let mut focus = vec![];
+                if let Some(a) = args.get("focus").and_then(|v| v.as_array()) {
+                    for x in a.iter().filter_map(|v| v.as_str()) {
+                        focus.push(self.confine_file(x)?);
+                    }
+                }
+                let focus: Vec<String> = focus
+                    .iter()
+                    .filter_map(|p| p.strip_prefix(&self.root).ok())
+                    .map(|p| p.to_string_lossy().replace('\\', "/"))
+                    .collect();
+                let p = plumbgraph_core::map::MapParams {
+                    tokens: u("tokens", 1500).clamp(100, 20000),
+                    changed: s("changed").map(String::from),
+                    focus,
+                    include_tests: b("include_tests", false),
+                    scip: self.scip_opts(args)?,
+                };
+                let r = plumbgraph_core::map::run_map(&self.target(), &p).map_err(err)?;
+                let tiers = self.tiers(r.edge_source.starts_with("scip"));
+                Ok(json!({"data": r, "truncated": false, "index": {"tiers": tiers}}))
+            }
+            "impact" => {
+                use plumbgraph_core::map::{ImpactParams, ImpactTarget};
+                let target = match s("symbol") {
+                    Some(q) => ImpactTarget::Symbol(q.to_string()),
+                    None => ImpactTarget::Diff(s("diff_base").unwrap_or("HEAD").to_string()),
+                };
+                let p = ImpactParams {
+                    target,
+                    depth: (u("depth", 4) as u32).min(10),
+                    min_confidence: f("min_confidence", 0.3),
+                    scip: self.scip_opts(args)?,
+                };
+                let mut r = plumbgraph_core::map::run_impact(&self.target(), &p).map_err(err)?;
+                let max = u("max_results", 100).clamp(1, 1000);
+                let truncated = r.affected.len() > max;
+                r.affected.truncate(max);
+                Ok(json!({"data": r, "truncated": truncated}))
             }
             "detect_test_weakening" => {
                 let base = s("base").unwrap_or("HEAD");
@@ -743,6 +788,24 @@ mod v02_tests {
         assert_eq!(r["structuredContent"]["data"][0]["source"], "scip");
         // scip paths are confined to the root
         let r = tool(&s, "scip_status", json!({"paths":["/etc/passwd"]}));
+        assert_eq!(r["isError"], true);
+    }
+
+    #[test]
+    fn repo_map_and_impact_tools() {
+        let t = project();
+        let s = server(&t);
+        let r = tool(&s, "repo_map", json!({"tokens": 200}));
+        assert_eq!(r["isError"], false, "{r}");
+        let d = &r["structuredContent"]["data"];
+        assert!(d["tokens_estimated"].as_u64().unwrap() <= 200);
+        assert!(d["text"].as_str().unwrap().contains("a.py"));
+        let r = tool(&s, "repo_map", json!({"focus":["../etc/passwd"]}));
+        assert_eq!(r["isError"], true);
+        let r = tool(&s, "impact", json!({"symbol":"used"}));
+        assert_eq!(r["isError"], false, "{r}");
+        assert_eq!(r["structuredContent"]["data"]["seeds"], json!(["used"]));
+        let r = tool(&s, "impact", json!({"symbol":"nope_nope"}));
         assert_eq!(r["isError"], true);
     }
 }

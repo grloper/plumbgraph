@@ -188,7 +188,7 @@ fn mcp_stdio_roundtrip() {
         .collect();
     assert_eq!(lines.len(), 4, "notifications get no response");
     assert_eq!(lines[0]["result"]["serverInfo"]["name"], "plumbgraph");
-    assert_eq!(lines[1]["result"]["tools"].as_array().unwrap().len(), 8);
+    assert_eq!(lines[1]["result"]["tools"].as_array().unwrap().len(), 10);
     assert_eq!(
         lines[2]["result"]["structuredContent"]["data"]["findings"][0]["symbol"],
         "_dead"
@@ -430,4 +430,51 @@ fn diagnostics_lsp_files_are_relative_to_the_project_even_with_a_relative_path_a
         String::from_utf8_lossy(&out.stderr)
     );
     assert_eq!(json_of(&out)["findings"][0]["file"], "pkg/a.py");
+}
+
+// ---------------------------------------------------------------- v1: map + impact
+
+#[test]
+fn map_and_impact_commands() {
+    let t = tempfile::tempdir().unwrap();
+    write(t.path(), "lib.py", "def core():\n    return 1\n");
+    write(
+        t.path(),
+        "app.py",
+        "from lib import core\n\ndef run():\n    return core()\n",
+    );
+    let out = plumb()
+        .args(["map"])
+        .arg(t.path())
+        .args(["--tokens", "300"])
+        .output()
+        .unwrap();
+    assert!(
+        out.status.success(),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    let text = String::from_utf8(out.stdout).unwrap();
+    assert!(
+        text.contains("lib.py") && text.contains("def core()"),
+        "{text}"
+    );
+    let out = plumb()
+        .args(["--json", "impact", "core", "--path"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    assert!(
+        out.status.success(),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    let v: serde_json::Value = serde_json::from_slice(&out.stdout).unwrap();
+    assert_eq!(v["affected"][0]["name"], "run");
+    let out = plumb()
+        .args(["impact", "nope", "--path"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    assert_eq!(out.status.code(), Some(2));
 }
