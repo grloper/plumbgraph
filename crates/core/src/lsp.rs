@@ -32,6 +32,7 @@ fn language_id(p: &Path) -> &'static str {
         "jsx" => "javascriptreact",
         "go" => "go",
         "java" => "java",
+        "cs" => "csharp",
         "c" | "h" => "c",
         "cpp" | "cc" | "hpp" => "cpp",
         _ => "plaintext",

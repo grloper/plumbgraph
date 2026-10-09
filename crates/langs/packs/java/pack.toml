@@ -1,0 +1,11 @@
+id = "java"
+grammar = "java"
+extensions = [".java"]
+manifests = ["pom.xml", "build.gradle", "build.gradle.kts"]
+ref_node_kinds = ["identifier", "type_identifier"]
+call_node_kinds = ["method_invocation", "object_creation_expression"]
+string_node_kinds = ["string_fragment"]
+dynamic_markers = ["Class.forName", "java.lang.reflect", "ServiceLoader", "MethodHandles", "@Autowired", "@Inject"]
+entry_names = []
+test_globs = ["**/src/test/**", "**/test/**", "**/*Test.java", "**/*Tests.java", "**/*IT.java"]
+queries = { defs = "defs.scm", imports = "imports.scm" }

@@ -1,0 +1,11 @@
+id = "go"
+grammar = "go"
+extensions = [".go"]
+manifests = ["go.mod"]
+ref_node_kinds = ["identifier", "field_identifier", "type_identifier"]
+call_node_kinds = ["call_expression"]
+string_node_kinds = ["interpreted_string_literal_content"]
+dynamic_markers = ["reflect.", "plugin.Open", "go:linkname", "unsafe."]
+entry_names = ["main", "init"]
+test_globs = ["**/*_test.go", "**/testdata/**"]
+queries = { defs = "defs.scm", imports = "imports.scm" }

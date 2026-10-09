@@ -163,6 +163,133 @@ fn py_decorator_is_neutral(d: &str) -> bool {
     PY_NEUTRAL_DECORATORS.contains(&last)
 }
 
+/// Modifier keywords of a Java/C# declaration (`public`, `static`, `override`, ...).
+fn cl_modifiers(def: Node, src: &[u8]) -> Vec<String> {
+    let mut out = vec![];
+    let mut c = def.walk();
+    for ch in def.children(&mut c) {
+        match ch.kind() {
+            "modifiers" => out.extend(
+                text(ch, src)
+                    .split_whitespace()
+                    .filter(|w| !w.starts_with('@') && w.chars().all(|c| c.is_alphabetic()))
+                    .map(String::from),
+            ),
+            "modifier" => out.push(text(ch, src).trim().to_string()),
+            _ => {}
+        }
+    }
+    out
+}
+
+/// Annotation / attribute names (last path segment) on a Java/C# declaration.
+fn cl_annotations(def: Node, src: &[u8]) -> Vec<String> {
+    fn last(t: &str) -> String {
+        let head = t.split(['(', '<']).next().unwrap_or(t).trim();
+        head.rsplit('.').next().unwrap_or(head).to_string()
+    }
+    let mut out = vec![];
+    let mut stack: Vec<Node> = vec![];
+    let mut c = def.walk();
+    for ch in def.children(&mut c) {
+        stack.push(ch);
+    }
+    while let Some(n) = stack.pop() {
+        match n.kind() {
+            "modifiers" | "attribute_list" => {
+                let mut cc = n.walk();
+                for x in n.children(&mut cc) {
+                    stack.push(x);
+                }
+            }
+            "annotation" | "marker_annotation" => {
+                if let Some(nm) = n.child_by_field_name("name") {
+                    out.push(last(text(nm, src)));
+                }
+            }
+            "attribute" => {
+                if let Some(nm) = n.child_by_field_name("name").or_else(|| n.named_child(0)) {
+                    out.push(last(text(nm, src)));
+                }
+            }
+            _ => {}
+        }
+    }
+    out
+}
+
+const CL_TEST_ANNOTATIONS: &[&str] = &[
+    "Test",
+    "ParameterizedTest",
+    "RepeatedTest",
+    "TestFactory",
+    "BeforeEach",
+    "AfterEach",
+    "BeforeAll",
+    "AfterAll",
+    "Before",
+    "After",
+    "BeforeClass",
+    "AfterClass",
+    "Fact",
+    "Theory",
+    "TestMethod",
+    "TestCase",
+    "TestCaseSource",
+    "SetUp",
+    "TearDown",
+    "OneTimeSetUp",
+    "OneTimeTearDown",
+    "ClassInitialize",
+    "ClassCleanup",
+    "TestInitialize",
+    "TestCleanup",
+];
+
+const CL_NEUTRAL_ANNOTATIONS: &[&str] = &[
+    "Override",
+    "Deprecated",
+    "SuppressWarnings",
+    "SafeVarargs",
+    "FunctionalInterface",
+    "Obsolete",
+    "Serializable",
+    "Flags",
+    "DebuggerDisplay",
+    "MethodImpl",
+    "NonSerialized",
+    "SuppressMessage",
+    "Conditional",
+    "Nullable",
+];
+
+const GO_WELL_KNOWN_METHODS: &[&str] = &[
+    "String",
+    "Error",
+    "Len",
+    "Less",
+    "Swap",
+    "ServeHTTP",
+    "MarshalJSON",
+    "UnmarshalJSON",
+    "MarshalText",
+    "UnmarshalText",
+    "Read",
+    "Write",
+    "Close",
+    "Unwrap",
+    "Is",
+    "As",
+    "Format",
+    "Scan",
+    "Value",
+    "Push",
+    "Pop",
+    "Seek",
+    "ReadFrom",
+    "WriteTo",
+];
+
 fn ancestors_have_export(def: Node) -> bool {
     let mut cur = def.parent();
     for _ in 0..4 {
@@ -228,6 +355,12 @@ fn is_callee(node: Node) -> bool {
             "member_expression" if field_is("property") => cur = p,
             "field_expression" if field_is("field") => cur = p,
             "scoped_identifier" if field_is("name") => cur = p,
+            "selector_expression" if field_is("field") => cur = p,
+            "member_access_expression" if field_is("name") => cur = p,
+            "generic_name" => cur = p,
+            "method_invocation" => return field_is("name"),
+            "invocation_expression" => return field_is("function"),
+            "object_creation_expression" => return field_is("type"),
             "generic_function" if field_is("function") => cur = p,
             "call" | "call_expression" => return field_is("function"),
             "new_expression" => return field_is("constructor"),
@@ -249,6 +382,13 @@ fn is_member(node: Node) -> bool {
         "member_expression" => field_is("property"),
         "field_expression" => field_is("field"),
         "scoped_identifier" | "scoped_type_identifier" => field_is("name"),
+        "selector_expression" => field_is("field"),
+        "field_access" => field_is("field"),
+        "member_access_expression" => field_is("name"),
+        // every Java call is a method call (`foo()` means `this.foo()`)
+        "method_invocation" => field_is("name"),
+        // C#: `Foo()` inside a class is a method call; `Foo.Bar()` is handled above
+        "invocation_expression" => field_is("function"),
         _ => false,
     }
 }
@@ -480,6 +620,60 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
                     }
                 }
             }
+            Family::ClassLike => {
+                let go = pack.manifest.grammar == "go";
+                let parent_kind = parent.map(|p| syms[p].kind.clone());
+                let in_type = parent_kind
+                    .as_deref()
+                    .map(|k| matches!(k, "class" | "struct" | "interface" | "enum"))
+                    .unwrap_or(false);
+                if go {
+                    exported = name
+                        .chars()
+                        .next()
+                        .map(|c| c.is_uppercase())
+                        .unwrap_or(false);
+                    if kind == "method" && GO_WELL_KNOWN_METHODS.contains(&name.as_str()) {
+                        entry = Some("well-known interface method".into());
+                    }
+                    if kind == "function" && parent.is_none() && name == "init" {
+                        entry = Some("init function".into());
+                    }
+                } else {
+                    let mods = cl_modifiers(d.def, src);
+                    let anns = cl_annotations(d.def, src);
+                    let has = |m: &str| mods.iter().any(|x| x == m);
+                    let visible = has("public") || has("protected");
+                    let iface_member = parent_kind.as_deref() == Some("interface");
+                    exported = match parent {
+                        None => has("public"),
+                        Some(p) => syms[p].exported && (visible || iface_member),
+                    };
+                    if anns
+                        .iter()
+                        .any(|a| CL_TEST_ANNOTATIONS.contains(&a.as_str()))
+                    {
+                        is_test = true;
+                    }
+                    if anns.iter().any(|a| {
+                        !CL_NEUTRAL_ANNOTATIONS.contains(&a.as_str())
+                            && !CL_TEST_ANNOTATIONS.contains(&a.as_str())
+                    }) {
+                        decorated = true;
+                    }
+                    if kind == "method" {
+                        let parent_name = parent.map(|p| syms[p].name.clone());
+                        if parent_name.as_deref() == Some(name.as_str()) {
+                            entry = Some("constructor".into());
+                            entry_cond = Some("parent".into());
+                        } else if has("override") || anns.iter().any(|a| a == "Override") {
+                            entry = Some("overrides a base-class method".into());
+                        } else if in_type && has("static") && (name == "main" || name == "Main") {
+                            entry = Some("program entry point".into());
+                        }
+                    }
+                }
+            }
             Family::Rust => {
                 let attrs = rust_attrs(d.def, src);
                 let inners: Vec<&str> = attrs.iter().map(|a| attr_inner(a)).collect();
@@ -575,6 +769,19 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
                             !(named.is_empty() || named.len() == 1 && named[0] == "object")
                         })
                         .unwrap_or(false),
+                    Family::ClassLike => {
+                        let mut c = class_node.walk();
+                        let has = class_node.children(&mut c).any(|ch| {
+                            matches!(
+                                ch.kind(),
+                                "superclass"
+                                    | "super_interfaces"
+                                    | "extends_interfaces"
+                                    | "base_list"
+                            )
+                        });
+                        has
+                    }
                     _ => {
                         let mut c = class_node.walk();
                         let has = class_node

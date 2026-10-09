@@ -63,6 +63,8 @@ pub enum Family {
     Python,
     JsLike,
     Rust,
+    /// Go, Java, C#: classes/methods/types with modifier- or case-based visibility
+    ClassLike,
 }
 
 impl Pack {
@@ -74,6 +76,7 @@ impl Pack {
         match self.manifest.grammar.as_str() {
             "python" => Family::Python,
             "rust" => Family::Rust,
+            "go" | "java" | "c-sharp" => Family::ClassLike,
             _ => Family::JsLike,
         }
     }
@@ -111,6 +114,9 @@ pub fn grammar(name: &str) -> Result<Language> {
         "typescript" => tree_sitter_typescript::LANGUAGE_TYPESCRIPT.into(),
         "tsx" => tree_sitter_typescript::LANGUAGE_TSX.into(),
         "rust" => tree_sitter_rust::LANGUAGE.into(),
+        "go" => tree_sitter_go::LANGUAGE.into(),
+        "java" => tree_sitter_java::LANGUAGE.into(),
+        "c-sharp" => tree_sitter_c_sharp::LANGUAGE.into(),
         other => bail!("unknown built-in grammar `{other}`"),
     })
 }
@@ -132,7 +138,7 @@ macro_rules! builtin {
 }
 
 impl PackSet {
-    /// The packs shipped in the binary: python, javascript, typescript, tsx, rust.
+    /// The packs shipped in the binary: python, javascript, typescript, tsx, rust, go, java, csharp.
     pub fn builtin() -> Result<Self> {
         let sources = [
             builtin!("python"),
@@ -140,6 +146,9 @@ impl PackSet {
             builtin!("typescript"),
             builtin!("tsx"),
             builtin!("rust"),
+            builtin!("go"),
+            builtin!("java"),
+            builtin!("csharp"),
         ];
         let mut packs = Vec::new();
         for (toml_src, defs, imports) in sources {
