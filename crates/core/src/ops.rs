@@ -54,7 +54,7 @@ fn open_graph(t: &Target) -> Result<(Graph, PathBuf, IndexStats)> {
 }
 
 /// Load the tier-0 graph and overlay SCIP indexes (auto-detected, or explicit and then mandatory).
-fn open_graph_scip(
+pub(crate) fn open_graph_scip(
     t: &Target,
     sc: &ScipOpts,
 ) -> Result<(Graph, PathBuf, IndexStats, Option<ScipStats>)> {

@@ -175,6 +175,40 @@ enum Cmd {
         #[command(flatten)]
         scip: ScipArgs,
     },
+    /// Compact, token-budgeted repo map: most important symbols first (PageRank over resolved edges)
+    Map {
+        #[arg(default_value = ".")]
+        path: PathBuf,
+        /// Hard token budget (estimated as chars/4)
+        #[arg(long, default_value_t = 1500)]
+        tokens: usize,
+        /// Boost files changed vs this git revision (use `--changed` alone for HEAD)
+        #[arg(long, num_args = 0..=1, default_missing_value = "HEAD", value_name = "REV")]
+        changed: Option<String>,
+        /// Boost these project-relative files (repeatable)
+        #[arg(long = "focus")]
+        focus: Vec<String>,
+        #[arg(long)]
+        include_tests: bool,
+        #[command(flatten)]
+        scip: ScipArgs,
+    },
+    /// What breaks if a symbol (or the current diff) changes: transitive callers and tests to run
+    Impact {
+        /// Symbol name or qualified name; omit to analyse the working-tree diff
+        symbol: Option<String>,
+        #[arg(long, default_value = ".")]
+        path: PathBuf,
+        /// Diff base when no symbol is given
+        #[arg(long, default_value = "HEAD")]
+        base: String,
+        #[arg(long, default_value_t = 4)]
+        depth: u32,
+        #[arg(long, default_value_t = 0.3)]
+        min_confidence: f64,
+        #[command(flatten)]
+        scip: ScipArgs,
+    },
     /// Serve the tools over MCP (stdio, JSON-RPC)
     Mcp {
         /// Project root the tools are confined to (default: current directory)
@@ -554,6 +588,86 @@ fn run(cli: Cli) -> Result<bool> {
                             s.documents, s.documents_matched, s.documents_unmatched, s.stale_files, s.symbols_mapped, s.edges_replaced, s.edges_added
                         );
                     }
+                }
+            }
+            Ok(false)
+        }
+        Cmd::Map {
+            path,
+            tokens,
+            changed,
+            focus,
+            include_tests,
+            scip,
+        } => {
+            let r = plumbgraph_core::map::run_map(
+                &target(path),
+                &plumbgraph_core::map::MapParams {
+                    tokens,
+                    changed,
+                    focus,
+                    include_tests,
+                    scip: scip.opts(),
+                },
+            )?;
+            if json {
+                print_json(&r)?;
+            } else {
+                print!("{}", r.text);
+            }
+            Ok(false)
+        }
+        Cmd::Impact {
+            symbol,
+            path,
+            base,
+            depth,
+            min_confidence,
+            scip,
+        } => {
+            use plumbgraph_core::map::{run_impact, ImpactParams, ImpactTarget};
+            let r = run_impact(
+                &target(path),
+                &ImpactParams {
+                    target: match symbol {
+                        Some(s) => ImpactTarget::Symbol(s),
+                        None => ImpactTarget::Diff(base),
+                    },
+                    depth,
+                    min_confidence,
+                    scip: scip.opts(),
+                },
+            )?;
+            if json {
+                print_json(&r)?;
+            } else {
+                println!("changed: {}", r.seeds.join(", "));
+                for a in &r.affected {
+                    println!(
+                        "d{} {:.2} {:<8} {}  {}:{}  via {}{}  [{}]",
+                        a.distance,
+                        a.confidence,
+                        a.kind,
+                        a.qname,
+                        a.file,
+                        a.line,
+                        a.via,
+                        if a.is_test { "  (test)" } else { "" },
+                        a.source
+                    );
+                }
+                println!(
+                    "
+{} affected symbol(s) in {} file(s); module-level dependents: {}",
+                    r.affected.len(),
+                    r.affected_files.len(),
+                    r.module_level_dependents.len()
+                );
+                if !r.tests_to_run.is_empty() {
+                    println!("tests to run: {}", r.tests_to_run.join(" "));
+                }
+                for l in &r.limitations {
+                    println!("note: {l}");
                 }
             }
             Ok(false)
