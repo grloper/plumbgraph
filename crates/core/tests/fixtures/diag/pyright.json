@@ -1,0 +1,45 @@
+{
+ "version": "x",
+ "time": "0",
+ "generalDiagnostics": [
+  {
+   "file": "app.py",
+   "severity": "error",
+   "message": "Type \"int\" is not assignable to return type \"str\"\n\u00a0\u00a0\"int\" is not assignable to \"str\"",
+   "range": {
+    "start": {
+     "line": 4,
+     "character": 11
+    },
+    "end": {
+     "line": 4,
+     "character": 16
+    }
+   },
+   "rule": "reportReturnType"
+  },
+  {
+   "file": "app.py",
+   "severity": "error",
+   "message": "\"undefined_name\" is not defined",
+   "range": {
+    "start": {
+     "line": 6,
+     "character": 6
+    },
+    "end": {
+     "line": 6,
+     "character": 20
+    }
+   },
+   "rule": "reportUndefinedVariable"
+  }
+ ],
+ "summary": {
+  "filesAnalyzed": 1,
+  "errorCount": 2,
+  "warningCount": 0,
+  "informationCount": 0,
+  "timeInSec": 0.311
+ }
+}

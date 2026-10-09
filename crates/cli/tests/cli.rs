@@ -188,10 +188,246 @@ fn mcp_stdio_roundtrip() {
         .collect();
     assert_eq!(lines.len(), 4, "notifications get no response");
     assert_eq!(lines[0]["result"]["serverInfo"]["name"], "plumbgraph");
-    assert_eq!(lines[1]["result"]["tools"].as_array().unwrap().len(), 6);
+    assert_eq!(lines[1]["result"]["tools"].as_array().unwrap().len(), 8);
     assert_eq!(
         lines[2]["result"]["structuredContent"]["data"]["findings"][0]["symbol"],
         "_dead"
     );
     assert_eq!(lines[3]["result"]["isError"], true);
+}
+
+// ---------------------------------------------------------------- v0.2: diagnostics + SCIP
+
+fn diag_fixture(name: &str) -> std::path::PathBuf {
+    Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("../core/tests/fixtures/diag")
+        .join(name)
+}
+
+fn json_of(out: &std::process::Output) -> serde_json::Value {
+    serde_json::from_slice(&out.stdout)
+        .unwrap_or_else(|e| panic!("{e}: {}", String::from_utf8_lossy(&out.stdout)))
+}
+
+#[test]
+fn diagnostics_ingest_saved_output_does_not_execute_anything() {
+    let t = project();
+    let from = format!("ruff-json:{}", diag_fixture("ruff.json").display());
+    let out = plumb()
+        .args(["--json", "diagnostics"])
+        .arg(t.path())
+        .args(["--from", &from])
+        .output()
+        .unwrap();
+    assert!(
+        out.status.success(),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    let v = json_of(&out);
+    assert_eq!(v["executed"], false);
+    assert_eq!(v["findings"].as_array().unwrap().len(), 4);
+    assert_eq!(v["findings"][0]["source"], "lint:ruff");
+    assert!(v["findings"][0]["confidence"].as_f64().unwrap() > 0.0);
+}
+
+#[test]
+fn diagnostics_text_output_and_fail_on() {
+    let t = project();
+    let from = format!("tsc:{}", diag_fixture("tsc.txt").display());
+    let out = plumb()
+        .arg("diagnostics")
+        .arg(t.path())
+        .args(["--from", &from, "--fail-on", "high"])
+        .output()
+        .unwrap();
+    assert_eq!(out.status.code(), Some(1));
+    let s = String::from_utf8_lossy(&out.stdout);
+    assert!(
+        s.contains("a.ts:1:7") && s.contains("TS2322") && s.contains("[typecheck:tsc]"),
+        "{s}"
+    );
+}
+
+#[test]
+fn diagnostics_without_inputs_is_a_usage_error() {
+    let t = project();
+    let out = plumb().arg("diagnostics").arg(t.path()).output().unwrap();
+    assert_eq!(out.status.code(), Some(2));
+    let e = String::from_utf8_lossy(&out.stderr);
+    assert!(e.contains("--from") && e.contains("--run"), "{e}");
+    let out = plumb()
+        .arg("diagnostics")
+        .arg(t.path())
+        .args(["--from", "bogus:file"])
+        .output()
+        .unwrap();
+    assert_eq!(out.status.code(), Some(2));
+}
+
+#[test]
+fn diagnostics_run_skips_missing_tools_instead_of_failing() {
+    let t = project();
+    write(t.path(), "tsconfig.json", "{}");
+    let out = plumb()
+        .args(["--json", "diagnostics"])
+        .arg(t.path())
+        .args(["--run", "--tool", "tsc"])
+        .env("PATH", "")
+        .output()
+        .unwrap();
+    assert!(
+        out.status.success(),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    let v = json_of(&out);
+    assert_eq!(v["tools"][0]["tool"], "tsc");
+    assert_eq!(v["tools"][0]["status"], "skipped");
+    assert_eq!(v["executed"], false);
+}
+
+#[test]
+fn diagnostics_via_lsp_client() {
+    let t = project();
+    let server = format!("python3 {}", diag_fixture("fake_lsp.py").display());
+    let out = plumb()
+        .args(["--json", "diagnostics"])
+        .arg(t.path())
+        .args([
+            "--lsp",
+            &server,
+            "--lsp-file",
+            "pkg/a.py",
+            "--timeout-secs",
+            "10",
+        ])
+        .output()
+        .unwrap();
+    assert!(
+        out.status.success(),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    let v = json_of(&out);
+    assert_eq!(v["executed"], true);
+    assert_eq!(v["findings"][0]["file"], "pkg/a.py");
+    assert!(v["findings"][0]["source"]
+        .as_str()
+        .unwrap()
+        .starts_with("lsp:"));
+}
+
+fn scip_index(path: &Path) {
+    use protobuf::Message;
+    use scip::types::{Document, Index, Occurrence, SymbolRole};
+    let sym = |n: &str| format!("scip-python python pkg 0.1 `a`/{n}");
+    let occ = |s: &str, line: i32, def: bool| {
+        let mut o = Occurrence::new();
+        o.symbol = s.into();
+        o.range = vec![line, 4, 8];
+        if def {
+            o.symbol_roles = protobuf::Enum::value(&SymbolRole::Definition);
+        }
+        o
+    };
+    let mut d = Document::new();
+    d.relative_path = "pkg/a.py".into();
+    // pkg/a.py: line1 import, line3 used(), line6 _dead(), line9 print(used())
+    d.occurrences = vec![
+        occ(&sym("used()."), 2, true),
+        occ(&sym("_dead()."), 5, true),
+        occ(&sym("used()."), 8, false),
+    ];
+    let mut i = Index::new();
+    i.documents = vec![d];
+    std::fs::write(path, i.write_to_bytes().unwrap()).unwrap();
+}
+
+#[test]
+fn dead_code_with_scip_reports_source_scip_and_no_scip_falls_back() {
+    let t = project();
+    std::thread::sleep(std::time::Duration::from_millis(20));
+    scip_index(&t.path().join("index.scip"));
+    let run = |extra: &[&str]| {
+        let out = plumb()
+            .args(["--json", "dead-code"])
+            .arg(t.path())
+            .args(extra)
+            .output()
+            .unwrap();
+        assert!(
+            out.status.success(),
+            "{}",
+            String::from_utf8_lossy(&out.stderr)
+        );
+        json_of(&out)
+    };
+    let v = run(&[]);
+    assert_eq!(v["scip"]["symbols_mapped"], 2);
+    let f = v["findings"].as_array().unwrap();
+    assert!(
+        f.iter()
+            .any(|x| x["symbol"] == "_dead" && x["source"] == "scip"),
+        "{f:?}"
+    );
+    let v = run(&["--no-scip"]);
+    assert!(v["scip"].is_null());
+    assert!(v["findings"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .all(|x| x["source"] != "scip"));
+    // explicit but broken index is an error, not a silent fallback
+    write(t.path(), "broken.scip", "not protobuf \u{ff}");
+    let out = plumb()
+        .arg("dead-code")
+        .arg(t.path())
+        .args(["--scip", t.path().join("broken.scip").to_str().unwrap()])
+        .output()
+        .unwrap();
+    assert_eq!(out.status.code(), Some(2));
+}
+
+#[test]
+fn scip_status_command() {
+    let t = project();
+    let out = plumb().args(["scip"]).arg(t.path()).output().unwrap();
+    assert!(out.status.success());
+    assert!(String::from_utf8_lossy(&out.stdout).contains("no SCIP index"));
+    std::thread::sleep(std::time::Duration::from_millis(20));
+    scip_index(&t.path().join("index.scip"));
+    let out = plumb()
+        .args(["--json", "scip"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    let v = json_of(&out);
+    assert_eq!(v["documents_matched"], 1);
+}
+
+#[test]
+fn diagnostics_lsp_files_are_relative_to_the_project_even_with_a_relative_path_argument() {
+    let t = project();
+    let server = format!("python3 {}", diag_fixture("fake_lsp.py").display());
+    let out = plumb()
+        .current_dir(t.path().parent().unwrap())
+        .args(["--json", "diagnostics"])
+        .arg(t.path().file_name().unwrap())
+        .args([
+            "--lsp",
+            &server,
+            "--lsp-file",
+            "pkg/a.py",
+            "--timeout-secs",
+            "10",
+        ])
+        .output()
+        .unwrap();
+    assert!(
+        out.status.success(),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    assert_eq!(json_of(&out)["findings"][0]["file"], "pkg/a.py");
 }

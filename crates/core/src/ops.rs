@@ -5,6 +5,7 @@ use crate::deps::{check_deps, DepsOptions, DepsReport};
 use crate::index::{db_path_for, index_project, scan_manifests, IndexOptions, IndexStats};
 use crate::registry::{HttpRegistry, Offline, Registry};
 use crate::sanitize;
+use crate::scip::{self, ScipStats};
 use crate::store::{Graph, Store};
 use crate::weakening::{detect, WeakeningReport};
 use crate::{Finding, Level};
@@ -48,11 +49,36 @@ pub fn index(t: &Target, force: bool) -> Result<IndexStats> {
 }
 
 fn open_graph(t: &Target) -> Result<(Graph, PathBuf, IndexStats)> {
+    let (g, root, stats, _) = open_graph_scip(t, &ScipOpts::disabled())?;
+    Ok((g, root, stats))
+}
+
+/// Load the tier-0 graph and overlay SCIP indexes (auto-detected, or explicit and then mandatory).
+fn open_graph_scip(
+    t: &Target,
+    sc: &ScipOpts,
+) -> Result<(Graph, PathBuf, IndexStats, Option<ScipStats>)> {
     let stats = index(t, false)?;
     let root = t.root.canonicalize()?;
     let db = db_path_for(&root, &opts(t)?);
-    let g = Graph::load(&Store::open(&db)?)?;
-    Ok((g, root, stats))
+    let mut g = Graph::load(&Store::open(&db)?)?;
+    let mut scip_stats = None;
+    if !sc.disable {
+        let paths = if sc.paths.is_empty() {
+            scip::discover(&root)
+        } else {
+            sc.paths.clone()
+        };
+        if !paths.is_empty() {
+            let mut idxs = vec![];
+            for p in &paths {
+                // explicit paths must load; auto-detected ones too: a broken index must be visible
+                idxs.push(scip::load(p)?);
+            }
+            scip_stats = Some(scip::apply(&mut g, &idxs, &root));
+        }
+    }
+    Ok((g, root, stats, scip_stats))
 }
 
 #[derive(Debug, Clone)]
@@ -63,6 +89,7 @@ pub struct DeadCodeParams {
     pub allow_file: Option<PathBuf>,
     pub path_prefix: Option<String>,
     pub include_test_only: bool,
+    pub scip: ScipOpts,
 }
 
 impl Default for DeadCodeParams {
@@ -74,6 +101,7 @@ impl Default for DeadCodeParams {
             allow_file: None,
             path_prefix: None,
             include_test_only: true,
+            scip: ScipOpts::default(),
         }
     }
 }
@@ -84,6 +112,7 @@ pub struct DeadCodeResult {
     pub summary: Summary,
     pub index: IndexStats,
     pub limitations: Vec<String>,
+    pub scip: Option<crate::scip::ScipStats>,
 }
 
 #[derive(Debug, Serialize, Default)]
@@ -110,7 +139,7 @@ pub fn summarize(f: &[Finding]) -> Summary {
 }
 
 pub fn run_dead_code(t: &Target, p: &DeadCodeParams) -> Result<DeadCodeResult> {
-    let (g, root, stats) = open_graph(t)?;
+    let (g, root, stats, scip_stats) = open_graph_scip(t, &p.scip)?;
     let mut o = DeadCodeOptions {
         mode: if p.library_mode { Mode::Lib } else { Mode::App },
         min_confidence: p.min_confidence,
@@ -123,15 +152,29 @@ pub fn run_dead_code(t: &Target, p: &DeadCodeParams) -> Result<DeadCodeResult> {
         o.kinds = k.clone();
     }
     let findings = dead_code(&g, &o);
+    let mut limits = vec![
+        if scip_stats.is_some() {
+            "findings with source `scip` use compiler-grade references from a SCIP index; everything the index does not cover (unmatched or modified files, unresolved symbols) falls back to tier-0 name-based analysis (source `t0-treesitter`)".to_string()
+        } else {
+            "tier-0 (tree-sitter, name-based) analysis: no type information, reflection or macro expansion; no SCIP index was used".to_string()
+        },
+        "never delete on `medium` or `low` findings without checking usages yourself; `high` means no use was found in indexed code, not that deletion is proven safe".into(),
+        "files excluded by .gitignore, vendor/build directories and files over 2 MiB are not indexed".into(),
+    ];
+    if let Some(st) = &scip_stats {
+        if st.stale_files > 0 {
+            limits.push(format!(
+                "{} file(s) changed after the SCIP index was written and were analysed name-based",
+                st.stale_files
+            ));
+        }
+    }
     Ok(DeadCodeResult {
         summary: summarize(&findings),
         findings,
         index: stats,
-        limitations: vec![
-            "tier-0 (tree-sitter, name-based) analysis: no type information, reflection or macro expansion".into(),
-            "never delete on `medium` or `low` findings without checking usages yourself; `high` means the name occurs nowhere else in indexed code, not that deletion is proven safe".into(),
-            "files excluded by .gitignore, vendor/build directories and files over 2 MiB are not indexed".into(),
-        ],
+        limitations: limits,
+        scip: scip_stats,
     })
 }
 
@@ -270,7 +313,18 @@ pub fn references(
     min_confidence: f64,
     limit: usize,
 ) -> Result<Vec<RefHit>> {
-    let (g, _, _) = open_graph(t)?;
+    references_scip(t, symbol, min_confidence, limit, &ScipOpts::disabled())
+}
+
+/// Like [`references`], but overlays SCIP indexes (auto-detected unless `scip` says otherwise).
+pub fn references_scip(
+    t: &Target,
+    symbol: &str,
+    min_confidence: f64,
+    limit: usize,
+    scip: &ScipOpts,
+) -> Result<Vec<RefHit>> {
+    let (g, _, _, _) = open_graph_scip(t, scip)?;
     let want = symbol.to_lowercase();
     let targets: Vec<&crate::store::SymRow> = g
         .symbols
@@ -328,4 +382,174 @@ pub fn references(
     });
     out.truncate(limit.clamp(1, 500));
     Ok(out)
+}
+
+/// Which SCIP indexes to use. Default: auto-detect `<root>/index.scip` and
+/// `<root>/.plumbgraph/index.scip`; explicit paths replace auto-detection; `disable` forces name-based only.
+#[derive(Debug, Clone, Default)]
+pub struct ScipOpts {
+    pub paths: Vec<PathBuf>,
+    pub disable: bool,
+}
+
+impl ScipOpts {
+    pub fn disabled() -> Self {
+        ScipOpts {
+            paths: vec![],
+            disable: true,
+        }
+    }
+}
+
+/// Coverage of the SCIP indexes against the tier-0 graph (`None` when no index is found/enabled).
+pub fn scip_status(t: &Target, sc: &ScipOpts) -> Result<Option<ScipStats>> {
+    let (_, _, _, st) = open_graph_scip(t, sc)?;
+    Ok(st)
+}
+
+// ------------------------------------------------------------------ diagnostics
+
+use crate::diagnostics::{self, DiagReport, Format, ToolRun};
+use crate::Severity;
+use std::time::Duration;
+
+pub const TOOL_NAMES: &[&str] = &["cargo-check", "clippy", "tsc", "ruff", "pyright"];
+
+pub struct DiagInput {
+    pub format: Format,
+    /// Where it came from (path, `-`), for the report only.
+    pub label: String,
+    pub text: String,
+}
+
+pub struct DiagParams {
+    /// Saved tool output to ingest (executes nothing).
+    pub inputs: Vec<DiagInput>,
+    /// Run the project's toolchain (cargo check/clippy, tsc, ruff, pyright). **Executes code.**
+    pub run: bool,
+    /// Restrict `run` to these names (see [`TOOL_NAMES`]); empty = every applicable tool.
+    pub tools: Vec<String>,
+    /// Language-server commands to start and query via LSP. **Executes code.**
+    pub lsp: Vec<Vec<String>>,
+    /// Files to open in the LSP server; empty = source files found under the root (max 100).
+    pub lsp_files: Vec<PathBuf>,
+    pub timeout: Duration,
+    pub min_severity: Severity,
+}
+
+impl Default for DiagParams {
+    fn default() -> Self {
+        DiagParams {
+            inputs: vec![],
+            run: false,
+            tools: vec![],
+            lsp: vec![],
+            lsp_files: vec![],
+            timeout: Duration::from_secs(120),
+            min_severity: Severity::Warning,
+        }
+    }
+}
+
+fn default_lsp_files(root: &Path) -> Vec<PathBuf> {
+    let exts = ["rs", "py", "ts", "tsx", "js", "jsx"];
+    let skip = [
+        "node_modules",
+        "target",
+        "vendor",
+        "dist",
+        "build",
+        "venv",
+        ".venv",
+        "__pycache__",
+        ".git",
+        ".plumbgraph",
+    ];
+    let mut v = vec![];
+    for e in ignore::WalkBuilder::new(root)
+        .filter_entry(move |e| !skip.iter().any(|s| e.file_name() == *s))
+        .build()
+        .flatten()
+    {
+        let p = e.path();
+        if p.is_file()
+            && p.extension()
+                .and_then(|x| x.to_str())
+                .map(|x| exts.contains(&x))
+                .unwrap_or(false)
+        {
+            v.push(p.to_path_buf());
+            if v.len() >= 100 {
+                break;
+            }
+        }
+    }
+    v.sort();
+    v
+}
+
+pub fn run_diagnostics(root: &Path, p: &DiagParams) -> Result<DiagReport> {
+    if p.inputs.is_empty() && !p.run && p.lsp.is_empty() {
+        bail!("nothing to do: pass saved tool output (`--from FORMAT:FILE`, no code is executed) and/or explicitly run tools (`--run`, `--lsp`)");
+    }
+    for t in &p.tools {
+        if !TOOL_NAMES.contains(&t.as_str()) {
+            bail!(
+                "unknown tool `{}` (expected one of: {})",
+                sanitize(t),
+                TOOL_NAMES.join(", ")
+            );
+        }
+    }
+    let root = root.canonicalize()?;
+    let mut reports = vec![];
+    for i in &p.inputs {
+        let (findings, dropped) = diagnostics::parse(i.format, &i.text, &root)?;
+        reports.push(DiagReport {
+            tools: vec![ToolRun {
+                tool: i.format.as_str().into(),
+                command: format!("ingest {}", sanitize(&i.label)),
+                status: "ingested".into(),
+                findings: findings.len(),
+                note: None,
+            }],
+            findings,
+            dropped_outside_root: dropped,
+            executed: false,
+        });
+    }
+    if p.run {
+        let all = diagnostics::builtin_tools(&root);
+        let specs: Vec<_> = if p.tools.is_empty() {
+            all.clone()
+        } else {
+            all.iter()
+                .filter(|s| p.tools.contains(&s.name))
+                .cloned()
+                .collect()
+        };
+        let mut r = diagnostics::run_tools(&root, &specs, p.timeout);
+        for t in &p.tools {
+            if !all.iter().any(|s| &s.name == t) {
+                r.tools.push(ToolRun {
+                    tool: t.clone(),
+                    status: "skipped".into(),
+                    note: Some("not applicable: no matching project file (Cargo.toml, tsconfig.json, pyproject.toml, ...)".into()),
+                    ..Default::default()
+                });
+            }
+        }
+        reports.push(r);
+    }
+    for server in &p.lsp {
+        let files = if p.lsp_files.is_empty() {
+            default_lsp_files(&root)
+        } else {
+            p.lsp_files.clone()
+        };
+        reports.push(crate::lsp::collect(server, &root, &files, p.timeout)?);
+    }
+    let mut rep = diagnostics::merge(reports);
+    diagnostics::filter_severity(&mut rep, p.min_severity);
+    Ok(rep)
 }
