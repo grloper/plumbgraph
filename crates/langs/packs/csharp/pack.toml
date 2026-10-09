@@ -1,0 +1,11 @@
+id = "csharp"
+grammar = "c-sharp"
+extensions = [".cs"]
+manifests = ["*.csproj"]
+ref_node_kinds = ["identifier"]
+call_node_kinds = ["invocation_expression", "object_creation_expression"]
+string_node_kinds = ["string_content"]
+dynamic_markers = ["Activator.CreateInstance", "System.Reflection", "Assembly.Load", "GetMethod(", "Type.GetType"]
+entry_names = []
+test_globs = ["**/tests/**", "**/Tests/**", "**/*Tests.cs", "**/*Test.cs", "**/*.Tests/**", "**/*.Test/**"]
+queries = { defs = "defs.scm", imports = "imports.scm" }

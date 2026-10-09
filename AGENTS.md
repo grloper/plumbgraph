@@ -27,3 +27,4 @@ Instructions for AI coding agents working in this repository.
 - SCIP overlay changes must keep the per-occurrence fallback (see `docs/SCIP.md`); measure on a real index before claiming an improvement.
 - Do not run `git push --force`, tag, or publish crates/releases. Changes go through PRs.
 - Keep `cargo clippy -- -D warnings` clean; Rust 1.85 must keep working (`Cargo.lock` pins `ignore` to 0.4.23 for that reason).
+- Languages: python, javascript, typescript, tsx, rust, go, java, csharp (see `docs/PACKS.md`; `Family::ClassLike` in `crates/core/src/extract.rs` handles Go/Java/C#).

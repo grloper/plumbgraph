@@ -408,6 +408,92 @@ pub fn resolve_import(
         Family::Python => resolve_python(view, file_path, imp),
         Family::JsLike => resolve_js(view, file_path, imp),
         Family::Rust => resolve_rust(view, file_path, imp, bound),
+        Family::ClassLike => resolve_classlike(view, file_path, imp),
+    }
+}
+
+/// Go (package path -> directory), Java (qualified name -> file/dir). C# `using` is namespace
+/// based and namespaces are not indexed, so non-System namespaces stay `unresolved`.
+fn resolve_classlike(view: &ProjectView, file_path: &str, imp: &ImportFact) -> Resolution {
+    let m = imp.module.as_str();
+    let ext = file_path.rsplit('.').next().unwrap_or("");
+    let files_in_dir = |dir: &str, ext: &str| -> Vec<String> {
+        let mut v: Vec<String> = view
+            .paths
+            .iter()
+            .filter(|p| p.ends_with(ext) && dir_of(p) == dir && !p.ends_with("_test.go"))
+            .cloned()
+            .collect();
+        v.sort();
+        v
+    };
+    match ext {
+        "go" => {
+            let mut dirs: Vec<&str> = view
+                .paths
+                .iter()
+                .filter(|p| p.ends_with(".go"))
+                .map(|p| dir_of(p))
+                .filter(|d| !d.is_empty() && (m == *d || m.ends_with(&format!("/{d}"))))
+                .collect();
+            dirs.sort_by_key(|d| std::cmp::Reverse(d.len()));
+            if let Some(d) = dirs.first() {
+                let mut r = Resolution::new("local");
+                r.resolved_files = files_in_dir(d, ".go");
+                return r;
+            }
+            if !m.split('/').next().unwrap_or("").contains('.') {
+                return Resolution::new("stdlib");
+            }
+            let mut r = Resolution::new("external");
+            r.package = Some(m.to_string());
+            r
+        }
+        "java" => {
+            let rel = format!("{}.java", m.replace('.', "/"));
+            let mut hit: Vec<String> = view
+                .paths
+                .iter()
+                .filter(|p| **p == rel || p.ends_with(&format!("/{rel}")))
+                .cloned()
+                .collect();
+            if hit.is_empty() {
+                // wildcard / package import: every file in a directory ending with the package path
+                let pkg = m.replace('.', "/");
+                let mut dirs: Vec<&str> = view
+                    .paths
+                    .iter()
+                    .filter(|p| p.ends_with(".java"))
+                    .map(|p| dir_of(p))
+                    .filter(|d| *d == pkg || d.ends_with(&format!("/{pkg}")))
+                    .collect();
+                dirs.sort();
+                dirs.dedup();
+                for d in dirs {
+                    hit.extend(files_in_dir(d, ".java"));
+                }
+            }
+            if !hit.is_empty() {
+                hit.sort();
+                let mut r = Resolution::new("local");
+                r.resolved_files = hit;
+                return r;
+            }
+            if ["java.", "javax.", "jdk.", "sun."]
+                .iter()
+                .any(|p| m.starts_with(p))
+            {
+                return Resolution::new("stdlib");
+            }
+            Resolution::new("external")
+        }
+        _ => {
+            if m == "System" || m.starts_with("System.") || m.starts_with("Microsoft.") {
+                Resolution::new("stdlib")
+            } else {
+                Resolution::new("unresolved")
+            }
+        }
     }
 }
 
