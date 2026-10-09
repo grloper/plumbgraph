@@ -54,6 +54,14 @@ pub struct Pack {
     pub defs_query: String,
     pub imports_query: String,
     pub builtin: bool,
+    /// Queries are compiled once per pack, on first use (compiling per file dominated indexing).
+    compiled: std::sync::Arc<Compiled>,
+}
+
+#[derive(Debug, Default)]
+struct Compiled {
+    defs: std::sync::OnceLock<std::result::Result<Query, String>>,
+    imports: std::sync::OnceLock<std::result::Result<Query, String>>,
 }
 
 /// The language "family" drives the small amount of per-language Rust logic
@@ -85,14 +93,28 @@ impl Pack {
         grammar(&self.manifest.grammar)
     }
 
-    pub fn defs(&self) -> Result<Query> {
-        Query::new(&self.language()?, &self.defs_query)
-            .map_err(|e| anyhow!("pack {}: bad defs query: {e}", self.id()))
+    pub fn defs(&self) -> Result<&Query> {
+        self.compiled
+            .defs
+            .get_or_init(|| {
+                let lang = self.language().map_err(|e| e.to_string())?;
+                Query::new(&lang, &self.defs_query)
+                    .map_err(|e| format!("pack {}: bad defs query: {e}", self.id()))
+            })
+            .as_ref()
+            .map_err(|e| anyhow!("{e}"))
     }
 
-    pub fn imports(&self) -> Result<Query> {
-        Query::new(&self.language()?, &self.imports_query)
-            .map_err(|e| anyhow!("pack {}: bad imports query: {e}", self.id()))
+    pub fn imports(&self) -> Result<&Query> {
+        self.compiled
+            .imports
+            .get_or_init(|| {
+                let lang = self.language().map_err(|e| e.to_string())?;
+                Query::new(&lang, &self.imports_query)
+                    .map_err(|e| format!("pack {}: bad imports query: {e}", self.id()))
+            })
+            .as_ref()
+            .map_err(|e| anyhow!("{e}"))
     }
 
     /// Validate that both queries compile against the grammar.
@@ -159,8 +181,10 @@ impl PackSet {
                 defs_query: defs.to_string(),
                 imports_query: imports.to_string(),
                 builtin: true,
+                compiled: Default::default(),
             };
-            pack.validate()?;
+            // Built-in packs are validated by the `builtin_packs_load_and_validate` test;
+            // compiling every query at startup cost ~100 ms per invocation.
             packs.push(pack);
         }
         Ok(Self { packs })
@@ -192,6 +216,7 @@ impl PackSet {
             defs_query,
             imports_query,
             builtin: false,
+            compiled: Default::default(),
         };
         pack.validate()?;
         Ok(pack)
@@ -244,8 +269,21 @@ mod tests {
     fn builtin_packs_load_and_validate() {
         let set = PackSet::builtin().unwrap();
         let ids: Vec<_> = set.packs().iter().map(|p| p.id().to_string()).collect();
-        for want in ["python", "javascript", "typescript", "tsx", "rust"] {
+        for want in [
+            "python",
+            "javascript",
+            "typescript",
+            "tsx",
+            "rust",
+            "go",
+            "java",
+            "csharp",
+        ] {
             assert!(ids.contains(&want.to_string()), "missing {want}");
+        }
+        // built-ins are no longer validated at startup: every one must compile here
+        for p in set.packs() {
+            p.validate().unwrap();
         }
     }
 

@@ -60,6 +60,10 @@ pub struct IndexStats {
     pub files_parsed: usize,
     pub files_unchanged: usize,
     pub files_removed: usize,
+    /// files whose bytes were read and hashed (unchanged size+mtime files are not)
+    pub files_hashed: usize,
+    /// false when nothing changed and import resolution + edges were reused
+    pub resolved: bool,
     pub files_skipped_large: usize,
     pub parse_errors: usize,
     pub files_with_syntax_errors: usize,
@@ -72,6 +76,40 @@ pub struct IndexStats {
 }
 
 const TEXT_MAX_BYTES: usize = 512 * 1024;
+
+/// Files that influence import classification without being indexed themselves.
+const MANIFEST_NAMES: &[&str] = &[
+    "package.json",
+    "Cargo.toml",
+    "pyproject.toml",
+    "requirements.txt",
+    "setup.cfg",
+    "setup.py",
+    "Pipfile",
+    "go.mod",
+    "pom.xml",
+    "build.gradle",
+    "build.gradle.kts",
+];
+
+/// A file modified this recently when indexed may change again without changing its mtime
+/// (coarse timestamps): its mtime is recorded as 0 so the next run re-hashes it.
+const RACY_NS: i64 = 2_000_000_000;
+
+fn now_ns() -> i64 {
+    std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|d| d.as_nanos() as i64)
+        .unwrap_or(0)
+}
+
+fn mtime_ns(md: &std::fs::Metadata) -> i64 {
+    md.modified()
+        .ok()
+        .and_then(|t| t.duration_since(std::time::UNIX_EPOCH).ok())
+        .map(|d| d.as_nanos() as i64)
+        .unwrap_or(0)
+}
 
 /// Non-code files scanned for identifier mentions (evidence that a name is used from outside indexed code).
 fn text_kind(p: &Path) -> Option<&'static str> {
@@ -179,10 +217,16 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
         pack: String,
     }
     let mut entries: Vec<Entry> = vec![];
+    let mut manifest_files: Vec<PathBuf> = vec![];
     for dent in walker(&root).build() {
         let Ok(dent) = dent else { continue };
         if !dent.file_type().map(|t| t.is_file()).unwrap_or(false) {
             continue;
+        }
+        if let Some(n) = dent.path().file_name().and_then(|n| n.to_str()) {
+            if MANIFEST_NAMES.contains(&n) || n.ends_with(".csproj") {
+                manifest_files.push(dent.path().to_path_buf());
+            }
         }
         if let Some(pack) = opts.packs.for_path(dent.path()) {
             entries.push(Entry {
@@ -212,17 +256,40 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
     stats.files_seen = entries.len() - stats.text_files;
 
     // 2. hash & diff
-    let existing = store.file_hashes()?;
+    let existing = store.file_stats()?;
     struct Loaded {
         rel: String,
         pack: String,
         hash: String,
         size: usize,
+        mtime: i64,
+        hashed: bool,
         text: Option<String>,
     }
+    let force = opts.force;
     let loaded: Vec<Loaded> = entries
         .par_iter()
         .map(|e| {
+            let md = std::fs::metadata(&e.abs).ok();
+            let (size, mtime) = md
+                .as_ref()
+                .map(|m| (m.len() as i64, mtime_ns(m)))
+                .unwrap_or((-1, 0));
+            if !force {
+                if let Some((_, h, s, m)) = existing.get(&e.rel) {
+                    if *m != 0 && *m == mtime && *s == size && size >= 0 {
+                        return Loaded {
+                            rel: e.rel.clone(),
+                            pack: e.pack.clone(),
+                            hash: h.clone(),
+                            size: size as usize,
+                            mtime,
+                            hashed: false,
+                            text: None,
+                        };
+                    }
+                }
+            }
             let bytes = std::fs::read(&e.abs).unwrap_or_default();
             let mut h = Sha256::new();
             h.update(EXTRACTOR_VERSION.as_bytes());
@@ -239,15 +306,26 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
                 pack: e.pack.clone(),
                 hash,
                 size: bytes.len(),
+                mtime,
+                hashed: true,
                 text,
             }
         })
         .collect();
+    stats.files_hashed = loaded.iter().filter(|l| l.hashed).count();
+    let indexed_at = now_ns();
+    let safe_mtime = |m: i64| {
+        if m == 0 || indexed_at - m < RACY_NS {
+            0
+        } else {
+            m
+        }
+    };
     let on_disk: HashSet<&str> = loaded.iter().map(|l| l.rel.as_str()).collect();
     let removed: Vec<i64> = existing
         .iter()
         .filter(|(p, _)| !on_disk.contains(p.as_str()))
-        .map(|(_, (id, _))| *id)
+        .map(|(_, (id, _, _, _))| *id)
         .collect();
     stats.files_removed = removed.len();
     let to_parse: Vec<&Loaded> = loaded
@@ -256,7 +334,7 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
             opts.force
                 || existing
                     .get(&l.rel)
-                    .map(|(_, h)| h != &l.hash)
+                    .map(|(_, h, _, _)| h != &l.hash)
                     .unwrap_or(true)
         })
         .collect();
@@ -297,7 +375,7 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
             store.delete_file(*id)?;
         }
         for (l, res) in &results {
-            if let Some((id, _)) = existing.get(&l.rel) {
+            if let Some((id, _, _, _)) = existing.get(&l.rel) {
                 store.delete_file(*id)?;
             }
             match res {
@@ -310,7 +388,7 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
                     } else {
                         l.pack.as_str()
                     };
-                    store.insert_file(
+                    let id = store.insert_file(
                         &l.rel,
                         &l.hash,
                         l.size,
@@ -322,6 +400,7 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
                             "ok"
                         },
                     )?;
+                    store.set_mtime(id, safe_mtime(l.mtime))?;
                     if !l.pack.starts_with("text:") {
                         stats.files_parsed += 1;
                     }
@@ -332,7 +411,7 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
                     } else {
                         stats.parse_errors += 1;
                     }
-                    store.insert_file(
+                    let id = store.insert_file(
                         &l.rel,
                         &l.hash,
                         l.size,
@@ -340,11 +419,42 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
                         &l.pack,
                         &format!("error: {msg}"),
                     )?;
+                    store.set_mtime(id, safe_mtime(l.mtime))?;
                 }
             }
         }
-        resolve_imports(&store, &root, &opts.packs)?;
-        build_edges(&store)?;
+        // unchanged content but a new/untrusted mtime: remember the current one
+        let parsed: HashSet<&str> = results.iter().map(|(l, _)| l.rel.as_str()).collect();
+        for l in &loaded {
+            if parsed.contains(l.rel.as_str()) {
+                continue;
+            }
+            if let Some((id, _, _, m)) = existing.get(&l.rel) {
+                let want = safe_mtime(l.mtime);
+                if *m != want {
+                    store.set_mtime(*id, want)?;
+                }
+            }
+        }
+        // Import resolution and edges depend only on the indexed files and the manifests:
+        // reuse them when neither changed.
+        let mut h = Sha256::new();
+        for m in &manifest_files {
+            h.update(rel_path(&root, m).as_bytes());
+            h.update(std::fs::read(m).unwrap_or_default());
+        }
+        let stamp = format!("{:x}", h.finalize());
+        let unchanged = removed.is_empty()
+            && results.is_empty()
+            && store.meta("resolve_stamp").as_deref() == Some(stamp.as_str())
+            && store.meta("edges_built").as_deref() == Some("1");
+        if !unchanged {
+            resolve_imports(&store, &root, &opts.packs)?;
+            build_edges(&store)?;
+            store.set_meta("resolve_stamp", &stamp)?;
+            store.set_meta("edges_built", "1")?;
+            stats.resolved = true;
+        }
         Ok(())
     })();
     match write {
@@ -672,5 +782,87 @@ mod tests {
         write(t.path(), "bad.py", "def (:\n  ???\n");
         let s = index_project(t.path(), &opts(t.path())).unwrap();
         assert_eq!(s.files_with_syntax_errors, 1);
+    }
+
+    #[test]
+    fn unchanged_files_are_not_read_and_edges_are_reused() {
+        let t = tempfile::tempdir().unwrap();
+        let r = t.path();
+        write(r, "a.py", "def f():\n    return 1\n");
+        write(r, "b.py", "from a import f\n\nprint(f())\n");
+        let o = opts(r);
+        let s1 = index_project(r, &o).unwrap();
+        assert_eq!(s1.files_hashed, 2);
+        assert!(s1.resolved);
+        // racy window: files modified in the last 2 s are re-hashed once more
+        let s2 = index_project(r, &o).unwrap();
+        assert_eq!(s2.files_parsed, 0);
+        // age the files so their mtimes are trusted, then index again
+        let old = std::time::SystemTime::now() - std::time::Duration::from_secs(3600);
+        for f in ["a.py", "b.py"] {
+            std::fs::File::options()
+                .write(true)
+                .open(r.join(f))
+                .unwrap()
+                .set_modified(old)
+                .unwrap();
+        }
+        let s3 = index_project(r, &o).unwrap();
+        assert_eq!(s3.files_parsed, 0);
+        let s4 = index_project(r, &o).unwrap();
+        assert_eq!(s4.files_hashed, 0, "trusted size+mtime: no file is read");
+        assert!(!s4.resolved, "edges reused when nothing changed");
+        assert_eq!(s4.edges, s1.edges);
+        // same size, same mtime would be missed by design only inside the racy window; a real
+        // content change with a new mtime is always found
+        write(r, "a.py", "def f():\n    return 2\n");
+        let s5 = index_project(r, &o).unwrap();
+        assert_eq!((s5.files_hashed, s5.files_parsed), (1, 1));
+        assert!(s5.resolved);
+    }
+
+    #[test]
+    fn same_size_edit_inside_the_racy_window_is_still_detected() {
+        let t = tempfile::tempdir().unwrap();
+        let r = t.path();
+        write(r, "a.py", "def f():\n    return 1\n");
+        let o = opts(r);
+        index_project(r, &o).unwrap();
+        let m = std::fs::metadata(r.join("a.py"))
+            .unwrap()
+            .modified()
+            .unwrap();
+        write(r, "a.py", "def g():\n    return 1\n");
+        std::fs::File::options()
+            .write(true)
+            .open(r.join("a.py"))
+            .unwrap()
+            .set_modified(m)
+            .unwrap();
+        let s = index_project(r, &o).unwrap();
+        assert_eq!(s.files_parsed, 1, "identical size and mtime, new content");
+        let g = Graph::load(&Store::open(&db_path_for(r, &o)).unwrap()).unwrap();
+        assert!(g.symbols.iter().any(|x| x.name == "g"));
+    }
+
+    #[test]
+    fn manifest_change_forces_re_resolution() {
+        let t = tempfile::tempdir().unwrap();
+        let r = t.path();
+        write(r, "a.py", "import requests\n");
+        write(r, "requirements.txt", "requests\n");
+        let o = opts(r);
+        index_project(r, &o).unwrap();
+        let old = std::time::SystemTime::now() - std::time::Duration::from_secs(3600);
+        std::fs::File::options()
+            .write(true)
+            .open(r.join("a.py"))
+            .unwrap()
+            .set_modified(old)
+            .unwrap();
+        index_project(r, &o).unwrap();
+        assert!(!index_project(r, &o).unwrap().resolved);
+        write(r, "requirements.txt", "requests\nflask\n");
+        assert!(index_project(r, &o).unwrap().resolved);
     }
 }

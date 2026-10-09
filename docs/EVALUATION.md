@@ -122,3 +122,20 @@ plumb diagnostics <wraith copy with an injected type error> --lsp "rustup run st
 | rust-analyzer via the LSP client, on a scratch copy of Wraith with `fn plumb_injected_error() -> i32 { "not an int" }` appended to `src/maps.rs` | 2 diagnostics (E0308 `mismatched types`, 0.95, plus its related "expected `i32` because of return type" hint, 0.75), 6.8 s. Before the client advertised work-done-progress and `experimental/serverStatus` support it returned **0 diagnostics** in ~3 s because rust-analyzer publishes an empty list first; that is now covered by a fake-server regression test, and confirmed against the real server only on this one injected error |
 
 Not measured: how often a diagnostic is a real defect versus environment noise (so the per-source confidence constants are unvalidated), LSP behaviour for servers other than rust-analyzer, tsc/ruff/pyright against the repositories' own intended configs, baseline diffing (not implemented).
+
+
+## v1.0 measurements (2026-10-10, commit `3f1257f`, 8 CPUs, release build)
+
+Raw data: [docs/bench/results-2026-10-10.json](bench/results-2026-10-10.json), produced by `scripts/bench.py` on scratch copies (never the originals). Token counts are an estimate (chars/4), not a real tokenizer. Single run per repo (no-op reindex is a median); wall-clock on one machine.
+
+| repo | files | symbols | cold index | no-op reindex | 1 file changed | map @1000 tok (actual est.) | dead-code (default) | impact top symbol |
+|---|---|---|---|---|---|---|---|---|
+| Wraith (Rust) | 34 | 627 | 0.117 s | 0.009 s | 0.042 s | 962 (87/265 symbols) | 1 medium | `Severity`: 170 affected, 8 tests |
+| classroom-archiver (JS) | 61 | 364 | 0.108 s | 0.008 s | 0.036 s | 955 (77/305) | 3 medium | `resolve`: 26 affected, 1 test |
+| plumbgraph (Rust) | 59 | 696 | 0.176 s | 0.010 s | 0.069 s | 958 (87/362) | 1 medium | `id`: 56, 7 tests |
+| chi (Go, third-party) | 84 | 497 | 0.132 s | 0.008 s | 0.049 s | 970 (62/332) | 19 medium | `Handler`: 179, 7 tests |
+| gson (Java, third-party) | 264 | 4247 | 0.554 s | 0.013 s | 0.384 s | 978 (41/1331) | 28 medium | `JsonElement`: 1288, 99 tests |
+
+**Seeded recall.** In each repo, 20 uniquely named dead functions and 20 live ones (called from live code) were injected in the repo's own language (outside test/example/bench/fixture paths). All 20/20 dead were found at the default threshold and 0/20 live were flagged. This is a synthetic, easy test (unique names, simple call shapes); it shows the pipeline works, not real-world recall.
+
+**Not measured:** precision of the dead-code findings on chi and gson (19 and 28 findings were not hand-reviewed), the Go/Java/C# cases beyond fixtures (C# was not benchmarked on a real repository; no C# import resolution), real-tokenizer map sizes, whether maps improve agent task success, and any run of external providers (semgrep, ast-grep, SCIP indexers) inside `verify`; those paths are covered by fixture/fake-tool tests only. `verify` on plumbgraph itself exits 1 because `check-deps` reports 10 findings, not triaged here.
