@@ -269,6 +269,10 @@ pub struct Graph {
     pub edges: Vec<EdgeRow>,
     /// names mentioned in string literals, per file id
     pub strings: HashMap<i64, Vec<String>>,
+    /// Symbol ids whose references were resolved from a SCIP index (see `scip::apply`).
+    pub scip_symbols: std::collections::HashSet<i64>,
+    /// `(file id, line, name)` occurrences a SCIP index resolved; their name-based edges were replaced.
+    pub scip_resolved_refs: std::collections::HashSet<(i64, u32, String)>,
 }
 
 impl Graph {

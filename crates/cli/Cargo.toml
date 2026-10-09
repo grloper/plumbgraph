@@ -29,4 +29,6 @@ serde.workspace = true
 serde_json.workspace = true
 
 [dev-dependencies]
+protobuf.workspace = true
+scip.workspace = true
 tempfile.workspace = true

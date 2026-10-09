@@ -344,6 +344,13 @@ pub fn dead_code(g: &Graph, opts: &DeadCodeOptions) -> Vec<Finding> {
     // name census
     let mut refs_by_name: HashMap<&str, Vec<(i64, u32)>> = HashMap::new();
     for r in &g.refs {
+        // occurrences a SCIP index resolved (to this or another symbol) are no longer name evidence
+        if !g.scip_resolved_refs.is_empty()
+            && g.scip_resolved_refs
+                .contains(&(r.file_id, r.line, r.name.clone()))
+        {
+            continue;
+        }
         refs_by_name
             .entry(r.name.as_str())
             .or_default()
@@ -404,6 +411,7 @@ pub fn dead_code(g: &Graph, opts: &DeadCodeOptions) -> Vec<Finding> {
             &refs_by_name,
             &string_names,
             &imported_names,
+            g.scip_symbols.contains(&s.id),
         ));
     }
     out.retain(|f| f.confidence >= opts.min_confidence);
@@ -431,6 +439,7 @@ fn score(
     refs_by_name: &HashMap<&str, Vec<(i64, u32)>>,
     string_names: &HashSet<&str>,
     imported_names: &HashSet<&str>,
+    scip: bool,
 ) -> Finding {
     let name = s.name.as_str();
     let other_refs = refs_by_name
@@ -443,7 +452,13 @@ fn score(
         .unwrap_or(0);
     let in_string = string_names.contains(name);
     let imported = imported_names.contains(name);
-    let census_zero = other_refs == 0 && !in_string && !imported;
+    // SCIP resolves references by symbol identity, so same-named symbols and import lists do
+    // not count as evidence of use; strings/dynamic markers still can.
+    let census_zero = if scip {
+        !in_string
+    } else {
+        other_refs == 0 && !in_string && !imported
+    };
 
     let mut bonus: f64 = 0.0;
     let mut pen: f64 = 0.0;
@@ -467,7 +482,13 @@ fn score(
     }
     if census_zero {
         bonus += 0.15;
-        evidence.push(format!("the name `{}` occurs nowhere else in the indexed code (identifiers, strings, import lists)", sanitize(name)));
+        if scip {
+            evidence.push(
+                "resolved by SCIP: the index records no reference to this exact symbol".into(),
+            );
+        } else {
+            evidence.push(format!("the name `{}` occurs nowhere else in the indexed code (identifiers, strings, import lists)", sanitize(name)));
+        }
     }
     if !dynamic.is_empty() {
         pen += 0.20;
@@ -495,7 +516,7 @@ fn score(
         pen += 0.10;
         fp.push("exported/public: may be used by consumers outside the indexed code".into());
     }
-    if imported && !in_string {
+    if imported && !in_string && !scip {
         pen += 0.20;
         fp.push("the name appears in an import/export list elsewhere (possible re-export)".into());
     }
@@ -503,7 +524,11 @@ fn score(
         pen += 0.10;
         fp.push("the file has syntax errors; extraction may be incomplete".into());
     }
-    fp.push("tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files".into());
+    if scip {
+        fp.push("SCIP index may be stale, partial, or blind to reflection, generated code and callers outside the indexed project".into());
+    } else {
+        fp.push("tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files".into());
+    }
     let mut conf = ((0.70 + bonus) * (1.0 - pen)).clamp(0.0, 0.99);
     if !dead {
         conf = conf.min(0.85);
@@ -518,7 +543,8 @@ fn score(
     } else {
         format!("{} `{}` is only used by tests", s.kind, sanitize(&s.qname))
     };
-    let mut f = Finding::new("dead", rule, path, s.start_line, conf, "t0-treesitter", msg);
+    let source = if scip { "scip" } else { "t0-treesitter" };
+    let mut f = Finding::new("dead", rule, path, s.start_line, conf, source, msg);
     f.symbol = Some(sanitize(&s.qname));
     f.kind = s.kind.clone();
     f.severity = if f.level == Level::Low {

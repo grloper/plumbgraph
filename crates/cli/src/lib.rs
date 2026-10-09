@@ -2,8 +2,11 @@
 
 use anyhow::Result;
 use clap::{Parser, Subcommand};
-use plumbgraph_core::ops::{self, DeadCodeParams, DepsParams, Target};
-use plumbgraph_core::{Finding, Level};
+use plumbgraph_core::diagnostics::Format;
+use plumbgraph_core::ops::{
+    self, DeadCodeParams, DepsParams, DiagInput, DiagParams, ScipOpts, Target,
+};
+use plumbgraph_core::{Finding, Level, Severity};
 use std::path::PathBuf;
 use std::process::ExitCode;
 
@@ -81,6 +84,8 @@ enum Cmd {
         /// Exit with status 1 when a finding of at least this level exists
         #[arg(long, value_enum, default_value = "none")]
         fail_on: FailOn,
+        #[command(flatten)]
+        scip: ScipArgs,
     },
     /// Check imports against manifests and package registries
     CheckDeps {
@@ -128,13 +133,84 @@ enum Cmd {
         min_confidence: f64,
         #[arg(long, default_value_t = 50)]
         limit: usize,
+        #[command(flatten)]
+        scip: ScipArgs,
+    },
+    /// Normalised compiler / type-checker / linter / LSP diagnostics.
+    ///
+    /// `--from FORMAT:FILE` ingests saved output and executes nothing. `--run` and `--lsp`
+    /// execute the project's toolchain (cargo check runs build scripts and proc-macros): use
+    /// them only on code you trust. FORMAT is cargo-json, ruff-json, pyright-json or tsc; FILE
+    /// may be `-` for stdin.
+    Diagnostics {
+        path: PathBuf,
+        /// Saved tool output to ingest, `FORMAT:FILE` (repeatable)
+        #[arg(long = "from", value_name = "FORMAT:FILE")]
+        from: Vec<String>,
+        /// Run the applicable tools: cargo check + clippy (Cargo.toml), tsc (tsconfig.json), ruff + pyright (Python project files)
+        #[arg(long)]
+        run: bool,
+        /// With --run: only these tools (cargo-check, clippy, tsc, ruff, pyright)
+        #[arg(long = "tool")]
+        tools: Vec<String>,
+        /// Start this language server (command line, split on spaces) and collect publishDiagnostics (repeatable)
+        #[arg(long = "lsp", value_name = "COMMAND")]
+        lsp: Vec<String>,
+        /// Files to open in the language server (default: up to 100 source files under PATH)
+        #[arg(long = "lsp-file")]
+        lsp_files: Vec<PathBuf>,
+        /// Per-tool / LSP timeout in seconds
+        #[arg(long, default_value_t = 120)]
+        timeout_secs: u64,
+        /// Hide diagnostics below this severity
+        #[arg(long, value_enum, default_value = "warning")]
+        min_severity: SevArg,
+        /// Exit with status 1 when a diagnostic of at least this confidence level exists
+        #[arg(long, value_enum, default_value = "none")]
+        fail_on: FailOn,
+    },
+    /// Show how well SCIP index files cover the project (reads index.scip, executes nothing)
+    Scip {
+        path: PathBuf,
+        #[command(flatten)]
+        scip: ScipArgs,
     },
     /// Serve the tools over MCP (stdio, JSON-RPC)
     Mcp {
         /// Project root the tools are confined to (default: current directory)
         #[arg(long, default_value = ".")]
         root: PathBuf,
+        /// Let the `diagnostics` tool run project toolchains and language servers when the
+        /// agent asks. Off by default: a repository must not be able to enable this itself.
+        #[arg(long)]
+        allow_exec: bool,
     },
+}
+
+#[derive(Clone, Copy, clap::ValueEnum)]
+enum SevArg {
+    Info,
+    Warning,
+    Error,
+}
+
+#[derive(clap::Args, Clone)]
+struct ScipArgs {
+    /// SCIP index file to use (repeatable). Default: auto-detect <path>/index.scip and <path>/.plumbgraph/index.scip
+    #[arg(long = "scip", value_name = "FILE")]
+    scip: Vec<PathBuf>,
+    /// Ignore SCIP indexes; name-based analysis only
+    #[arg(long)]
+    no_scip: bool,
+}
+
+impl ScipArgs {
+    fn opts(&self) -> ScipOpts {
+        ScipOpts {
+            paths: self.scip.clone(),
+            disable: self.no_scip,
+        }
+    }
 }
 
 fn print_json<T: serde::Serialize>(v: &T) -> Result<()> {
@@ -143,12 +219,21 @@ fn print_json<T: serde::Serialize>(v: &T) -> Result<()> {
 }
 
 fn render(f: &Finding) {
+    let loc = match f.column {
+        Some(c) => format!("{}:{}:{}", f.file, f.line, c),
+        None => format!("{}:{}", f.file, f.line),
+    };
+    let rule = if f.category == "diagnostic" {
+        format!("{} ", f.rule)
+    } else {
+        String::new()
+    };
     println!(
-        "{:<6} {:.2}  {}:{}  {}  [{}]",
+        "{:<6} {:.2}  {}  {}{}  [{}]",
         f.level.as_str().to_uppercase(),
         f.confidence,
-        f.file,
-        f.line,
+        loc,
+        rule,
         f.message,
         f.source
     );
@@ -203,6 +288,7 @@ fn run(cli: Cli) -> Result<bool> {
             no_test_only,
             only,
             fail_on,
+            scip,
         } => {
             let p = DeadCodeParams {
                 library_mode: lib,
@@ -211,6 +297,7 @@ fn run(cli: Cli) -> Result<bool> {
                 allow_file,
                 path_prefix: only,
                 include_test_only: !no_test_only,
+                scip: scip.opts(),
             };
             let r = ops::run_dead_code(&target(path), &p)?;
             if json {
@@ -228,7 +315,13 @@ fn run(cli: Cli) -> Result<bool> {
                     r.index.files_seen,
                     r.index.symbols
                 );
-                println!("note: tier-0 name-based analysis; verify medium/low findings before deleting anything.");
+                match &r.scip {
+                    Some(st) => println!(
+                        "scip: {} document(s) matched of {}, {} symbol(s) resolved precisely, {} stale file(s) analysed name-based; findings marked [scip] come from the index, the rest are name-based.",
+                        st.documents_matched, st.documents, st.symbols_mapped, st.stale_files
+                    ),
+                    None => println!("note: tier-0 name-based analysis (no SCIP index); verify medium/low findings before deleting anything."),
+                }
             }
             Ok(fail_on.tripped(&r.findings))
         }
@@ -333,8 +426,10 @@ fn run(cli: Cli) -> Result<bool> {
             symbol,
             min_confidence,
             limit,
+            scip,
         } => {
-            let hits = ops::references(&target(path), &symbol, min_confidence, limit)?;
+            let hits =
+                ops::references_scip(&target(path), &symbol, min_confidence, limit, &scip.opts())?;
             if json {
                 print_json(&hits)?;
             } else {
@@ -355,11 +450,124 @@ fn run(cli: Cli) -> Result<bool> {
             }
             Ok(false)
         }
-        Cmd::Mcp { root } => {
-            let server = plumbgraph_mcp::Server::new(&root, cli.db.clone())?;
+        Cmd::Diagnostics {
+            path,
+            from,
+            run,
+            tools,
+            lsp,
+            lsp_files,
+            timeout_secs,
+            min_severity,
+            fail_on,
+        } => {
+            let mut inputs = vec![];
+            for spec in &from {
+                let (fmt, file) = spec
+                    .split_once(':')
+                    .ok_or_else(|| anyhow::anyhow!("--from expects FORMAT:FILE, got `{spec}`"))?;
+                let format: Format = fmt.parse()?;
+                let text = if file == "-" {
+                    let mut s = String::new();
+                    std::io::Read::read_to_string(&mut std::io::stdin(), &mut s)?;
+                    s
+                } else {
+                    std::fs::read_to_string(file)
+                        .map_err(|e| anyhow::anyhow!("reading {file}: {e}"))?
+                };
+                inputs.push(DiagInput {
+                    format,
+                    label: file.to_string(),
+                    text,
+                });
+            }
+            let p = DiagParams {
+                inputs,
+                run,
+                tools,
+                lsp: lsp
+                    .iter()
+                    .map(|c| c.split_whitespace().map(String::from).collect())
+                    .collect(),
+                // relative file names are resolved against the project root by the LSP client
+                lsp_files,
+                timeout: std::time::Duration::from_secs(timeout_secs),
+                min_severity: match min_severity {
+                    SevArg::Info => Severity::Info,
+                    SevArg::Warning => Severity::Warning,
+                    SevArg::Error => Severity::Error,
+                },
+            };
+            let r = ops::run_diagnostics(&path, &p)?;
+            if json {
+                print_json(&r)?;
+            } else {
+                for f in &r.findings {
+                    render(f);
+                }
+                println!("\n{} diagnostic(s)", r.findings.len());
+                for t in &r.tools {
+                    println!(
+                        "  {:<14} {:<9} {} finding(s){}",
+                        t.tool,
+                        t.status,
+                        t.findings,
+                        t.note
+                            .as_ref()
+                            .map(|n| format!("  ({n})"))
+                            .unwrap_or_default()
+                    );
+                }
+                if r.dropped_outside_root > 0 {
+                    println!(
+                        "note: {} diagnostic(s) outside the project root were dropped",
+                        r.dropped_outside_root
+                    );
+                }
+                println!(
+                    "{}",
+                    if r.executed {
+                        "note: external tools were executed for this report."
+                    } else {
+                        "note: nothing was executed; diagnostics come from saved output."
+                    }
+                );
+            }
+            Ok(fail_on.tripped(&r.findings))
+        }
+        Cmd::Scip { path, scip } => {
+            let st = ops::scip_status(&target(path), &scip.opts())?;
+            if json {
+                print_json(
+                    &st.clone()
+                        .map(|s| serde_json::to_value(s).unwrap_or_default())
+                        .unwrap_or(serde_json::json!({"found": false})),
+                )?;
+            } else {
+                match st {
+                    None => println!("no SCIP index found (looked for index.scip and .plumbgraph/index.scip); analysis is name-based"),
+                    Some(s) => {
+                        println!("indexes: {}", s.indexes.join(", "));
+                        println!("tools: {}", s.tools.join(", "));
+                        println!(
+                            "documents {} (matched {}, not in the project {}, stale {}); symbols resolved {}; edges replaced {} / added {}",
+                            s.documents, s.documents_matched, s.documents_unmatched, s.stale_files, s.symbols_mapped, s.edges_replaced, s.edges_added
+                        );
+                    }
+                }
+            }
+            Ok(false)
+        }
+        Cmd::Mcp { root, allow_exec } => {
+            let server =
+                plumbgraph_mcp::Server::new(&root, cli.db.clone())?.with_allow_exec(allow_exec);
             let stdin = std::io::stdin();
             let stdout = std::io::stdout();
-            eprintln!("plumbgraph MCP server (stdio) root={}", root.display());
+            eprintln!(
+                "plumbgraph MCP server (stdio) root={} allow_exec={}",
+                root.display(),
+                allow_exec
+            );
             server.serve(stdin.lock(), stdout.lock())?;
             Ok(false)
         }

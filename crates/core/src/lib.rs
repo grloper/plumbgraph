@@ -6,13 +6,16 @@
 
 pub mod deadcode;
 pub mod deps;
+pub mod diagnostics;
 pub mod extract;
 pub mod index;
+pub mod lsp;
 pub mod manifest;
 pub mod model;
 pub mod ops;
 pub mod registry;
 pub mod resolve;
+pub mod scip;
 pub mod store;
 pub mod weakening;
 
@@ -65,6 +68,9 @@ pub struct Finding {
     pub line: u32,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub symbol: Option<String>,
+    /// 1-based column, when the source provides one (diagnostics).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub column: Option<u32>,
     pub kind: String,
     pub severity: Severity,
     pub confidence: f64,
@@ -92,6 +98,7 @@ impl Finding {
             file: file.into(),
             line,
             symbol: None,
+            column: None,
             kind: String::new(),
             severity: Severity::Warning,
             confidence,
