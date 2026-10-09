@@ -1,0 +1,16 @@
+id = "python"
+grammar = "python"
+extensions = [".py", ".pyi"]
+manifests = ["pyproject.toml", "requirements.txt", "setup.cfg", "Pipfile"]
+registry = "pypi"
+# tree-sitter node kinds that count as a (non-defining) identifier occurrence
+ref_node_kinds = ["identifier"]
+# node kinds that denote a call expression (the callee is its `function` field)
+call_node_kinds = ["call"]
+string_node_kinds = ["string_content"]
+# Markers whose presence in a file lowers dead-code confidence (dynamic access).
+dynamic_markers = ["getattr", "setattr", "importlib", "__import__", "eval(", "exec(", "globals()", "locals()", "__all__"]
+# Names that are entry points by convention.
+entry_names = ["main"]
+test_globs = ["**/tests/**", "**/test/**", "**/test_*.py", "**/*_test.py", "**/conftest.py"]
+queries = { defs = "defs.scm", imports = "imports.scm" }

@@ -1,0 +1,12 @@
+id = "tsx"
+grammar = "tsx"
+extensions = [".tsx"]
+ref_node_kinds = ["identifier", "property_identifier", "shorthand_property_identifier", "shorthand_property_identifier_pattern", "type_identifier"]
+call_node_kinds = ["call_expression", "new_expression"]
+string_node_kinds = ["string_fragment"]
+dynamic_markers = ["eval(", "new Function(", "require(", "import(", "Reflect.", "window[", "globalThis[", "module.exports"]
+entry_names = ["main"]
+test_globs = ["**/__tests__/**", "**/*.test.*", "**/*.spec.*", "**/tests/**", "**/test/**", "**/*.stories.*"]
+manifests = ["package.json"]
+registry = "npm"
+queries = { defs = "defs.scm", imports = "imports.scm" }

@@ -1,0 +1,4 @@
+high   0.90 nonexistent-declared-package dependency ghost-pkg-zzz package.json:1
+high   0.90 nonexistent-package import    fake-undeclared-pkg src/a.js:4
+medium 0.80 undeclared-dependency import    lodash src/a.js:3
+medium 0.80 unresolved-import  import    ./nope.js src/a.js:5

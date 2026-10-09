@@ -1,0 +1,12 @@
+id = "rust"
+grammar = "rust"
+extensions = [".rs"]
+manifests = ["Cargo.toml"]
+registry = "crates.io"
+ref_node_kinds = ["identifier", "type_identifier", "field_identifier"]
+call_node_kinds = ["call_expression", "macro_invocation"]
+string_node_kinds = ["string_content"]
+dynamic_markers = ["dyn Any", "libloading", "dlopen", "extern \"C\"", "#[no_mangle]"]
+entry_names = ["main"]
+test_globs = ["**/tests/**", "**/benches/**", "**/examples/**"]
+queries = { defs = "defs.scm", imports = "imports.scm" }

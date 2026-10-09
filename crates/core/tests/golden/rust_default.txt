@@ -1,0 +1,5 @@
+high   0.95 dead-code          function  dead_private src/main.rs:8
+high   0.95 dead-code          struct    DeadStruct src/main.rs:10
+medium 0.77 dead-code          function  pub_unused src/util.rs:7
+medium 0.77 dead-code          method    S::new src/util.rs:12
+medium 0.80 used-only-by-tests function  test_only src/main.rs:12

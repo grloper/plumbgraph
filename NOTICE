@@ -1,0 +1,15 @@
+Plumbgraph
+Copyright 2026 the Plumbgraph contributors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Third-party software
+--------------------
+Plumbgraph links against open-source crates, including tree-sitter and the
+tree-sitter-{python,javascript,typescript,rust} grammars (MIT), rusqlite and
+SQLite (MIT / public domain), ureq and rustls (Apache-2.0 / MIT / ISC), clap,
+serde, regex, rayon and others. Their licenses are enforced in CI with
+`cargo deny` (see deny.toml). Run `cargo deny list` for the full list.
+
+Ideas and prior art acknowledged (no code copied): vulture's confidence model,
+knip, aider's repo-map, stack-graphs, SCIP, ast-grep.

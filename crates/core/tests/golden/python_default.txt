@@ -1,0 +1,7 @@
+high   0.95 dead-code          function  _dead_private app/main.py:10
+high   0.95 dead-code          method    Service._never_called app/util.py:23
+medium 0.77 dead-code          function  unused_public app/util.py:5
+medium 0.77 dead-code          method    Service.public_unused_method app/util.py:26
+medium 0.80 dead-code          function  _cycle_a app/main.py:14
+medium 0.80 dead-code          function  _cycle_b app/main.py:18
+medium 0.80 used-only-by-tests function  _test_only_helper app/util.py:9
