@@ -11,6 +11,7 @@ pub mod extract;
 pub mod index;
 pub mod lsp;
 pub mod manifest;
+pub mod map;
 pub mod model;
 pub mod ops;
 pub mod registry;
