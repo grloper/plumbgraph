@@ -171,7 +171,7 @@ impl Rules {
                 r"\b(?:it|test|describe)\.(?:skip|todo|failing)\b|\b(?:xit|xtest|xdescribe)\s*\(",
             ),
             only_js: r(r"\b(?:it|test|describe)\.only\b|\b(?:fit|fdescribe)\s*\("),
-            ignore_rs: r(r"#\[\s*ignore\b"),
+            ignore_rs: r(r"^\s*#\[\s*ignore\b"),
             assert_py: r(r"^\s*assert\b|\bself\.assert\w+\s*\(|\bpytest\.raises\s*\("),
             assert_js: r(r"\bexpect\s*\(|\bassert(?:\.\w+)?\s*\(|\.should\b"),
             assert_rs: r(r"\b(?:debug_)?assert(?:_eq|_ne)?!"),
@@ -587,6 +587,17 @@ mod tests {
         );
         // `it('works')` was removed and `it.skip('works')` added with the same name: not a deletion
         assert!(!r.contains(&"deleted-test"));
+    }
+
+    #[test]
+    fn rust_ignore_only_counts_as_attribute_line() {
+        let hdr = "diff --git a/src/lib.rs b/src/lib.rs\n--- a/src/lib.rs\n+++ b/src/lib.rs\n@@ -1,0 +2,1 @@\n";
+        // the text appears inside a string literal / call: not a skip marker
+        let d = format!("{hdr}+    let s = \"#[ignore]\";\n");
+        assert!(!rules(&analyze_diff(&d)).contains(&"added-skip"));
+        // a real attribute line, with a reason, is one
+        let d = format!("{hdr}+    #[ignore = \"slow\"]\n");
+        assert!(rules(&analyze_diff(&d)).contains(&"added-skip"));
     }
 
     #[test]
