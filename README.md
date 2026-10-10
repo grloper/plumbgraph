@@ -8,7 +8,7 @@ Local code intelligence and a pre-submit gate for AI coding agents, over CLI and
 <p align="center">
 <a href="https://github.com/grloper/plumbgraph/actions/workflows/ci.yml"><img src="https://github.com/grloper/plumbgraph/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue" alt="License: Apache-2.0"></a>
-<img src="https://img.shields.io/badge/version-1.0.0%20(unreleased)-informational" alt="Version 1.0.0, unreleased">
+<a href="https://github.com/grloper/plumbgraph/releases/latest"><img src="https://img.shields.io/github/v/release/grloper/plumbgraph?label=release" alt="Latest release"></a>
 <img src="https://img.shields.io/badge/rust-1.85%2B-orange?logo=rust" alt="Rust 1.85+">
 <img src="https://img.shields.io/badge/MCP-stdio-5B5BD6" alt="MCP over stdio">
 </p>
@@ -30,10 +30,11 @@ It indexes with tree-sitter into a local SQLite file, executes none of your code
 
 ## Quickstart
 
-Nothing is published yet (no crate, no binaries). Build from source with Rust 1.85+:
+Source releases are on [GitHub](https://github.com/grloper/plumbgraph/releases) (no crates.io package and no prebuilt binaries yet). Build from source with Rust 1.85+:
 
 ```bash
 git clone https://github.com/grloper/plumbgraph && cd plumbgraph
+git checkout v1.0.1                           # latest release (or stay on main)
 cargo install --path crates/cli --locked      # installs `plumb` (and `plumbgraph`)
 
 plumb map . --tokens 1500         # ranked overview under a hard token budget (--budget is an alias)
@@ -51,20 +52,9 @@ In a git work tree `plumb init` adds `.plumbgraph/*` and `!.plumbgraph/allow.tom
 
 ### Windows
 
-The same `cargo install --path crates/cli --locked` works from PowerShell; it puts `plumb.exe` and `plumbgraph.exe` in `%USERPROFILE%\.cargo\bin`. The rustup installer adds that directory to `PATH`; other Rust installs (Chocolatey, for example) do not, and `cargo install` then prints `be sure to add ...\.cargo\bin to your PATH`. Add it for your user and open a new terminal:
+`cargo install --path crates/cli --locked` works from PowerShell and installs `plumb.exe` into `%USERPROFILE%\.cargo\bin`. If `plumb` is not found, add that folder to your user `PATH` and open a new terminal (rustup does this for you; Chocolatey Rust installs do not).
 
-```powershell
-$bin = "$env:USERPROFILE\.cargo\bin"
-$user = [Environment]::GetEnvironmentVariable('Path', 'User')
-if (($user -split ';') -notcontains $bin) {
-  [Environment]::SetEnvironmentVariable('Path', ($user.TrimEnd(';') + ';' + $bin), 'User')
-}
-# new terminal:
-plumb --version
-plumb doctor .
-```
-
-What was tested on Windows, and only this: Windows 11 Home 64-bit (build 26200) with Rust 1.91.1 `x86_64-pc-windows-gnu` from Chocolatey (no rustup, so `rust-toolchain.toml`'s 1.85 was not used, and the MSVC target was not tried). `cargo install --path crates/cli --locked` built and installed both v1.0.0 and the v1.0.1 changes. On one real repository, v1.0.0 ran `index`, `map`, `dead-code`, `check-deps`, `verify`, `weakening`, `doctor` and `plumb mcp` (driven by one MCP host), and the v1.0.1 build ran `doctor`, `map --budget` and `init --dry-run`. `cargo test --workspace` on that machine: every test passes except 10 that also fail on `main` there (LSP/diagnostics tests that need a real `python3`, which was only the Microsoft Store stub, and the closed-stdout-pipe test, which gets Windows error 232 instead of a broken pipe). CI runs on Linux only.
+Tested on one Windows 11 machine only (Rust 1.91.1, GNU target): install, `doctor`, `map`, `dead-code`, `check-deps`, `verify`, `weakening`, `init --dry-run` and `plumb mcp` driven by an MCP host. 10 tests fail there (they need a real `python3` and a POSIX closed-pipe behavior) and also fail on unmodified `main`. CI is Linux only. Details in [docs/VALIDATION.md](docs/VALIDATION.md).
 
 ### Use with an agent (MCP)
 
@@ -78,7 +68,7 @@ Or in `.cursor/mcp.json`, Claude Desktop and other `mcpServers` clients:
 { "mcpServers": { "plumbgraph": { "command": "plumb", "args": ["mcp", "--root", "/path/to/project"] } } }
 ```
 
-13 tools and 3 resources; running external tools is refused unless **you** start the server with `--allow-exec`. Details and the clients it was actually tested with: [docs/MCP.md](docs/MCP.md).
+13 tools and 3 resources; running external tools is refused unless **you** start the server with `--allow-exec`. Details and the clients it was tested with: [docs/MCP.md](docs/MCP.md).
 
 ## See it work
 
@@ -114,7 +104,7 @@ More in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 | `index`, `find`, `refs` | Python, JavaScript, TypeScript/TSX, Rust, Go, Java, C# | Tier-0 (tree-sitter, name-based). Import resolution varies by language; C# imports are not resolved to files. |
 | `dead-code` | same | Reachability from entry points and tests; confidence 0-1; `--lib`, allow-list (`.plumbgraph/allow.toml`), `plumb:keep` comments; evidence and false-positive risks per finding. |
 | `check-deps` | Python, JS/TS, Rust | Imports vs manifests; registry existence checks are opt-in (`--online`), and registry errors are never reported as "does not exist". |
-| `weakening` | any language with test files | Heuristic, line-based `git diff` analysis. |
+| `weakening` | Python, JS/TS, Rust, Go, Java/Kotlin, C# | Heuristic, line-based `git diff` analysis. |
 | `map`, `impact` | all of the above | PageRank-ranked map under a hard token budget; reverse reachability with tests to run. |
 | `verify`, `doctor`, `enrich`, `init` | | Baseline-diffing gate; provider detection; opt-in SCIP indexers; agent config writer. |
 | SCIP overlay | rust-analyzer, scip-typescript, scip-python indexes | Compiler-grade edges where the index resolved a reference, per-reference fallback ([docs/SCIP.md](docs/SCIP.md)). Exercised on toy projects with scip-python and scip-typescript. |
@@ -145,12 +135,13 @@ Use them together: if you need precise navigation and editing today, an LSP-back
 - Reflection, `eval`, DI containers, macros and framework magic are invisible (they lower confidence but are not understood).
 - Go, Java, C# are tier-0 only; C# was not benchmarked on a real repository.
 - SCIP: rust-analyzer's SCIP output, scip-go, scip-java and scip-dotnet were not run; scip-python and scip-typescript only on toys.
-- MCP: stdio only, tools and resources only (no prompts). Tested with the official TypeScript SDK and the MCP inspector CLI; agent hosts were not tested.
-- `weakening` is line-based and heuristic. Windows: one machine, manual runs, no CI (see [Windows](#windows)). No releases or packages yet.
+- MCP: stdio only, tools and resources only (no prompts). Tested with the official TypeScript SDK, the MCP inspector CLI and one agent host on Windows; Claude Code, Cursor and Codex were not tested.
+- Unity: lifecycle methods and common attributes are treated as entry points, but scenes and prefabs are not read, so a component never referenced from code cannot be reported dead.
+- `weakening` is line-based and heuristic. Windows: one machine, manual runs, no CI (see [Windows](#windows)). No crates.io package or prebuilt binaries yet.
 
 ## Documentation
 
-[Docs index](docs/README.md) · [Architecture](docs/ARCHITECTURE.md) · [MCP](docs/MCP.md) · [SCIP](docs/SCIP.md) · [Diagnostics](docs/DIAGNOSTICS.md) · [Language packs](docs/PACKS.md) · [Evaluation](docs/EVALUATION.md) · [Landscape](docs/LANDSCAPE.md) · [Changelog](CHANGELOG.md)
+[Docs index](docs/README.md) · [Architecture](docs/ARCHITECTURE.md) · [MCP](docs/MCP.md) · [SCIP](docs/SCIP.md) · [Diagnostics](docs/DIAGNOSTICS.md) · [Language packs](docs/PACKS.md) · [Validation](docs/VALIDATION.md) · [Strategy](docs/STRATEGY.md) · [Evaluation](docs/EVALUATION.md) · [Landscape](docs/LANDSCAPE.md) · [Changelog](CHANGELOG.md)
 
 ## Development
 
