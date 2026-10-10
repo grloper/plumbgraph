@@ -592,7 +592,7 @@ checksum = "f6b464fbc74e149a392436b17d523f769e057cb6877f6a5c4618bc6f11800548"
 
 [[package]]
 name = "plumbgraph-cli"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "anyhow",
  "clap",
@@ -607,7 +607,7 @@ dependencies = [
 
 [[package]]
 name = "plumbgraph-core"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "anyhow",
  "globset",
@@ -630,7 +630,7 @@ dependencies = [
 
 [[package]]
 name = "plumbgraph-langs"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "anyhow",
  "serde",
@@ -648,7 +648,7 @@ dependencies = [
 
 [[package]]
 name = "plumbgraph-mcp"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
  "anyhow",
  "plumbgraph-core",

@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased] - 1.0.1
+## [1.0.1] - 2026-10-10
 
 Fixes for problems found by using v1.0.0 on real projects (Windows, Unity). Not released; the crate version is still 1.0.0.
 
