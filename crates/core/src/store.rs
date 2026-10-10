@@ -6,9 +6,9 @@ use rusqlite::{params, Connection};
 use std::collections::HashMap;
 use std::path::Path;
 
-pub const SCHEMA_VERSION: &str = "3";
+pub const SCHEMA_VERSION: &str = "4";
 /// Bump when extraction logic changes so cached facts are re-extracted.
-pub const EXTRACTOR_VERSION: &str = "8";
+pub const EXTRACTOR_VERSION: &str = "9";
 
 pub struct Store {
     pub conn: Connection,
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS file(
 CREATE TABLE IF NOT EXISTS symbol(
   id INTEGER PRIMARY KEY, file_id INTEGER NOT NULL REFERENCES file(id) ON DELETE CASCADE, idx INTEGER NOT NULL,
   kind TEXT NOT NULL, name TEXT NOT NULL, qname TEXT NOT NULL, start_line INTEGER, end_line INTEGER,
-  exported INTEGER, is_test INTEGER, entry TEXT, entry_cond TEXT, decorated INTEGER, subclass INTEGER NOT NULL DEFAULT 0, keep TEXT, parent_idx INTEGER, framework_risk TEXT);
+  exported INTEGER, is_test INTEGER, entry TEXT, entry_cond TEXT, decorated INTEGER, subclass INTEGER NOT NULL DEFAULT 0, keep TEXT, parent_idx INTEGER, framework_risk TEXT, unity TEXT);
 CREATE INDEX IF NOT EXISTS symbol_name ON symbol(name);
 CREATE INDEX IF NOT EXISTS symbol_file ON symbol(file_id);
 CREATE TABLE IF NOT EXISTS ref(
@@ -172,7 +172,7 @@ impl Store {
         let Some(f) = facts else { return Ok(id) };
         {
             let mut st = self.conn.prepare_cached(
-                "INSERT INTO symbol(file_id,idx,kind,name,qname,start_line,end_line,exported,is_test,entry,entry_cond,decorated,subclass,keep,parent_idx,framework_risk) VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14,?15,?16)",
+                "INSERT INTO symbol(file_id,idx,kind,name,qname,start_line,end_line,exported,is_test,entry,entry_cond,decorated,subclass,keep,parent_idx,framework_risk,unity) VALUES(?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,?14,?15,?16,?17)",
             )?;
             for (i, s) in f.symbols.iter().enumerate() {
                 st.execute(params![
@@ -191,7 +191,8 @@ impl Store {
                     s.subclass_method,
                     s.keep,
                     s.parent.map(|p| p as i64),
-                    s.framework_risk
+                    s.framework_risk,
+                    s.unity
                 ])?;
             }
         }
@@ -266,6 +267,7 @@ pub struct SymRow {
     pub keep: Option<String>,
     pub parent_idx: Option<i64>,
     pub framework_risk: Option<String>,
+    pub unity: Option<String>,
 }
 
 #[derive(Debug, Clone)]
@@ -338,7 +340,7 @@ impl Graph {
         })? {
             g.files.push(r?);
         }
-        let mut st = c.prepare("SELECT id,file_id,idx,kind,name,qname,start_line,end_line,exported,is_test,entry,entry_cond,decorated,subclass,keep,parent_idx,framework_risk FROM symbol ORDER BY file_id, idx")?;
+        let mut st = c.prepare("SELECT id,file_id,idx,kind,name,qname,start_line,end_line,exported,is_test,entry,entry_cond,decorated,subclass,keep,parent_idx,framework_risk,unity FROM symbol ORDER BY file_id, idx")?;
         for r in st.query_map([], |r| {
             Ok(SymRow {
                 id: r.get(0)?,
@@ -358,6 +360,7 @@ impl Graph {
                 keep: r.get(14)?,
                 parent_idx: r.get(15)?,
                 framework_risk: r.get(16)?,
+                unity: r.get(17)?,
             })
         })? {
             g.symbols.push(r?);
@@ -449,6 +452,7 @@ mod tests {
             decorated: false,
             subclass_method: false,
             framework_risk: None,
+            unity: None,
             keep: None,
             parent: None,
         });

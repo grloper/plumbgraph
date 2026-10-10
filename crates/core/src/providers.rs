@@ -441,3 +441,36 @@ pub fn run_scip_indexers(
     }
     runs
 }
+
+/// Windows keeps a running `.exe` open, so `cargo install` fails with "Access is denied" while an
+/// MCP host still runs `plumb mcp`. `probe` tries to open `exe` for writing; this turns a failure
+/// into the advice shown by `plumb doctor`. Platform independent so it can be tested anywhere.
+pub fn overwrite_warning(
+    exe: &Path,
+    probe: impl Fn(&Path) -> std::io::Result<()>,
+) -> Option<String> {
+    let e = probe(exe).err()?;
+    let denied = e.kind() == std::io::ErrorKind::PermissionDenied;
+    Some(format!(
+        "cannot overwrite the running executable {} ({}{}). `cargo install` will fail while it is in use: stop `plumb mcp` / close the MCP hosts (Claude, Cursor, ...) that started it first, or install elsewhere with `cargo install --path crates/cli --locked --root <dir>` and point the host at that binary",
+        exe.display(),
+        e,
+        if denied { ": another process, likely a running `plumb mcp`, holds it open" } else { "" }
+    ))
+}
+
+/// `plumb doctor` check for the running binary. Windows only: elsewhere a running binary can be
+/// replaced (the old file is unlinked), so there is nothing to warn about.
+pub fn self_overwrite_warning() -> Option<String> {
+    #[cfg(windows)]
+    {
+        let exe = std::env::current_exe().ok()?;
+        overwrite_warning(&exe, |p| {
+            std::fs::OpenOptions::new().write(true).open(p).map(|_| ())
+        })
+    }
+    #[cfg(not(windows))]
+    {
+        None
+    }
+}

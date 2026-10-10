@@ -31,6 +31,23 @@ The engine calls MonoBehaviour messages by name, so tier-0 sees no caller. Rules
 - **Attributes are entry points** in a Unity file: `[RuntimeInitializeOnLoadMethod]`, `[InitializeOnLoadMethod]`, `[InitializeOnLoad]` (class), `[MenuItem]`, `[ContextMenu]`, `[DidReloadScripts]`, `[PostProcessBuild]`, `[PostProcessScene]`, `[OnOpenAsset]` (with or without the `Attribute` suffix). A Unity file is one under `Assets/` or `Packages/`, or whose code (not comments or strings) has a `using UnityEngine…`/`using UnityEditor…` directive or a `UnityEngine.`/`UnityEditor.` qualified name.
 - **Public methods of such classes** stay findings but get a 0.25 penalty and the fp_risk "may be bound to a UnityEvent (e.g. Button.onClick), an Animation Event or SendMessage in a scene, prefab or animation clip, which are not indexed". Scenes, prefabs, animation clips and `.asset` files are not parsed, so plumb cannot tell a bound handler from dead code.
 - `[SerializeField]` fields: C# fields are not extracted, so they are never reported (tested, so this is noticed if field extraction is added).
+- **Partial classes:** a message on a `partial` class is an entry point when any part of the type declares a Unity base, including a base declared in another file. Parts are merged by type name within one `Assets/` root (multiple `.asmdef` assemblies in one root are not told apart); the other parts of the type become live too. The base chain is followed through classes in the index (`Hero : CharacterBase`, `CharacterBase : MonoBehaviour`). Outcomes: a Unity base is found: the message is an entry point (`dead-code --verbose` prints `unity-message@partial-merged`); every base resolved to a non-Unity class, or there is no base class: an ordinary method that can be reported (HIGH is possible); a base type that is not in the index: reported as MEDIUM at most with the reason `unity-message-name-but-host-type-unresolved`. Plain classes with an `Update(float dt)` and ordinary methods that merely contain `Update` are not entry points.
+- **Editor:** `Editor` (custom inspectors), `EditorWindow` and `ScriptableWizard` bases (in a Unity file), their messages (`OnInspectorGUI`, `OnSceneGUI`, `OnGUI`, `Update`, `OnWizardCreate`, ...), `[MenuItem]`, `[InitializeOnLoad]`, `[InitializeOnLoadMethod]`, `[RuntimeInitializeOnLoadMethod]`. Static helpers that carry none of these attributes are not entry points.
 - Not covered: messages invoked through `SendMessage("Name")` / `Invoke("Name")` strings are only a string-mention penalty; `Editor`/`EditorWindow` subclasses outside a Unity file; no Unity project or editor was run to produce these rules (they come from the Unity scripting reference).
 
-Not covered: fields/properties/events, local functions, Go package-level `var`, generics-aware resolution, partial classes across files, DI containers/reflection (only marker strings lower confidence), registry checks for Go/Maven/NuGet (`check-deps` skips these languages). Dead-code calls to interface-implementing methods without `@Override`/`override` are flagged *subclass method* (lower confidence), not proven live.
+Not covered: fields/properties/events, local functions, Go package-level `var`, generics-aware resolution, partial classes across files for anything but Unity messages, DI containers/reflection (only marker strings lower confidence), registry checks for Go/Maven/NuGet (`check-deps` skips these languages). #### Unity gaps
+
+`dead-code` prints a note when it indexes C# under `Assets/`. What plumb cannot see:
+
+| gap | effect | what to do |
+|---|---|---|
+| `.unity` scenes, `.prefab` files, `.asset` files | not parsed: a public method bound in a UnityEvent (e.g. `Button.onClick`) looks unused | public methods of Unity classes stay findings at low confidence (0.25 penalty, fp_risk) |
+| `SendMessage` / `BroadcastMessage` / string `Invoke("Name")` / `StartCoroutine("Name")` | only a string-mention penalty (low confidence), no edge | grep the name before deleting |
+| animation events (`.anim` / `.controller`) | not parsed | same |
+| Addressables, `Resources.Load`, reflection | not parsed | same |
+| `scip-dotnet` | tier-1 is opt-in (`plumb enrich`) and does not see engine callbacks either | engine-by-name rules still apply on top |
+| multiple `.asmdef` assemblies | partial parts are merged per `Assets/` root, not per assembly | same-named types in different assemblies can merge |
+
+Never mass-delete HIGH findings under `Assets/` without confirming engine callbacks and serialization.
+
+Dead-code calls to interface-implementing methods without `@Override`/`override` are flagged *subclass method* (lower confidence), not proven live.

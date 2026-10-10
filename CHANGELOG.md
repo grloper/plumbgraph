@@ -1,5 +1,29 @@
 # Changelog
 
+## [Unreleased]
+
+### 1.0.3
+
+Fixes for false positives and install problems found by running 1.0.2 on a real Unity project (`Assets/UYF`). Not released; the crate version is still 1.0.2.
+
+#### Fixed
+- Unity: message methods (`LateUpdate`, `FixedUpdate`, `OnDisable`, ...) on a `partial` class are entry points when **any** part declares a Unity base (`MonoBehaviour`, `ScriptableObject`, `NetworkBehaviour`, `EditorWindow`, ...), even when the base is declared in another file. Parts are merged per type within one `Assets/` root; the other parts of the type are then live too. Indirect bases (`Hero : CharacterBase : MonoBehaviour`) are resolved through classes in the index. `dead-code --verbose` prints `unity-message@partial-merged ...` for every suppressed message.
+- Unity: a message-named method on a class whose Unity base cannot be decided (base type not in the index) under `Assets/` is now reported as MEDIUM at most, with the reason `unity-message-name-but-host-type-unresolved`, instead of being silently live (partial classes) or HIGH. A class whose bases all resolve to non-Unity classes (`DerivedState : PlainBase`) is no longer treated as a component, so its `Update(float dt)` stays reportable.
+- Unity: `ScriptableWizard` is an editor base; `OnWizardCreate`, `OnWizardUpdate`, `OnWizardOtherButton` are messages.
+
+#### Added
+- `dead-code` prints two notes when C# files under `Assets/` are indexed (Unity pack active; do not mass-delete HIGH findings) and `--help` links the Unity pack limitations. `docs/PACKS.md` documents the Unity gaps (scenes/prefabs/UnityEvents, string-based invocation, animation events, Addressables/Resources, scip-dotnet, multiple asmdefs).
+- `plumb mcp` startup line on stderr includes the version and pid.
+- `plumb doctor` warns (Windows) when it cannot overwrite its own executable, e.g. because an MCP host still runs `plumb mcp`.
+- Docs: stop MCP hosts before `cargo install` on Windows (or use `--root`); `plumb mcp --root` should point at the workspace you are working on.
+
+#### Changed
+- Index schema 4 / extractor 9 (new `unity` column on symbols): existing indexes are rebuilt once.
+- `DeadCodeResult` (JSON) has an optional `notes` array.
+
+#### Already correct in 1.0.2 (regression tests added only)
+- A plain class with `Update(float dt)` and no base class is not an engine callback; ordinary methods that merely contain "Update" are not entry points; same-file `MonoBehaviour.Update` is suppressed; a private unreferenced helper on a MonoBehaviour is reported; `[MenuItem]`, `[InitializeOnLoad]`, `[InitializeOnLoadMethod]`, `[RuntimeInitializeOnLoadMethod]`, `Editor` and `EditorWindow` handling; MCP `initialize` already carried `serverInfo.version` (now asserted).
+
 ## [1.0.2] - 2026-10-10
 
 - Docs only: README now matches the released version, the tested Windows scope, supported weakening languages and known limits.

@@ -54,6 +54,8 @@ In a git work tree `plumb init` adds `.plumbgraph/*` and `!.plumbgraph/allow.tom
 
 `cargo install --path crates/cli --locked` works from PowerShell and installs `plumb.exe` into `%USERPROFILE%\.cargo\bin`. If `plumb` is not found, add that folder to your user `PATH` and open a new terminal (rustup does this for you; Chocolatey Rust installs do not).
 
+**Updating on Windows:** a running `plumb mcp` keeps `%USERPROFILE%\.cargo\bin\plumb.exe` open, so `cargo install` fails with "Access is denied" while Claude, Cursor or another MCP host is running it. Stop the MCP server (close or restart the hosts) before `cargo install`, or install to another place with `cargo install --path crates/cli --locked --root C:\tools\plumb` and point the host at `C:\tools\plumb\bin\plumb.exe`. `plumb doctor` warns when it cannot overwrite its own executable.
+
 Tested on one Windows 11 machine only (Rust 1.91.1, GNU target): install, `doctor`, `map`, `dead-code`, `check-deps`, `verify`, `weakening`, `init --dry-run` and `plumb mcp` driven by an MCP host. 10 tests fail there (they need a real `python3` and a POSIX closed-pipe behavior) and also fail on unmodified `main`. CI is Linux only. Details in [docs/VALIDATION.md](docs/VALIDATION.md).
 
 ### Use with an agent (MCP)
@@ -61,6 +63,8 @@ Tested on one Windows 11 machine only (Rust 1.91.1, GNU target): install, `docto
 ```bash
 claude mcp add plumbgraph -- plumb mcp --root /path/to/project
 ```
+
+`--root` is the only tree the tools may read and defaults to the current directory. Point it at the workspace repository you are working on, not at another checkout; an MCP host started in a different directory otherwise answers about the wrong code. The server logs `plumbgraph MCP server v<version> pid=<pid> ...` to stderr and reports its version as `serverInfo.version`.
 
 Or in `.cursor/mcp.json`, Claude Desktop and other `mcpServers` clients:
 

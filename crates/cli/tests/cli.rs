@@ -720,3 +720,80 @@ fn verify_output_is_capped_but_verdict_counts_everything() {
     assert_eq!(v["verdict"], "fail");
     assert_eq!(out.status.code(), Some(1));
 }
+
+#[test]
+fn mcp_startup_line_on_stderr_has_version_and_pid() {
+    let t = project();
+    let mut child = plumb()
+        .args(["mcp", "--root"])
+        .arg(t.path())
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .unwrap();
+    let pid = child.id();
+    drop(child.stdin.take()); // EOF: the server exits after printing its startup line
+    let out = child.wait_with_output().unwrap();
+    let err = String::from_utf8_lossy(&out.stderr);
+    assert!(err.contains(&format!("pid={pid}")), "{err}");
+    assert!(
+        err.contains(&format!("v{}", env!("CARGO_PKG_VERSION"))),
+        "{err}"
+    );
+}
+
+#[test]
+fn dead_code_help_links_the_unity_pack_limitations() {
+    let out = plumb().args(["dead-code", "--help"]).output().unwrap();
+    let h = String::from_utf8_lossy(&out.stdout);
+    assert!(h.contains("docs/PACKS.md#unity-c"), "{h}");
+}
+
+#[test]
+fn dead_code_prints_unity_footer_under_assets() {
+    let t = tempfile::tempdir().unwrap();
+    write(
+        t.path(),
+        "Assets/A.cs",
+        "using UnityEngine;\nclass A : MonoBehaviour { void Update() { } void Dead() { } }\n",
+    );
+    let out = plumb().args(["dead-code"]).arg(t.path()).output().unwrap();
+    let s = String::from_utf8_lossy(&out.stdout);
+    assert!(s.contains("note: Unity pack active. Scenes/prefabs/UnityEvents unread. Partial MonoBehaviour messages are entry points when any part declares a Unity base."), "{s}");
+    assert!(s.contains("note: Do not mass-delete HIGH findings in Assets/ without confirming engine callbacks and serialization."), "{s}");
+    // and not for projects without Assets/
+    let p = project();
+    let out = plumb().args(["dead-code"]).arg(p.path()).output().unwrap();
+    assert!(!String::from_utf8_lossy(&out.stdout).contains("Unity pack active"));
+}
+
+#[test]
+fn dead_code_verbose_prints_unity_partial_merge_notes() {
+    let t = tempfile::tempdir().unwrap();
+    write(
+        t.path(),
+        "Assets/B.cs",
+        "partial class B { void LateUpdate() { } }\n",
+    );
+    write(
+        t.path(),
+        "Assets/B.Core.cs",
+        "using UnityEngine;\npartial class B : MonoBehaviour { }\n",
+    );
+    let out = plumb()
+        .args(["dead-code", "--verbose"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    let s = String::from_utf8_lossy(&out.stdout);
+    assert!(
+        s.contains("debug: unity-message@partial-merged B.LateUpdate"),
+        "{s}{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    assert!(!s.contains("B.LateUpdate` appears unused"), "{s}");
+    // without --verbose the note is not printed
+    let out = plumb().args(["dead-code"]).arg(t.path()).output().unwrap();
+    assert!(!String::from_utf8_lossy(&out.stdout).contains("partial-merged"));
+}

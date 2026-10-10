@@ -1,6 +1,6 @@
 //! High-level operations shared by the CLI and the MCP server.
 
-use crate::deadcode::{dead_code, AllowList, DeadCodeOptions, Mode};
+use crate::deadcode::{AllowList, DeadCodeOptions, Mode};
 use crate::deps::{check_deps, DepsOptions, DepsReport};
 use crate::index::{db_path_for, index_project, scan_manifests, IndexOptions, IndexStats};
 use crate::registry::{HttpRegistry, Offline, Registry};
@@ -113,6 +113,9 @@ pub struct DeadCodeResult {
     pub summary: Summary,
     pub index: IndexStats,
     pub limitations: Vec<String>,
+    /// Debug notes (e.g. `unity-message@partial-merged`); shown by `--verbose`.
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub notes: Vec<String>,
     pub scip: Option<crate::scip::ScipStats>,
 }
 
@@ -139,6 +142,10 @@ pub fn summarize(f: &[Finding]) -> Summary {
     s
 }
 
+/// Footer printed by `dead-code` when C# files under `Assets/` were indexed.
+pub const UNITY_PACK_NOTE: &str = "Unity pack active. Scenes/prefabs/UnityEvents unread. Partial MonoBehaviour messages are entry points when any part declares a Unity base.";
+pub const UNITY_MASS_DELETE_NOTE: &str = "Do not mass-delete HIGH findings in Assets/ without confirming engine callbacks and serialization.";
+
 pub fn run_dead_code(t: &Target, p: &DeadCodeParams) -> Result<DeadCodeResult> {
     let (g, root, stats, scip_stats) = open_graph_scip(t, &p.scip)?;
     let mut o = DeadCodeOptions {
@@ -152,7 +159,7 @@ pub fn run_dead_code(t: &Target, p: &DeadCodeParams) -> Result<DeadCodeResult> {
     if let Some(k) = &p.kinds {
         o.kinds = k.clone();
     }
-    let findings = dead_code(&g, &o);
+    let (findings, notes) = crate::deadcode::dead_code_with_notes(&g, &o);
     let mut limits = vec![
         if scip_stats.is_some() {
             "findings with source `scip` use compiler-grade references from a SCIP index; everything the index does not cover (unmatched or modified files, unresolved symbols) falls back to tier-0 name-based analysis (source `t0-treesitter`)".to_string()
@@ -169,6 +176,12 @@ pub fn run_dead_code(t: &Target, p: &DeadCodeParams) -> Result<DeadCodeResult> {
                 st.stale_files
             ));
         }
+    }
+    if g.files.iter().any(|f| {
+        f.lang == "csharp" && (f.path.starts_with("Assets/") || f.path.contains("/Assets/"))
+    }) {
+        limits.push(UNITY_PACK_NOTE.into());
+        limits.push(UNITY_MASS_DELETE_NOTE.into());
     }
     if !p.library_mode {
         let exported: HashSet<&str> = g
@@ -190,6 +203,7 @@ pub fn run_dead_code(t: &Target, p: &DeadCodeParams) -> Result<DeadCodeResult> {
         findings,
         index: stats,
         limitations: limits,
+        notes,
         scip: scip_stats,
     })
 }
