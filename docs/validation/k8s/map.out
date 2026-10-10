@@ -1,0 +1,110 @@
+# plumb map: 48 files, 61 of 83112 symbols (~1459 tokens, budget 1500)
+staging/src/k8s.io/client-go/applyconfigurations/meta/v1/objectmeta.go
+  31: type ObjectMetaApplyConfiguration struct
+  149: func ObjectMeta() *ObjectMetaApplyConfiguration
+staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go
+  42: type TypeMeta struct
+  131: type ObjectMeta struct
+  832: type Status struct
+staging/src/k8s.io/apiserver/pkg/endpoints/handlers/rest.go
+  111: func (scope *RequestScope) err(err error, w http.ResponseWriter, req *http.Request)
+staging/src/k8s.io/client-go/applyconfigurations/meta/v1/typemeta.go
+  27: type TypeMetaApplyConfiguration struct
+  43: func TypeMeta() *TypeMetaApplyConfiguration
+staging/src/k8s.io/code-generator/cmd/validation-gen/validators/validators.go
+  98: type Scope string  // Note: All of these values should be strings which can be used in an error // message such as "may …
+  135: type Context struct
+staging/src/k8s.io/apimachinery/pkg/conversion/converter.go
+  94: type Scope interface
+  142: type Meta struct
+staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/time.go
+  33: type Time struct
+test/e2e/framework/ginkgowrapper.go
+  185: func Context(args ...interface{}) bool
+  198: func registerInSuite(ginkgoCall func(string, ...interface{}) bool, args []interface{}) bool
+pkg/kubelet/images/pullmanager/locks.go
+  48: func (s *StripedLockSet) Lock(key string)
+  52: func (s *StripedLockSet) Unlock(key string)
+staging/src/k8s.io/apimachinery/pkg/util/validation/field/path.go
+  49: type Path struct
+staging/src/k8s.io/code-generator/pkg/apidefinitions/spec.go
+  23: type Spec struct
+  53: type ValueMode int  const ( // Boolean identifies "true"/"false" values that explicitly turn on or
+staging/src/k8s.io/dynamic-resource-allocation/leaderelection/leaderelection.go
+  54: type leaderElection struct
+  139: func Context(ctx context.Context) Option
+test/e2e/invariants/logcheck/logcheck.go
+  129: type logCheck struct
+  145: func (c logCheck) any() bool
+staging/src/k8s.io/apiserver/pkg/storage/value/transformer.go
+  37: type Context interface
+  73: func (c DefaultContext) AuthenticatedData() []byte
+staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/duration.go
+  27: type Duration struct
+pkg/kubelet/cm/topologymanager/scope.go
+  42: type Scope interface
+  57: type scope struct
+pkg/scheduler/backend/queue/active_queue.go
+  390: func (aq *activeQueue) len() int
+pkg/scheduler/backend/queue/pod_group_member_pods.go
+  60: func (p *podGroupMemberPods) len() int
+pkg/scheduler/backend/queue/backoff_queue.go
+  416: func (bq *backoffQueue) len() int
+pkg/scheduler/framework/plugins/dynamicresources/claims.go
+  68: func (cs *claimStore) len() int
+pkg/proxy/ipvs/graceful_termination.go
+  86: func (q *graceTerminateRSList) len() int
+staging/src/k8s.io/apimachinery/pkg/types/uid.go
+  22: type UID string
+staging/src/k8s.io/code-generator/cmd/client-gen/types/types.go
+  38: type Group string  func (g Group) String() string
+staging/src/k8s.io/apiserver/pkg/cel/library/format.go
+  97: type format struct{}  func (*format) LibraryName() string
+staging/src/k8s.io/apimachinery/pkg/runtime/interfaces.go
+  337: type Object interface
+pkg/volume/plugins.go
+  439: type Spec struct
+staging/src/k8s.io/kubectl/pkg/cmd/diff/diff.go
+  317: type Object interface
+staging/src/k8s.io/client-go/tools/cache/controller.go
+  293: type Object interface
+staging/src/k8s.io/ktesting/format/format.go
+  40: func Object(object interface{}, indentation uint) string
+staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/meta.go
+  34: type Object interface
+staging/src/k8s.io/code-generator/cmd/deepcopy-gen/output_tests/otherpkg/interfaces.go
+  19: type Object interface
+staging/src/k8s.io/kube-scheduler/framework/types.go
+  134: type EventResource string  // Constants for GVKs. //
+staging/src/k8s.io/apimachinery/pkg/runtime/schema/interfaces.go
+  22: type ObjectKind interface
+staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/mode/doc.go
+  115: type TypeMeta int
+staging/src/k8s.io/apimachinery/pkg/runtime/types.go
+  38: type TypeMeta struct
+staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/levels/modes/doc.go
+  103: type TypeMeta int
+staging/src/k8s.io/code-generator/cmd/defaulter-gen/output_tests/empty/type.go
+  27: type TypeMeta struct
+staging/src/k8s.io/kubectl/pkg/util/i18n/i18n.go
+  202: func T(defaultValue string, args ...int) string
+staging/src/k8s.io/apimachinery/pkg/util/wait/wait.go
+  43: type Group struct
+staging/src/k8s.io/client-go/tools/clientcmd/api/types.go
+  162: type Context struct
+staging/src/k8s.io/client-go/tools/clientcmd/api/v1/types.go
+  152: type Context struct
+staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/options/subfields/doc.go
+  38: type ObjectMeta struct
+staging/src/k8s.io/apimachinery/pkg/util/intstr/intstr.go
+  49: type Type int64  const ( Int    Type = iota // The IntOrString holds an int.
+staging/src/k8s.io/code-generator/cmd/deepcopy-gen/output_tests/aliases/doc.go
+  42: type Pointer *int type PointerAlias *Builtin type Struct Foo type Map map[string]int
+pkg/scheduler/framework/plugins/tainttoleration/taint_toleration.go
+  51: Name = names.TaintToleration // preScoreStateKey is the key in CycleState to TaintToleration pre-computed data for Scori…
+test/e2e/storage/drivers/csi-test/mock/service/service.go
+  36: Name = "io.kubernetes.storage.mock"  // VendorVersion is the version returned by GetPluginInfo. VendorVersion = "0.3.0"
+pkg/scheduler/framework/plugins/noderesources/fit.go
+  53: Name = names.NodeResourcesFit  // preFilterStateKey is the key in CycleState to NodeResourcesFit pre-computed data. // U…
+pkg/scheduler/framework/plugins/defaultbinder/default_binder.go
+  32: const Name = names.DefaultBinder  // DefaultBinder binds pods to nodes using a k8s client. type DefaultBinder struct

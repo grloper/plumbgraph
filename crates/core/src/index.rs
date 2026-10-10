@@ -357,6 +357,13 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
         .count();
     stats.files_unchanged = (loaded.len() - text_total) - (to_parse.len() - text_parsed);
 
+    let _t = std::time::Instant::now();
+    let tp = |m: &str| {
+        if std::env::var("PLUMB_TIMING").is_ok() {
+            eprintln!("[timing] {m}");
+        }
+    };
+    tp("start-extract");
     // 3. extract in parallel
     let results: Vec<(&Loaded, std::result::Result<FileFacts, String>)> = to_parse
         .par_iter()
@@ -377,6 +384,7 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
         })
         .collect();
 
+    tp("extract-done");
     // 4. write
     store.conn.execute_batch("BEGIN")?;
     let write = (|| -> Result<()> {
@@ -457,9 +465,12 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
             && results.is_empty()
             && store.meta("resolve_stamp").as_deref() == Some(stamp.as_str())
             && store.meta("edges_built").as_deref() == Some("1");
+        tp("rows-inserted");
         if !unchanged {
             resolve_imports(&store, &root, &opts.packs)?;
+            tp("resolved");
             build_edges(&store)?;
+            tp("edges-built");
             store.set_meta("resolve_stamp", &stamp)?;
             store.set_meta("edges_built", "1")?;
             stats.resolved = true;

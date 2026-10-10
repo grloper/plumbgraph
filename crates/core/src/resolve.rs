@@ -35,6 +35,13 @@ pub struct ProjectView {
     /// dotted-suffix of directories (namespace packages)
     pub py_dirs: HashSet<String>,
     pub rust_files: Vec<String>,
+    /// Go directory -> its non-test `.go` files (sorted). Directories holding only tests map to an empty list.
+    pub go_dirs: HashMap<String, Vec<String>>,
+    /// Java: every `/`-boundary suffix of a `.java` path -> the paths ending with it
+    pub java_by_suffix: HashMap<String, Vec<String>>,
+    /// Java: every `/`-boundary suffix of a directory holding `.java` files -> those directories
+    pub java_dir_suffix: HashMap<String, Vec<String>>,
+    pub java_dir_files: HashMap<String, Vec<String>>,
     pub rust_mods: HashSet<String>,
     /// package names that are local (workspace members): npm names, cargo package names (normalized `_`), python project names
     pub local_pkgs: HashSet<String>,
@@ -54,6 +61,36 @@ impl ProjectView {
         };
         for (p, lang) in files {
             v.paths.insert(p.clone());
+            if p.ends_with(".go") {
+                let d = dir_of(p).to_string();
+                let e = v.go_dirs.entry(d).or_default();
+                if !p.ends_with("_test.go") {
+                    e.push(p.clone());
+                }
+            } else if p.ends_with(".java") {
+                for (i, c) in p.char_indices() {
+                    if i == 0 || p.as_bytes()[i - 1] == b'/' {
+                        v.java_by_suffix
+                            .entry(p[i..].to_string())
+                            .or_default()
+                            .push(p.clone());
+                    }
+                    let _ = c;
+                }
+                let d = dir_of(p).to_string();
+                if !v.java_dir_files.contains_key(&d) {
+                    for (i, _) in d.char_indices() {
+                        if i == 0 || d.as_bytes()[i - 1] == b'/' {
+                            v.java_dir_suffix
+                                .entry(d[i..].to_string())
+                                .or_default()
+                                .push(d.clone());
+                        }
+                    }
+                    v.java_dir_files.insert(d.clone(), vec![]);
+                }
+                v.java_dir_files.get_mut(&d).unwrap().push(p.clone());
+            }
             if lang == "python" {
                 let no_ext = p.trim_end_matches(".pyi").trim_end_matches(".py");
                 let parts: Vec<&str> = no_ext.split('/').collect();
@@ -83,6 +120,12 @@ impl ProjectView {
             }
         }
         v.rust_files.sort();
+        for f in v.go_dirs.values_mut() {
+            f.sort();
+        }
+        for f in v.java_dir_files.values_mut() {
+            f.sort();
+        }
         v
     }
 }
@@ -417,29 +460,23 @@ pub fn resolve_import(
 fn resolve_classlike(view: &ProjectView, file_path: &str, imp: &ImportFact) -> Resolution {
     let m = imp.module.as_str();
     let ext = file_path.rsplit('.').next().unwrap_or("");
-    let files_in_dir = |dir: &str, ext: &str| -> Vec<String> {
-        let mut v: Vec<String> = view
-            .paths
-            .iter()
-            .filter(|p| p.ends_with(ext) && dir_of(p) == dir && !p.ends_with("_test.go"))
-            .cloned()
-            .collect();
-        v.sort();
-        v
-    };
     match ext {
         "go" => {
-            let mut dirs: Vec<&str> = view
-                .paths
-                .iter()
-                .filter(|p| p.ends_with(".go"))
-                .map(|p| dir_of(p))
-                .filter(|d| !d.is_empty() && (m == *d || m.ends_with(&format!("/{d}"))))
-                .collect();
-            dirs.sort_by_key(|d| std::cmp::Reverse(d.len()));
-            if let Some(d) = dirs.first() {
+            // longest directory that equals the module path or is a `/`-suffix of it
+            let mut found: Option<&String> = None;
+            let mut cand = Some(m);
+            while let Some(c) = cand {
+                if !c.is_empty() {
+                    if let Some((k, _)) = view.go_dirs.get_key_value(c) {
+                        found = Some(k);
+                        break;
+                    }
+                }
+                cand = c.find('/').map(|i| &c[i + 1..]);
+            }
+            if let Some(d) = found {
                 let mut r = Resolution::new("local");
-                r.resolved_files = files_in_dir(d, ".go");
+                r.resolved_files = view.go_dirs[d].clone();
                 return r;
             }
             if !m.split('/').next().unwrap_or("").contains('.') {
@@ -451,26 +488,19 @@ fn resolve_classlike(view: &ProjectView, file_path: &str, imp: &ImportFact) -> R
         }
         "java" => {
             let rel = format!("{}.java", m.replace('.', "/"));
-            let mut hit: Vec<String> = view
-                .paths
-                .iter()
-                .filter(|p| **p == rel || p.ends_with(&format!("/{rel}")))
-                .cloned()
-                .collect();
+            let mut hit: Vec<String> = view.java_by_suffix.get(&rel).cloned().unwrap_or_default();
             if hit.is_empty() {
                 // wildcard / package import: every file in a directory ending with the package path
                 let pkg = m.replace('.', "/");
-                let mut dirs: Vec<&str> = view
-                    .paths
-                    .iter()
-                    .filter(|p| p.ends_with(".java"))
-                    .map(|p| dir_of(p))
-                    .filter(|d| *d == pkg || d.ends_with(&format!("/{pkg}")))
-                    .collect();
+                let mut dirs: Vec<&String> = view
+                    .java_dir_suffix
+                    .get(&pkg)
+                    .map(|v| v.iter().collect())
+                    .unwrap_or_default();
                 dirs.sort();
                 dirs.dedup();
                 for d in dirs {
-                    hit.extend(files_in_dir(d, ".java"));
+                    hit.extend(view.java_dir_files.get(d).cloned().unwrap_or_default());
                 }
             }
             if !hit.is_empty() {
@@ -806,6 +836,52 @@ mod tests {
             line: 1,
             kind: kind.into(),
         }
+    }
+
+    #[test]
+    fn go_and_java_resolution_use_longest_dir_and_skip_tests() {
+        let v = view(
+            &[
+                ("pkg/util/a.go", "go"),
+                ("pkg/util/a_test.go", "go"),
+                ("util/b.go", "go"),
+                ("app/main.go", "go"),
+                ("src/main/java/com/x/Foo.java", "java"),
+                ("src/main/java/com/x/Bar.java", "java"),
+            ],
+            &[],
+            &[],
+        );
+        let r = |f: &str, m: &str| {
+            resolve_import(
+                &v,
+                Family::ClassLike,
+                f,
+                &imp(m, &[], "import"),
+                &HashSet::new(),
+            )
+        };
+        // longest matching directory wins; *_test.go is never a resolved target
+        let a = r("app/main.go", "example.com/mod/pkg/util");
+        assert_eq!(
+            (a.class.as_str(), a.resolved_files),
+            ("local", vec!["pkg/util/a.go".to_string()])
+        );
+        let b = r("app/main.go", "example.com/mod/util");
+        assert_eq!(b.resolved_files, vec!["util/b.go".to_string()]);
+        assert_eq!(r("app/main.go", "fmt").class, "stdlib");
+        assert_eq!(r("app/main.go", "github.com/x/y").class, "external");
+        let j = r("src/main/java/com/x/Foo.java", "com.x.Bar");
+        assert_eq!(
+            j.resolved_files,
+            vec!["src/main/java/com/x/Bar.java".to_string()]
+        );
+        let w = r("src/main/java/com/x/Foo.java", "com.x");
+        assert_eq!(w.resolved_files.len(), 2);
+        assert_eq!(
+            r("src/main/java/com/x/Foo.java", "java.util.List").class,
+            "stdlib"
+        );
     }
 
     #[test]
