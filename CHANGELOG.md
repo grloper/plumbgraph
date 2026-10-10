@@ -1,10 +1,8 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.3] - 2026-10-10
 
-### 1.0.3
-
-Fixes for false positives and install problems found by running 1.0.2 on a real Unity project (`Assets/UYF`). Not released; the crate version is still 1.0.2.
+Fixes for false positives and install problems found by running 1.0.2 on a real Unity project (`Assets/UYF`).
 
 #### Fixed
 - Unity: message methods (`LateUpdate`, `FixedUpdate`, `OnDisable`, ...) on a `partial` class are entry points when **any** part declares a Unity base (`MonoBehaviour`, `ScriptableObject`, `NetworkBehaviour`, `EditorWindow`, ...), even when the base is declared in another file. Parts are merged per type within one `Assets/` root; the other parts of the type are then live too. Indirect bases (`Hero : CharacterBase : MonoBehaviour`) are resolved through classes in the index. `dead-code --verbose` prints `unity-message@partial-merged ...` for every suppressed message.
