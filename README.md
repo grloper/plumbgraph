@@ -36,15 +36,35 @@ Nothing is published yet (no crate, no binaries). Build from source with Rust 1.
 git clone https://github.com/grloper/plumbgraph && cd plumbgraph
 cargo install --path crates/cli --locked      # installs `plumb` (and `plumbgraph`)
 
-plumb map .                       # ranked, token-budgeted overview
+plumb map . --tokens 1500         # ranked overview under a hard token budget (--budget is an alias)
 plumb dead-code .                 # add --lib for libraries (exports = public API)
 plumb check-deps . --online       # sends package names only to the registries
 plumb verify .                    # one pass/fail gate (exit 1 on new findings)
 plumb verify . --run --online     # also run diagnostics, semgrep, ast-grep (trusted code only)
-plumb init                        # write AGENTS.md block + MCP config for your agent
+plumb init --dry-run              # preview: AGENTS.md block, MCP config, .gitignore lines
+plumb init                        # write them
 ```
 
+In a git work tree `plumb init` adds `.plumbgraph/*` and `!.plumbgraph/allow.toml` to `<project>/.gitignore` (the index is a local cache; the allow-list is meant to be committed). An existing `.plumbgraph` entry is left alone, a `.gitignore` that is not UTF-8 is never rewritten, and `--no-gitignore` skips this step.
+
 `--json` on any command gives machine-readable output; `--fail-on high|medium|low` sets the exit code.
+
+### Windows
+
+The same `cargo install --path crates/cli --locked` works from PowerShell; it puts `plumb.exe` and `plumbgraph.exe` in `%USERPROFILE%\.cargo\bin`. The rustup installer adds that directory to `PATH`; other Rust installs (Chocolatey, for example) do not, and `cargo install` then prints `be sure to add ...\.cargo\bin to your PATH`. Add it for your user and open a new terminal:
+
+```powershell
+$bin = "$env:USERPROFILE\.cargo\bin"
+$user = [Environment]::GetEnvironmentVariable('Path', 'User')
+if (($user -split ';') -notcontains $bin) {
+  [Environment]::SetEnvironmentVariable('Path', ($user.TrimEnd(';') + ';' + $bin), 'User')
+}
+# new terminal:
+plumb --version
+plumb doctor .
+```
+
+What was tested on Windows, and only this: Windows 11 Home 64-bit (build 26200) with Rust 1.91.1 `x86_64-pc-windows-gnu` from Chocolatey (no rustup, so `rust-toolchain.toml`'s 1.85 was not used, and the MSVC target was not tried). `cargo install --path crates/cli --locked` built and installed both v1.0.0 and the v1.0.1 changes. On one real repository, v1.0.0 ran `index`, `map`, `dead-code`, `check-deps`, `verify`, `weakening`, `doctor` and `plumb mcp` (driven by one MCP host), and the v1.0.1 build ran `doctor`, `map --budget` and `init --dry-run`. `cargo test --workspace` on that machine: every test passes except 10 that also fail on `main` there (LSP/diagnostics tests that need a real `python3`, which was only the Microsoft Store stub, and the closed-stdout-pipe test, which gets Windows error 232 instead of a broken pipe). CI runs on Linux only.
 
 ### Use with an agent (MCP)
 
@@ -126,7 +146,7 @@ Use them together: if you need precise navigation and editing today, an LSP-back
 - Go, Java, C# are tier-0 only; C# was not benchmarked on a real repository.
 - SCIP: rust-analyzer's SCIP output, scip-go, scip-java and scip-dotnet were not run; scip-python and scip-typescript only on toys.
 - MCP: stdio only, tools and resources only (no prompts). Tested with the official TypeScript SDK and the MCP inspector CLI; agent hosts were not tested.
-- `weakening` is line-based and heuristic. No Windows testing. No releases or packages yet.
+- `weakening` is line-based and heuristic. Windows: one machine, manual runs, no CI (see [Windows](#windows)). No releases or packages yet.
 
 ## Documentation
 

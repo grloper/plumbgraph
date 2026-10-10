@@ -1,12 +1,13 @@
 //! Dead-code analysis: reachability from entry points over the tier-0 reference graph,
 //! then a confidence score per unreachable symbol.
 //!
-//! Confidence model (documented in docs/DEAD_CODE.md):
+//! Confidence model:
 //! `score = clamp((0.70 + bonuses) * (1 - sum(penalties)), 0, 0.99)`
 //! bonuses: private symbol +0.10, name occurs nowhere else in the indexed code +0.15.
 //! penalties: dynamic-access markers in file 0.20, name appears in a string literal 0.15,
-//! decorated/attributed 0.30, exported (app mode) 0.10, imported-by-name elsewhere 0.20,
-//! file has syntax errors 0.10.
+//! decorated/attributed 0.30, method of a subclass 0.25, framework risk (e.g. a public
+//! Unity component method that a UnityEvent may call) 0.25, exported (app mode) 0.10,
+//! imported-by-name elsewhere 0.20, file has syntax errors 0.10.
 //! Levels: high >= 0.90, medium >= 0.70, low otherwise (hidden by default).
 
 use crate::store::{Graph, SymRow};
@@ -555,6 +556,10 @@ fn score(
     if s.subclass {
         pen += 0.25;
         fp.push("method of a class that extends/implements another type: it may override or implement a base/framework method that is called from outside the indexed code".into());
+    }
+    if let Some(r) = &s.framework_risk {
+        pen += 0.25;
+        fp.push(sanitize(r));
     }
     if s.exported {
         pen += 0.10;

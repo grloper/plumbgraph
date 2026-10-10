@@ -263,6 +263,253 @@ const CL_NEUTRAL_ANNOTATIONS: &[&str] = &[
     "Nullable",
 ];
 
+/// Unity base types whose subclasses receive engine messages by method name. Names that are
+/// only used by Unity; `Editor`/`EditorWindow` are generic and need `UNITY_EDITOR_BASES` context.
+const UNITY_BASES: &[&str] = &[
+    "MonoBehaviour",
+    "ScriptableObject",
+    "NetworkBehaviour",
+    "StateMachineBehaviour",
+    "UIBehaviour",
+];
+const UNITY_EDITOR_BASES: &[&str] = &["Editor", "EditorWindow"];
+
+/// Methods the Unity engine calls by name (reflection on the message name, not a virtual call).
+/// MonoBehaviour / ScriptableObject messages, physics (3D and 2D), rendering, input, animation,
+/// StateMachineBehaviour, Editor/EditorWindow (incl. IHasCustomMenu) and
+/// ISerializationCallbackReceiver callbacks.
+const UNITY_MESSAGES: &[&str] = &[
+    "Awake",
+    "Start",
+    "Update",
+    "LateUpdate",
+    "FixedUpdate",
+    "OnEnable",
+    "OnDisable",
+    "OnDestroy",
+    "OnValidate",
+    "Reset",
+    "OnGUI",
+    "OnApplicationFocus",
+    "OnApplicationPause",
+    "OnApplicationQuit",
+    "OnBecameVisible",
+    "OnBecameInvisible",
+    "OnCollisionEnter",
+    "OnCollisionStay",
+    "OnCollisionExit",
+    "OnCollisionEnter2D",
+    "OnCollisionStay2D",
+    "OnCollisionExit2D",
+    "OnTriggerEnter",
+    "OnTriggerStay",
+    "OnTriggerExit",
+    "OnTriggerEnter2D",
+    "OnTriggerStay2D",
+    "OnTriggerExit2D",
+    "OnControllerColliderHit",
+    "OnJointBreak",
+    "OnJointBreak2D",
+    "OnParticleCollision",
+    "OnParticleTrigger",
+    "OnParticleSystemStopped",
+    "OnMouseDown",
+    "OnMouseUp",
+    "OnMouseUpAsButton",
+    "OnMouseEnter",
+    "OnMouseExit",
+    "OnMouseOver",
+    "OnMouseDrag",
+    "OnPreCull",
+    "OnPreRender",
+    "OnPostRender",
+    "OnRenderImage",
+    "OnRenderObject",
+    "OnWillRenderObject",
+    "OnDrawGizmos",
+    "OnDrawGizmosSelected",
+    "OnAnimatorMove",
+    "OnAnimatorIK",
+    "OnAudioFilterRead",
+    "OnTransformChildrenChanged",
+    "OnTransformParentChanged",
+    "OnBeforeTransformParentChanged",
+    "OnRectTransformDimensionsChange",
+    "OnCanvasGroupChanged",
+    "OnStateEnter",
+    "OnStateExit",
+    "OnStateUpdate",
+    "OnStateMove",
+    "OnStateIK",
+    "OnStateMachineEnter",
+    "OnStateMachineExit",
+    "OnInspectorGUI",
+    "OnSceneGUI",
+    "CreateInspectorGUI",
+    "CreateGUI",
+    "OnSelectionChange",
+    "OnFocus",
+    "OnLostFocus",
+    "OnHierarchyChange",
+    "OnProjectChange",
+    "OnInspectorUpdate",
+    "AddItemsToMenu",
+    "OnBeforeSerialize",
+    "OnAfterDeserialize",
+];
+
+/// Unity interfaces whose methods the engine calls on any implementing type (not only
+/// components): serialization callbacks, the editor's custom menu, and UI EventSystem handlers.
+const UNITY_CALLBACK_INTERFACES: &[(&str, &str)] = &[
+    ("ISerializationCallbackReceiver", "OnBeforeSerialize"),
+    ("ISerializationCallbackReceiver", "OnAfterDeserialize"),
+    ("IHasCustomMenu", "AddItemsToMenu"),
+    ("IPointerEnterHandler", "OnPointerEnter"),
+    ("IPointerExitHandler", "OnPointerExit"),
+    ("IPointerDownHandler", "OnPointerDown"),
+    ("IPointerUpHandler", "OnPointerUp"),
+    ("IPointerClickHandler", "OnPointerClick"),
+    ("IPointerMoveHandler", "OnPointerMove"),
+    (
+        "IInitializePotentialDragHandler",
+        "OnInitializePotentialDrag",
+    ),
+    ("IBeginDragHandler", "OnBeginDrag"),
+    ("IDragHandler", "OnDrag"),
+    ("IEndDragHandler", "OnEndDrag"),
+    ("IDropHandler", "OnDrop"),
+    ("IScrollHandler", "OnScroll"),
+    ("IUpdateSelectedHandler", "OnUpdateSelected"),
+    ("ISelectHandler", "OnSelect"),
+    ("IDeselectHandler", "OnDeselect"),
+    ("IMoveHandler", "OnMove"),
+    ("ISubmitHandler", "OnSubmit"),
+    ("ICancelHandler", "OnCancel"),
+];
+
+/// Unity attributes that make the engine/editor call the method (or, for `InitializeOnLoad`,
+/// run the class's static constructor). Matched without a trailing `Attribute`.
+const UNITY_ENTRY_ATTRIBUTES: &[&str] = &[
+    "RuntimeInitializeOnLoadMethod",
+    "InitializeOnLoadMethod",
+    "InitializeOnLoad",
+    "MenuItem",
+    "ContextMenu",
+    "DidReloadScripts",
+    "PostProcessBuild",
+    "PostProcessScene",
+    "OnOpenAsset",
+];
+
+/// Unity context for a C# file: under `Assets/` or `Packages/` (a Unity project layout), or
+/// code (not comments or strings) that imports or names the `UnityEngine`/`UnityEditor`
+/// namespaces: a `using` directive or a qualified name such as `UnityEditor.MenuItem`.
+fn unity_file(rel_path: &str, root: Node, src: &[u8]) -> bool {
+    let under = |dir: &str| {
+        rel_path.starts_with(&format!("{dir}/")) || rel_path.contains(&format!("/{dir}/"))
+    };
+    if under("Assets") || under("Packages") {
+        return true;
+    }
+    let names_unity = |t: &str| {
+        let t = t.trim().trim_start_matches("global::");
+        ["UnityEngine", "UnityEditor"]
+            .iter()
+            .any(|ns| t == *ns || t.starts_with(&format!("{ns}.")))
+    };
+    let mut stack = vec![root];
+    while let Some(n) = stack.pop() {
+        match n.kind() {
+            "using_directive" => {
+                let mut c = n.walk();
+                if n.named_children(&mut c)
+                    .any(|ch| names_unity(text(ch, src)))
+                {
+                    return true;
+                }
+            }
+            "qualified_name" | "alias_qualified_name" if names_unity(text(n, src)) => return true,
+            "comment"
+            | "string_literal"
+            | "verbatim_string_literal"
+            | "raw_string_literal"
+            | "interpolated_string_expression" => {}
+            _ => {
+                let mut c = n.walk();
+                stack.extend(n.children(&mut c));
+            }
+        }
+    }
+    false
+}
+
+fn under_assets(rel_path: &str) -> bool {
+    rel_path.starts_with("Assets/") || rel_path.contains("/Assets/")
+}
+
+/// Base type names (last path segment, generics stripped) of a C# class declaration.
+fn cs_base_names(class_node: Node, src: &[u8]) -> Vec<String> {
+    let mut out = vec![];
+    let mut c = class_node.walk();
+    for ch in class_node.children(&mut c) {
+        if ch.kind() != "base_list" {
+            continue;
+        }
+        let mut cc = ch.walk();
+        for b in ch.named_children(&mut cc) {
+            let t = text(b, src);
+            let head = t.split(['<', '(']).next().unwrap_or(t).trim();
+            let last = head.rsplit(['.', ':']).next().unwrap_or(head).trim();
+            if !last.is_empty() {
+                out.push(last.to_string());
+            }
+        }
+    }
+    out
+}
+
+/// How a C# class relates to Unity: `Some(reason)` when its methods may be called by the engine.
+fn unity_class(
+    class_node: Node,
+    src: &[u8],
+    rel_path: &str,
+    in_unity_file: bool,
+) -> Option<String> {
+    let bases = cs_base_names(class_node, src);
+    if let Some(b) = bases.iter().find(|b| UNITY_BASES.contains(&b.as_str())) {
+        return Some(format!("derives from {b}"));
+    }
+    if in_unity_file {
+        if let Some(b) = bases
+            .iter()
+            .find(|b| UNITY_EDITOR_BASES.contains(&b.as_str()))
+        {
+            return Some(format!("derives from {b}"));
+        }
+    }
+    // .NET naming: `IDisposable`, `IComparable<T>`. A class lists its base class first and
+    // cannot reach MonoBehaviour through an interface.
+    let interface_like = |b: &str| {
+        let mut c = b.chars();
+        c.next() == Some('I') && c.next().is_some_and(|x| x.is_ascii_uppercase())
+    };
+    if under_assets(rel_path) && bases.first().is_some_and(|b| !interface_like(b)) {
+        // indirect subclass (`Enemy : Character : MonoBehaviour`): the chain is not resolved,
+        // so a class with a base class in a Unity project's Assets/ may be a component
+        return Some(format!(
+            "derives from {} under Assets/ (possibly an indirect MonoBehaviour)",
+            bases[0]
+        ));
+    }
+    None
+}
+
+fn unity_attribute(anns: &[String]) -> Option<&str> {
+    anns.iter()
+        .map(|a| a.strip_suffix("Attribute").unwrap_or(a.as_str()))
+        .find(|a| UNITY_ENTRY_ATTRIBUTES.contains(a))
+}
+
 const GO_WELL_KNOWN_METHODS: &[&str] = &[
     "String",
     "Error",
@@ -516,6 +763,9 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
         || rel_path.starts_with("bin/")
         || rel_path.contains("examples/");
 
+    let is_csharp = pack.manifest.id == "csharp";
+    let cs_unity_file = is_csharp && unity_file(rel_path, root, src);
+
     let mut syms: Vec<SymbolFact> = Vec::with_capacity(defs.len());
     for (i, d) in defs.iter().enumerate() {
         let mut name = text(d.name_node, src).to_string();
@@ -573,6 +823,7 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
         let mut entry_cond: Option<String> = None;
         let mut decorated = false;
         let mut subclass_method = false;
+        let mut framework_risk: Option<String> = None;
 
         match family {
             Family::Python => {
@@ -688,6 +939,46 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
                             entry = Some("overrides a base-class method".into());
                         } else if in_type && has("static") && (name == "main" || name == "Main") {
                             entry = Some("program entry point".into());
+                        }
+                    }
+                    if is_csharp {
+                        if let Some(a) = unity_attribute(&anns).filter(|_| cs_unity_file) {
+                            if entry.is_none() {
+                                entry =
+                                    Some(format!("Unity `[{a}]`: invoked by the engine/editor"));
+                            }
+                        }
+                        if entry.is_none() && cs_unity_file && kind == "method" {
+                            if let Some(p) = parent
+                                .filter(|&p| matches!(syms[p].kind.as_str(), "class" | "struct"))
+                            {
+                                let bases = cs_base_names(defs[p].def, src);
+                                if let Some((iface, _)) = UNITY_CALLBACK_INTERFACES
+                                    .iter()
+                                    .find(|(i, m)| *m == name && bases.iter().any(|b| b == i))
+                                {
+                                    entry = Some(format!(
+                                        "Unity callback `{name}` of `{iface}`: called by the engine"
+                                    ));
+                                }
+                            }
+                        }
+                        let unity_owner = parent
+                            .filter(|&p| syms[p].kind == "class")
+                            .and_then(|p| unity_class(defs[p].def, src, rel_path, cs_unity_file));
+                        if let (Some(why), true) = (unity_owner, kind == "method" && !has("static"))
+                        {
+                            if UNITY_MESSAGES.contains(&name.as_str()) {
+                                if entry.is_none() {
+                                    entry = Some(format!(
+                                        "Unity message `{name}` (class {why}): called by the engine by name"
+                                    ));
+                                }
+                            } else if entry.is_none() && has("public") {
+                                framework_risk = Some(format!(
+                                    "public method of a Unity class ({why}): may be bound to a UnityEvent (e.g. Button.onClick), an Animation Event or SendMessage in a scene, prefab or animation clip, which are not indexed"
+                                ));
+                            }
                         }
                     }
                 }
@@ -872,6 +1163,7 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
             entry_cond,
             decorated,
             subclass_method,
+            framework_risk,
             keep,
             parent,
         });

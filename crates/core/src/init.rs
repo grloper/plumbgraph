@@ -43,7 +43,7 @@ fn server_entry() -> Value {
 }
 
 fn merge_json(path: &Path, rep: &mut InitReport, dry: bool) -> Result<()> {
-    let rel = path.display().to_string();
+    let rel = shown(path);
     let mut doc: Value = match std::fs::read_to_string(path) {
         Ok(s) => serde_json::from_str(&s)
             .with_context(|| format!("{rel} exists but is not valid JSON; not touching it"))?,
@@ -82,7 +82,7 @@ fn merge_json(path: &Path, rep: &mut InitReport, dry: bool) -> Result<()> {
 }
 
 fn upsert_block(path: &Path, rep: &mut InitReport, dry: bool, create: bool) -> Result<()> {
-    let rel = path.display().to_string();
+    let rel = shown(path);
     let existing = std::fs::read_to_string(path).ok();
     if existing.is_none() && !create {
         return Ok(());
@@ -106,8 +106,75 @@ fn upsert_block(path: &Path, rep: &mut InitReport, dry: bool, create: bool) -> R
     Ok(())
 }
 
+/// Drop the Windows verbatim prefix that `canonicalize` adds: `\\?\C:\x` -> `C:\x`,
+/// `\\?\UNC\srv\share` -> `\\srv\share`. Other verbatim forms (`\\?\Volume{..}\`) have no
+/// plain spelling and are returned unchanged, as is every non-verbatim path.
+pub fn strip_verbatim(p: &str) -> String {
+    if let Some(rest) = p.strip_prefix(r"\\?\UNC\") {
+        return format!(r"\\{rest}");
+    }
+    if let Some(rest) = p.strip_prefix(r"\\?\") {
+        let b = rest.as_bytes();
+        if b.len() >= 2 && b[0].is_ascii_alphabetic() && b[1] == b':' {
+            return rest.to_string();
+        }
+    }
+    p.to_string()
+}
+
+/// `p` for display and for config files (no verbatim prefix).
+fn shown(p: &Path) -> String {
+    strip_verbatim(&p.display().to_string())
+}
+
+/// Encode `s` as a TOML string: a literal string (`'C:\x'`, no escapes, so Windows
+/// backslashes stay readable) when that can hold it, else a basic string with every
+/// character TOML requires escaped (`"`, `\`, control characters).
+pub fn toml_string(s: &str) -> String {
+    if !s.contains('\'') && !s.chars().any(|c| c.is_control() && c != '\t') {
+        return format!("'{s}'");
+    }
+    let mut out = String::with_capacity(s.len() + 2);
+    out.push('"');
+    for c in s.chars() {
+        match c {
+            '"' => out.push_str("\\\""),
+            '\\' => out.push_str("\\\\"),
+            '\n' => out.push_str("\\n"),
+            '\r' => out.push_str("\\r"),
+            '\t' => out.push_str("\\t"),
+            '\u{8}' => out.push_str("\\b"),
+            '\u{c}' => out.push_str("\\f"),
+            c if c.is_control() => out.push_str(&format!("\\u{:04X}", c as u32)),
+            c => out.push(c),
+        }
+    }
+    out.push('"');
+    out
+}
+
+/// The `~/.codex/config.toml` block registering the server for `root` (a path as
+/// `canonicalize` returns it; a Windows verbatim prefix is removed).
+pub fn codex_snippet(root: &str) -> String {
+    format!(
+        "# Codex: add to ~/.codex/config.toml (global; plumb does not edit it)\n[mcp_servers.plumbgraph]\ncommand = \"plumb\"\nargs = [\"mcp\", \"--root\", {}]\n",
+        toml_string(&strip_verbatim(root))
+    )
+}
+
 /// `agents`: which to configure; empty = everything detected (`AGENTS.md` is always written).
+/// Also adds `GITIGNORE_LINES` to `.gitignore` inside a git work tree.
 pub fn init(root: &Path, agents: &[String], dry_run: bool) -> Result<InitReport> {
+    init_with(root, agents, dry_run, true)
+}
+
+/// `init` with `gitignore = false` for `--no-gitignore` (the report says what to add by hand).
+pub fn init_with(
+    root: &Path,
+    agents: &[String],
+    dry_run: bool,
+    gitignore: bool,
+) -> Result<InitReport> {
     let root = root.canonicalize()?;
     let mut rep = InitReport::default();
     let want = |name: &str, detected: bool| {
@@ -129,31 +196,87 @@ pub fn init(root: &Path, agents: &[String], dry_run: bool) -> Result<InitReport>
         merge_json(&root.join(".cursor/mcp.json"), &mut rep, dry_run)?;
     }
     if want("codex", codex || !agents.is_empty()) || agents.is_empty() {
-        rep.snippets.push(format!(
-            "# Codex: add to ~/.codex/config.toml (global; plumb does not edit it)\n[mcp_servers.plumbgraph]\ncommand = \"plumb\"\nargs = [\"mcp\", \"--root\", \"{}\"]\n",
-            root.display()
-        ));
+        rep.snippets
+            .push(codex_snippet(&root.display().to_string()));
     }
-    // keep the local index out of version control, but keep the baseline
-    let gi = root.join(".gitignore");
-    let cur = std::fs::read_to_string(&gi).unwrap_or_default();
-    if root.join(".git").exists()
-        && !cur
-            .lines()
-            .any(|l| l.trim() == ".plumbgraph/" || l.trim() == ".plumbgraph")
-    {
-        if !dry_run {
-            let mut n = cur.clone();
-            if !n.is_empty() && !n.ends_with('\n') {
-                n.push('\n');
-            }
-            n.push_str(".plumbgraph/\n");
-            std::fs::write(&gi, n)?;
-        }
-        rep.written.push(gi.display().to_string());
-    }
+    ensure_gitignore(&root, &mut rep, dry_run, gitignore)?;
     if rep.written.is_empty() && rep.notes.is_empty() {
         rep.notes.push("already configured".into());
     }
     Ok(rep)
+}
+
+/// Lines `init` adds to `<root>/.gitignore`. The index and SCIP files are local caches; the
+/// allow-list `.plumbgraph/allow.toml` is meant to be committed. `/*` rather than `/`:
+/// git cannot re-include a file whose parent directory is excluded.
+pub const GITIGNORE_LINES: &[&str] = &[".plumbgraph/*", "!.plumbgraph/allow.toml"];
+
+/// Does the user already manage `.plumbgraph` in this `.gitignore`? Any rule (not a comment)
+/// that mentions it counts: an exclusion in any spelling (`/.plumbgraph/`, `**/.plumbgraph/*`,
+/// `.plumbgraph*`) or a negation (`!.plumbgraph/`), which our appended lines would override,
+/// because the last matching rule wins.
+fn gitignore_mentions_plumbgraph(text: &str) -> bool {
+    text.lines().any(|l| {
+        let l = l.trim_start_matches('\u{feff}').trim();
+        !l.starts_with('#') && l.contains(".plumbgraph")
+    })
+}
+
+/// Add `GITIGNORE_LINES` to `<root>/.gitignore` when `root` is inside a git work tree and the
+/// file has no rule about `.plumbgraph` yet. Never rewrites a file it cannot read as UTF-8.
+fn ensure_gitignore(root: &Path, rep: &mut InitReport, dry: bool, enabled: bool) -> Result<()> {
+    let wanted = GITIGNORE_LINES.join(" and ");
+    if !enabled {
+        rep.notes.push(format!(
+            "--no-gitignore: .gitignore not touched; to keep the local index out of git add {wanted}"
+        ));
+        return Ok(());
+    }
+    // `.git` is a directory in a normal checkout and a file in worktrees and submodules
+    if !root.ancestors().any(|a| a.join(".git").exists()) {
+        rep.notes
+            .push("not inside a git work tree: .gitignore not touched".into());
+        return Ok(());
+    }
+    let gi = root.join(".gitignore");
+    let cur = match std::fs::read(&gi) {
+        Ok(bytes) => match String::from_utf8(bytes) {
+            Ok(s) => s,
+            Err(_) => {
+                rep.notes.push(format!(
+                    "{}: not UTF-8 (UTF-16?); left as is. Add {wanted} yourself",
+                    shown(&gi)
+                ));
+                rep.unchanged.push(shown(&gi));
+                return Ok(());
+            }
+        },
+        Err(e) if e.kind() == std::io::ErrorKind::NotFound => String::new(),
+        Err(e) => return Err(e).with_context(|| format!("reading {}", shown(&gi))),
+    };
+    if gitignore_mentions_plumbgraph(&cur) {
+        rep.unchanged.push(shown(&gi));
+        return Ok(());
+    }
+    rep.notes.push(format!(
+        "{} {}: {wanted}",
+        if dry { "would add to" } else { "added to" },
+        shown(&gi)
+    ));
+    if !dry {
+        let nl = if cur.contains("\r\n") { "\r\n" } else { "\n" };
+        let mut n = cur;
+        if !n.is_empty() && !n.ends_with('\n') {
+            n.push_str(nl);
+        }
+        n.push_str("# plumbgraph: local index and caches (the allow-list stays committed)");
+        n.push_str(nl);
+        for l in GITIGNORE_LINES {
+            n.push_str(l);
+            n.push_str(nl);
+        }
+        std::fs::write(&gi, n)?;
+    }
+    rep.written.push(shown(&gi));
+    Ok(())
 }
