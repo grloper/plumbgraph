@@ -49,6 +49,23 @@ In a git work tree `plumb init` adds `.plumbgraph/*` and `!.plumbgraph/allow.tom
 
 `--json` on any command gives machine-readable output; `--fail-on high|medium|low` sets the exit code.
 
+### Windows
+
+The same `cargo install --path crates/cli --locked` works from PowerShell; it puts `plumb.exe` and `plumbgraph.exe` in `%USERPROFILE%\.cargo\bin`. The rustup installer adds that directory to `PATH`; other Rust installs (Chocolatey, for example) do not, and `cargo install` then prints `be sure to add ...\.cargo\bin to your PATH`. Add it for your user and open a new terminal:
+
+```powershell
+$bin = "$env:USERPROFILE\.cargo\bin"
+$user = [Environment]::GetEnvironmentVariable('Path', 'User')
+if (($user -split ';') -notcontains $bin) {
+  [Environment]::SetEnvironmentVariable('Path', ($user.TrimEnd(';') + ';' + $bin), 'User')
+}
+# new terminal:
+plumb --version
+plumb doctor .
+```
+
+What was tested on Windows, and only this: Windows 11 Home 64-bit (build 26200) with Rust 1.91.1 `x86_64-pc-windows-gnu` from Chocolatey (no rustup, so `rust-toolchain.toml`'s 1.85 was not used, and the MSVC target was not tried). `cargo install --path crates/cli --locked` built and installed; `plumb index`, `map`, `dead-code`, `check-deps`, `verify`, `weakening`, `doctor`, `init --dry-run` and `plumb mcp` (driven by one MCP host) ran on a real repository. `cargo test --workspace` on that machine: every test passes except 10 that also fail on `main` there (LSP/diagnostics tests that need a real `python3`, which was only the Microsoft Store stub, and the closed-stdout-pipe test, which gets Windows error 232 instead of a broken pipe). CI runs on Linux only.
+
 ### Use with an agent (MCP)
 
 ```bash
@@ -129,7 +146,7 @@ Use them together: if you need precise navigation and editing today, an LSP-back
 - Go, Java, C# are tier-0 only; C# was not benchmarked on a real repository.
 - SCIP: rust-analyzer's SCIP output, scip-go, scip-java and scip-dotnet were not run; scip-python and scip-typescript only on toys.
 - MCP: stdio only, tools and resources only (no prompts). Tested with the official TypeScript SDK and the MCP inspector CLI; agent hosts were not tested.
-- `weakening` is line-based and heuristic. No Windows testing. No releases or packages yet.
+- `weakening` is line-based and heuristic. Windows: one machine, manual runs, no CI (see [Windows](#windows)). No releases or packages yet.
 
 ## Documentation
 
