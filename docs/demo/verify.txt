@@ -1,0 +1,33 @@
+$ plumb verify --run --online --baseline plumb-baseline.json
+MEDIUM 0.70  src/app.py:4  `fastjsonx_utils` is not declared and does not exist on pypi  [registry:pypi]
+         why:  `fastjsonx_utils` is imported at src/app.py:4
+         why:  not declared in any pypi manifest covering this file
+         why:  pypi returned 404 for `fastjsonx_utils`
+         risk: a Python import name can differ from its distribution name (known mappings are built in; others are not)
+MEDIUM 0.88  src/app.py:4:8  F401 `fastjsonx_utils` imported but unused  [lint:ruff]
+         why:  reported by lint:ruff at src/app.py:4:8
+         risk: tool output depends on the local environment (toolchain version, installed dependencies, configuration)
+MEDIUM 0.77  src/app.py:16  function `legacy_export` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `legacy_export` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.85  src/app.py:22:5  use logging instead of print()  [ast-grep]
+         why:  ast-grep rule `demo-no-print` matched
+         risk: a rule match is a pattern match, not proof of a defect; review the rule's intent
+MEDIUM 0.85  src/calc.py:5:12  eval() on dynamic input is dangerous  [semgrep]
+         why:  semgrep rule `demo-no-eval` matched
+         risk: a rule match is a pattern match, not proof of a defect; review the rule's intent
+
+  dead-code        ran      1 finding(s)
+  check-deps       ran      1 finding(s)
+  test-weakening   ran      0 finding(s)  (vs HEAD)
+  diagnostics      ran      1 finding(s)  (pyright: skipped)
+  semgrep          ran      1 finding(s)
+  ast-grep         ran      1 finding(s)
+
+verify: FAIL  (5 new, 0 baselined, 0 fixed since baseline; fail-on medium)
+note: dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change
+note: baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new
+note: no baseline found at plumb-baseline.json: every finding counts as new (create one with --update-baseline)

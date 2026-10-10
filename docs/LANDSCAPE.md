@@ -22,6 +22,7 @@ is a benchmark of those tools; we did not run most of them.
 | mcp-language-server — https://github.com/isaacphi/mcp-language-server | one LSP exposed over MCP (definition, references, diagnostics, rename) | BSD-3-Clause / 1 607 / 2026-03-01 | Confirms diagnostics-over-MCP is wanted; Plumbgraph merges LSP diagnostics with other sources instead of one-server-per-process. |
 | LSP spec — https://microsoft.github.io/language-server-protocol/ | editor↔server protocol | spec | `publishDiagnostics` client (v0.2). |
 | MCP spec — https://modelcontextprotocol.io/specification | tools, resources, prompts over JSON-RPC | spec | v1 server implements tools **and resources** (`plumb://map`, …). |
+| Sourcegraph — https://sourcegraph.com/docs/code-navigation , https://sourcegraph.com/pricing | code search and code navigation platform; "precise" navigation from SCIP indexes, search-based navigation otherwise; MCP server on the enterprise plan | commercial (pricing page read 2026-10-10: enterprise "starting at $16K" minimum annual contract) | **Format and vocabulary**: SCIP is Sourcegraph's index format. Plumbgraph is a local CLI/MCP tool, not a hosted platform. |
 | Go tooling — https://github.com/golang/tools | `deadcode`, gopls | BSD-3-Clause / 8 006 | Not wrapped (gap); Go gets tier-0 only. |
 
 ## Where Plumbgraph is different (and where it is not)

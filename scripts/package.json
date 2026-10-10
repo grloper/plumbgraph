@@ -1,0 +1,9 @@
+{
+  "name": "plumbgraph-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Dev-only helpers (MCP SDK smoke test). Not part of the Rust workspace.",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1"
+  }
+}

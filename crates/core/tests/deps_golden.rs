@@ -104,3 +104,33 @@ fn inconclusive_lookup_is_not_nonexistent() {
         .iter()
         .any(|f| f.rule == "undeclared-dependency"));
 }
+
+#[test]
+fn deps_allow_list_suppresses_by_path_and_requires_reason() {
+    use plumbgraph_core::deadcode::AllowList;
+    let t = copy_fixture("deps_js");
+    std::fs::create_dir_all(t.path().join(".plumbgraph")).unwrap();
+    let db = tempfile::tempdir().unwrap();
+    let target = Target {
+        root: t.path().to_path_buf(),
+        db: Some(db.path().join("i.db")),
+    };
+    let params = DepsParams {
+        offline: true,
+        ..Default::default()
+    };
+    let before = run_check_deps(&target, &params, None)
+        .unwrap()
+        .findings
+        .len();
+    assert!(before > 0);
+    std::fs::write(
+        t.path().join(".plumbgraph/allow.toml"),
+        "[[deps_allow]]\npath = \"src/**\"\nreason = \"intentional fixture\"\n",
+    )
+    .unwrap();
+    let after = run_check_deps(&target, &params, None).unwrap().findings;
+    assert!(after.is_empty(), "{after:?}");
+    assert!(AllowList::parse("[[deps_allow]]\npath = \"x\"\nreason = \"\"\n").is_err());
+    assert!(AllowList::parse("[[deps_allow]]\npath = \"x\"\n").is_err());
+}

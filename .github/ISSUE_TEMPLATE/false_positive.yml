@@ -1,0 +1,47 @@
+name: False positive / false negative
+description: A finding that is wrong (or one that is missing)
+labels: ["false-positive"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Precision reports are the most useful feedback we get. Please include the finding exactly as printed (with `why:` / `risk:` lines) and a minimal source snippet. Do not paste secrets or proprietary code.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is wrong?
+      options:
+        - False positive (reported, but the code is fine / used)
+        - False negative (should have been reported, was not)
+    validations:
+      required: true
+  - type: dropdown
+    id: command
+    attributes:
+      label: Command
+      options: [dead-code, check-deps, weakening, impact, map, verify, other]
+    validations:
+      required: true
+  - type: input
+    id: lang
+    attributes:
+      label: Language and framework
+      placeholder: "Java + Spring, Go stdlib http, ..."
+  - type: textarea
+    id: finding
+    attributes:
+      label: Finding / expected finding
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: A few lines of source, or a public repository and commit.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: "`plumb --version` and whether a SCIP index was used"

@@ -1,6 +1,6 @@
 # Security Policy
 
-Plumbgraph is **pre-alpha (v0.2)**. It reads source trees that may be untrusted and is often run by AI agents, so we treat parser, path-handling and prompt-injection issues as in scope.
+Plumbgraph is a **1.0 candidate** (not yet released or published). It reads source trees that may be untrusted and is often run by AI agents, so we treat parser, path-handling and prompt-injection issues as in scope.
 
 ## Reporting a vulnerability
 
@@ -11,9 +11,9 @@ Include the version/commit, a minimal reproduction (ideally a small repository o
 
 ## Supported versions
 
-Only the latest commit on `main` is supported while the project is pre-1.0.
+Only the latest commit on `main` is supported until a first release is cut; after that, the latest release and `main`.
 
-## Threat model (v0.2)
+## Threat model (v1.0 candidate)
 
 What the code does today, and what it deliberately does not do:
 

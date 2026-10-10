@@ -1,0 +1,14 @@
+$ plumb enrich
+scip-python          ran      1285 ms /tmp/demo-app/.plumbgraph/scip/scip-python.scip
+indexes in .plumbgraph/scip/ are picked up automatically by map/impact/dead-code/refs.
+$ plumb dead-code .
+MEDIUM 0.77  src/app.py:16  function `legacy_export` appears unused  [scip]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  resolved by SCIP: the index records no reference to this exact symbol
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: SCIP index may be stale, partial, or blind to reflection, generated code and callers outside the indexed project
+
+1 finding(s): 0 high, 1 medium, 0 low  (indexed 3 files, 6 symbols)
+scip: 3 document(s) matched of 3, 6 symbol(s) resolved precisely, 0 stale file(s) analysed name-based; findings marked [scip] come from the index, the rest are name-based.
+note: 1 finding(s) are exported symbols. If this project is a library, re-run with --lib to treat exported symbols as public API (app mode assumes only main/init/tests are entry points)

@@ -15,7 +15,7 @@ use std::process::ExitCode;
     name = "plumb",
     version,
     about = "Know your code. Verify the change.",
-    long_about = "Plumbgraph: tier-0 (tree-sitter) code intelligence and pre-submit checks for AI coding agents.\nPre-alpha: results are heuristic; every finding carries a source and a confidence."
+    long_about = "Plumbgraph: tier-0 (tree-sitter) code intelligence and pre-submit checks for AI coding agents.\nResults are heuristic unless a SCIP index covers the code; every finding carries a source and a confidence."
 )]
 struct Cli {
     /// SQLite index location (default: <path>/.plumbgraph/index.db)
@@ -419,6 +419,9 @@ fn run(cli: Cli) -> Result<bool> {
                     ),
                     None => println!("note: tier-0 name-based analysis (no SCIP index); verify medium/low findings before deleting anything."),
                 }
+                if let Some(l) = r.limitations.iter().find(|l| l.contains("--lib")) {
+                    println!("note: {l}");
+                }
             }
             Ok(fail_on.tripped(&r.findings))
         }
@@ -806,11 +809,19 @@ fn run(cli: Cli) -> Result<bool> {
                 println!(
                     "
 verify: {}  ({} new, {} baselined, {} fixed since baseline; fail-on {})",
-                    r.verdict.to_uppercase(),
+                    if matches!(fail_on, FailOn::None) {
+                        "REPORT-ONLY".to_string()
+                    } else {
+                        r.verdict.to_uppercase()
+                    },
                     r.new.len(),
                     r.baselined,
                     r.fixed,
-                    r.fail_on
+                    if matches!(fail_on, FailOn::None) {
+                        "none"
+                    } else {
+                        r.fail_on.as_str()
+                    }
                 );
                 if r.baseline_updated {
                     println!(

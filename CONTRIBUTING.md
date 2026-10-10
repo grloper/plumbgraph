@@ -1,6 +1,6 @@
 # Contributing to Plumbgraph
 
-Thanks for helping! Plumbgraph is pre-alpha; small, well-tested changes are easiest to review.
+Thanks for helping! Small, well-tested changes are easiest to review.
 
 ## Ground rules
 
@@ -30,7 +30,7 @@ git diff crates/core/tests/golden      # review every changed line by hand
 
 ## Adding a language pack
 
-See [docs/PACKS.md](docs/PACKS.md). Packs are `pack.toml` + tree-sitter queries; v0.1 can only select one of the built-in grammars.
+See [docs/PACKS.md](docs/PACKS.md). Packs are `pack.toml` + tree-sitter queries; a pack can only select one of the built-in grammars.
 
 ## Sign-off (DCO)
 

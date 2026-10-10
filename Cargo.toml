@@ -3,7 +3,7 @@ resolver = "3"
 members = ["crates/langs", "crates/core", "crates/mcp", "crates/cli"]
 
 [workspace.package]
-version = "0.2.0"
+version = "1.0.0"
 edition = "2021"
 rust-version = "1.85"
 license = "Apache-2.0"
@@ -37,9 +37,9 @@ protobuf = "=3.7.2"
 scip = "0.10"
 ureq = { version = "2", default-features = false, features = ["tls", "json"] }
 globset = "0.4"
-plumbgraph-langs = { path = "crates/langs", version = "0.2.0" }
-plumbgraph-core = { path = "crates/core", version = "0.2.0" }
-plumbgraph-mcp = { path = "crates/mcp", version = "0.2.0" }
+plumbgraph-langs = { path = "crates/langs", version = "1.0.0" }
+plumbgraph-core = { path = "crates/core", version = "1.0.0" }
+plumbgraph-mcp = { path = "crates/mcp", version = "1.0.0" }
 
 [profile.release]
 lto = "thin"

@@ -792,6 +792,30 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
                 };
             }
         }
+        if entry.is_none() && kind == "method" && pack.manifest.id == "java" {
+            if let Some(a) = java_framework_annotation(d.def, src) {
+                entry = Some(format!(
+                    "annotated `@{a}` (framework-managed: invoked reflectively)"
+                ));
+            }
+        }
+        if entry.is_none() && kind == "method" {
+            let id = pack.manifest.id.as_str();
+            if (id == "java" && name == "main") || (id == "csharp" && name == "Main") {
+                entry = Some("static main entry point".into());
+            } else if id == "java"
+                && matches!(
+                    name.as_str(),
+                    "writeReplace"
+                        | "readResolve"
+                        | "readObject"
+                        | "writeObject"
+                        | "readObjectNoData"
+                )
+            {
+                entry = Some("Java serialization hook (invoked reflectively)".into());
+            }
+        }
         if entry.is_none()
             && parent.is_none()
             && kind == "function"
@@ -986,6 +1010,21 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
                     if is_ident_like(t) {
                         strings.insert(t.to_string());
                     }
+                    // Rust inline format args: "{NAME}" / "{name:?}" capture the identifier.
+                    if pack.manifest.id == "rust" {
+                        for name in inline_format_captures(t) {
+                            refs.push((
+                                node.start_byte(),
+                                RefFact {
+                                    name,
+                                    kind: "references".into(),
+                                    line: node.start_position().row as u32 + 1,
+                                    member: false,
+                                    src: None,
+                                },
+                            ));
+                        }
+                    }
                 }
             }
             if !skip_subtree && cursor.goto_first_child() {
@@ -1024,6 +1063,70 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
     facts.symbols = syms;
     facts.strings = strings;
     Ok(facts)
+}
+
+/// Name of the first annotation on a Java declaration that is not a compiler/lint marker.
+/// Such methods (`@Test`, `@BeforeExperiment`, `@Bean`, `@Scheduled`, ...) are called by a
+/// framework, never by name from the indexed code.
+fn java_framework_annotation(def: tree_sitter::Node, src: &[u8]) -> Option<String> {
+    const PLAIN: &[&str] = &[
+        "Override",
+        "Deprecated",
+        "SuppressWarnings",
+        "SafeVarargs",
+        "FunctionalInterface",
+        "Nullable",
+        "NonNull",
+        "CheckForNull",
+        "CanIgnoreReturnValue",
+        "VisibleForTesting",
+    ];
+    let mut c = def.walk();
+    let mods = def.children(&mut c).find(|n| n.kind() == "modifiers")?;
+    let mut c2 = mods.walk();
+    for a in mods.children(&mut c2) {
+        if matches!(a.kind(), "marker_annotation" | "annotation") {
+            let name = a.child_by_field_name("name").map(|n| text(n, src))?;
+            let short = name.rsplit('.').next().unwrap_or(name);
+            if !PLAIN.contains(&short) {
+                return Some(short.to_string());
+            }
+        }
+    }
+    None
+}
+
+/// Identifiers captured by Rust inline format args inside a string literal, e.g. `{END}`, `{x:?}`.
+/// `{{` is an escaped brace and is skipped. Over-approximating is safe (it only suppresses
+/// dead-code findings); a plain-text `{word}` in a non-format string is the accepted false negative.
+fn inline_format_captures(lit: &str) -> Vec<String> {
+    let b = lit.as_bytes();
+    let mut out = vec![];
+    let mut i = 0;
+    while i < b.len() {
+        if b[i] == b'{' {
+            if i + 1 < b.len() && b[i + 1] == b'{' {
+                i += 2;
+                continue;
+            }
+            let start = i + 1;
+            let mut j = start;
+            while j < b.len() && (b[j].is_ascii_alphanumeric() || b[j] == b'_') {
+                j += 1;
+            }
+            if j > start
+                && !b[start].is_ascii_digit()
+                && j < b.len()
+                && (b[j] == b'}' || b[j] == b':')
+            {
+                out.push(lit[start..j].to_string());
+            }
+            i = j.max(i + 1);
+        } else {
+            i += 1;
+        }
+    }
+    out
 }
 
 #[cfg(test)]
@@ -1178,6 +1281,44 @@ mod tests {
         assert_eq!(sym(&f, "hook").keep.as_deref(), Some("public hook"));
         let g = ex("python", "a.py", "# @generated\ndef x(): pass\n");
         assert!(g.is_generated);
+    }
+
+    #[test]
+    fn rust_inline_format_args_are_references() {
+        let f = ex(
+            "rust",
+            "a.rs",
+            "const END: &str = \"x\";\nfn f() -> String { format!(\"a{END}b {{NOT}} {n:?}\") }\n",
+        );
+        assert!(f.refs.iter().any(|r| r.name == "END"), "{:?}", f.refs);
+        assert!(f.refs.iter().any(|r| r.name == "n"));
+        assert!(!f.refs.iter().any(|r| r.name == "NOT"));
+    }
+
+    #[test]
+    fn java_main_and_serialization_hooks_are_entries() {
+        let f = ex(
+            "java",
+            "A.java",
+            "class A implements java.io.Serializable {\n public static void main(String[] a) { helper(); }\n static void helper() {}\n private Object writeReplace() { return this; }\n private void readObject(java.io.ObjectInputStream i) {}\n void other() {}\n}\n",
+        );
+        assert!(sym(&f, "main").entry.is_some());
+        assert!(sym(&f, "writeReplace").entry.is_some());
+        assert!(sym(&f, "readObject").entry.is_some());
+        assert!(sym(&f, "other").entry.is_none());
+        let g = ex(
+            "java",
+            "B.java",
+            "class B {\n @BeforeExperiment void setUp() {}\n @Override public String toString() { return \"\"; }\n @SuppressWarnings(\"x\") void plain() {}\n}\n",
+        );
+        assert!(sym(&g, "setUp").entry.is_some());
+        assert!(sym(&g, "plain").entry.is_none());
+        let c = ex(
+            "csharp",
+            "A.cs",
+            "class P { static void Main(string[] a) { } }\n",
+        );
+        assert!(sym(&c, "Main").entry.is_some());
     }
 
     #[test]

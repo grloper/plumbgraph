@@ -21,6 +21,9 @@ cargo test --workspace --locked
 step "test integrity"
 scripts/check-test-integrity.sh
 
+step "dogfood: plumb verify . (offline; allow-list in .plumbgraph/allow.toml)"
+cargo run --quiet --locked -p plumbgraph-cli --bin plumb -- verify .
+
 if [[ $quick -eq 0 ]]; then
   if cargo deny --version >/dev/null 2>&1; then
     step "cargo deny check"
