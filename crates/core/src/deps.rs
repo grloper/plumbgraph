@@ -155,6 +155,8 @@ pub fn check_deps(
         mapped: bool,
         has_manifest: bool,
         dev_only: bool,
+        /// inside `try: import x / except ImportError`: an optional or compat import
+        optional: bool,
     }
     let mut report = DepsReport {
         findings: vec![],
@@ -217,6 +219,7 @@ pub fn check_deps(
             continue;
         };
         report.external_imports += 1;
+        let optional = imp.kind == "optional";
         let anc = ancestor_manifests(manifests, eco, &f.path);
         let want = norm_for(eco, pkg);
         let (cands, mapped_dist) = if eco == "pypi" {
@@ -260,6 +263,7 @@ pub fn check_deps(
             mapped: mapped_dist.is_some(),
             has_manifest: !anc.is_empty(),
             dev_only: declared && dev_only && !f.is_test,
+            optional,
         });
     }
 
@@ -400,6 +404,11 @@ pub fn check_deps(
         };
         if !e.has_manifest {
             conf = conf.min(0.45);
+        }
+        if e.optional {
+            // guarded by `except ImportError`: absence is expected (py2 compat, optional extras)
+            conf = conf.min(0.35);
+            fp.push("the import is guarded by try/except ImportError (optional or compatibility import)".into());
         }
         let mut fd = Finding::new("deps", rule, &e.file, e.line, conf, &src, msg);
         fd.severity = Severity::Error;

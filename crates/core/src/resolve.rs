@@ -491,7 +491,10 @@ fn resolve_classlike(view: &ProjectView, file_path: &str, imp: &ImportFact) -> R
             if m == "System" || m.starts_with("System.") || m.starts_with("Microsoft.") {
                 Resolution::new("stdlib")
             } else {
-                Resolution::new("unresolved")
+                // A C# `using` names a namespace, which cannot be mapped to a file without a
+                // compiler (many files share one namespace; NuGet packages and test frameworks
+                // look the same). Not "unresolved": there is no evidence it is missing.
+                Resolution::new("external")
             }
         }
     }
@@ -634,6 +637,22 @@ fn resolve_js(view: &ProjectView, file_path: &str, imp: &ImportFact) -> Resoluti
             if let Some(f) = js_try(view, &j) {
                 let mut r = Resolution::new("local");
                 r.resolved_files = vec![f];
+                return r;
+            }
+            // `require('..')` / `import '../'`: a directory (or the project root) resolved through
+            // its package.json "main" or index file; the entry file may not be one we can name.
+            let prefix = if j.is_empty() {
+                String::new()
+            } else {
+                format!("{j}/")
+            };
+            if view.paths.iter().any(|p| p.starts_with(&prefix)) {
+                let mut r = Resolution::new("local");
+                let root_index = JS_EXTS[1..]
+                    .iter()
+                    .map(|e| format!("{prefix}index{e}"))
+                    .find(|c| view.paths.contains(c));
+                r.resolved_files = root_index.into_iter().collect();
                 return r;
             }
         }
