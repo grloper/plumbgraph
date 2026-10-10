@@ -23,6 +23,10 @@ pub struct SymbolFact {
     pub decorated: bool,
     /// Method of a class that extends/implements another type (may override a base/framework method).
     pub subclass_method: bool,
+    /// A framework may call it from outside the indexed code (e.g. a UnityEvent bound in a
+    /// scene). The text becomes a dead-code `fp_risk` and lowers confidence.
+    #[serde(default)]
+    pub framework_risk: Option<String>,
     /// `plumb:keep(reason)` annotation text.
     pub keep: Option<String>,
     /// Index of the lexically enclosing symbol in the same file.

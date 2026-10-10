@@ -1,0 +1,15 @@
+high   0.95 dead-code          class     MathUtil Assets/Scripts/MathUtil.cs:4
+high   0.95 dead-code          class     Worker Server/Worker.cs:7
+high   0.95 dead-code          method    BuildTools.OrphanTool Assets/Editor/BuildTools.cs:20
+high   0.95 dead-code          method    MathUtil.Start Assets/Scripts/MathUtil.cs:7
+high   0.95 dead-code          method    MathUtil.Update Assets/Scripts/MathUtil.cs:6
+low    0.34 dead-code          method    Player.Jump Assets/Scripts/Player.cs:43
+low    0.43 dead-code          method    Worker.Menu Server/Worker.cs:14
+medium 0.71 dead-code          method    Character.UnusedCharacterHelper Assets/Scripts/Character.cs:9
+medium 0.71 dead-code          method    Enemy.EnemyDeadHelper Assets/Scripts/Enemy.cs:11
+medium 0.71 dead-code          method    GameSettings.StaleSettingsHelper Assets/Scripts/GameSettings.cs:11
+medium 0.71 dead-code          method    NetPlayer.NetDeadHelper Assets/Scripts/Net/NetPlayer.cs:10
+medium 0.71 dead-code          method    Player.NeverCalled Assets/Scripts/Player.cs:46
+medium 0.71 dead-code          method    Worker.Dispose Server/Worker.cs:11
+medium 0.71 dead-code          method    Worker.Start Server/Worker.cs:12
+medium 0.71 dead-code          method    Worker.Update Server/Worker.cs:13
