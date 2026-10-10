@@ -1,0 +1,108 @@
+{
+  "findings": [
+    {
+      "category": "deps",
+      "rule": "undeclared-dependency",
+      "file": "test/images/node-perf/pytorch-wide-deep/train_wide_deep.py",
+      "line": 24,
+      "symbol": "torch",
+      "kind": "import",
+      "severity": "error",
+      "confidence": 0.45,
+      "level": "low",
+      "source": "manifest+t0-import",
+      "message": "`torch` is imported but not declared in a manifest",
+      "evidence": [
+        "`torch` is imported at test/images/node-perf/pytorch-wide-deep/train_wide_deep.py:24",
+        "no pypi manifest found for this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "fp_risks": [
+        "no manifest was found, so declared dependencies are unknown",
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ]
+    },
+    {
+      "category": "deps",
+      "rule": "undeclared-dependency",
+      "file": "test/images/node-perf/pytorch-wide-deep/train_wide_deep.py",
+      "line": 25,
+      "symbol": "torch.nn",
+      "kind": "import",
+      "severity": "error",
+      "confidence": 0.45,
+      "level": "low",
+      "source": "manifest+t0-import",
+      "message": "`torch` is imported but not declared in a manifest",
+      "evidence": [
+        "`torch` is imported at test/images/node-perf/pytorch-wide-deep/train_wide_deep.py:25",
+        "no pypi manifest found for this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "fp_risks": [
+        "no manifest was found, so declared dependencies are unknown",
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ]
+    },
+    {
+      "category": "deps",
+      "rule": "undeclared-dependency",
+      "file": "test/images/node-perf/pytorch-wide-deep/train_wide_deep.py",
+      "line": 26,
+      "symbol": "torch.optim",
+      "kind": "import",
+      "severity": "error",
+      "confidence": 0.45,
+      "level": "low",
+      "source": "manifest+t0-import",
+      "message": "`torch` is imported but not declared in a manifest",
+      "evidence": [
+        "`torch` is imported at test/images/node-perf/pytorch-wide-deep/train_wide_deep.py:26",
+        "no pypi manifest found for this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "fp_risks": [
+        "no manifest was found, so declared dependencies are unknown",
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ]
+    },
+    {
+      "category": "deps",
+      "rule": "undeclared-dependency",
+      "file": "test/images/node-perf/pytorch-wide-deep/train_wide_deep.py",
+      "line": 27,
+      "symbol": "numpy",
+      "kind": "import",
+      "severity": "error",
+      "confidence": 0.45,
+      "level": "low",
+      "source": "manifest+t0-import",
+      "message": "`numpy` is imported but not declared in a manifest",
+      "evidence": [
+        "`numpy` is imported at test/images/node-perf/pytorch-wide-deep/train_wide_deep.py:27",
+        "no pypi manifest found for this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "fp_risks": [
+        "no manifest was found, so declared dependencies are unknown",
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ]
+    }
+  ],
+  "lookups": [
+    {
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "torch",
+      "result": "unknown (offline mode)"
+    }
+  ],
+  "registry": "offline",
+  "offline": true,
+  "imports_checked": 89353,
+  "external_imports": 4
+}

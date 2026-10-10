@@ -568,3 +568,72 @@ fn doctor_and_init_commands() {
     );
     assert!(t.path().join("AGENTS.md").is_file() && t.path().join(".mcp.json").is_file());
 }
+
+fn many_dead() -> tempfile::TempDir {
+    let t = tempfile::tempdir().unwrap();
+    let mut src = String::from("def main():\n    return 1\n\nmain()\n");
+    for i in 0..30 {
+        src.push_str(&format!("\ndef _dead_{i}():\n    return {i}\n"));
+    }
+    write(t.path(), "pkg/a.py", &src);
+    t
+}
+
+#[test]
+fn dead_code_output_is_capped_with_summary() {
+    let t = many_dead();
+    let out = plumb()
+        .args(["--json", "dead-code", "--max-findings", "5"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    let v: serde_json::Value = serde_json::from_slice(&out.stdout).unwrap();
+    assert_eq!(v["findings"].as_array().unwrap().len(), 5);
+    assert_eq!(v["summary"]["total"].as_u64().unwrap(), 30);
+    assert_eq!(v["truncated"]["shown"], 5);
+    assert_eq!(v["truncated"]["total"], 30);
+    // text mode says so too
+    let out = plumb()
+        .args(["dead-code", "--max-findings", "5"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    assert!(String::from_utf8_lossy(&out.stdout).contains("25 more finding(s) not shown"));
+    // 0 = unlimited, and no "truncated" key
+    let out = plumb()
+        .args(["--json", "dead-code", "--max-findings", "0"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    let v: serde_json::Value = serde_json::from_slice(&out.stdout).unwrap();
+    assert_eq!(v["findings"].as_array().unwrap().len(), 30);
+    assert!(v.get("truncated").is_none());
+}
+
+#[test]
+fn exit_code_uses_all_findings_even_when_output_is_capped() {
+    let t = many_dead();
+    let out = plumb()
+        .args(["dead-code", "--max-findings", "1", "--fail-on", "high"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    assert_eq!(out.status.code(), Some(1));
+}
+
+#[test]
+fn closed_stdout_pipe_does_not_panic() {
+    let t = many_dead();
+    let mut c = plumb()
+        .args(["--json", "dead-code", "--max-findings", "0"])
+        .arg(t.path())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .unwrap();
+    drop(c.stdout.take()); // reader goes away before the first write
+    let out = c.wait_with_output().unwrap();
+    let err = String::from_utf8_lossy(&out.stderr);
+    assert!(!err.contains("panicked"), "{err}");
+    assert!(!err.contains("failed printing"), "{err}");
+}

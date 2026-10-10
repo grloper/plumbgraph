@@ -1,0 +1,5 @@
+indexed 13558 file(s): parsed 13557, unchanged 0, removed 0
+symbols 145092, references 6078895, imports 94062, edges 5269587
+languages: go=13551 html=1 python=7 text=7718
+warnings: 155 file(s) with syntax errors, 0 parse error(s), 1 skipped (too large)
+db: /workspace/repos/k8s/.plumbgraph/index.db
