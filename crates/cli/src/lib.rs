@@ -278,8 +278,12 @@ enum Cmd {
         /// claude, cursor, codex or all (default: whatever is detected)
         #[arg(long = "agent")]
         agents: Vec<String>,
+        /// Show what would be written (including the .gitignore lines) without writing
         #[arg(long)]
         dry_run: bool,
+        /// Do not add `.plumbgraph/*` and `!.plumbgraph/allow.toml` to .gitignore
+        #[arg(long)]
+        no_gitignore: bool,
     },
     /// Serve the tools over MCP (stdio, JSON-RPC)
     Mcp {
@@ -989,8 +993,9 @@ nothing was executed. `plumb enrich` runs SCIP indexers; `plumb verify --run` ru
             path,
             agents,
             dry_run,
+            no_gitignore,
         } => {
-            let r = plumbgraph_core::init::init(&path, &agents, dry_run)?;
+            let r = plumbgraph_core::init::init_with(&path, &agents, dry_run, !no_gitignore)?;
             if json {
                 print_json(&r)?;
             } else {

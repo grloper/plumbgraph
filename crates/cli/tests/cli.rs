@@ -514,6 +514,38 @@ fn map_budget_is_an_alias_of_tokens() {
     );
 }
 
+#[test]
+fn init_dry_run_shows_the_gitignore_lines() {
+    let t = project();
+    git(t.path(), &["init", "-q"]);
+    let out = plumb()
+        .args(["init"])
+        .arg(t.path())
+        .arg("--dry-run")
+        .output()
+        .unwrap();
+    assert!(out.status.success());
+    let text = String::from_utf8_lossy(&out.stdout);
+    assert!(
+        text.contains("would add to") && text.contains(".plumbgraph/*"),
+        "{text}"
+    );
+    assert!(text.contains("!.plumbgraph/allow.toml"), "{text}");
+    assert!(
+        !t.path().join(".gitignore").exists(),
+        "dry run writes nothing"
+    );
+    let out = plumb()
+        .args(["init"])
+        .arg(t.path())
+        .args(["--no-gitignore"])
+        .output()
+        .unwrap();
+    assert!(out.status.success());
+    assert!(!t.path().join(".gitignore").exists());
+    assert!(String::from_utf8_lossy(&out.stdout).contains("--no-gitignore"));
+}
+
 // ---------------------------------------------------------------- v1: verify, doctor, init
 
 #[test]

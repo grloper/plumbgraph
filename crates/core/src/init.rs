@@ -163,7 +163,18 @@ pub fn codex_snippet(root: &str) -> String {
 }
 
 /// `agents`: which to configure; empty = everything detected (`AGENTS.md` is always written).
+/// Also adds `GITIGNORE_LINES` to `.gitignore` inside a git work tree.
 pub fn init(root: &Path, agents: &[String], dry_run: bool) -> Result<InitReport> {
+    init_with(root, agents, dry_run, true)
+}
+
+/// `init` with `gitignore = false` for `--no-gitignore` (the report says what to add by hand).
+pub fn init_with(
+    root: &Path,
+    agents: &[String],
+    dry_run: bool,
+    gitignore: bool,
+) -> Result<InitReport> {
     let root = root.canonicalize()?;
     let mut rep = InitReport::default();
     let want = |name: &str, detected: bool| {
@@ -188,26 +199,91 @@ pub fn init(root: &Path, agents: &[String], dry_run: bool) -> Result<InitReport>
         rep.snippets
             .push(codex_snippet(&root.display().to_string()));
     }
-    // keep the local index out of version control, but keep the baseline
-    let gi = root.join(".gitignore");
-    let cur = std::fs::read_to_string(&gi).unwrap_or_default();
-    if root.join(".git").exists()
-        && !cur
-            .lines()
-            .any(|l| l.trim() == ".plumbgraph/" || l.trim() == ".plumbgraph")
-    {
-        if !dry_run {
-            let mut n = cur.clone();
-            if !n.is_empty() && !n.ends_with('\n') {
-                n.push('\n');
-            }
-            n.push_str(".plumbgraph/\n");
-            std::fs::write(&gi, n)?;
-        }
-        rep.written.push(shown(&gi));
-    }
+    ensure_gitignore(&root, &mut rep, dry_run, gitignore)?;
     if rep.written.is_empty() && rep.notes.is_empty() {
         rep.notes.push("already configured".into());
     }
     Ok(rep)
+}
+
+/// Lines `init` adds to `<root>/.gitignore`. The index and SCIP files are local caches; the
+/// allow-list `.plumbgraph/allow.toml` is meant to be committed. `/*` rather than `/`:
+/// git cannot re-include a file whose parent directory is excluded.
+pub const GITIGNORE_LINES: &[&str] = &[".plumbgraph/*", "!.plumbgraph/allow.toml"];
+
+/// Does an existing `.gitignore` already exclude `.plumbgraph` in some spelling
+/// (`.plumbgraph`, `/.plumbgraph/`, `.plumbgraph/*`, `**/.plumbgraph/**`, ...)?
+fn gitignore_covers_plumbgraph(text: &str) -> bool {
+    text.lines().any(|l| {
+        let l = l.trim_start_matches('\u{feff}').trim();
+        if l.starts_with('#') || l.starts_with('!') {
+            return false;
+        }
+        let l = l.trim_start_matches('/');
+        let l = l.strip_prefix("**/").unwrap_or(l);
+        let l = l
+            .strip_suffix("/**")
+            .or_else(|| l.strip_suffix("/*"))
+            .unwrap_or(l);
+        l.trim_end_matches('/') == ".plumbgraph"
+    })
+}
+
+/// Add `GITIGNORE_LINES` to `<root>/.gitignore` when `root` is inside a git work tree and the
+/// file does not already cover `.plumbgraph`. Never rewrites a file it cannot read as UTF-8.
+fn ensure_gitignore(root: &Path, rep: &mut InitReport, dry: bool, enabled: bool) -> Result<()> {
+    let wanted = GITIGNORE_LINES.join(" and ");
+    if !enabled {
+        rep.notes.push(format!(
+            "--no-gitignore: .gitignore not touched; to keep the local index out of git add {wanted}"
+        ));
+        return Ok(());
+    }
+    // `.git` is a directory in a normal checkout and a file in worktrees and submodules
+    if !root.ancestors().any(|a| a.join(".git").exists()) {
+        rep.notes
+            .push("not inside a git work tree: .gitignore not touched".into());
+        return Ok(());
+    }
+    let gi = root.join(".gitignore");
+    let cur = match std::fs::read(&gi) {
+        Ok(bytes) => match String::from_utf8(bytes) {
+            Ok(s) => s,
+            Err(_) => {
+                rep.notes.push(format!(
+                    "{}: not UTF-8 (UTF-16?); left as is. Add {wanted} yourself",
+                    shown(&gi)
+                ));
+                rep.unchanged.push(shown(&gi));
+                return Ok(());
+            }
+        },
+        Err(e) if e.kind() == std::io::ErrorKind::NotFound => String::new(),
+        Err(e) => return Err(e).with_context(|| format!("reading {}", shown(&gi))),
+    };
+    if gitignore_covers_plumbgraph(&cur) {
+        rep.unchanged.push(shown(&gi));
+        return Ok(());
+    }
+    rep.notes.push(format!(
+        "{} {}: {wanted}",
+        if dry { "would add to" } else { "added to" },
+        shown(&gi)
+    ));
+    if !dry {
+        let nl = if cur.contains("\r\n") { "\r\n" } else { "\n" };
+        let mut n = cur;
+        if !n.is_empty() && !n.ends_with('\n') {
+            n.push_str(nl);
+        }
+        n.push_str("# plumbgraph: local index and caches (the allow-list stays committed)");
+        n.push_str(nl);
+        for l in GITIGNORE_LINES {
+            n.push_str(l);
+            n.push_str(nl);
+        }
+        std::fs::write(&gi, n)?;
+    }
+    rep.written.push(shown(&gi));
+    Ok(())
 }

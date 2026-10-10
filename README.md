@@ -41,8 +41,11 @@ plumb dead-code .                 # add --lib for libraries (exports = public AP
 plumb check-deps . --online       # sends package names only to the registries
 plumb verify .                    # one pass/fail gate (exit 1 on new findings)
 plumb verify . --run --online     # also run diagnostics, semgrep, ast-grep (trusted code only)
-plumb init                        # write AGENTS.md block + MCP config for your agent
+plumb init --dry-run              # preview: AGENTS.md block, MCP config, .gitignore lines
+plumb init                        # write them
 ```
+
+In a git work tree `plumb init` adds `.plumbgraph/*` and `!.plumbgraph/allow.toml` to `<project>/.gitignore` (the index is a local cache; the allow-list is meant to be committed). An existing `.plumbgraph` entry is left alone, a `.gitignore` that is not UTF-8 is never rewritten, and `--no-gitignore` skips this step.
 
 `--json` on any command gives machine-readable output; `--fail-on high|medium|low` sets the exit code.
 
