@@ -36,7 +36,7 @@ Nothing is published yet (no crate, no binaries). Build from source with Rust 1.
 git clone https://github.com/grloper/plumbgraph && cd plumbgraph
 cargo install --path crates/cli --locked      # installs `plumb` (and `plumbgraph`)
 
-plumb map .                       # ranked, token-budgeted overview
+plumb map . --tokens 1500         # ranked overview under a hard token budget (--budget is an alias)
 plumb dead-code .                 # add --lib for libraries (exports = public API)
 plumb check-deps . --online       # sends package names only to the registries
 plumb verify .                    # one pass/fail gate (exit 1 on new findings)

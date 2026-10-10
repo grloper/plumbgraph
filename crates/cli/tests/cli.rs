@@ -479,6 +479,41 @@ fn map_and_impact_commands() {
     assert_eq!(out.status.code(), Some(2));
 }
 
+#[test]
+fn map_budget_is_an_alias_of_tokens() {
+    let t = tempfile::tempdir().unwrap();
+    write(t.path(), "lib.py", "def core():\n    return 1\n");
+    let run = |args: &[&str]| {
+        plumb()
+            .arg("map")
+            .arg(t.path())
+            .args(args)
+            .output()
+            .unwrap()
+    };
+    let by_budget = run(&["--budget", "300"]);
+    assert!(
+        by_budget.status.success(),
+        "{}",
+        String::from_utf8_lossy(&by_budget.stderr)
+    );
+    let by_tokens = run(&["--tokens", "300"]);
+    assert_eq!(by_budget.stdout, by_tokens.stdout, "same flag, same output");
+    assert!(String::from_utf8_lossy(&by_budget.stdout).contains("budget 300"));
+    // giving the budget twice under both names is a usage error, not a silent override
+    assert_eq!(
+        run(&["--budget", "300", "--tokens", "500"]).status.code(),
+        Some(2)
+    );
+    // the alias is visible in --help
+    let help = plumb().args(["map", "--help"]).output().unwrap();
+    let help = String::from_utf8_lossy(&help.stdout);
+    assert!(
+        help.contains("--tokens") && help.contains("--budget"),
+        "{help}"
+    );
+}
+
 // ---------------------------------------------------------------- v1: verify, doctor, init
 
 #[test]

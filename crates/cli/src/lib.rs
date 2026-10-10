@@ -186,7 +186,7 @@ enum Cmd {
         #[arg(default_value = ".")]
         path: PathBuf,
         /// Hard token budget (estimated as chars/4)
-        #[arg(long, default_value_t = 1500)]
+        #[arg(long, visible_alias = "budget", default_value_t = 1500)]
         tokens: usize,
         /// Boost files changed vs this git revision (use `--changed` alone for HEAD)
         #[arg(long, num_args = 0..=1, default_missing_value = "HEAD", value_name = "REV")]
