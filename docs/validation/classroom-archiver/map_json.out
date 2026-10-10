@@ -1,0 +1,1205 @@
+{
+  "text": "# plumb map: 39 files, 115 of 305 symbols (~1440 tokens, budget 1500)\nweb/src/archive/importer.js\n  9: export class LoadedArchive\n  16: get graph()\n  20: get meta()\n  29: resolve(localPath)\n  50: function normalizeKey(localPath)\n  76: function importJsonText(text, source)\n  87: async function importZipBlob(blob)\nweb/src/util/dom.js\n  7: export function el(tag, props =\n  29: function appendChildren(node, children)\n  38: export function clear(node)\n  43: export function mount(node, children)\n  85: export function icon(name,\nsrc/parsers/classroom.js\n  3: function hash(value)\n  7: export function formatDueDate(dueDate, dueTime)\n  22: export function mapCourseWorkType(courseWork)\n  56: function normalizeDriveAttachment(materialId, driveFile)\n  82: function normalizeLinkAttachment(materialId, link)\n  107: function normalizeYoutubeAttachment(materialId, video)\n  123: function normalizeFormAttachment(materialId, form)\n  139: export function extractAttachments(materials = [], materialId)\nsrc/storage/database.js\n  6: function stringify(value)\n  10: function parseJson(value, fallback = null)\n  19: export class ArchiveDatabase\n  352: getCoursesGraph()\n  444: close()\nweb/src/ui/coursePicker.js\n  38: function toggleOpen(e)\n  54: function handleOutsideClick(e)\n  58: function handleKeydown(e)\n  62: function updateTrigger()\n  96: function notifyChange()\n  101: function getVisibleCourses()\n  111: function renderList()\nweb/src/util/hash.js\n  10: export function shortHash(value)\n  18: function fnv1a(str, seed)\n  28: function toHex8(n)\nsrc/config.js\n  9: function resolveFromRoot(value, fallback)\n  14: function parseBool(value, fallback = false)\n  19: function parseInteger(value, fallback)\n  24: function parseList(value, fallback = [])\nweb/src/scraper/googleAuth.js\n  16: export function loadGis()\n  58: get isSignedIn()\n  62: async init()\n  73: requestToken({ prompt = '' } =\n  104: async getToken()\n  139: function describeTokenError(response)\nweb/src/scraper/normalize.js\n  57: function normalizeDriveAttachment(materialId, driveFile)\n  74: export function extractDriveFileId(url)\n  83: function normalizeLinkAttachment(materialId, link)\n  107: function normalizeYoutubeAttachment(materialId, video)\n  123: function normalizeFormAttachment(materialId, form)\n  139: export function extractAttachments(materials = [], materialId)\nweb/src/scraper/classroomApi.js\n  9: function buildUrl(path, params =\n  20: async function listAll(session, path, key, params =\n  35: async function safeList(label, fn, onWarn)\nweb/src/scraper/googleFetch.js\n  6: export async function googleFetch(session, url,\n  43: async function extractError(res)\n  53: export function sleep(ms)\nsrc/utils/retry.js\n  1: export function sleep(ms)\n  7: function getStatus(error)\n  11: export function isRetryable(error)\n  28: export async function retry(fn, options =\nweb/src/util/paths.js\n  12: export function safeSegment(input, fallback = 'untitled')\n  29: export function joinPath(...parts)\n  36: export function extname(name = '')\nweb/src/archive/format.js\n  126: export function normalizeArchive(input, meta =\n  146: export function sanitizeGraph(graph)\n  189: export function countGraph(graph)\n  247: export async function decodeSharePayload(encoded)\n  264: export function makeShareable(archive)\nweb/src/util/base64.js\n  78: function padding(len)\n  83: function toBase64(binary)\n  88: function fromBase64(b64)\n  93: function utf8Encode(str)\nweb/src/ui/app.js\n  41: function refreshTopbarActions(bar = appRoot?._topbar)\n  61: function navigate(hash)\n  72: async function route()\n  127: function setLoaded(loaded)\nsrc/utils/paths.js\n  30: export function safeSegment(input, fallback = 'untitled')\n  48: export async function ensureProjectFolders(activeConfig = config)\n  61: export function resolveOutputPath(relativePath, activeConfig = config)\nscripts/check-web.js\n  13: function collect(dir)\nsrc/api/ui/canvas.js\n  1: class ArchiveCanvas\n  10: init()\n  16: resize()\n  21: animate()\nsrc/system/preflight.js\n  6: function hasEnvCredentials(activeConfig = config)\n  30: export async function getPreflightStatus(activeConfig = config)\n  62: export function printPreflightStatus(status)\n  86: export async function runPreflight(activeConfig = config)\nscripts/build-standalone.js\n  36: function run(command, args, cwd = rootDir)\n  65: async function main()\nsrc/utils/args.js\n  1: function npmConfigKey(flagName)\n  5: export function hasFlag(flagName, argv = process.argv, env = process.env)\nweb/src/ui/toast.js\n  4: function ensureWrap()\n  12: export function toast(message, kind = 'default', duration = 3200)\nsrc/auth/googleApi.js\n  21: function normalizeCredentials(raw, activeConfig)\n  133: export async function getOAuthClient(options =\nsrc/utils/runtimePaths.js\n  6: export function getSourcePath(...segments)\n  10: export function quoteForCmd(value)\nweb/src/ui/viewer.js\n  192: function renderContent()\n  362: function emptyState(title, subtitle)\nweb/src/scraper/scrapeEngine.js\n  157: async function worker()\n  209: async function worker()\nweb/src/archive/exporter.js\n  81: function stripHash(url)\nsrc/api/server.js\n  78: async function main()\nsrc/auth/login.js\n  8: async function main()\nsrc/crawler/run.js\n  60: async function main()\nsrc/export/export.js\n  7: async function main()\nsrc/system/engine.js\n  24: async function main()\nweb/src/util/format.js\n  3: export function bytesToSize(bytes)\nsrc/downloaders/driveDownloader.js\n  77: async function writeStreamToFile(stream, targetPath)\nsrc/utils/logger.js\n  8: export async function createLogger(activeConfig = config)\nweb/src/ui/theme.js\n  11: export function currentTheme()\nweb/src/util/vendor.js\n  6: export function loadJsZip()\nsrc/storage/exporter.js\n  6: export async function exportArchive(db, activeConfig = config)\n",
+  "tokens_estimated": 1441,
+  "budget": 1500,
+  "token_estimate_method": "ceil(chars/4); not a real tokenizer",
+  "total_symbols": 305,
+  "shown_symbols": 115,
+  "changed_files": [],
+  "files": [
+    {
+      "path": "web/src/archive/importer.js",
+      "rank": 0.06803372469533533,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "LoadedArchive",
+          "kind": "class",
+          "line": 9,
+          "rank": 0.0034436099936631095,
+          "references": 4,
+          "signature": "export class LoadedArchive"
+        },
+        {
+          "name": "graph",
+          "kind": "method",
+          "line": 16,
+          "rank": 0.010086697161835675,
+          "references": 21,
+          "signature": "get graph()"
+        },
+        {
+          "name": "meta",
+          "kind": "method",
+          "line": 20,
+          "rank": 0.0033135864364944347,
+          "references": 11,
+          "signature": "get meta()"
+        },
+        {
+          "name": "resolve",
+          "kind": "method",
+          "line": 29,
+          "rank": 0.028139664132200794,
+          "references": 22,
+          "signature": "resolve(localPath)"
+        },
+        {
+          "name": "normalizeKey",
+          "kind": "function",
+          "line": 50,
+          "rank": 0.018036247667570175,
+          "references": 2,
+          "signature": "function normalizeKey(localPath)"
+        },
+        {
+          "name": "importJsonText",
+          "kind": "function",
+          "line": 76,
+          "rank": 0.002506959651785574,
+          "references": 2,
+          "signature": "function importJsonText(text, source)"
+        },
+        {
+          "name": "importZipBlob",
+          "kind": "function",
+          "line": 87,
+          "rank": 0.002506959651785574,
+          "references": 2,
+          "signature": "async function importZipBlob(blob)"
+        }
+      ]
+    },
+    {
+      "path": "web/src/util/dom.js",
+      "rank": 0.05561629302538307,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "el",
+          "kind": "function",
+          "line": 7,
+          "rank": 0.015852939594874563,
+          "references": 36,
+          "signature": "export function el(tag, props ="
+        },
+        {
+          "name": "appendChildren",
+          "kind": "function",
+          "line": 29,
+          "rank": 0.01682133255887052,
+          "references": 2,
+          "signature": "function appendChildren(node, children)"
+        },
+        {
+          "name": "clear",
+          "kind": "function",
+          "line": 38,
+          "rank": 0.007055814643463208,
+          "references": 10,
+          "signature": "export function clear(node)"
+        },
+        {
+          "name": "mount",
+          "kind": "function",
+          "line": 43,
+          "rank": 0.005033913749374986,
+          "references": 14,
+          "signature": "export function mount(node, children)"
+        },
+        {
+          "name": "icon",
+          "kind": "function",
+          "line": 85,
+          "rank": 0.01085229247879979,
+          "references": 29,
+          "signature": "export function icon(name,"
+        }
+      ]
+    },
+    {
+      "path": "src/parsers/classroom.js",
+      "rank": 0.029789981571412976,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "hash",
+          "kind": "function",
+          "line": 3,
+          "rank": 0.012702783374454667,
+          "references": 10,
+          "signature": "function hash(value)"
+        },
+        {
+          "name": "formatDueDate",
+          "kind": "function",
+          "line": 7,
+          "rank": 0.0019206178974596096,
+          "references": 2,
+          "signature": "export function formatDueDate(dueDate, dueTime)"
+        },
+        {
+          "name": "mapCourseWorkType",
+          "kind": "function",
+          "line": 22,
+          "rank": 0.0019206178974596096,
+          "references": 2,
+          "signature": "export function mapCourseWorkType(courseWork)"
+        },
+        {
+          "name": "normalizeDriveAttachment",
+          "kind": "function",
+          "line": 56,
+          "rank": 0.0027018862798123327,
+          "references": 2,
+          "signature": "function normalizeDriveAttachment(materialId, driveFile)"
+        },
+        {
+          "name": "normalizeLinkAttachment",
+          "kind": "function",
+          "line": 82,
+          "rank": 0.0021053659321432494,
+          "references": 1,
+          "signature": "function normalizeLinkAttachment(materialId, link)"
+        },
+        {
+          "name": "normalizeYoutubeAttachment",
+          "kind": "function",
+          "line": 107,
+          "rank": 0.0021053659321432494,
+          "references": 1,
+          "signature": "function normalizeYoutubeAttachment(materialId, video)"
+        },
+        {
+          "name": "normalizeFormAttachment",
+          "kind": "function",
+          "line": 123,
+          "rank": 0.0021053659321432494,
+          "references": 1,
+          "signature": "function normalizeFormAttachment(materialId, form)"
+        },
+        {
+          "name": "extractAttachments",
+          "kind": "function",
+          "line": 139,
+          "rank": 0.004227978325797008,
+          "references": 4,
+          "signature": "export function extractAttachments(materials = [], materialId)"
+        }
+      ]
+    },
+    {
+      "path": "src/storage/database.js",
+      "rank": 0.02851326646878781,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "stringify",
+          "kind": "function",
+          "line": 6,
+          "rank": 0.010526898363806172,
+          "references": 17,
+          "signature": "function stringify(value)"
+        },
+        {
+          "name": "parseJson",
+          "kind": "function",
+          "line": 10,
+          "rank": 0.005888721769617847,
+          "references": 5,
+          "signature": "function parseJson(value, fallback = null)"
+        },
+        {
+          "name": "ArchiveDatabase",
+          "kind": "class",
+          "line": 19,
+          "rank": 0.001918297681972437,
+          "references": 4,
+          "signature": "export class ArchiveDatabase"
+        },
+        {
+          "name": "getCoursesGraph",
+          "kind": "method",
+          "line": 352,
+          "rank": 0.0017555299772625621,
+          "references": 3,
+          "signature": "getCoursesGraph()"
+        },
+        {
+          "name": "close",
+          "kind": "method",
+          "line": 444,
+          "rank": 0.008423818676128793,
+          "references": 18,
+          "signature": "close()"
+        }
+      ]
+    },
+    {
+      "path": "web/src/ui/coursePicker.js",
+      "rank": 0.021242073324037866,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "toggleOpen",
+          "kind": "function",
+          "line": 38,
+          "rank": 0.004633033693972316,
+          "references": 3,
+          "signature": "function toggleOpen(e)"
+        },
+        {
+          "name": "handleOutsideClick",
+          "kind": "function",
+          "line": 54,
+          "rank": 0.0026135062614116504,
+          "references": 2,
+          "signature": "function handleOutsideClick(e)"
+        },
+        {
+          "name": "handleKeydown",
+          "kind": "function",
+          "line": 58,
+          "rank": 0.0026135062614116504,
+          "references": 2,
+          "signature": "function handleKeydown(e)"
+        },
+        {
+          "name": "updateTrigger",
+          "kind": "function",
+          "line": 62,
+          "rank": 0.004507397975217633,
+          "references": 3,
+          "signature": "function updateTrigger()"
+        },
+        {
+          "name": "notifyChange",
+          "kind": "function",
+          "line": 96,
+          "rank": 0.002228107898022024,
+          "references": 3,
+          "signature": "function notifyChange()"
+        },
+        {
+          "name": "getVisibleCourses",
+          "kind": "function",
+          "line": 101,
+          "rank": 0.002324520514904271,
+          "references": 3,
+          "signature": "function getVisibleCourses()"
+        },
+        {
+          "name": "renderList",
+          "kind": "function",
+          "line": 111,
+          "rank": 0.0023220007190983207,
+          "references": 4,
+          "signature": "function renderList()"
+        }
+      ]
+    },
+    {
+      "path": "web/src/util/hash.js",
+      "rank": 0.020952254164866495,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "shortHash",
+          "kind": "function",
+          "line": 10,
+          "rank": 0.010020763830261927,
+          "references": 7,
+          "signature": "export function shortHash(value)"
+        },
+        {
+          "name": "fnv1a",
+          "kind": "function",
+          "line": 18,
+          "rank": 0.005465745167302283,
+          "references": 1,
+          "signature": "function fnv1a(str, seed)"
+        },
+        {
+          "name": "toHex8",
+          "kind": "function",
+          "line": 28,
+          "rank": 0.005465745167302283,
+          "references": 1,
+          "signature": "function toHex8(n)"
+        }
+      ]
+    },
+    {
+      "path": "src/config.js",
+      "rank": 0.019017310782922434,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "resolveFromRoot",
+          "kind": "function",
+          "line": 9,
+          "rank": 0.004754327695730609,
+          "references": 1,
+          "signature": "function resolveFromRoot(value, fallback)"
+        },
+        {
+          "name": "parseBool",
+          "kind": "function",
+          "line": 14,
+          "rank": 0.004754327695730609,
+          "references": 1,
+          "signature": "function parseBool(value, fallback = false)"
+        },
+        {
+          "name": "parseInteger",
+          "kind": "function",
+          "line": 19,
+          "rank": 0.004754327695730609,
+          "references": 1,
+          "signature": "function parseInteger(value, fallback)"
+        },
+        {
+          "name": "parseList",
+          "kind": "function",
+          "line": 24,
+          "rank": 0.004754327695730609,
+          "references": 1,
+          "signature": "function parseList(value, fallback = [])"
+        }
+      ]
+    },
+    {
+      "path": "web/src/scraper/googleAuth.js",
+      "rank": 0.015626723827833238,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "loadGis",
+          "kind": "function",
+          "line": 16,
+          "rank": 0.0031461182674863107,
+          "references": 1,
+          "signature": "export function loadGis()"
+        },
+        {
+          "name": "isSignedIn",
+          "kind": "method",
+          "line": 58,
+          "rank": 0.003119051797800751,
+          "references": 2,
+          "signature": "get isSignedIn()"
+        },
+        {
+          "name": "init",
+          "kind": "method",
+          "line": 62,
+          "rank": 0.002281409093026038,
+          "references": 2,
+          "signature": "async init()"
+        },
+        {
+          "name": "requestToken",
+          "kind": "method",
+          "line": 73,
+          "rank": 0.002281409093026038,
+          "references": 2,
+          "signature": "requestToken({ prompt = '' } ="
+        },
+        {
+          "name": "getToken",
+          "kind": "method",
+          "line": 104,
+          "rank": 0.0024837020503546228,
+          "references": 3,
+          "signature": "async getToken()"
+        },
+        {
+          "name": "describeTokenError",
+          "kind": "function",
+          "line": 139,
+          "rank": 0.0023150335261394777,
+          "references": 1,
+          "signature": "function describeTokenError(response)"
+        }
+      ]
+    },
+    {
+      "path": "web/src/scraper/normalize.js",
+      "rank": 0.015019417259453856,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "normalizeDriveAttachment",
+          "kind": "function",
+          "line": 57,
+          "rank": 0.0026778446323895335,
+          "references": 2,
+          "signature": "function normalizeDriveAttachment(materialId, driveFile)"
+        },
+        {
+          "name": "extractDriveFileId",
+          "kind": "function",
+          "line": 74,
+          "rank": 0.001869080012963589,
+          "references": 2,
+          "signature": "export function extractDriveFileId(url)"
+        },
+        {
+          "name": "normalizeLinkAttachment",
+          "kind": "function",
+          "line": 83,
+          "rank": 0.002096076469268284,
+          "references": 1,
+          "signature": "function normalizeLinkAttachment(materialId, link)"
+        },
+        {
+          "name": "normalizeYoutubeAttachment",
+          "kind": "function",
+          "line": 107,
+          "rank": 0.002096076469268284,
+          "references": 1,
+          "signature": "function normalizeYoutubeAttachment(materialId, video)"
+        },
+        {
+          "name": "normalizeFormAttachment",
+          "kind": "function",
+          "line": 123,
+          "rank": 0.002096076469268284,
+          "references": 1,
+          "signature": "function normalizeFormAttachment(materialId, form)"
+        },
+        {
+          "name": "extractAttachments",
+          "kind": "function",
+          "line": 139,
+          "rank": 0.00418426320629588,
+          "references": 3,
+          "signature": "export function extractAttachments(materials = [], materialId)"
+        }
+      ]
+    },
+    {
+      "path": "web/src/scraper/classroomApi.js",
+      "rank": 0.014953967286337414,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "buildUrl",
+          "kind": "function",
+          "line": 9,
+          "rank": 0.003651895274068299,
+          "references": 1,
+          "signature": "function buildUrl(path, params ="
+        },
+        {
+          "name": "listAll",
+          "kind": "function",
+          "line": 20,
+          "rank": 0.008988877705144225,
+          "references": 7,
+          "signature": "async function listAll(session, path, key, params ="
+        },
+        {
+          "name": "safeList",
+          "kind": "function",
+          "line": 35,
+          "rank": 0.002313194307124888,
+          "references": 2,
+          "signature": "async function safeList(label, fn, onWarn)"
+        }
+      ]
+    },
+    {
+      "path": "web/src/scraper/googleFetch.js",
+      "rank": 0.014405984206015313,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "googleFetch",
+          "kind": "function",
+          "line": 6,
+          "rank": 0.00559187944736267,
+          "references": 4,
+          "signature": "export async function googleFetch(session, url,"
+        },
+        {
+          "name": "extractError",
+          "kind": "function",
+          "line": 43,
+          "rank": 0.0031081595506184624,
+          "references": 1,
+          "signature": "async function extractError(res)"
+        },
+        {
+          "name": "sleep",
+          "kind": "function",
+          "line": 53,
+          "rank": 0.005705945208034181,
+          "references": 2,
+          "signature": "export function sleep(ms)"
+        }
+      ]
+    },
+    {
+      "path": "src/utils/retry.js",
+      "rank": 0.012667581726219224,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "sleep",
+          "kind": "function",
+          "line": 1,
+          "rank": 0.0031592624029040967,
+          "references": 3,
+          "signature": "export function sleep(ms)"
+        },
+        {
+          "name": "getStatus",
+          "kind": "function",
+          "line": 7,
+          "rank": 0.003460111731478847,
+          "references": 1,
+          "signature": "function getStatus(error)"
+        },
+        {
+          "name": "isRetryable",
+          "kind": "function",
+          "line": 11,
+          "rank": 0.002650813168115763,
+          "references": 1,
+          "signature": "export function isRetryable(error)"
+        },
+        {
+          "name": "retry",
+          "kind": "function",
+          "line": 28,
+          "rank": 0.003397394423720516,
+          "references": 5,
+          "signature": "export async function retry(fn, options ="
+        }
+      ]
+    },
+    {
+      "path": "web/src/util/paths.js",
+      "rank": 0.012118657827124384,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "safeSegment",
+          "kind": "function",
+          "line": 12,
+          "rank": 0.004187707229242055,
+          "references": 5,
+          "signature": "export function safeSegment(input, fallback = 'untitled')"
+        },
+        {
+          "name": "joinPath",
+          "kind": "function",
+          "line": 29,
+          "rank": 0.0024043596526244224,
+          "references": 3,
+          "signature": "export function joinPath(...parts)"
+        },
+        {
+          "name": "extname",
+          "kind": "function",
+          "line": 36,
+          "rank": 0.005526590945257906,
+          "references": 6,
+          "signature": "export function extname(name = '')"
+        }
+      ]
+    },
+    {
+      "path": "web/src/archive/format.js",
+      "rank": 0.011667010196868596,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "normalizeArchive",
+          "kind": "function",
+          "line": 126,
+          "rank": 0.003293217463849871,
+          "references": 4,
+          "signature": "export function normalizeArchive(input, meta ="
+        },
+        {
+          "name": "sanitizeGraph",
+          "kind": "function",
+          "line": 146,
+          "rank": 0.002064097556995614,
+          "references": 2,
+          "signature": "export function sanitizeGraph(graph)"
+        },
+        {
+          "name": "countGraph",
+          "kind": "function",
+          "line": 189,
+          "rank": 0.0025729837305210656,
+          "references": 5,
+          "signature": "export function countGraph(graph)"
+        },
+        {
+          "name": "decodeSharePayload",
+          "kind": "function",
+          "line": 247,
+          "rank": 0.0018984155475765452,
+          "references": 2,
+          "signature": "export async function decodeSharePayload(encoded)"
+        },
+        {
+          "name": "makeShareable",
+          "kind": "function",
+          "line": 264,
+          "rank": 0.0018382958979255002,
+          "references": 3,
+          "signature": "export function makeShareable(archive)"
+        }
+      ]
+    },
+    {
+      "path": "web/src/util/base64.js",
+      "rank": 0.010858867368073715,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "padding",
+          "kind": "function",
+          "line": 78,
+          "rank": 0.0034701674828961594,
+          "references": 9,
+          "signature": "function padding(len)"
+        },
+        {
+          "name": "toBase64",
+          "kind": "function",
+          "line": 83,
+          "rank": 0.00315109533688881,
+          "references": 2,
+          "signature": "function toBase64(binary)"
+        },
+        {
+          "name": "fromBase64",
+          "kind": "function",
+          "line": 88,
+          "rank": 0.002367232180852892,
+          "references": 2,
+          "signature": "function fromBase64(b64)"
+        },
+        {
+          "name": "utf8Encode",
+          "kind": "function",
+          "line": 93,
+          "rank": 0.001870372367435854,
+          "references": 1,
+          "signature": "function utf8Encode(str)"
+        }
+      ]
+    },
+    {
+      "path": "web/src/ui/app.js",
+      "rank": 0.00999489069000635,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "refreshTopbarActions",
+          "kind": "function",
+          "line": 41,
+          "rank": 0.0020620423437514154,
+          "references": 2,
+          "signature": "function refreshTopbarActions(bar = appRoot?._topbar)"
+        },
+        {
+          "name": "navigate",
+          "kind": "function",
+          "line": 61,
+          "rank": 0.002357485069356741,
+          "references": 4,
+          "signature": "function navigate(hash)"
+        },
+        {
+          "name": "route",
+          "kind": "function",
+          "line": 72,
+          "rank": 0.0034008901323787227,
+          "references": 5,
+          "signature": "async function route()"
+        },
+        {
+          "name": "setLoaded",
+          "kind": "function",
+          "line": 127,
+          "rank": 0.002174473144519471,
+          "references": 3,
+          "signature": "function setLoaded(loaded)"
+        }
+      ]
+    },
+    {
+      "path": "src/utils/paths.js",
+      "rank": 0.00945333993272002,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "safeSegment",
+          "kind": "function",
+          "line": 30,
+          "rank": 0.004612759479851002,
+          "references": 4,
+          "signature": "export function safeSegment(input, fallback = 'untitled')"
+        },
+        {
+          "name": "ensureProjectFolders",
+          "kind": "function",
+          "line": 48,
+          "rank": 0.0025066614564693496,
+          "references": 5,
+          "signature": "export async function ensureProjectFolders(activeConfig = config)"
+        },
+        {
+          "name": "resolveOutputPath",
+          "kind": "function",
+          "line": 61,
+          "rank": 0.00233391899639967,
+          "references": 1,
+          "signature": "export function resolveOutputPath(relativePath, activeConfig = config)"
+        }
+      ]
+    },
+    {
+      "path": "scripts/check-web.js",
+      "rank": 0.008851146441191832,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "collect",
+          "kind": "function",
+          "line": 13,
+          "rank": 0.008851146441191832,
+          "references": 1,
+          "signature": "function collect(dir)"
+        }
+      ]
+    },
+    {
+      "path": "src/api/ui/canvas.js",
+      "rank": 0.008777329611424248,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "ArchiveCanvas",
+          "kind": "class",
+          "line": 1,
+          "rank": 0.002232802994959582,
+          "references": 1,
+          "signature": "class ArchiveCanvas"
+        },
+        {
+          "name": "init",
+          "kind": "method",
+          "line": 10,
+          "rank": 0.002232802994959582,
+          "references": 1,
+          "signature": "init()"
+        },
+        {
+          "name": "resize",
+          "kind": "method",
+          "line": 16,
+          "rank": 0.0021558618107525426,
+          "references": 1,
+          "signature": "resize()"
+        },
+        {
+          "name": "animate",
+          "kind": "method",
+          "line": 21,
+          "rank": 0.0021558618107525426,
+          "references": 1,
+          "signature": "animate()"
+        }
+      ]
+    },
+    {
+      "path": "src/system/preflight.js",
+      "rank": 0.008777208959384724,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "hasEnvCredentials",
+          "kind": "function",
+          "line": 6,
+          "rank": 0.0022898375275477003,
+          "references": 2,
+          "signature": "function hasEnvCredentials(activeConfig = config)"
+        },
+        {
+          "name": "getPreflightStatus",
+          "kind": "function",
+          "line": 30,
+          "rank": 0.002012214921219349,
+          "references": 2,
+          "signature": "export async function getPreflightStatus(activeConfig = config)"
+        },
+        {
+          "name": "printPreflightStatus",
+          "kind": "function",
+          "line": 62,
+          "rank": 0.0019169526341770824,
+          "references": 1,
+          "signature": "export function printPreflightStatus(status)"
+        },
+        {
+          "name": "runPreflight",
+          "kind": "function",
+          "line": 86,
+          "rank": 0.002558203876440592,
+          "references": 2,
+          "signature": "export async function runPreflight(activeConfig = config)"
+        }
+      ]
+    },
+    {
+      "path": "scripts/build-standalone.js",
+      "rank": 0.007864638442363632,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "run",
+          "kind": "function",
+          "line": 36,
+          "rank": 0.005590210136345905,
+          "references": 10,
+          "signature": "function run(command, args, cwd = rootDir)"
+        },
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 65,
+          "rank": 0.002274428306017726,
+          "references": 2,
+          "signature": "async function main()"
+        }
+      ]
+    },
+    {
+      "path": "src/utils/args.js",
+      "rank": 0.007109120530476813,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "npmConfigKey",
+          "kind": "function",
+          "line": 1,
+          "rank": 0.00391874215640221,
+          "references": 1,
+          "signature": "function npmConfigKey(flagName)"
+        },
+        {
+          "name": "hasFlag",
+          "kind": "function",
+          "line": 5,
+          "rank": 0.0031903783740746027,
+          "references": 5,
+          "signature": "export function hasFlag(flagName, argv = process.argv, env = process.env)"
+        }
+      ]
+    },
+    {
+      "path": "web/src/ui/toast.js",
+      "rank": 0.005954976139090435,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "ensureWrap",
+          "kind": "function",
+          "line": 4,
+          "rank": 0.002222228025020063,
+          "references": 1,
+          "signature": "function ensureWrap()"
+        },
+        {
+          "name": "toast",
+          "kind": "function",
+          "line": 12,
+          "rank": 0.003732748114070372,
+          "references": 7,
+          "signature": "export function toast(message, kind = 'default', duration = 3200)"
+        }
+      ]
+    },
+    {
+      "path": "src/auth/googleApi.js",
+      "rank": 0.005662854487089928,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "normalizeCredentials",
+          "kind": "function",
+          "line": 21,
+          "rank": 0.0025189706860618,
+          "references": 1,
+          "signature": "function normalizeCredentials(raw, activeConfig)"
+        },
+        {
+          "name": "getOAuthClient",
+          "kind": "function",
+          "line": 133,
+          "rank": 0.003143883801028127,
+          "references": 3,
+          "signature": "export async function getOAuthClient(options ="
+        }
+      ]
+    },
+    {
+      "path": "src/utils/runtimePaths.js",
+      "rank": 0.004525255881973288,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "getSourcePath",
+          "kind": "function",
+          "line": 6,
+          "rank": 0.002425328381727149,
+          "references": 3,
+          "signature": "export function getSourcePath(...segments)"
+        },
+        {
+          "name": "quoteForCmd",
+          "kind": "function",
+          "line": 10,
+          "rank": 0.0020999275002461393,
+          "references": 2,
+          "signature": "export function quoteForCmd(value)"
+        }
+      ]
+    },
+    {
+      "path": "web/src/ui/viewer.js",
+      "rank": 0.0044359421329457655,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "renderContent",
+          "kind": "function",
+          "line": 192,
+          "rank": 0.0025983446716518078,
+          "references": 5,
+          "signature": "function renderContent()"
+        },
+        {
+          "name": "emptyState",
+          "kind": "function",
+          "line": 362,
+          "rank": 0.0018375974612939582,
+          "references": 2,
+          "signature": "function emptyState(title, subtitle)"
+        }
+      ]
+    },
+    {
+      "path": "web/src/scraper/scrapeEngine.js",
+      "rank": 0.003755620160938981,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "worker",
+          "kind": "function",
+          "line": 157,
+          "rank": 0.0018778100804694906,
+          "references": 2,
+          "signature": "async function worker()"
+        },
+        {
+          "name": "worker",
+          "kind": "function",
+          "line": 209,
+          "rank": 0.0018778100804694906,
+          "references": 2,
+          "signature": "async function worker()"
+        }
+      ]
+    },
+    {
+      "path": "web/src/archive/exporter.js",
+      "rank": 0.0025103265630425408,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "stripHash",
+          "kind": "function",
+          "line": 81,
+          "rank": 0.0025103265630425408,
+          "references": 2,
+          "signature": "function stripHash(url)"
+        }
+      ]
+    },
+    {
+      "path": "src/api/server.js",
+      "rank": 0.002274428306017726,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 78,
+          "rank": 0.002274428306017726,
+          "references": 2,
+          "signature": "async function main()"
+        }
+      ]
+    },
+    {
+      "path": "src/auth/login.js",
+      "rank": 0.002274428306017726,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 8,
+          "rank": 0.002274428306017726,
+          "references": 2,
+          "signature": "async function main()"
+        }
+      ]
+    },
+    {
+      "path": "src/crawler/run.js",
+      "rank": 0.002274428306017726,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 60,
+          "rank": 0.002274428306017726,
+          "references": 2,
+          "signature": "async function main()"
+        }
+      ]
+    },
+    {
+      "path": "src/export/export.js",
+      "rank": 0.002274428306017726,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 7,
+          "rank": 0.002274428306017726,
+          "references": 2,
+          "signature": "async function main()"
+        }
+      ]
+    },
+    {
+      "path": "src/system/engine.js",
+      "rank": 0.002274428306017726,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 24,
+          "rank": 0.002274428306017726,
+          "references": 2,
+          "signature": "async function main()"
+        }
+      ]
+    },
+    {
+      "path": "web/src/util/format.js",
+      "rank": 0.0021561852417922183,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "bytesToSize",
+          "kind": "function",
+          "line": 3,
+          "rank": 0.0021561852417922183,
+          "references": 4,
+          "signature": "export function bytesToSize(bytes)"
+        }
+      ]
+    },
+    {
+      "path": "src/downloaders/driveDownloader.js",
+      "rank": 0.0020767458259796315,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "writeStreamToFile",
+          "kind": "function",
+          "line": 77,
+          "rank": 0.0020767458259796315,
+          "references": 2,
+          "signature": "async function writeStreamToFile(stream, targetPath)"
+        }
+      ]
+    },
+    {
+      "path": "src/utils/logger.js",
+      "rank": 0.0020661083409950114,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "createLogger",
+          "kind": "function",
+          "line": 8,
+          "rank": 0.0020661083409950114,
+          "references": 4,
+          "signature": "export async function createLogger(activeConfig = config)"
+        }
+      ]
+    },
+    {
+      "path": "web/src/ui/theme.js",
+      "rank": 0.0020584532647084123,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "currentTheme",
+          "kind": "function",
+          "line": 11,
+          "rank": 0.0020584532647084123,
+          "references": 2,
+          "signature": "export function currentTheme()"
+        }
+      ]
+    },
+    {
+      "path": "web/src/util/vendor.js",
+      "rank": 0.0019895782952943845,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "loadJsZip",
+          "kind": "function",
+          "line": 6,
+          "rank": 0.0019895782952943845,
+          "references": 2,
+          "signature": "export function loadJsZip()"
+        }
+      ]
+    },
+    {
+      "path": "src/storage/exporter.js",
+      "rank": 0.001918297681972437,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "exportArchive",
+          "kind": "function",
+          "line": 6,
+          "rank": 0.001918297681972437,
+          "references": 4,
+          "signature": "export async function exportArchive(db, activeConfig = config)"
+        }
+      ]
+    }
+  ],
+  "edge_source": "t0-treesitter"
+}

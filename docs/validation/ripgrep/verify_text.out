@@ -1,0 +1,270 @@
+HIGH   0.95  crates/globset/src/glob.rs:256  type `Tokens::Target` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Target` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  crates/index/src/index.rs:181  method `Handle::begin_read` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `begin_read` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  crates/index/src/index.rs:191  method `Handle::read_write` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `read_write` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  crates/index/src/index.rs:200  method `Handle::read_write_mut` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `read_write_mut` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  crates/regex/src/literal.rs:537  method `TSeq::max_literal_len` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `max_literal_len` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/cli/src/decompress.rs:96  method `DecompressionMatcherBuilder::associate` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `associate` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/cli/src/escape.rs:77  function `unescape_os` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `unescape_os` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/cli/src/hostname.rs:36  function `gethostname` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/cli/src/lib.rs:260  function `is_tty_stdin` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `is_tty_stdin` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/cli/src/lib.rs:279  function `is_tty_stdout` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `is_tty_stdout` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/cli/src/lib.rs:292  function `is_tty_stderr` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `is_tty_stderr` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/globset/src/lib.rs:695  method `GlobSetMatchStrategy::matches_all` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/globset/src/lib.rs:725  method `LiteralStrategy::matches_all` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/globset/src/lib.rs:760  method `BasenameLiteralStrategy::matches_all` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/globset/src/lib.rs:798  method `ExtensionStrategy::matches_all` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/globset/src/lib.rs:835  method `PrefixStrategy::matches_all` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/globset/src/lib.rs:880  method `SuffixStrategy::matches_all` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/globset/src/lib.rs:928  method `RequiredExtensionStrategy::matches_all` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/globset/src/lib.rs:997  method `RegexSetStrategy::matches_all` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/ignore/src/gitignore.rs:141  method `Gitignore::global` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `global` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/ignore/src/incremental.rs:542  function `normalize_absolute` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/ignore/src/lib.rs:162  method `Error::is_partial` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `is_partial` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/ignore/src/lib.rs:207  method `Error::io_error` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `io_error` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/ignore/src/lib.rs:232  method `Error::into_io_error` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `into_io_error` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/ignore/src/types.rs:132  method `Glob::file_type_def` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `file_type_def` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/ignore/src/walk.rs:147  method `DirEntryInner::into_path` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/ignore/src/walk.rs:276  method `DirEntryRaw::into_path` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/ignore/src/walk.rs:973  method `WalkBuilder::sort_by_file_path` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `sort_by_file_path` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/matcher/src/lib.rs:331  method `ByteSet::add_all` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `add_all` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/pcre2/src/matcher.rs:245  method `RegexMatcherBuilder::disable_utf_check` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `disable_utf_check` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/pcre2/src/matcher.rs:258  method `RegexMatcherBuilder::jit` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `jit` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/printer/src/color.rs:162  method `UserColorSpec::to_color_spec` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `to_color_spec` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/printer/src/counter.rs:47  method `CounterWriter::into_inner` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/printer/src/hyperlink/mod.rs:89  method `HyperlinkFormat::into_config` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `into_config` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/printer/src/json.rs:566  method `JSON::has_written` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `has_written` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/printer/src/standard.rs:505  method `Standard::new_no_color` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `new_no_color` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/printer/src/standard.rs:600  method `Standard::has_written` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `has_written` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/printer/src/summary.rs:377  method `Summary::new_no_color` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `new_no_color` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/printer/src/summary.rs:454  method `Summary::has_written` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `has_written` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/regex/src/literal.rs:516  method `TSeq::is_exact` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/regex/src/matcher.rs:92  method `RegexMatcherBuilder::build_literals` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `build_literals` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/searcher/src/line_buffer.rs:75  method `BinaryDetection::is_quit` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/searcher/src/line_buffer.rs:256  method `LineBufferReader::fill` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/searcher/src/line_buffer.rs:367  method `LineBuffer::free_buffer` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/searcher/src/line_buffer.rs:406  method `LineBuffer::fill` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  crates/searcher/src/line_buffer.rs:499  method `LineBuffer::ensure_capacity` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  crates/searcher/src/searcher/mod.rs:665  method `Searcher::search_file` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `search_file` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  tests/json.rs:4  `serde_json as json` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `serde_json as json` is imported at tests/json.rs:4
+         why:  not declared in any crates.io manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+LOW    0.60  crates/core/index/mod.rs:5  import `imp` does not resolve to any indexed file  [t0-import-resolution]
+         why:  no file matching `imp` found relative to crates/core/index/mod.rs
+         risk: a `#[path]` attribute or build-generated module may exist
+LOW    0.60  crates/core/index/mod.rs:8  import `imp` does not resolve to any indexed file  [t0-import-resolution]
+         why:  no file matching `imp` found relative to crates/core/index/mod.rs
+         risk: a `#[path]` attribute or build-generated module may exist
+
+  dead-code        ran      47 finding(s)
+  check-deps       ran      3 finding(s)  (offline: manifests and local resolution only; pass --online to check registries)
+  test-weakening   ran      0 finding(s)  (vs HEAD)
+  diagnostics      skipped  0 finding(s)  (no saved output (--from) and --run not given; nothing was executed)
+  rule-engines     skipped  0 finding(s)  (semgrep / ast-grep run only with --run)
+
+verify: FAIL  (50 new, 0 baselined, 0 fixed since baseline; fail-on medium)
+note: dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change
+note: baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new
+note: no baseline found at /workspace/repos/ripgrep/plumb-baseline.json: every finding counts as new (create one with --update-baseline)
+note: nothing was executed (no --run).

@@ -1,0 +1,95 @@
+# plumb map: 13 files, 81 of 328 symbols (~1466 tokens, budget 1500)
+command.go
+  35: CommandDisplayNameAnnotation = "cobra_annotation_command_display_name"  helpFlagName    = "help" helpCommandName = "help…
+  42: type FParseErrWhitelist flag.ParseErrorsAllowlist  // Group Structure to manage groups for commands type Group struct
+  45: type Group struct
+  54: type Command struct
+  269: func (c *Command) Context() context.Context
+  281: func (c *Command) SetArgs(a []string)
+  289: func (c *Command) SetOutput(output io.Writer)
+  296: func (c *Command) SetOut(newOut io.Writer)
+  302: func (c *Command) SetErr(newErr io.Writer)
+  382: func (c *Command) SetGlobalNormalizationFunc(n func(f *flag.FlagSet, name string) flag.NormalizedName)
+  398: func (c *Command) OutOrStderr() io.Writer
+  403: func (c *Command) ErrOrStderr() io.Writer
+  412: func (c *Command) getOut(def io.Writer) io.Writer
+  478: func (c *Command) Usage() error
+  892: func (c *Command) Root() *Command
+  1070: func (c *Command) Execute() error
+  1084: func (c *Command) ExecuteC() (cmd *Command, err error)
+  1325: type commandSorterByName []*Command  func (c commandSorterByName) Len() int
+  1332: func (c *Command) Commands() []*Command
+  1342: func (c *Command) AddCommand(cmds ...*Command)
+  1435: func (c *Command) Print(i ...interface{})
+  1450: func (c *Command) PrintErr(i ...interface{})
+  1465: func (c *Command) CommandPath() string
+  1474: func (c *Command) DisplayName() string
+  1541: func (c *Command) Name() string
+  1596: func (c *Command) Runnable() bool
+  1607: func (c *Command) IsAvailableCommand() bool
+  1628: func (c *Command) IsAdditionalHelpTopicCommand() bool
+  1677: func (c *Command) HasParent() bool
+  1688: func (c *Command) Flags() *flag.FlagSet
+  1716: func (c *Command) LocalFlags() *flag.FlagSet
+  1744: func (c *Command) InheritedFlags() *flag.FlagSet
+  1775: func (c *Command) PersistentFlags() *flag.FlagSet
+  1822: func (c *Command) HasAvailableFlags() bool
+  1844: func (c *Command) Flag(name string) (flag *flag.Flag)
+  1855: func (c *Command) persistentFlag(name string) (flag *flag.Flag)
+  1892: func (c *Command) Parent() *Command
+  1898: func (c *Command) mergePersistentFlags()
+  1937: type tmplFunc struct
+completions.go
+  31: ShellCompRequestCmd = "__complete" // ShellCompNoDescRequestCmd is the name of the hidden command that is used to reques…
+  34: ShellCompNoDescRequestCmd = "__completeNoDesc" )  // Global map of flag completion functions. Make sure to use flagCompl…
+  45: type ShellCompDirective int  type flagCompError struct
+  47: type flagCompError struct
+  52: func (e *flagCompError) Error() string
+  58: ShellCompDirectiveError ShellCompDirective = 1 << iota  // ShellCompDirectiveNoSpace indicates that the shell should not…
+  62: ShellCompDirectiveNoSpace  // ShellCompDirectiveNoFileComp indicates that the shell should not provide // file completio…
+  66: ShellCompDirectiveNoFileComp  // ShellCompDirectiveFilterFileExt indicates that the provided completions // should be us…
+  73: ShellCompDirectiveFilterFileExt  // ShellCompDirectiveFilterDirs indicates that only directory names should // be provid…
+  80: ShellCompDirectiveFilterDirs  // ShellCompDirectiveKeepOrder indicates that the shell should preserve the order // in wh…
+  84: ShellCompDirectiveKeepOrder  // ===========================================================================
+  90: shellCompDirectiveMaxValue  // ShellCompDirectiveDefault indicates to let the shell perform its default // behavior afte…
+  95: ShellCompDirectiveDefault ShellCompDirective = 0 )  const (
+  107: type CompletionOptions struct
+  200: func (d ShellCompDirective) string() string
+  955: func CompDebug(msg string, printToStdErr bool)
+args.go
+  22: type PositionalArgs func(cmd *Command, args []string) error  // legacyArgs validation has the following behaviour
+  42: func NoArgs(cmd *Command, args []string) error
+  51: func OnlyValidArgs(cmd *Command, args []string) error
+  82: func ArbitraryArgs(cmd *Command, args []string) error
+  87: func MinimumNArgs(n int) PositionalArgs
+  97: func MaximumNArgs(n int) PositionalArgs
+  107: func ExactArgs(n int) PositionalArgs
+  117: func RangeArgs(min int, max int) PositionalArgs
+  127: func MatchAll(pargs ...PositionalArgs) PositionalArgs
+cobra.go
+  179: func tmpl(text string) *tmplFunc
+  235: func CheckErr(msg interface{})
+  243: func WriteStringAndCheck(b io.StringWriter, s string)
+doc/man_docs.go
+  94: type GenManHeader struct
+  105: func GenMan(cmd *cobra.Command, header *GenManHeader, w io.Writer) error
+active_help.go
+  23: activeHelpMarker = "_activeHelp_ " // The below values should not be changed: programs will be using them explicitly // …
+  26: activeHelpEnvVarSuffix  = "ACTIVE_HELP" activeHelpGlobalEnvVar  = configEnvVarGlobalPrefix + "_" + activeHelpEnvVarSuffi…
+  58: func activeHelpEnvVar(name string) string
+bash_completions.go
+  30: BashCompFilenameExt     = "cobra_annotation_bash_completion_filename_extensions" BashCompCustom          = "cobra_annota…
+  32: BashCompOneRequiredFlag = "cobra_annotation_bash_completion_one_required_flag" BashCompSubdirsInDir    = "cobra_annotati…
+  33: BashCompSubdirsInDir    = "cobra_annotation_bash_completion_subdirs_in_dir" )  func writePreamble(buf io.StringWriter, n…
+doc/util.go
+  48: type byName []*cobra.Command  func (s byName) Len() int
+flag_groups.go
+  209: func sortedKeys(m map[string]map[string]bool) []string
+zsh_completions.go
+  80: func (c *Command) genZshCompletion(w io.Writer, includeDesc bool) error
+powershell_completions.go
+  313: func (c *Command) genPowerShellCompletion(w io.Writer, includeDesc bool) error
+doc/yaml_docs.go
+  93: func GenYamlCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string) string) error
+doc/md_docs.go
+  57: func GenMarkdownCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string) string) error

@@ -1,0 +1,10 @@
+MEDIUM 0.77  docs/_themes/flask_theme_support.py:7  class `FlaskyStyle` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `FlaskyStyle` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+
+1 finding(s): 0 high, 1 medium, 0 low  (indexed 37 files, 911 symbols)
+note: tier-0 name-based analysis (no SCIP index); verify medium/low findings before deleting anything.
+note: 1 finding(s) are exported symbols. If this project is a library, re-run with --lib to treat exported symbols as public API (app mode assumes only main/init/tests are entry points)

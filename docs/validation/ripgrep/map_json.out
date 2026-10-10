@@ -1,0 +1,1264 @@
+{
+  "text": "# plumb map: 36 files, 125 of 2777 symbols (~1434 tokens, budget 1500)\ncrates/searcher/src/sink.rs\n  226: type Error = S::Error;\n  279: type Error = S::Error;\n  430: pub enum SinkContextKind\n  548: type Error = io::Error;\n  596: type Error = io::Error;\n  646: type Error = io::Error;\ncrates/matcher/src/lib.rs\n  69: pub struct Match\n  94: pub fn start(&self) -> usize\n  100: pub fn end(&self) -> usize\n  159: type Output = [u8];\n  175: type Output = str;\n  195: pub struct LineTerminator(LineTerminatorImp);\n  198: enum LineTerminatorImp\n  497: pub struct NoError(());\n  546: pub trait Matcher\n  1135: type Error = M::Error;\ncrates/ignore/src/walk.rs\n  31: pub struct DirEntry\n  38: pub fn path(&self) -> &Path\n  81: pub fn depth(&self) -> usize\n  98: pub fn error(&self) -> Option<&Error>\n  138: fn path(&self) -> &Path\n  209: fn depth(&self) -> usize\n  272: fn path(&self) -> &Path\n  318: fn depth(&self) -> usize\n  488: pub struct WalkBuilder\n  521: struct Filter(Arc<dyn Fn(&DirEntry) -> bool + Send + Sync + 'static>);\n  552: pub fn new<P: AsRef<Path>>(path: P) -> WalkBuilder\n  1134: pub fn new<P: AsRef<Path>>(path: P) -> Walk\ncrates/globset/src/glob.rs\n  76: pub struct Glob\n  84: fn as_ref(&self) -> &Glob\n  211: pub struct GlobBuilder<'a>\n  220: struct GlobOptions\n  253: struct Tokens(Vec<Token>);\n  270: enum Token\ncrates/printer/src/standard.rs\n  36: struct Config\n  99: pub struct StandardBuilder\n  105: pub fn new() -> StandardBuilder\n  480: pub struct Standard<W>\n  515: pub fn sink<'s, M: Matcher>( &'s mut self, matcher: M, ) -> StandardSink<'static, 's, M, W>\n  764: type Error = io::Error;\n  928: fn sink(&self) -> io::Result<()>\n  1536: fn config(&self) -> &'a Config\n  1541: fn wtr(&self) -> &'a RefCell<CounterWriter<W>>\n  1614: fn new(std: &'a StandardImpl<'a, M, W>) -> PreludeWriter<'a, M, W>\n  1739: fn config(&self) -> &Config\ncrates/core/flags/mod.rs\n  74: trait Flag: Debug + Send + Sync + UnwindSafe + RefUnwindSafe + 'static\n  192: enum Category\n  268: enum FlagValue\ncrates/index/src/literal.rs\n  16: pub enum GramQuery\n  57: fn unwrap(self) -> GramQuery\n  73: fn or(mut queries: Vec<GramQuery>) -> GramQuery\n  101: fn and(mut queries: Vec<GramQuery>) -> GramQuery\n  619: fn len(&self) -> usize\n  637: pub struct GramQueryBuilder\ncrates/searcher/src/testutil.rs\n  65: type Error = NoError;\n  129: type Error = io::Error;\n  204: pub(crate) struct SearcherTester\n  250: pub(crate) fn test(&self)\ncrates/ignore/src/lib.rs\n  68: pub enum Error\n  367: fn from(err: std::io::Error) -> Error\n  416: pub enum Match<T>\n  464: pub fn inner(&self) -> Option<&T>\n  475: pub fn map<U, F: FnOnce(T) -> U>(self, f: F) -> Match<U>\ncrates/cli/src/process.rs\n  16: enum CommandErrorKind\n  23: pub(crate) fn io(ioerr: io::Error) -> CommandError\n  84: pub struct CommandReaderBuilder\n  132: pub fn async_stderr(&mut self, yes: bool) -> &mut CommandReaderBuilder\ncrates/printer/src/hyperlink/mod.rs\n  48: pub(crate) fn format(&self) -> &HyperlinkFormat\n  71: pub struct HyperlinkFormat\n  228: const fn format(&self) -> &'static str\n  513: enum Part\ncrates/ignore/src/dir.rs\n  94: pub(crate) struct Ignore\n  115: struct IgnoreInner\n  716: pub(crate) struct IgnoreRef<'a>\n  753: pub(crate) struct IgnoreBuilder\ncrates/ignore/src/types.rs\n  111: pub struct Glob<'a>(GlobInner<'a>);\n  146: pub struct FileTypeDef\n  185: enum Selection<T>\n  205: fn map<U, F: FnOnce(T) -> U>(self, f: F) -> Selection<U>\n  216: fn inner(&self) -> &T\ncrates/globset/src/lib.rs\n  157: pub struct Error\n  167: pub enum ErrorKind\n  211: pub fn kind(&self) -> &ErrorKind\n  309: pub struct GlobSet\n  337: pub fn len(&self) -> usize\n  654: enum GlobSetMatchStrategy\ncrates/core/flags/defs.rs\n  1533: struct Debug;\n  7006: struct Text;\n  7969: pub(super) fn string(v: OsString) -> anyhow::Result<String>\ncrates/printer/src/stats.rs\n  13: pub struct Stats\n  108: type Output = Stats;\n  116: type Output = Stats;\ncrates/pcre2/src/error.rs\n  7: pub struct Error\n  17: pub fn kind(&self) -> &ErrorKind\n  25: pub enum ErrorKind\ncrates/regex/src/matcher.rs\n  410: type Captures = RegexCaptures;\n  411: type Error = NoError;\n  524: pub struct RegexCaptures\ncrates/regex/src/error.rs\n  7: pub struct Error\n  34: pub fn kind(&self) -> &ErrorKind\n  42: pub enum ErrorKind\ncrates/globset/src/fnv.rs\n  2: pub(crate) type HashMap<K, V> = std::collections::HashMap<K, V, std::hash::BuildHasherDefault<Hasher>>;\n  6: pub(crate) struct Hasher(u64);\ncrates/ignore/src/overrides.rs\n  28: pub struct Glob<'a>(GlobInner<'a>);\n  32: enum GlobInner<'a>\ncrates/regex/src/config.rs\n  25: pub(crate) struct Config\n  232: pub(crate) fn config(&self) -> &Config\ncrates/core/flags/config.rs\n  16: pub fn args() -> Vec<OsString>\ncrates/ignore/src/gitignore.rs\n  32: pub struct Glob\n  81: pub struct Gitignore\ncrates/pcre2/src/matcher.rs\n  12: pub struct RegexMatcherBuilder\n  317: type Error = Error;\ncrates/core/haystack.rs\n  16: pub(crate) struct HaystackBuilder\n  85: pub(crate) fn strip_dot_prefix( &mut self, yes: bool, ) -> &mut HaystackBuilder\ncrates/printer/src/color.rs\n  24: pub enum ColorError\ncrates/globset/src/serde_impl.rs\n  20: type Value = Glob;\n  48: type Value = GlobSet;\ncrates/core/flags/parse.rs\n  182: static P: OnceLock<Parser> = OnceLock::new();\ncrates/core/flags/lowargs.rs\n  33: pub(crate) struct LowArgs\ncrates/searcher/src/searcher/mod.rs\n  298: pub struct SearcherBuilder\ncrates/cli/src/human.rs\n  19: fn format(original: &str) -> ParseSizeError\ncrates/cli/src/pattern.rs\n  20: pub fn valid_up_to(&self) -> usize\ncrates/printer/src/json.rs\n  720: type Error = io::Error;\ncrates/printer/src/summary.rs\n  631: type Error = io::Error;\ncrates/core/flags/hiargs.rs\n  1246: fn globs( state: &State, low: &LowArgs, ) -> anyhow::Result<ignore::overrides::Override>\n",
+  "tokens_estimated": 1435,
+  "budget": 1500,
+  "token_estimate_method": "ceil(chars/4); not a real tokenizer",
+  "total_symbols": 2777,
+  "shown_symbols": 125,
+  "changed_files": [],
+  "files": [
+    {
+      "path": "crates/searcher/src/sink.rs",
+      "rank": 0.039781494202826805,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 226,
+          "rank": 0.007634360694084974,
+          "references": 193,
+          "signature": "type Error = S::Error;"
+        },
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 279,
+          "rank": 0.007634360694084973,
+          "references": 193,
+          "signature": "type Error = S::Error;"
+        },
+        {
+          "name": "SinkContextKind",
+          "kind": "enum",
+          "line": 430,
+          "rank": 0.001214542693729785,
+          "references": 7,
+          "signature": "pub enum SinkContextKind"
+        },
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 548,
+          "rank": 0.00776607670697569,
+          "references": 193,
+          "signature": "type Error = io::Error;"
+        },
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 596,
+          "rank": 0.007766076706975691,
+          "references": 193,
+          "signature": "type Error = io::Error;"
+        },
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 646,
+          "rank": 0.007766076706975691,
+          "references": 193,
+          "signature": "type Error = io::Error;"
+        }
+      ]
+    },
+    {
+      "path": "crates/matcher/src/lib.rs",
+      "rank": 0.026928041948756143,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Match",
+          "kind": "struct",
+          "line": 69,
+          "rank": 0.00230816730780189,
+          "references": 93,
+          "signature": "pub struct Match"
+        },
+        {
+          "name": "start",
+          "kind": "method",
+          "line": 94,
+          "rank": 0.0025035287189725942,
+          "references": 87,
+          "signature": "pub fn start(&self) -> usize"
+        },
+        {
+          "name": "end",
+          "kind": "method",
+          "line": 100,
+          "rank": 0.0023698681165806013,
+          "references": 102,
+          "signature": "pub fn end(&self) -> usize"
+        },
+        {
+          "name": "Output",
+          "kind": "type",
+          "line": 159,
+          "rank": 0.0015461100344208503,
+          "references": 40,
+          "signature": "type Output = [u8];"
+        },
+        {
+          "name": "Output",
+          "kind": "type",
+          "line": 175,
+          "rank": 0.0015461100344208503,
+          "references": 40,
+          "signature": "type Output = str;"
+        },
+        {
+          "name": "LineTerminator",
+          "kind": "struct",
+          "line": 195,
+          "rank": 0.0016280760305419156,
+          "references": 37,
+          "signature": "pub struct LineTerminator(LineTerminatorImp);"
+        },
+        {
+          "name": "LineTerminatorImp",
+          "kind": "enum",
+          "line": 198,
+          "rank": 0.0025042750733103507,
+          "references": 6,
+          "signature": "enum LineTerminatorImp"
+        },
+        {
+          "name": "NoError",
+          "kind": "struct",
+          "line": 497,
+          "rank": 0.009055954625536282,
+          "references": 16,
+          "signature": "pub struct NoError(());"
+        },
+        {
+          "name": "Matcher",
+          "kind": "trait",
+          "line": 546,
+          "rank": 0.0012724265761922778,
+          "references": 44,
+          "signature": "pub trait Matcher"
+        },
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 1135,
+          "rank": 0.002193525430978529,
+          "references": 200,
+          "signature": "type Error = M::Error;"
+        }
+      ]
+    },
+    {
+      "path": "crates/ignore/src/walk.rs",
+      "rank": 0.025234771348677854,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "DirEntry",
+          "kind": "struct",
+          "line": 31,
+          "rank": 0.0030543028618520074,
+          "references": 34,
+          "signature": "pub struct DirEntry"
+        },
+        {
+          "name": "path",
+          "kind": "method",
+          "line": 38,
+          "rank": 0.0020302822273609677,
+          "references": 116,
+          "signature": "pub fn path(&self) -> &Path"
+        },
+        {
+          "name": "depth",
+          "kind": "method",
+          "line": 81,
+          "rank": 0.0019142374310099322,
+          "references": 30,
+          "signature": "pub fn depth(&self) -> usize"
+        },
+        {
+          "name": "error",
+          "kind": "method",
+          "line": 98,
+          "rank": 0.0025696437671541787,
+          "references": 18,
+          "signature": "pub fn error(&self) -> Option<&Error>"
+        },
+        {
+          "name": "path",
+          "kind": "method",
+          "line": 138,
+          "rank": 0.002386105475714755,
+          "references": 116,
+          "signature": "fn path(&self) -> &Path"
+        },
+        {
+          "name": "depth",
+          "kind": "method",
+          "line": 209,
+          "rank": 0.0019142374310099322,
+          "references": 30,
+          "signature": "fn depth(&self) -> usize"
+        },
+        {
+          "name": "path",
+          "kind": "method",
+          "line": 272,
+          "rank": 0.0020302822273609677,
+          "references": 116,
+          "signature": "fn path(&self) -> &Path"
+        },
+        {
+          "name": "depth",
+          "kind": "method",
+          "line": 318,
+          "rank": 0.0019142374310099322,
+          "references": 30,
+          "signature": "fn depth(&self) -> usize"
+        },
+        {
+          "name": "WalkBuilder",
+          "kind": "struct",
+          "line": 488,
+          "rank": 0.002816235237652136,
+          "references": 60,
+          "signature": "pub struct WalkBuilder"
+        },
+        {
+          "name": "Filter",
+          "kind": "struct",
+          "line": 521,
+          "rank": 0.0022077432486416054,
+          "references": 33,
+          "signature": "struct Filter(Arc<dyn Fn(&DirEntry) -> bool + Send + Sync + 'static>);"
+        },
+        {
+          "name": "new",
+          "kind": "method",
+          "line": 552,
+          "rank": 0.0012581940144702395,
+          "references": 42,
+          "signature": "pub fn new<P: AsRef<Path>>(path: P) -> WalkBuilder"
+        },
+        {
+          "name": "new",
+          "kind": "method",
+          "line": 1134,
+          "rank": 0.0011392699954412024,
+          "references": 41,
+          "signature": "pub fn new<P: AsRef<Path>>(path: P) -> Walk"
+        }
+      ]
+    },
+    {
+      "path": "crates/globset/src/glob.rs",
+      "rank": 0.02315981132413924,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Glob",
+          "kind": "struct",
+          "line": 76,
+          "rank": 0.0033823726313706314,
+          "references": 31,
+          "signature": "pub struct Glob"
+        },
+        {
+          "name": "as_ref",
+          "kind": "method",
+          "line": 84,
+          "rank": 0.0016024046631344482,
+          "references": 80,
+          "signature": "fn as_ref(&self) -> &Glob"
+        },
+        {
+          "name": "GlobBuilder",
+          "kind": "struct",
+          "line": 211,
+          "rank": 0.0030119709378608125,
+          "references": 14,
+          "signature": "pub struct GlobBuilder<'a>"
+        },
+        {
+          "name": "GlobOptions",
+          "kind": "struct",
+          "line": 220,
+          "rank": 0.0029677905542457193,
+          "references": 7,
+          "signature": "struct GlobOptions"
+        },
+        {
+          "name": "Tokens",
+          "kind": "struct",
+          "line": 253,
+          "rank": 0.006262185131525345,
+          "references": 6,
+          "signature": "struct Tokens(Vec<Token>);"
+        },
+        {
+          "name": "Token",
+          "kind": "enum",
+          "line": 270,
+          "rank": 0.005933087406002281,
+          "references": 25,
+          "signature": "enum Token"
+        }
+      ]
+    },
+    {
+      "path": "crates/printer/src/standard.rs",
+      "rank": 0.021067151415317578,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Config",
+          "kind": "struct",
+          "line": 36,
+          "rank": 0.003612913360557635,
+          "references": 15,
+          "signature": "struct Config"
+        },
+        {
+          "name": "StandardBuilder",
+          "kind": "struct",
+          "line": 99,
+          "rank": 0.0018855542263142525,
+          "references": 99,
+          "signature": "pub struct StandardBuilder"
+        },
+        {
+          "name": "new",
+          "kind": "method",
+          "line": 105,
+          "rank": 0.0011327776051748726,
+          "references": 103,
+          "signature": "pub fn new() -> StandardBuilder"
+        },
+        {
+          "name": "Standard",
+          "kind": "struct",
+          "line": 480,
+          "rank": 0.0011222919637044004,
+          "references": 30,
+          "signature": "pub struct Standard<W>"
+        },
+        {
+          "name": "sink",
+          "kind": "method",
+          "line": 515,
+          "rank": 0.0015548859440166658,
+          "references": 84,
+          "signature": "pub fn sink<'s, M: Matcher>( &'s mut self, matcher: M, ) -> StandardSink<'static, 's, M, W>"
+        },
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 764,
+          "rank": 0.0011798513327705357,
+          "references": 162,
+          "signature": "type Error = io::Error;"
+        },
+        {
+          "name": "sink",
+          "kind": "method",
+          "line": 928,
+          "rank": 0.0015548859440166658,
+          "references": 84,
+          "signature": "fn sink(&self) -> io::Result<()>"
+        },
+        {
+          "name": "config",
+          "kind": "method",
+          "line": 1536,
+          "rank": 0.00366511949574562,
+          "references": 182,
+          "signature": "fn config(&self) -> &'a Config"
+        },
+        {
+          "name": "wtr",
+          "kind": "method",
+          "line": 1541,
+          "rank": 0.001128754366449008,
+          "references": 45,
+          "signature": "fn wtr(&self) -> &'a RefCell<CounterWriter<W>>"
+        },
+        {
+          "name": "new",
+          "kind": "method",
+          "line": 1614,
+          "rank": 0.0011327776051748726,
+          "references": 103,
+          "signature": "fn new(std: &'a StandardImpl<'a, M, W>) -> PreludeWriter<'a, M, W>"
+        },
+        {
+          "name": "config",
+          "kind": "method",
+          "line": 1739,
+          "rank": 0.0030973395713930494,
+          "references": 182,
+          "signature": "fn config(&self) -> &Config"
+        }
+      ]
+    },
+    {
+      "path": "crates/core/flags/mod.rs",
+      "rank": 0.015742514802672226,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Flag",
+          "kind": "trait",
+          "line": 74,
+          "rank": 0.007603685668127375,
+          "references": 115,
+          "signature": "trait Flag: Debug + Send + Sync + UnwindSafe + RefUnwindSafe + 'static"
+        },
+        {
+          "name": "Category",
+          "kind": "enum",
+          "line": 192,
+          "rank": 0.006095870685718568,
+          "references": 113,
+          "signature": "enum Category"
+        },
+        {
+          "name": "FlagValue",
+          "kind": "enum",
+          "line": 268,
+          "rank": 0.002042958448826281,
+          "references": 112,
+          "signature": "enum FlagValue"
+        }
+      ]
+    },
+    {
+      "path": "crates/index/src/literal.rs",
+      "rank": 0.013472969050053208,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "GramQuery",
+          "kind": "enum",
+          "line": 16,
+          "rank": 0.003041415846561821,
+          "references": 24,
+          "signature": "pub enum GramQuery"
+        },
+        {
+          "name": "unwrap",
+          "kind": "method",
+          "line": 57,
+          "rank": 0.00475000062813766,
+          "references": 407,
+          "signature": "fn unwrap(self) -> GramQuery"
+        },
+        {
+          "name": "or",
+          "kind": "method",
+          "line": 73,
+          "rank": 0.0013907965741858854,
+          "references": 7,
+          "signature": "fn or(mut queries: Vec<GramQuery>) -> GramQuery"
+        },
+        {
+          "name": "and",
+          "kind": "method",
+          "line": 101,
+          "rank": 0.0013846342668711346,
+          "references": 5,
+          "signature": "fn and(mut queries: Vec<GramQuery>) -> GramQuery"
+        },
+        {
+          "name": "len",
+          "kind": "method",
+          "line": 619,
+          "rank": 0.0010951282585741741,
+          "references": 129,
+          "signature": "fn len(&self) -> usize"
+        },
+        {
+          "name": "GramQueryBuilder",
+          "kind": "struct",
+          "line": 637,
+          "rank": 0.0018109934757225324,
+          "references": 6,
+          "signature": "pub struct GramQueryBuilder"
+        }
+      ]
+    },
+    {
+      "path": "crates/searcher/src/testutil.rs",
+      "rank": 0.012480136731702257,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 65,
+          "rank": 0.0020599009405637245,
+          "references": 179,
+          "signature": "type Error = NoError;"
+        },
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 129,
+          "rank": 0.001291473341365735,
+          "references": 178,
+          "signature": "type Error = io::Error;"
+        },
+        {
+          "name": "SearcherTester",
+          "kind": "struct",
+          "line": 204,
+          "rank": 0.004035590857524798,
+          "references": 49,
+          "signature": "pub(crate) struct SearcherTester"
+        },
+        {
+          "name": "test",
+          "kind": "method",
+          "line": 250,
+          "rank": 0.005093171592248,
+          "references": 148,
+          "signature": "pub(crate) fn test(&self)"
+        }
+      ]
+    },
+    {
+      "path": "crates/ignore/src/lib.rs",
+      "rank": 0.012412424956104093,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "enum",
+          "line": 68,
+          "rank": 0.005227886746702923,
+          "references": 179,
+          "signature": "pub enum Error"
+        },
+        {
+          "name": "from",
+          "kind": "method",
+          "line": 367,
+          "rank": 0.0013064085450919982,
+          "references": 70,
+          "signature": "fn from(err: std::io::Error) -> Error"
+        },
+        {
+          "name": "Match",
+          "kind": "enum",
+          "line": 416,
+          "rank": 0.002424606112917324,
+          "references": 71,
+          "signature": "pub enum Match<T>"
+        },
+        {
+          "name": "inner",
+          "kind": "method",
+          "line": 464,
+          "rank": 0.001373632863746612,
+          "references": 21,
+          "signature": "pub fn inner(&self) -> Option<&T>"
+        },
+        {
+          "name": "map",
+          "kind": "method",
+          "line": 475,
+          "rank": 0.002079890687645237,
+          "references": 141,
+          "signature": "pub fn map<U, F: FnOnce(T) -> U>(self, f: F) -> Match<U>"
+        }
+      ]
+    },
+    {
+      "path": "crates/cli/src/process.rs",
+      "rank": 0.011209191280191795,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "CommandErrorKind",
+          "kind": "enum",
+          "line": 16,
+          "rank": 0.001243267097821071,
+          "references": 7,
+          "signature": "enum CommandErrorKind"
+        },
+        {
+          "name": "io",
+          "kind": "method",
+          "line": 23,
+          "rank": 0.007682198590956798,
+          "references": 196,
+          "signature": "pub(crate) fn io(ioerr: io::Error) -> CommandError"
+        },
+        {
+          "name": "CommandReaderBuilder",
+          "kind": "struct",
+          "line": 84,
+          "rank": 0.0011775533496134365,
+          "references": 7,
+          "signature": "pub struct CommandReaderBuilder"
+        },
+        {
+          "name": "async_stderr",
+          "kind": "method",
+          "line": 132,
+          "rank": 0.0011061722418004908,
+          "references": 4,
+          "signature": "pub fn async_stderr(&mut self, yes: bool) -> &mut CommandReaderBuilder"
+        }
+      ]
+    },
+    {
+      "path": "crates/printer/src/hyperlink/mod.rs",
+      "rank": 0.010454729667954809,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "format",
+          "kind": "method",
+          "line": 48,
+          "rank": 0.0037945721571975193,
+          "references": 79,
+          "signature": "pub(crate) fn format(&self) -> &HyperlinkFormat"
+        },
+        {
+          "name": "HyperlinkFormat",
+          "kind": "struct",
+          "line": 71,
+          "rank": 0.0020911550845430942,
+          "references": 13,
+          "signature": "pub struct HyperlinkFormat"
+        },
+        {
+          "name": "format",
+          "kind": "method",
+          "line": 228,
+          "rank": 0.0028647301681692518,
+          "references": 79,
+          "signature": "const fn format(&self) -> &'static str"
+        },
+        {
+          "name": "Part",
+          "kind": "enum",
+          "line": 513,
+          "rank": 0.0017042722580449428,
+          "references": 11,
+          "signature": "enum Part"
+        }
+      ]
+    },
+    {
+      "path": "crates/ignore/src/dir.rs",
+      "rank": 0.009789505530012772,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Ignore",
+          "kind": "struct",
+          "line": 94,
+          "rank": 0.00470152771772805,
+          "references": 32,
+          "signature": "pub(crate) struct Ignore"
+        },
+        {
+          "name": "IgnoreInner",
+          "kind": "struct",
+          "line": 115,
+          "rank": 0.0025060957163092895,
+          "references": 5,
+          "signature": "struct IgnoreInner"
+        },
+        {
+          "name": "IgnoreRef",
+          "kind": "struct",
+          "line": 716,
+          "rank": 0.001089574735300166,
+          "references": 4,
+          "signature": "pub(crate) struct IgnoreRef<'a>"
+        },
+        {
+          "name": "IgnoreBuilder",
+          "kind": "struct",
+          "line": 753,
+          "rank": 0.0014923073606752653,
+          "references": 40,
+          "signature": "pub(crate) struct IgnoreBuilder"
+        }
+      ]
+    },
+    {
+      "path": "crates/ignore/src/types.rs",
+      "rank": 0.009043584835418712,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Glob",
+          "kind": "struct",
+          "line": 111,
+          "rank": 0.0011058437840539873,
+          "references": 27,
+          "signature": "pub struct Glob<'a>(GlobInner<'a>);"
+        },
+        {
+          "name": "FileTypeDef",
+          "kind": "struct",
+          "line": 146,
+          "rank": 0.0012952079949918906,
+          "references": 7,
+          "signature": "pub struct FileTypeDef"
+        },
+        {
+          "name": "Selection",
+          "kind": "enum",
+          "line": 185,
+          "rank": 0.00287005240532628,
+          "references": 8,
+          "signature": "enum Selection<T>"
+        },
+        {
+          "name": "map",
+          "kind": "method",
+          "line": 205,
+          "rank": 0.002065572583890075,
+          "references": 140,
+          "signature": "fn map<U, F: FnOnce(T) -> U>(self, f: F) -> Selection<U>"
+        },
+        {
+          "name": "inner",
+          "kind": "method",
+          "line": 216,
+          "rank": 0.0017069080671564796,
+          "references": 23,
+          "signature": "fn inner(&self) -> &T"
+        }
+      ]
+    },
+    {
+      "path": "crates/globset/src/lib.rs",
+      "rank": 0.00901255289709543,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "struct",
+          "line": 157,
+          "rank": 0.0012212618543918626,
+          "references": 163,
+          "signature": "pub struct Error"
+        },
+        {
+          "name": "ErrorKind",
+          "kind": "enum",
+          "line": 167,
+          "rank": 0.0017361310530893408,
+          "references": 41,
+          "signature": "pub enum ErrorKind"
+        },
+        {
+          "name": "kind",
+          "kind": "method",
+          "line": 211,
+          "rank": 0.0011709668401857717,
+          "references": 64,
+          "signature": "pub fn kind(&self) -> &ErrorKind"
+        },
+        {
+          "name": "GlobSet",
+          "kind": "struct",
+          "line": 309,
+          "rank": 0.0017964300675974696,
+          "references": 14,
+          "signature": "pub struct GlobSet"
+        },
+        {
+          "name": "len",
+          "kind": "method",
+          "line": 337,
+          "rank": 0.001891680076406695,
+          "references": 131,
+          "signature": "pub fn len(&self) -> usize"
+        },
+        {
+          "name": "GlobSetMatchStrategy",
+          "kind": "enum",
+          "line": 654,
+          "rank": 0.0011960830054242905,
+          "references": 2,
+          "signature": "enum GlobSetMatchStrategy"
+        }
+      ]
+    },
+    {
+      "path": "crates/core/flags/defs.rs",
+      "rank": 0.007098192834291319,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Debug",
+          "kind": "struct",
+          "line": 1533,
+          "rank": 0.003249082501477358,
+          "references": 74,
+          "signature": "struct Debug;"
+        },
+        {
+          "name": "Text",
+          "kind": "struct",
+          "line": 7006,
+          "rank": 0.0010859183671622886,
+          "references": 16,
+          "signature": "struct Text;"
+        },
+        {
+          "name": "string",
+          "kind": "function",
+          "line": 7969,
+          "rank": 0.0027631919656516723,
+          "references": 24,
+          "signature": "pub(super) fn string(v: OsString) -> anyhow::Result<String>"
+        }
+      ]
+    },
+    {
+      "path": "crates/printer/src/stats.rs",
+      "rank": 0.0063772124208671035,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Stats",
+          "kind": "struct",
+          "line": 13,
+          "rank": 0.003284992352025403,
+          "references": 28,
+          "signature": "pub struct Stats"
+        },
+        {
+          "name": "Output",
+          "kind": "type",
+          "line": 108,
+          "rank": 0.0015461100344208503,
+          "references": 40,
+          "signature": "type Output = Stats;"
+        },
+        {
+          "name": "Output",
+          "kind": "type",
+          "line": 116,
+          "rank": 0.0015461100344208503,
+          "references": 40,
+          "signature": "type Output = Stats;"
+        }
+      ]
+    },
+    {
+      "path": "crates/pcre2/src/error.rs",
+      "rank": 0.004985101927989396,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "struct",
+          "line": 7,
+          "rank": 0.0013129137748147314,
+          "references": 163,
+          "signature": "pub struct Error"
+        },
+        {
+          "name": "kind",
+          "kind": "method",
+          "line": 17,
+          "rank": 0.0013459793910314724,
+          "references": 64,
+          "signature": "pub fn kind(&self) -> &ErrorKind"
+        },
+        {
+          "name": "ErrorKind",
+          "kind": "enum",
+          "line": 25,
+          "rank": 0.0023262087621431925,
+          "references": 42,
+          "signature": "pub enum ErrorKind"
+        }
+      ]
+    },
+    {
+      "path": "crates/regex/src/matcher.rs",
+      "rank": 0.0049568900468608,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Captures",
+          "kind": "type",
+          "line": 410,
+          "rank": 0.001895355738063593,
+          "references": 6,
+          "signature": "type Captures = RegexCaptures;"
+        },
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 411,
+          "rank": 0.001241327970114128,
+          "references": 161,
+          "signature": "type Error = NoError;"
+        },
+        {
+          "name": "RegexCaptures",
+          "kind": "struct",
+          "line": 524,
+          "rank": 0.0018202063386830794,
+          "references": 4,
+          "signature": "pub struct RegexCaptures"
+        }
+      ]
+    },
+    {
+      "path": "crates/regex/src/error.rs",
+      "rank": 0.004802001245769477,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "struct",
+          "line": 7,
+          "rank": 0.0012716292954337673,
+          "references": 160,
+          "signature": "pub struct Error"
+        },
+        {
+          "name": "kind",
+          "kind": "method",
+          "line": 34,
+          "rank": 0.0013022287295435012,
+          "references": 64,
+          "signature": "pub fn kind(&self) -> &ErrorKind"
+        },
+        {
+          "name": "ErrorKind",
+          "kind": "enum",
+          "line": 42,
+          "rank": 0.0022281432207922084,
+          "references": 41,
+          "signature": "pub enum ErrorKind"
+        }
+      ]
+    },
+    {
+      "path": "crates/globset/src/fnv.rs",
+      "rank": 0.004386119514151574,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "HashMap",
+          "kind": "type",
+          "line": 2,
+          "rank": 0.002545126920054584,
+          "references": 25,
+          "signature": "pub(crate) type HashMap<K, V> = std::collections::HashMap<K, V, std::hash::BuildHasherDefault<Hasher>>;"
+        },
+        {
+          "name": "Hasher",
+          "kind": "struct",
+          "line": 6,
+          "rank": 0.0018409925940969895,
+          "references": 6,
+          "signature": "pub(crate) struct Hasher(u64);"
+        }
+      ]
+    },
+    {
+      "path": "crates/ignore/src/overrides.rs",
+      "rank": 0.003408015082105644,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Glob",
+          "kind": "struct",
+          "line": 28,
+          "rank": 0.001771110915875563,
+          "references": 26,
+          "signature": "pub struct Glob<'a>(GlobInner<'a>);"
+        },
+        {
+          "name": "GlobInner",
+          "kind": "enum",
+          "line": 32,
+          "rank": 0.0016369041662300811,
+          "references": 3,
+          "signature": "enum GlobInner<'a>"
+        }
+      ]
+    },
+    {
+      "path": "crates/regex/src/config.rs",
+      "rank": 0.0029838805337651046,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Config",
+          "kind": "struct",
+          "line": 25,
+          "rank": 0.0015214269941359283,
+          "references": 13,
+          "signature": "pub(crate) struct Config"
+        },
+        {
+          "name": "config",
+          "kind": "method",
+          "line": 232,
+          "rank": 0.0014624535396291765,
+          "references": 139,
+          "signature": "pub(crate) fn config(&self) -> &Config"
+        }
+      ]
+    },
+    {
+      "path": "crates/core/flags/config.rs",
+      "rank": 0.0029244464543483287,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "args",
+          "kind": "function",
+          "line": 16,
+          "rank": 0.0029244464543483287,
+          "references": 251,
+          "signature": "pub fn args() -> Vec<OsString>"
+        }
+      ]
+    },
+    {
+      "path": "crates/ignore/src/gitignore.rs",
+      "rank": 0.0025697319279516626,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Glob",
+          "kind": "struct",
+          "line": 32,
+          "rank": 0.0014116295486651404,
+          "references": 28,
+          "signature": "pub struct Glob"
+        },
+        {
+          "name": "Gitignore",
+          "kind": "struct",
+          "line": 81,
+          "rank": 0.0011581023792865222,
+          "references": 18,
+          "signature": "pub struct Gitignore"
+        }
+      ]
+    },
+    {
+      "path": "crates/pcre2/src/matcher.rs",
+      "rank": 0.002549338520559407,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "RegexMatcherBuilder",
+          "kind": "struct",
+          "line": 12,
+          "rank": 0.001293226981307964,
+          "references": 29,
+          "signature": "pub struct RegexMatcherBuilder"
+        },
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 317,
+          "rank": 0.0012561115392514435,
+          "references": 163,
+          "signature": "type Error = Error;"
+        }
+      ]
+    },
+    {
+      "path": "crates/core/haystack.rs",
+      "rank": 0.0025384482126121137,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "HaystackBuilder",
+          "kind": "struct",
+          "line": 16,
+          "rank": 0.0012464043528213767,
+          "references": 3,
+          "signature": "pub(crate) struct HaystackBuilder"
+        },
+        {
+          "name": "strip_dot_prefix",
+          "kind": "method",
+          "line": 85,
+          "rank": 0.001292043859790737,
+          "references": 6,
+          "signature": "pub(crate) fn strip_dot_prefix( &mut self, yes: bool, ) -> &mut HaystackBuilder"
+        }
+      ]
+    },
+    {
+      "path": "crates/printer/src/color.rs",
+      "rank": 0.0024789597572862686,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "ColorError",
+          "kind": "enum",
+          "line": 24,
+          "rank": 0.0024789597572862686,
+          "references": 10,
+          "signature": "pub enum ColorError"
+        }
+      ]
+    },
+    {
+      "path": "crates/globset/src/serde_impl.rs",
+      "rank": 0.0024175722238055073,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Value",
+          "kind": "type",
+          "line": 20,
+          "rank": 0.0012087861119027537,
+          "references": 11,
+          "signature": "type Value = Glob;"
+        },
+        {
+          "name": "Value",
+          "kind": "type",
+          "line": 48,
+          "rank": 0.0012087861119027537,
+          "references": 11,
+          "signature": "type Value = GlobSet;"
+        }
+      ]
+    },
+    {
+      "path": "crates/core/flags/parse.rs",
+      "rank": 0.0016043702496835069,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "P",
+          "kind": "const",
+          "line": 182,
+          "rank": 0.0016043702496835069,
+          "references": 85,
+          "signature": "static P: OnceLock<Parser> = OnceLock::new();"
+        }
+      ]
+    },
+    {
+      "path": "crates/core/flags/lowargs.rs",
+      "rank": 0.001599333844165566,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "LowArgs",
+          "kind": "struct",
+          "line": 33,
+          "rank": 0.001599333844165566,
+          "references": 123,
+          "signature": "pub(crate) struct LowArgs"
+        }
+      ]
+    },
+    {
+      "path": "crates/searcher/src/searcher/mod.rs",
+      "rank": 0.001289800342185317,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "SearcherBuilder",
+          "kind": "struct",
+          "line": 298,
+          "rank": 0.001289800342185317,
+          "references": 125,
+          "signature": "pub struct SearcherBuilder"
+        }
+      ]
+    },
+    {
+      "path": "crates/cli/src/human.rs",
+      "rank": 0.0012148010429593938,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "format",
+          "kind": "method",
+          "line": 19,
+          "rank": 0.0012148010429593938,
+          "references": 66,
+          "signature": "fn format(original: &str) -> ParseSizeError"
+        }
+      ]
+    },
+    {
+      "path": "crates/cli/src/pattern.rs",
+      "rank": 0.0011902317740178426,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "valid_up_to",
+          "kind": "method",
+          "line": 20,
+          "rank": 0.0011902317740178426,
+          "references": 7,
+          "signature": "pub fn valid_up_to(&self) -> usize"
+        }
+      ]
+    },
+    {
+      "path": "crates/printer/src/json.rs",
+      "rank": 0.0011616533435602871,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 720,
+          "rank": 0.0011616533435602871,
+          "references": 161,
+          "signature": "type Error = io::Error;"
+        }
+      ]
+    },
+    {
+      "path": "crates/printer/src/summary.rs",
+      "rank": 0.0011574709104417958,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 631,
+          "rank": 0.0011574709104417958,
+          "references": 160,
+          "signature": "type Error = io::Error;"
+        }
+      ]
+    },
+    {
+      "path": "crates/core/flags/hiargs.rs",
+      "rank": 0.0010982797522814164,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "globs",
+          "kind": "function",
+          "line": 1246,
+          "rank": 0.0010982797522814164,
+          "references": 27,
+          "signature": "fn globs( state: &State, low: &LowArgs, ) -> anyhow::Result<ignore::overrides::Override>"
+        }
+      ]
+    }
+  ],
+  "edge_source": "t0-treesitter"
+}

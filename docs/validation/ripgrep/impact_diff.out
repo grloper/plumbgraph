@@ -1,0 +1,12 @@
+{
+  "seeds": [],
+  "affected": [],
+  "affected_files": [],
+  "tests_to_run": [],
+  "module_level_dependents": [],
+  "limitations": [
+    "reverse reachability over resolved call/reference edges: dynamic dispatch, reflection and code outside the index are invisible",
+    "confidence is the product of edge confidences along the best path found; it is a heuristic, not a probability",
+    "tests_to_run lists test files that reach a changed symbol through the graph; absence is not proof a test is unaffected"
+  ]
+}

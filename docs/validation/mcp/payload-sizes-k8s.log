@@ -1,0 +1,5 @@
+dead_code bytes 72514 ms 6787 truncated true isError false
+check_dependencies bytes 6528 ms 5423 truncated false isError false
+verify bytes 152388 ms 12134 truncated true isError false
+repo_map bytes 13008 ms 6216 truncated false isError false
+impact bytes 1482 ms 6163 truncated false isError false

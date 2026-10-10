@@ -1,0 +1,4 @@
+indexed 264 file(s): parsed 0, unchanged 264, removed 0
+symbols 4247, references 74862, imports 2674, edges 41530
+languages: java=264 text=1
+db: /workspace/repos/gson/.plumbgraph/index.db

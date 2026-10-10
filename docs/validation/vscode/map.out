@@ -1,0 +1,114 @@
+# plumb map: 47 files, 66 of 144129 symbols (~1457 tokens, budget 1500)
+src/vs/base/common/uri.ts
+  102: export class URI implements UriComponents
+  271: static parse(value: string, _strict: boolean = false): URI
+  386: toString(skipEncoding: boolean = false): string
+  426: export interface UriComponents
+  467: override toString(skipEncoding: boolean = false): string
+  666: function _asFormatted(uri: URI, skipEncoding: boolean): string
+src/vs/base/common/lifecycle.ts
+  312: export interface IDisposable
+  332: export function dispose<T extends IDisposable>(arg: T | Iterable<T> | undefined): any
+  416: export class DisposableStore implements IDisposable
+  526: export abstract class Disposable implements IDisposable
+  801: get(key: K): V | undefined
+src/vs/workbench/contrib/tasks/common/tasks.ts
+  32: export enum ShellQuoting
+  324: export interface IQuotedString
+  329: export type CommandString = string | IQuotedString;
+  332: export function value(value: CommandString): string
+src/vs/workbench/contrib/tasks/common/taskConfiguration.ts
+  233: export type CommandString = Types.SingleOrMany<string> |
+  236: export function value(value: CommandString): string
+src/vs/workbench/contrib/chat/common/model/objectMutationLog.ts
+  92: export function key<T, R = T>(comparator?: (a: R, b: R) => boolean): TransformValue<T, R>
+  103: export function value<T, R>(comparator?: (a: R, b: R) => boolean): TransformValue<T, R>
+extensions/json-language-features/client/src/jsonClient.ts
+  376: type T = SymbolInformation[] | DocumentSymbol[];
+src/vs/base/common/platform.ts
+  173: export function value(): string
+src/vs/base/common/types.ts
+  11: export function isString(str: unknown): str is string
+  18: export function isStringArray(value: unknown): value is string[]
+extensions/copilot/src/util/vs/base/common/platform.ts
+  172: export function value(): string
+src/vs/platform/agentHost/node/copilot/copilotToolDisplay.ts
+  1134: function str(value: unknown): string | undefined
+src/vs/nls.ts
+  85: export function localize(data: ILocalizeInfo | string /* | number when built */, message: string /* | null when built */…
+src/vs/workbench/contrib/mergeEditor/browser/model/modifiedBaseRange.ts
+  263: export enum ModifiedBaseRangeStateKind
+src/vs/base/common/event.ts
+  46: export interface Event<T>
+  1411: fire(event: T): void
+src/vs/platform/agentHost/common/agent.ts
+  1288: export function uri(provider: AgentProvider, rawSessionId: string): URI
+  1296: export function id(session: URI | string): string
+src/vs/workbench/contrib/chat/common/promptSyntax/chatPromptFilesContribution.ts
+  105: function key(extensionId: ExtensionIdentifier, type: PromptsType, path: string)
+src/vs/editor/common/model/bracketPairsTextModelPart/bracketPairsTree/ast.ts
+  14: export const enum AstNodeKind
+src/vs/platform/instantiation/common/instantiation.ts
+  109: export function createDecorator<T>(serviceId: string): ServiceIdentifier<T>
+src/vs/workbench/api/worker/extensionHostWorker.ts
+  249: export function create()
+src/vs/workbench/api/common/extHostTypes.ts
+  1884: get base(): string
+  1887: set base(base: string)
+src/vs/platform/configuration/common/configurationModels.ts
+  71: get overrides(): IOverrides[]
+  109: get overrides()
+src/vs/workbench/contrib/mcp/common/mcpTypes.ts
+  939: export interface Error
+extensions/terminal-suggest/src/fig/shared/internal.ts
+  32: export type Arg = Metadata.ArgMeta;
+src/vs/platform/mcp/common/modelContextProtocol.ts
+  160: export interface Error
+extensions/copilot/src/extension/typescriptContext/serverPlugin/src/common/protocol.ts
+  532: export type Error =
+extensions/copilot/src/extension/typescriptContext/common/serverProtocol.ts
+  532: export type Error =
+cli/src/options.rs
+  65: type Error = String;
+cli/src/msgpack_rpc.rs
+  137: type Error = io::Error;
+extensions/copilot/src/extension/common/modelContextProtocol.ts
+  133: export interface Error
+cli/src/desktop/version_manager.rs
+  69: type Error = InvalidRequestedVersion;
+src/vs/workbench/contrib/notebook/browser/viewModel/cellOutputTextHelper.ts
+  13: interface Error
+src/vs/workbench/contrib/chat/common/attachments/chatVariableEntries.ts
+  425: export function id(data: IDiagnosticVariableEntryFilterData)
+src/vs/workbench/contrib/performance/electron-browser/rendererAutoProfiler.ts
+  108: private async _store(profile: IV8Profile, sessionId: string): Promise<void>
+src/vs/workbench/services/extensions/common/extensionHostKind.ts
+  9: export const enum ExtensionHostKind
+extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/copilotCLIPromptReferences.ts
+  154: export function id(data: Record<string, unknown> &
+cli/src/util/errors.rs
+  265: pub struct InvalidRequestedVersion();
+extensions/typescript-language-features/src/filesystems/autoInstallerFs.ts
+  243: get scheme()
+src/vs/workbench/contrib/chat/browser/widgetHosts/viewPane/chatContextUsageDetails.ts
+  30: export interface IChatContextUsageData
+src/vs/editor/common/core/range.ts
+  33: export class Range
+src/vs/sessions/contrib/github/browser/fetchers/githubPRCIFetcher.ts
+  151: function e(value: string): string
+src/vs/sessions/contrib/github/browser/fetchers/githubPRFetcher.ts
+  458: function e(value: string): string
+src/vs/platform/agentHost/node/missionControl/missionControlSessionMirror.ts
+  637: private _session(sessionId: string): SessionSpool
+src/vs/code/electron-main/main.ts
+  92: class CodeMain
+src/vs/platform/actions/common/actions.ts
+  723: export abstract class Action2
+extensions/copilot/src/util/vs/base/common/uri.ts
+  104: export class URI implements UriComponents
+src/vs/editor/standalone/browser/standaloneThemeService.ts
+  66: public get base(): string
+src/vs/base/common/jsonSchema.ts
+  8: export interface IJSONSchema
+extensions/copilot/src/platform/filesystem/common/fileTypes.ts
+  40: get base(): string

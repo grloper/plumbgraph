@@ -1,0 +1,37 @@
+{
+  "findings": [],
+  "index": {
+    "by_language": {
+      "html": 8,
+      "javascript": 141,
+      "text": 1
+    },
+    "db_path": "/workspace/repos/express/.plumbgraph/index.db",
+    "edges": 2142,
+    "files_hashed": 0,
+    "files_parsed": 0,
+    "files_removed": 0,
+    "files_seen": 141,
+    "files_skipped_large": 0,
+    "files_unchanged": 141,
+    "files_with_syntax_errors": 0,
+    "imports": 400,
+    "parse_errors": 0,
+    "refs": 27450,
+    "resolved": false,
+    "symbols": 586,
+    "text_files": 9
+  },
+  "limitations": [
+    "tier-0 (tree-sitter, name-based) analysis: no type information, reflection or macro expansion; no SCIP index was used",
+    "never delete on `medium` or `low` findings without checking usages yourself; `high` means no use was found in indexed code, not that deletion is proven safe",
+    "files excluded by .gitignore, vendor/build directories and files over 2 MiB are not indexed"
+  ],
+  "scip": null,
+  "summary": {
+    "high": 0,
+    "low": 0,
+    "medium": 0,
+    "total": 0
+  }
+}

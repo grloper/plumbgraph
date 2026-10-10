@@ -1,0 +1,1038 @@
+{
+  "findings": [
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Target` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/globset/src/glob.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "type",
+      "level": "high",
+      "line": 256,
+      "message": "type `Tokens::Target` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Tokens::Target"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `begin_read` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/index/src/index.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 181,
+      "message": "method `Handle::begin_read` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Handle::begin_read"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `read_write` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/index/src/index.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 191,
+      "message": "method `Handle::read_write` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Handle::read_write"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `read_write_mut` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/index/src/index.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 200,
+      "message": "method `Handle::read_write_mut` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Handle::read_write_mut"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `max_literal_len` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/regex/src/literal.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 537,
+      "message": "method `TSeq::max_literal_len` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "TSeq::max_literal_len"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/cli/src/hostname.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 36,
+      "message": "function `gethostname` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "gethostname"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/globset/src/lib.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 695,
+      "message": "method `GlobSetMatchStrategy::matches_all` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "GlobSetMatchStrategy::matches_all"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/globset/src/lib.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 725,
+      "message": "method `LiteralStrategy::matches_all` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "LiteralStrategy::matches_all"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/globset/src/lib.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 760,
+      "message": "method `BasenameLiteralStrategy::matches_all` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "BasenameLiteralStrategy::matches_all"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/globset/src/lib.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 798,
+      "message": "method `ExtensionStrategy::matches_all` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "ExtensionStrategy::matches_all"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/globset/src/lib.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 835,
+      "message": "method `PrefixStrategy::matches_all` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "PrefixStrategy::matches_all"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/globset/src/lib.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 880,
+      "message": "method `SuffixStrategy::matches_all` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "SuffixStrategy::matches_all"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/globset/src/lib.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 928,
+      "message": "method `RequiredExtensionStrategy::matches_all` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "RequiredExtensionStrategy::matches_all"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/globset/src/lib.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 997,
+      "message": "method `RegexSetStrategy::matches_all` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "RegexSetStrategy::matches_all"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/ignore/src/incremental.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 542,
+      "message": "function `normalize_absolute` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "normalize_absolute"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/ignore/src/walk.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 147,
+      "message": "method `DirEntryInner::into_path` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "DirEntryInner::into_path"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "2 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/ignore/src/walk.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 276,
+      "message": "method `DirEntryRaw::into_path` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "DirEntryRaw::into_path"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/printer/src/counter.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 47,
+      "message": "method `CounterWriter::into_inner` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "CounterWriter::into_inner"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/regex/src/literal.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 516,
+      "message": "method `TSeq::is_exact` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "TSeq::is_exact"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/searcher/src/line_buffer.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 75,
+      "message": "method `BinaryDetection::is_quit` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "BinaryDetection::is_quit"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/searcher/src/line_buffer.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 256,
+      "message": "method `LineBufferReader::fill` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "LineBufferReader::fill"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/searcher/src/line_buffer.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 367,
+      "message": "method `LineBuffer::free_buffer` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "LineBuffer::free_buffer"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/searcher/src/line_buffer.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 406,
+      "message": "method `LineBuffer::fill` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "LineBuffer::fill"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "crates/searcher/src/line_buffer.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 499,
+      "message": "method `LineBuffer::ensure_capacity` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "LineBuffer::ensure_capacity"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `associate` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/cli/src/decompress.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 96,
+      "message": "method `DecompressionMatcherBuilder::associate` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "DecompressionMatcherBuilder::associate"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `unescape_os` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/cli/src/escape.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 77,
+      "message": "function `unescape_os` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "unescape_os"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `is_tty_stdin` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/cli/src/lib.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 260,
+      "message": "function `is_tty_stdin` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "is_tty_stdin"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `is_tty_stdout` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/cli/src/lib.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 279,
+      "message": "function `is_tty_stdout` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "is_tty_stdout"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `is_tty_stderr` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/cli/src/lib.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 292,
+      "message": "function `is_tty_stderr` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "is_tty_stderr"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `global` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/ignore/src/gitignore.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 141,
+      "message": "method `Gitignore::global` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Gitignore::global"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `is_partial` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/ignore/src/lib.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 162,
+      "message": "method `Error::is_partial` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Error::is_partial"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `io_error` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/ignore/src/lib.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 207,
+      "message": "method `Error::io_error` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Error::io_error"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `into_io_error` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/ignore/src/lib.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 232,
+      "message": "method `Error::into_io_error` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Error::into_io_error"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `file_type_def` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/ignore/src/types.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 132,
+      "message": "method `Glob::file_type_def` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Glob::file_type_def"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `sort_by_file_path` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/ignore/src/walk.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 973,
+      "message": "method `WalkBuilder::sort_by_file_path` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "WalkBuilder::sort_by_file_path"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `add_all` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/matcher/src/lib.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 331,
+      "message": "method `ByteSet::add_all` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "ByteSet::add_all"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `disable_utf_check` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/pcre2/src/matcher.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 245,
+      "message": "method `RegexMatcherBuilder::disable_utf_check` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "RegexMatcherBuilder::disable_utf_check"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `jit` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/pcre2/src/matcher.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 258,
+      "message": "method `RegexMatcherBuilder::jit` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "RegexMatcherBuilder::jit"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `to_color_spec` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/printer/src/color.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 162,
+      "message": "method `UserColorSpec::to_color_spec` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "UserColorSpec::to_color_spec"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `into_config` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/printer/src/hyperlink/mod.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 89,
+      "message": "method `HyperlinkFormat::into_config` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "HyperlinkFormat::into_config"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `has_written` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/printer/src/json.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 566,
+      "message": "method `JSON::has_written` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "JSON::has_written"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `new_no_color` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/printer/src/standard.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 505,
+      "message": "method `Standard::new_no_color` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Standard::new_no_color"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `has_written` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/printer/src/standard.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 600,
+      "message": "method `Standard::has_written` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Standard::has_written"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `new_no_color` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/printer/src/summary.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 377,
+      "message": "method `Summary::new_no_color` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Summary::new_no_color"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `has_written` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/printer/src/summary.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 454,
+      "message": "method `Summary::has_written` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Summary::has_written"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `build_literals` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/regex/src/matcher.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 92,
+      "message": "method `RegexMatcherBuilder::build_literals` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "RegexMatcherBuilder::build_literals"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `search_file` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "crates/searcher/src/searcher/mod.rs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 665,
+      "message": "method `Searcher::search_file` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Searcher::search_file"
+    }
+  ],
+  "index": {
+    "by_language": {
+      "rust": 110,
+      "text": 18
+    },
+    "db_path": "/workspace/repos/ripgrep/.plumbgraph/index.db",
+    "edges": 42187,
+    "files_hashed": 0,
+    "files_parsed": 0,
+    "files_removed": 0,
+    "files_seen": 110,
+    "files_skipped_large": 0,
+    "files_unchanged": 110,
+    "files_with_syntax_errors": 0,
+    "imports": 500,
+    "parse_errors": 0,
+    "refs": 69377,
+    "resolved": false,
+    "symbols": 4112,
+    "text_files": 18
+  },
+  "limitations": [
+    "tier-0 (tree-sitter, name-based) analysis: no type information, reflection or macro expansion; no SCIP index was used",
+    "never delete on `medium` or `low` findings without checking usages yourself; `high` means no use was found in indexed code, not that deletion is proven safe",
+    "files excluded by .gitignore, vendor/build directories and files over 2 MiB are not indexed",
+    "23 finding(s) are exported symbols. If this project is a library, re-run with --lib to treat exported symbols as public API (app mode assumes only main/init/tests are entry points)"
+  ],
+  "scip": null,
+  "summary": {
+    "high": 5,
+    "low": 0,
+    "medium": 42,
+    "total": 47
+  }
+}

@@ -1,0 +1,329 @@
+{
+  "external_imports": 60,
+  "findings": [
+    {
+      "category": "deps",
+      "confidence": 0.7,
+      "evidence": [
+        "`BaseHTTPServer` is imported at tests/conftest.py:4",
+        "not declared in any pypi manifest covering this file",
+        "pypi returned 404 for `BaseHTTPServer`"
+      ],
+      "file": "tests/conftest.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "medium",
+      "line": 4,
+      "message": "`BaseHTTPServer` is not declared and does not exist on pypi",
+      "rule": "nonexistent-package",
+      "severity": "error",
+      "source": "registry:pypi",
+      "symbol": "BaseHTTPServer"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.7,
+      "evidence": [
+        "`SimpleHTTPServer` is imported at tests/conftest.py:5",
+        "not declared in any pypi manifest covering this file",
+        "pypi returned 404 for `SimpleHTTPServer`"
+      ],
+      "file": "tests/conftest.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "medium",
+      "line": 5,
+      "message": "`SimpleHTTPServer` is not declared and does not exist on pypi",
+      "rule": "nonexistent-package",
+      "severity": "error",
+      "source": "registry:pypi",
+      "symbol": "SimpleHTTPServer"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`pygments` is imported at docs/_themes/flask_theme_support.py:2",
+        "not declared in any pypi manifest covering this file",
+        "pypi has a package named `pygments`"
+      ],
+      "file": "docs/_themes/flask_theme_support.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 2,
+      "message": "`pygments` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "pygments.style"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`pygments` is imported at docs/_themes/flask_theme_support.py:3",
+        "not declared in any pypi manifest covering this file",
+        "pypi has a package named `pygments`"
+      ],
+      "file": "docs/_themes/flask_theme_support.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 3,
+      "message": "`pygments` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "pygments.token"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`simplejson` is imported at src/requests/compat.py:76",
+        "not declared in any pypi manifest covering this file",
+        "pypi has a package named `simplejson`"
+      ],
+      "file": "src/requests/compat.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 76,
+      "message": "`simplejson` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "simplejson"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "setup.py",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 7,
+      "message": "`setuptools` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.35,
+      "evidence": [
+        "`simplejson` is imported at src/requests/compat.py:69",
+        "not declared in any pypi manifest covering this file",
+        "pypi has a package named `simplejson`"
+      ],
+      "file": "src/requests/compat.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)",
+        "the import is guarded by try/except ImportError (optional or compatibility import)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 69,
+      "message": "`simplejson` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "simplejson"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.35,
+      "evidence": [
+        "`StringIO` is imported at tests/compat.py:4",
+        "not declared in any pypi manifest covering this file",
+        "pypi returned 404 for `StringIO`"
+      ],
+      "file": "tests/compat.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)",
+        "the import is guarded by try/except ImportError (optional or compatibility import)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 4,
+      "message": "`StringIO` is not declared and does not exist on pypi",
+      "rule": "nonexistent-package",
+      "severity": "error",
+      "source": "registry:pypi",
+      "symbol": "StringIO"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.35,
+      "evidence": [
+        "`cStringIO` is imported at tests/compat.py:9",
+        "not declared in any pypi manifest covering this file",
+        "pypi returned 404 for `cStringIO`"
+      ],
+      "file": "tests/compat.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)",
+        "the import is guarded by try/except ImportError (optional or compatibility import)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 9,
+      "message": "`cStringIO` is not declared and does not exist on pypi",
+      "rule": "nonexistent-package",
+      "severity": "error",
+      "source": "registry:pypi",
+      "symbol": "cStringIO"
+    }
+  ],
+  "imports_checked": 308,
+  "lookups": [
+    {
+      "ecosystem": "pypi",
+      "package": "BaseHTTPServer",
+      "result": "not-found"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PyOpenSSL",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PySocks",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SimpleHTTPServer",
+      "result": "not-found"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Sphinx",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "StringIO",
+      "result": "not-found"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cStringIO",
+      "result": "not-found"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "certifi",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "chardet",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "charset_normalizer",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cryptography",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "httpbin",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "idna",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pygments",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyright",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pytest",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pytest-cov",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pytest-httpbin",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pytest-mock",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pytest-xdist",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "setuptools",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "simplejson",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "trustme",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "typing_extensions",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wheel",
+      "result": "exists"
+    }
+  ],
+  "offline": false,
+  "registry": "http"
+}

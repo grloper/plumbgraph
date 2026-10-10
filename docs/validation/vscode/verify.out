@@ -1,0 +1,4045 @@
+{
+  "baseline_path": "/workspace/repos/vscode/plumb-baseline.json",
+  "baseline_updated": false,
+  "baselined": 0,
+  "executed": false,
+  "fail_on": "medium",
+  "fixed": 0,
+  "limitations": [
+    "dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change",
+    "baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new",
+    "no baseline found at /workspace/repos/vscode/plumb-baseline.json: every finding counts as new (create one with --update-baseline)"
+  ],
+  "new": [
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `IntoIter` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "cli/src/util/ring_buffer.rs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "type",
+      "level": "high",
+      "line": 55,
+      "message": "type `RingBuffer::IntoIter` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "RingBuffer::IntoIter"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `resetIsolationLock` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/vscode-node/sessionOptionGroupBuilder.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "high",
+      "line": 261,
+      "message": "function `resetIsolationLock` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "resetIsolationLock"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `setDistanceToAlternativeDiagnostic` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/extension/inlineEdits/vscode-node/features/diagnosticsCompletionProcessor.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 640,
+      "message": "method `DiagnosticsCompletionHandlerTelemetry.setDistanceToAlternativeDiagnostic` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "DiagnosticsCompletionHandlerTelemetry.setDistanceToAlternativeDiagnostic"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `setDistanceToUnknownDiagnostic` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/extension/inlineEdits/vscode-node/features/diagnosticsCompletionProcessor.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 646,
+      "message": "method `DiagnosticsCompletionHandlerTelemetry.setDistanceToUnknownDiagnostic` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "DiagnosticsCompletionHandlerTelemetry.setDistanceToUnknownDiagnostic"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `setHasAlternativeDiagnosticForSameRange` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/extension/inlineEdits/vscode-node/features/diagnosticsCompletionProcessor.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 652,
+      "message": "method `DiagnosticsCompletionHandlerTelemetry.setHasAlternativeDiagnosticForSameRange` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "DiagnosticsCompletionHandlerTelemetry.setHasAlternativeDiagnosticForSameRange"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `_prefetch` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/extension/intents/node/newIntent.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 169,
+      "message": "method `NewWorkspaceCopilotContentManager._prefetch` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "NewWorkspaceCopilotContentManager._prefetch"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `registerToolExtension` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/extension/tools/common/toolsRegistry.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 137,
+      "message": "method `ToolRegistry.registerToolExtension` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "ToolRegistry.registerToolExtension"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `MyType` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/extension/typescriptContext/serverPlugin/fixtures/nes/p1/source/test.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "type",
+      "level": "high",
+      "line": 46,
+      "message": "type `MyType` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "MyType"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `TypeOne` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/extension/typescriptContext/serverPlugin/fixtures/nes/p1/source/test.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "type",
+      "level": "high",
+      "line": 50,
+      "message": "type `TypeOne` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "TypeOne"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `TypeTwo` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/extension/typescriptContext/serverPlugin/fixtures/nes/p1/source/test.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "type",
+      "level": "high",
+      "line": 54,
+      "message": "type `TypeTwo` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "TypeTwo"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `addRunnableResult` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/extension/typescriptContext/vscode-node/ts6/tsContextService.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 117,
+      "message": "method `OnTimeoutData.addRunnableResult` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "OnTimeoutData.addRunnableResult"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `onUpgrade` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/platform/networking/node/nodeFetchFetcher.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 112,
+      "message": "method `createWebSocket.onUpgrade` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "createWebSocket.onUpgrade"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `onHeaders` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/platform/networking/node/nodeFetchFetcher.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 119,
+      "message": "method `createWebSocket.onHeaders` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "createWebSocket.onHeaders"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `isTreeSitterOffsetRange` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/platform/parser/node/nodes.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 66,
+      "message": "method `TreeSitterOffsetRange.isTreeSitterOffsetRange` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "TreeSitterOffsetRange.isTreeSitterOffsetRange"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `getStateIdBeforeOrAtOpIdx` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/platform/workspaceRecorder/common/resolvedRecording/resolvedRecording.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 195,
+      "message": "method `WorkspaceDocument.getStateIdBeforeOrAtOpIdx` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "WorkspaceDocument.getStateIdBeforeOrAtOpIdx"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `getDependencyGraph` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/util/vs/base/common/observableInternal/observables/baseObservable.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 142,
+      "message": "method `DebugHelper.getDependencyGraph` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "DebugHelper.getDependencyGraph"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `getObserverGraph` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/src/util/vs/base/common/observableInternal/observables/baseObservable.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 146,
+      "message": "method `DebugHelper.getObserverGraph` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "DebugHelper.getObserverGraph"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `CallingMethodAsync` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_call_not_awaited.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 5,
+      "message": "method `Program.CallingMethodAsync` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Program.CallingMethodAsync"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `PrintMessage` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_does_not_exist.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 2,
+      "message": "method `Program.PrintMessage` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Program.PrintMessage"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Class2` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "high",
+      "line": 21,
+      "message": "class `Class2` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Class2"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Class3` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "high",
+      "line": 27,
+      "message": "class `Class3` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Class3"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Class2` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "high",
+      "line": 42,
+      "message": "class `Class2` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Class2"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Class3` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "high",
+      "line": 48,
+      "message": "class `Class3` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Class3"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Class2` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "high",
+      "line": 63,
+      "message": "class `Class2` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Class2"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Class3` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "high",
+      "line": 69,
+      "message": "class `Class3` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Class3"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Class11` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_has_same_name_as.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "high",
+      "line": 2,
+      "message": "class `Class1.Class11` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Class1.Class11"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Class111` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_has_same_name_as.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "high",
+      "line": 3,
+      "message": "class `Class1.Class11.Class111` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Class1.Class11.Class111"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Class112` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_has_same_name_as.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "high",
+      "line": 4,
+      "message": "class `Class1.Class11.Class112` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Class1.Class11.Class112"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `provideCompletionItem` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/html-language-features/client/src/htmlClient.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 169,
+      "message": "method `startClientWithParticipants.provideCompletionItem` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "startClientWithParticipants.provideCompletionItem"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `dropCustomMetadata` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/ipynb/src/ipynbMain.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 114,
+      "message": "method `activate.dropCustomMetadata` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "activate.dropCustomMetadata"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `protectData` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/microsoft-authentication/packageMocks/dpapi/dpapi.js",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 7,
+      "message": "method `defaultDpapi.protectData` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "defaultDpapi.protectData"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `unprotectData` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/microsoft-authentication/packageMocks/dpapi/dpapi.js",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 10,
+      "message": "method `defaultDpapi.unprotectData` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "defaultDpapi.unprotectData"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `flatPath` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "extensions/typescript-language-features/src/filesystems/autoInstallerFs.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 249,
+      "message": "method `MappedUri.flatPath` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "MappedUri.flatPath"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `acceptBubbleUp` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/base/browser/ui/tree/tree.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 230,
+      "message": "method `TreeDragOverReactions.acceptBubbleUp` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "TreeDragOverReactions.acceptBubbleUp"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `acceptBubbleDown` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/base/browser/ui/tree/tree.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 231,
+      "message": "method `TreeDragOverReactions.acceptBubbleDown` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "TreeDragOverReactions.acceptBubbleDown"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `acceptCopyBubbleUp` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/base/browser/ui/tree/tree.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 232,
+      "message": "method `TreeDragOverReactions.acceptCopyBubbleUp` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "TreeDragOverReactions.acceptCopyBubbleUp"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `acceptCopyBubbleDown` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/base/browser/ui/tree/tree.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 233,
+      "message": "method `TreeDragOverReactions.acceptCopyBubbleDown` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "TreeDragOverReactions.acceptCopyBubbleDown"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `getDependencyGraph` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/base/common/observableInternal/observables/baseObservable.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 140,
+      "message": "method `DebugHelper.getDependencyGraph` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "DebugHelper.getDependencyGraph"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `getObserverGraph` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/base/common/observableInternal/observables/baseObservable.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 144,
+      "message": "method `DebugHelper.getObserverGraph` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "DebugHelper.getObserverGraph"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `nodesConstructed` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/editor/common/model/bracketPairsTextModelPart/bracketPairsTree/parser.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 34,
+      "message": "method `Parser.nodesConstructed` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Parser.nodesConstructed"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `nodesReused` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/editor/common/model/bracketPairsTextModelPart/bracketPairsTree/parser.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 41,
+      "message": "method `Parser.nodesReused` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Parser.nodesReused"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `isWrappedLineContinuation` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/editor/common/viewModel/viewModelLines.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 1066,
+      "message": "method `ViewLineInfo.isWrappedLineContinuation` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "ViewLineInfo.isWrappedLineContinuation"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `_assertElicitationFieldCoversSchema` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/platform/agentHost/node/claude/claudeElicitation.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "high",
+      "line": 87,
+      "message": "function `_assertElicitationFieldCoversSchema` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "_assertElicitationFieldCoversSchema"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `withAssetTypes` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/platform/extensionManagement/common/extensionGalleryService.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 287,
+      "message": "method `Query.withAssetTypes` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Query.withAssetTypes"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `setElementsIsValid` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/platform/undoRedo/common/undoRedoService.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 246,
+      "message": "method `ResourceEditStack.setElementsIsValid` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "ResourceEditStack.setElementsIsValid"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `setChatRequestPauseState` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/api/common/extHostChatAgents2.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 1339,
+      "message": "method `ExtHostChatAgent.setChatRequestPauseState` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "ExtHostChatAgent.setChatRequestPauseState"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `getMirroredTestDataByReference` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/api/common/extHostTesting.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 1199,
+      "message": "method `TestObservers.getMirroredTestDataByReference` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "TestObservers.getMirroredTestDataByReference"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `removeWhere` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/contrib/chat/common/chatDebugServiceImpl.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 61,
+      "message": "method `SessionEventBuffer.removeWhere` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "SessionEventBuffer.removeWhere"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `getConfigurationModel` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/services/configuration/browser/configuration.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 883,
+      "message": "method `CachedWorkspaceConfiguration.getConfigurationModel` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "CachedWorkspaceConfiguration.getConfigurationModel"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `getUnsupportedKeys` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/services/configuration/browser/configuration.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 1010,
+      "message": "method `CachedFolderConfiguration.getUnsupportedKeys` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "CachedFolderConfiguration.getUnsupportedKeys"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `onCharacterEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 604,
+      "message": "method `fixRegexNewline.onCharacterEnter` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "fixRegexNewline.onCharacterEnter"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `onQuantifierEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 636,
+      "message": "method `fixRegexNewline.onQuantifierEnter` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "fixRegexNewline.onQuantifierEnter"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `onQuantifierLeave` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 639,
+      "message": "method `fixRegexNewline.onQuantifierLeave` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "fixRegexNewline.onQuantifierLeave"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `onCharacterClassRangeEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 642,
+      "message": "method `fixRegexNewline.onCharacterClassRangeEnter` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "fixRegexNewline.onCharacterClassRangeEnter"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `onCharacterClassRangeLeave` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 645,
+      "message": "method `fixRegexNewline.onCharacterClassRangeLeave` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "fixRegexNewline.onCharacterClassRangeLeave"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `onCharacterClassEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 648,
+      "message": "method `fixRegexNewline.onCharacterClassEnter` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "fixRegexNewline.onCharacterClassEnter"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `onCharacterClassLeave` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 651,
+      "message": "method `fixRegexNewline.onCharacterClassLeave` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "fixRegexNewline.onCharacterClassLeave"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `onAssertionEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 654,
+      "message": "method `fixRegexNewline.onAssertionEnter` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "fixRegexNewline.onAssertionEnter"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `onAssertionLeave` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 659,
+      "message": "method `fixRegexNewline.onAssertionLeave` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "fixRegexNewline.onAssertionLeave"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`cli` is imported at cli/src/bin/code/legacy_args.rs:8",
+        "not declared in any crates.io manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "cli/src/bin/code/legacy_args.rs",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`cli` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "cli::commands::args::{ CliCore, Commands, DesktopCodeOptions, ExtensionArgs, ExtensionSubcommand, InstallExtensionArgs, ListExtensionArgs, UninstallExtensionArgs, }"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`cli` is imported at cli/src/bin/code/main.rs:10",
+        "not declared in any crates.io manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "cli/src/bin/code/main.rs",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 10,
+      "message": "`cli` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "cli::{ commands::{ agent_endpoints, agent_host, agent_kill, agent_logs, agent_ps, agent_relay, agent_stop, args, serve_web, tunnels, update, version, CommandContext, }, constants::get_default_user_age…"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`cli` is imported at cli/tests/agent_tunnel.rs:8",
+        "not declared in any crates.io manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "cli/tests/agent_tunnel.rs",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`cli` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "cli::state::LauncherPaths"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "no file matching `./.eslint-plugin-local/index.ts` found relative to eslint.config.js"
+      ],
+      "file": "eslint.config.js",
+      "fp_risks": [
+        "the target may be generated at build time or excluded from the index (gitignore/vendor dirs)"
+      ],
+      "kind": "import",
+      "level": "medium",
+      "line": 14,
+      "message": "import `./.eslint-plugin-local/index.ts` does not resolve to any indexed file",
+      "rule": "unresolved-import",
+      "severity": "error",
+      "source": "t0-import-resolution",
+      "symbol": "./.eslint-plugin-local/index.ts"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "no file matching `./extensions/copilot/.eslintplugin/index.ts` found relative to eslint.config.js"
+      ],
+      "file": "eslint.config.js",
+      "fp_risks": [
+        "the target may be generated at build time or excluded from the index (gitignore/vendor dirs)"
+      ],
+      "kind": "import",
+      "level": "medium",
+      "line": 15,
+      "message": "import `./extensions/copilot/.eslintplugin/index.ts` does not resolve to any indexed file",
+      "rule": "unresolved-import",
+      "severity": "error",
+      "source": "t0-import-resolution",
+      "symbol": "./extensions/copilot/.eslintplugin/index.ts"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/configuration-editing/src/configurationEditingMain.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/configuration-editing/src/configurationEditingMain.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/configuration-editing/src/extensionsProposals.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/configuration-editing/src/extensionsProposals.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/configuration-editing/src/importExportProfiles.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/configuration-editing/src/importExportProfiles.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/configuration-editing/src/node/net.ts:9",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/configuration-editing/src/node/net.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 9,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/configuration-editing/src/settingsDocumentHelper.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/configuration-editing/src/settingsDocumentHelper.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/configuration-editing/src/test/completion.test.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/configuration-editing/src/test/completion.test.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vite` is imported at extensions/copilot/chat-lib/vitest.config.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/chat-lib/vitest.config.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vite` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vite"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "no file matching `./build/compressTikToken` found relative to extensions/copilot/script/postinstall.ts"
+      ],
+      "file": "extensions/copilot/script/postinstall.ts",
+      "fp_risks": [
+        "the target may be generated at build time or excluded from the index (gitignore/vendor dirs)"
+      ],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "import `./build/compressTikToken` does not resolve to any indexed file",
+      "rule": "unresolved-import",
+      "severity": "error",
+      "source": "t0-import-resolution",
+      "symbol": "./build/compressTikToken"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "no file matching `./build/copyStaticAssets` found relative to extensions/copilot/script/postinstall.ts"
+      ],
+      "file": "extensions/copilot/script/postinstall.ts",
+      "fp_risks": [
+        "the target may be generated at build time or excluded from the index (gitignore/vendor dirs)"
+      ],
+      "kind": "import",
+      "level": "medium",
+      "line": 9,
+      "message": "import `./build/copyStaticAssets` does not resolve to any indexed file",
+      "rule": "unresolved-import",
+      "severity": "error",
+      "source": "t0-import-resolution",
+      "symbol": "./build/copyStaticAssets"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/askAgentProvider.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/askAgentProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/cachedAgentFileWriter.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/cachedAgentFileWriter.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/exploreAgentProvider.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/exploreAgentProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/githubOrgChatResourcesService.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/githubOrgChatResourcesService.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/githubOrgCustomAgentProvider.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/githubOrgCustomAgentProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/githubOrgInstructionsProvider.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/githubOrgInstructionsProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/planAgentProvider.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/planAgentProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/promptFileContrib.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/promptFileContrib.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`chai` is imported at extensions/copilot/src/extension/agents/vscode-node/test/askAgentProvider.spec.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/test/askAgentProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`chai` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "chai"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/test/askAgentProvider.spec.ts:10",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/test/askAgentProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 10,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`chai` is imported at extensions/copilot/src/extension/agents/vscode-node/test/cachedAgentFileWriter.spec.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/test/cachedAgentFileWriter.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`chai` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "chai"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`chai` is imported at extensions/copilot/src/extension/agents/vscode-node/test/githubOrgChatResourcesService.spec.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/test/githubOrgChatResourcesService.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`chai` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "chai"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/test/githubOrgChatResourcesService.spec.ts:8",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/test/githubOrgChatResourcesService.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`chai` is imported at extensions/copilot/src/extension/agents/vscode-node/test/githubOrgCustomAgentProvider.spec.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/test/githubOrgCustomAgentProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`chai` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "chai"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/test/githubOrgCustomAgentProvider.spec.ts:8",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/test/githubOrgCustomAgentProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`chai` is imported at extensions/copilot/src/extension/agents/vscode-node/test/githubOrgInstructionsProvider.spec.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/test/githubOrgInstructionsProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`chai` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "chai"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/test/githubOrgInstructionsProvider.spec.ts:8",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/test/githubOrgInstructionsProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`chai` is imported at extensions/copilot/src/extension/agents/vscode-node/test/planAgentProvider.spec.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/test/planAgentProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`chai` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "chai"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/test/planAgentProvider.spec.ts:10",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/agents/vscode-node/test/planAgentProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 10,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/api/vscode/extensionApi.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/api/vscode/extensionApi.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/api/vscode/vscodeContextProviderApi.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/api/vscode/vscodeContextProviderApi.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/authentication/vscode-node/authentication.contribution.ts:5",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/authentication/vscode-node/authentication.contribution.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 5,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/common/anthropicMessageConverter.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/common/anthropicMessageConverter.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/common/byokProvider.ts:5",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/common/byokProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 5,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "3 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "extensions/copilot/src/extension/byok/common/byokProvider.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "interface",
+      "level": "medium",
+      "line": 25,
+      "message": "interface `BYOKBaseModelConfig` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "BYOKBaseModelConfig"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "2 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "extensions/copilot/src/extension/byok/common/byokProvider.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "interface",
+      "level": "medium",
+      "line": 41,
+      "message": "interface `BYOKNoAuthModelConfig` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "BYOKNoAuthModelConfig"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/common/geminiMessageConverter.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/common/geminiMessageConverter.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/common/test/geminiMessageConverter.spec.ts:8",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/common/test/geminiMessageConverter.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/node/openAIEndpoint.ts:5",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/node/openAIEndpoint.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 5,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/abstractLanguageModelChatProvider.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/abstractLanguageModelChatProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/anthropicProvider.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/anthropicProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/anthropicProvider.ts:8",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/anthropicProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/azureProvider.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/azureProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/azureProvider.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/azureProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/byokContribution.ts:5",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/byokContribution.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 5,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/byokModelInfo.ts:5",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/byokModelInfo.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 5,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/byokOTelHelpers.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/byokOTelHelpers.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/customEndpointProvider.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 48,
+      "message": "function `apiTypeToPath` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "apiTypeToPath"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/customEndpointProvider.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 62,
+      "message": "function `inferApiTypeFromUrl` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "inferApiTypeFromUrl"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/customEndpointProvider.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 72,
+      "message": "function `apiTypeToSupportedEndpoints` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "apiTypeToSupportedEndpoints"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/geminiNativeProvider.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/geminiNativeProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/openRouterProvider.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "interface",
+      "level": "medium",
+      "line": 21,
+      "message": "interface `OpenRouterModelData` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "OpenRouterModelData"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/openRouterProvider.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 146,
+      "message": "function `isAnthropicModelId` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "isAnthropicModelId"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/anthropicProvider.spec.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/test/anthropicProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/byokOTelHelpers.spec.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/test/byokOTelHelpers.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/customEndpointProvider.spec.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/test/customEndpointProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/customOAIProvider.spec.ts:8",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/test/customOAIProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/geminiNativeProvider.spec.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/test/geminiNativeProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/legacyHost.spec.ts:8",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/test/legacyHost.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/legacyHost.spec.ts:20",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/test/legacyHost.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 20,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/ollamaProvider.spec.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/test/ollamaProvider.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "extensions/copilot/src/extension/byok/vscode-node/xAIProvider.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "interface",
+      "level": "medium",
+      "line": 15,
+      "message": "interface `XAIModelData` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "XAIModelData"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chat/test/vscode-node/chatHookService.spec.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chat/test/vscode-node/chatHookService.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chat/vscode-node/chatDebugFileLoggerService.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chat/vscode-node/chatDebugFileLoggerService.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chat/vscode-node/chatHookService.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chat/vscode-node/chatHookService.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chat/vscode-node/chatHookTelemetry.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chat/vscode-node/chatHookTelemetry.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chat/vscode-node/chatQuota.contribution.ts:5",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chat/vscode-node/chatQuota.contribution.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 5,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chat/vscode-node/hooksOutputChannel.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chat/vscode-node/hooksOutputChannel.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "3 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "extensions/copilot/src/extension/chat/vscode-node/sessionTranscriptService.ts",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 30,
+      "message": "function `stripInternalToolCallId` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "stripInternalToolCallId"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatInputNotification/vscode-node/byokUtilityModel.contribution.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatInputNotification/vscode-node/byokUtilityModel.contribution.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessionContext/vscode-node/chatSessionContextProvider.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessionContext/vscode-node/chatSessionContextProvider.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/common/chatSessionMetadataStore.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/common/chatSessionMetadataStore.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/common/chatSessionWorkspaceFolderService.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/common/chatSessionWorkspaceFolderService.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/common/chatSessionWorktreeService.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/common/chatSessionWorktreeService.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/common/externalEditTracker.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/common/externalEditTracker.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/common/folderRepositoryManager.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/common/folderRepositoryManager.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/common/sessionEventRenderer.ts:11",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/common/sessionEventRenderer.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 11,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/common/test/mockChatSessionMetadataStore.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/common/test/mockChatSessionMetadataStore.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/common/workspaceInfo.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/common/workspaceInfo.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/common/copilotCLIPrompt.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/common/copilotCLIPrompt.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/common/copilotCLITools.ts:8",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/common/copilotCLITools.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/common/customSessionTitleService.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/common/customSessionTitleService.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/common/delegationSummaryService.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/common/delegationSummaryService.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/common/test/copilotCLITools.spec.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/common/test/copilotCLITools.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/common/utils.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/common/utils.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotCLISkills.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotCLISkills.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotCli.ts:10",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotCli.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 10,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliPromptResolver.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliPromptResolver.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:10",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 10,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:11",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 11,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:94",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 94,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:2676",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 2676,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:2676",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 2676,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSessionService.ts:11",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSessionService.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 11,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/exitPlanModeHandler.ts:8",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/exitPlanModeHandler.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/mcpHandler.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/mcpHandler.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/permissionHelpers.ts:8",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/permissionHelpers.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCLISkills.spec.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCLISkills.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCliAgents.spec.ts:18",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCliAgents.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 18,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCliModels.spec.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCliModels.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCliSessionService.spec.ts:11",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCliSessionService.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 11,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:8",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:211",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 211,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:215",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 215,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1043",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1043,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1113",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1113,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1173",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1173,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1258",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1258,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1330",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1330,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1387",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1387,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1421",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1421,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1445",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1445,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1502",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1502,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1533",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1533,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1566",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1566,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1599",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1599,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1636",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1636,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1696",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1696,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1733",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1733,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1766",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1766,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1798",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 1798,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/exitPlanModeHandler.spec.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/exitPlanModeHandler.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/exitPlanModeHandler.spec.ts:8",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/exitPlanModeHandler.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 8,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/missionControlApiClient.spec.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/missionControlApiClient.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/permissionHelpers.spec.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/permissionHelpers.spec.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/testHelpers.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/test/testHelpers.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/userInputHelpers.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/node/userInputHelpers.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/askUserQuestionHandler.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/askUserQuestionHandler.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/chatSessionMetadataStoreImpl.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/chatSessionMetadataStoreImpl.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/chatSessionMetadataStoreImpl.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/chatSessionMetadataStoreImpl.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/addFileReference.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/addFileReference.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/addSelection.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/addSelection.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/context.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/context.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/diffCommands.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/diffCommands.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/pickSession.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/pickSession.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/sendContext.ts:7",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/sendContext.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 7,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/contribution.ts:6",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: lookup cap reached"
+      ],
+      "file": "extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/contribution.ts",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 6,
+      "message": "`vscode` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "vscode"
+    }
+  ],
+  "steps": [
+    {
+      "findings": 969,
+      "name": "dead-code",
+      "note": null,
+      "status": "ran"
+    },
+    {
+      "findings": 4180,
+      "name": "check-deps",
+      "note": "offline: manifests and local resolution only; pass --online to check registries",
+      "status": "ran"
+    },
+    {
+      "findings": 0,
+      "name": "test-weakening",
+      "note": "vs HEAD",
+      "status": "ran"
+    },
+    {
+      "findings": 0,
+      "name": "diagnostics",
+      "note": "no saved output (--from) and --run not given; nothing was executed",
+      "status": "skipped"
+    },
+    {
+      "findings": 0,
+      "name": "rule-engines",
+      "note": "semgrep / ast-grep run only with --run",
+      "status": "skipped"
+    }
+  ],
+  "total_findings": 5149,
+  "truncated": {
+    "hint": "output capped, lowest confidence findings omitted; pass --max-findings 0 for everything or --only <path> to narrow down",
+    "shown": 200,
+    "total": 5149
+  },
+  "verdict": "fail"
+}

@@ -1,0 +1,69 @@
+{
+  "external_imports": 22,
+  "findings": [],
+  "imports_checked": 206,
+  "lookups": [
+    {
+      "ecosystem": "npm",
+      "package": "axios",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "better-sqlite3",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "cheerio",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "cli-progress",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "dotenv",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "fs-extra",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "googleapis",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "open",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "p-limit",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "playwright",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "sqlite3",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "winston",
+      "result": "exists"
+    }
+  ],
+  "offline": false,
+  "registry": "http"
+}

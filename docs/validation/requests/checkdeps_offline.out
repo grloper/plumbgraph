@@ -1,0 +1,329 @@
+{
+  "external_imports": 60,
+  "findings": [
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`pygments` is imported at docs/_themes/flask_theme_support.py:2",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "docs/_themes/flask_theme_support.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 2,
+      "message": "`pygments` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "pygments.style"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`pygments` is imported at docs/_themes/flask_theme_support.py:3",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "docs/_themes/flask_theme_support.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 3,
+      "message": "`pygments` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "pygments.token"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`simplejson` is imported at src/requests/compat.py:76",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "src/requests/compat.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 76,
+      "message": "`simplejson` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "simplejson"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`BaseHTTPServer` is imported at tests/conftest.py:4",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "tests/conftest.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 4,
+      "message": "`BaseHTTPServer` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "BaseHTTPServer"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`SimpleHTTPServer` is imported at tests/conftest.py:5",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "tests/conftest.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 5,
+      "message": "`SimpleHTTPServer` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "SimpleHTTPServer"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "setup.py",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 7,
+      "message": "`setuptools` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.35,
+      "evidence": [
+        "`simplejson` is imported at src/requests/compat.py:69",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "src/requests/compat.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)",
+        "the import is guarded by try/except ImportError (optional or compatibility import)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 69,
+      "message": "`simplejson` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "simplejson"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.35,
+      "evidence": [
+        "`StringIO` is imported at tests/compat.py:4",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "tests/compat.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)",
+        "the import is guarded by try/except ImportError (optional or compatibility import)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 4,
+      "message": "`StringIO` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "StringIO"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.35,
+      "evidence": [
+        "`cStringIO` is imported at tests/compat.py:9",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "tests/compat.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)",
+        "the import is guarded by try/except ImportError (optional or compatibility import)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 9,
+      "message": "`cStringIO` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "cStringIO"
+    }
+  ],
+  "imports_checked": 308,
+  "lookups": [
+    {
+      "ecosystem": "pypi",
+      "package": "BaseHTTPServer",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PyOpenSSL",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "PySocks",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "SimpleHTTPServer",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "Sphinx",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "StringIO",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cStringIO",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "certifi",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "chardet",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "charset_normalizer",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "cryptography",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "httpbin",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "idna",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pygments",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pyright",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pytest",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pytest-cov",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pytest-httpbin",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pytest-mock",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pytest-xdist",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "setuptools",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "simplejson",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "trustme",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "typing_extensions",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "urllib3",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "wheel",
+      "result": "unknown (offline mode)"
+    }
+  ],
+  "offline": true,
+  "registry": "offline"
+}

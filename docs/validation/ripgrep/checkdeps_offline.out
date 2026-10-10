@@ -1,0 +1,222 @@
+{
+  "external_imports": 57,
+  "findings": [
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`serde_json as json` is imported at tests/json.rs:4",
+        "not declared in any crates.io manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "tests/json.rs",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 4,
+      "message": "`serde_json as json` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "serde_json as json"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.6,
+      "evidence": [
+        "no file matching `imp` found relative to crates/core/index/mod.rs"
+      ],
+      "file": "crates/core/index/mod.rs",
+      "fp_risks": [
+        "a `#[path]` attribute or build-generated module may exist"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 5,
+      "message": "import `imp` does not resolve to any indexed file",
+      "rule": "unresolved-import",
+      "severity": "error",
+      "source": "t0-import-resolution",
+      "symbol": "imp"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.6,
+      "evidence": [
+        "no file matching `imp` found relative to crates/core/index/mod.rs"
+      ],
+      "file": "crates/core/index/mod.rs",
+      "fp_risks": [
+        "a `#[path]` attribute or build-generated module may exist"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 8,
+      "message": "import `imp` does not resolve to any indexed file",
+      "rule": "unresolved-import",
+      "severity": "error",
+      "source": "t0-import-resolution",
+      "symbol": "imp"
+    }
+  ],
+  "imports_checked": 500,
+  "lookups": [
+    {
+      "ecosystem": "crates.io",
+      "package": "aho-corasick",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "anyhow",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "arbitrary",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "bstr",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "crossbeam-channel",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "crossbeam-deque",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "encoding_rs",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "encoding_rs_io",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "fst",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "glob",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "lexopt",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "libc",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "libfuzzer-sys",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "log",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "memchr",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "memmap2",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "pcre2",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "redb",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "regex",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "regex-automata",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "regex-syntax",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "same-file",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "serde",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "serde_derive",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "serde_json",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "serde_json as json",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "termcolor",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "textwrap",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "tikv-jemallocator",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "walkdir",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "winapi-util",
+      "result": "unknown (offline mode)"
+    }
+  ],
+  "offline": true,
+  "registry": "offline"
+}

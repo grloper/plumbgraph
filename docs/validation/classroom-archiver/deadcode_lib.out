@@ -1,0 +1,37 @@
+{
+  "findings": [],
+  "index": {
+    "by_language": {
+      "html": 2,
+      "javascript": 62,
+      "text": 3
+    },
+    "db_path": "/workspace/repos/classroom-archiver/.plumbgraph/index.db",
+    "edges": 872,
+    "files_hashed": 0,
+    "files_parsed": 0,
+    "files_removed": 0,
+    "files_seen": 62,
+    "files_skipped_large": 0,
+    "files_unchanged": 62,
+    "files_with_syntax_errors": 0,
+    "imports": 206,
+    "parse_errors": 0,
+    "refs": 11941,
+    "resolved": false,
+    "symbols": 364,
+    "text_files": 5
+  },
+  "limitations": [
+    "tier-0 (tree-sitter, name-based) analysis: no type information, reflection or macro expansion; no SCIP index was used",
+    "never delete on `medium` or `low` findings without checking usages yourself; `high` means no use was found in indexed code, not that deletion is proven safe",
+    "files excluded by .gitignore, vendor/build directories and files over 2 MiB are not indexed"
+  ],
+  "scip": null,
+  "summary": {
+    "high": 0,
+    "low": 0,
+    "medium": 0,
+    "total": 0
+  }
+}

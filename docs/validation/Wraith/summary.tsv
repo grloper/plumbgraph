@@ -1,0 +1,15 @@
+index	rc=0	102ms	maxrss=27MB	out=194B
+index_again	rc=0	12ms	maxrss=10MB	out=194B
+map	rc=0	27ms	maxrss=13MB	out=5769B
+map_json	rc=0	32ms	maxrss=12MB	out=37515B
+deadcode_app	rc=0	24ms	maxrss=12MB	out=2105B
+deadcode_lib	rc=0	21ms	maxrss=13MB	out=1020B
+deadcode_text	rc=0	21ms	maxrss=12MB	out=956B
+checkdeps_offline	rc=0	27ms	maxrss=12MB	out=1365B
+checkdeps_online	rc=0	273ms	maxrss=13MB	out=1280B
+weakening	rc=0	38ms	maxrss=10MB	out=316B
+diagnostics_noflags	rc=2	2ms	maxrss=10MB	out=0B
+verify	rc=1	77ms	maxrss=13MB	out=3072B
+verify_text	rc=1	79ms	maxrss=13MB	out=2017B
+doctor	rc=0	3ms	maxrss=10MB	out=3714B
+impact_diff	rc=0	53ms	maxrss=12MB	out=515B

@@ -1,16 +1,5 @@
 {
-  "baseline_path": "/workspace/repos/k8s/plumb-baseline.json",
-  "baseline_updated": false,
-  "baselined": 0,
-  "executed": false,
-  "fail_on": "medium",
-  "fixed": 0,
-  "limitations": [
-    "dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change",
-    "baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new",
-    "no baseline found at /workspace/repos/k8s/plumb-baseline.json: every finding counts as new (create one with --update-baseline)"
-  ],
-  "new": [
+  "findings": [
     {
       "category": "dead",
       "confidence": 0.95,
@@ -4084,43 +4073,45 @@
       "symbol": "CostEstimator.listElementNode"
     }
   ],
-  "steps": [
-    {
-      "findings": 4996,
-      "name": "dead-code",
-      "note": null,
-      "status": "ran"
+  "index": {
+    "by_language": {
+      "go": 13551,
+      "html": 1,
+      "python": 7,
+      "text": 7718
     },
-    {
-      "findings": 4,
-      "name": "check-deps",
-      "note": "offline: manifests and local resolution only; pass --online to check registries",
-      "status": "ran"
-    },
-    {
-      "findings": 0,
-      "name": "test-weakening",
-      "note": "vs HEAD",
-      "status": "ran"
-    },
-    {
-      "findings": 0,
-      "name": "diagnostics",
-      "note": "no saved output (--from) and --run not given; nothing was executed",
-      "status": "skipped"
-    },
-    {
-      "findings": 0,
-      "name": "rule-engines",
-      "note": "semgrep / ast-grep run only with --run",
-      "status": "skipped"
-    }
+    "db_path": "/workspace/repos/k8s/.plumbgraph/index.db",
+    "edges": 5269587,
+    "files_hashed": 0,
+    "files_parsed": 0,
+    "files_removed": 0,
+    "files_seen": 13558,
+    "files_skipped_large": 0,
+    "files_unchanged": 13558,
+    "files_with_syntax_errors": 0,
+    "imports": 94062,
+    "parse_errors": 0,
+    "refs": 6078895,
+    "resolved": false,
+    "symbols": 145092,
+    "text_files": 7719
+  },
+  "limitations": [
+    "tier-0 (tree-sitter, name-based) analysis: no type information, reflection or macro expansion; no SCIP index was used",
+    "never delete on `medium` or `low` findings without checking usages yourself; `high` means no use was found in indexed code, not that deletion is proven safe",
+    "files excluded by .gitignore, vendor/build directories and files over 2 MiB are not indexed",
+    "4114 finding(s) are exported symbols. If this project is a library, re-run with --lib to treat exported symbols as public API (app mode assumes only main/init/tests are entry points)"
   ],
-  "total_findings": 5000,
+  "scip": null,
+  "summary": {
+    "high": 28,
+    "low": 0,
+    "medium": 4968,
+    "total": 4996
+  },
   "truncated": {
     "hint": "output capped, lowest confidence findings omitted; pass --max-findings 0 for everything or --only <path> to narrow down",
     "shown": 200,
-    "total": 5000
-  },
-  "verdict": "fail"
+    "total": 4996
+  }
 }

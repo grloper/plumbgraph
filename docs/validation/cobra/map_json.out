@@ -1,0 +1,751 @@
+{
+  "text": "# plumb map: 13 files, 81 of 328 symbols (~1466 tokens, budget 1500)\ncommand.go\n  35: CommandDisplayNameAnnotation = \"cobra_annotation_command_display_name\"  helpFlagName    = \"help\" helpCommandName = \"help…\n  42: type FParseErrWhitelist flag.ParseErrorsAllowlist  // Group Structure to manage groups for commands type Group struct\n  45: type Group struct\n  54: type Command struct\n  269: func (c *Command) Context() context.Context\n  281: func (c *Command) SetArgs(a []string)\n  289: func (c *Command) SetOutput(output io.Writer)\n  296: func (c *Command) SetOut(newOut io.Writer)\n  302: func (c *Command) SetErr(newErr io.Writer)\n  382: func (c *Command) SetGlobalNormalizationFunc(n func(f *flag.FlagSet, name string) flag.NormalizedName)\n  398: func (c *Command) OutOrStderr() io.Writer\n  403: func (c *Command) ErrOrStderr() io.Writer\n  412: func (c *Command) getOut(def io.Writer) io.Writer\n  478: func (c *Command) Usage() error\n  892: func (c *Command) Root() *Command\n  1070: func (c *Command) Execute() error\n  1084: func (c *Command) ExecuteC() (cmd *Command, err error)\n  1325: type commandSorterByName []*Command  func (c commandSorterByName) Len() int\n  1332: func (c *Command) Commands() []*Command\n  1342: func (c *Command) AddCommand(cmds ...*Command)\n  1435: func (c *Command) Print(i ...interface{})\n  1450: func (c *Command) PrintErr(i ...interface{})\n  1465: func (c *Command) CommandPath() string\n  1474: func (c *Command) DisplayName() string\n  1541: func (c *Command) Name() string\n  1596: func (c *Command) Runnable() bool\n  1607: func (c *Command) IsAvailableCommand() bool\n  1628: func (c *Command) IsAdditionalHelpTopicCommand() bool\n  1677: func (c *Command) HasParent() bool\n  1688: func (c *Command) Flags() *flag.FlagSet\n  1716: func (c *Command) LocalFlags() *flag.FlagSet\n  1744: func (c *Command) InheritedFlags() *flag.FlagSet\n  1775: func (c *Command) PersistentFlags() *flag.FlagSet\n  1822: func (c *Command) HasAvailableFlags() bool\n  1844: func (c *Command) Flag(name string) (flag *flag.Flag)\n  1855: func (c *Command) persistentFlag(name string) (flag *flag.Flag)\n  1892: func (c *Command) Parent() *Command\n  1898: func (c *Command) mergePersistentFlags()\n  1937: type tmplFunc struct\ncompletions.go\n  31: ShellCompRequestCmd = \"__complete\" // ShellCompNoDescRequestCmd is the name of the hidden command that is used to reques…\n  34: ShellCompNoDescRequestCmd = \"__completeNoDesc\" )  // Global map of flag completion functions. Make sure to use flagCompl…\n  45: type ShellCompDirective int  type flagCompError struct\n  47: type flagCompError struct\n  52: func (e *flagCompError) Error() string\n  58: ShellCompDirectiveError ShellCompDirective = 1 << iota  // ShellCompDirectiveNoSpace indicates that the shell should not…\n  62: ShellCompDirectiveNoSpace  // ShellCompDirectiveNoFileComp indicates that the shell should not provide // file completio…\n  66: ShellCompDirectiveNoFileComp  // ShellCompDirectiveFilterFileExt indicates that the provided completions // should be us…\n  73: ShellCompDirectiveFilterFileExt  // ShellCompDirectiveFilterDirs indicates that only directory names should // be provid…\n  80: ShellCompDirectiveFilterDirs  // ShellCompDirectiveKeepOrder indicates that the shell should preserve the order // in wh…\n  84: ShellCompDirectiveKeepOrder  // ===========================================================================\n  90: shellCompDirectiveMaxValue  // ShellCompDirectiveDefault indicates to let the shell perform its default // behavior afte…\n  95: ShellCompDirectiveDefault ShellCompDirective = 0 )  const (\n  107: type CompletionOptions struct\n  200: func (d ShellCompDirective) string() string\n  955: func CompDebug(msg string, printToStdErr bool)\nargs.go\n  22: type PositionalArgs func(cmd *Command, args []string) error  // legacyArgs validation has the following behaviour\n  42: func NoArgs(cmd *Command, args []string) error\n  51: func OnlyValidArgs(cmd *Command, args []string) error\n  82: func ArbitraryArgs(cmd *Command, args []string) error\n  87: func MinimumNArgs(n int) PositionalArgs\n  97: func MaximumNArgs(n int) PositionalArgs\n  107: func ExactArgs(n int) PositionalArgs\n  117: func RangeArgs(min int, max int) PositionalArgs\n  127: func MatchAll(pargs ...PositionalArgs) PositionalArgs\ncobra.go\n  179: func tmpl(text string) *tmplFunc\n  235: func CheckErr(msg interface{})\n  243: func WriteStringAndCheck(b io.StringWriter, s string)\ndoc/man_docs.go\n  94: type GenManHeader struct\n  105: func GenMan(cmd *cobra.Command, header *GenManHeader, w io.Writer) error\nactive_help.go\n  23: activeHelpMarker = \"_activeHelp_ \" // The below values should not be changed: programs will be using them explicitly // …\n  26: activeHelpEnvVarSuffix  = \"ACTIVE_HELP\" activeHelpGlobalEnvVar  = configEnvVarGlobalPrefix + \"_\" + activeHelpEnvVarSuffi…\n  58: func activeHelpEnvVar(name string) string\nbash_completions.go\n  30: BashCompFilenameExt     = \"cobra_annotation_bash_completion_filename_extensions\" BashCompCustom          = \"cobra_annota…\n  32: BashCompOneRequiredFlag = \"cobra_annotation_bash_completion_one_required_flag\" BashCompSubdirsInDir    = \"cobra_annotati…\n  33: BashCompSubdirsInDir    = \"cobra_annotation_bash_completion_subdirs_in_dir\" )  func writePreamble(buf io.StringWriter, n…\ndoc/util.go\n  48: type byName []*cobra.Command  func (s byName) Len() int\nflag_groups.go\n  209: func sortedKeys(m map[string]map[string]bool) []string\nzsh_completions.go\n  80: func (c *Command) genZshCompletion(w io.Writer, includeDesc bool) error\npowershell_completions.go\n  313: func (c *Command) genPowerShellCompletion(w io.Writer, includeDesc bool) error\ndoc/yaml_docs.go\n  93: func GenYamlCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string) string) error\ndoc/md_docs.go\n  57: func GenMarkdownCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string) string) error\n",
+  "tokens_estimated": 1467,
+  "budget": 1500,
+  "token_estimate_method": "ceil(chars/4); not a real tokenizer",
+  "total_symbols": 328,
+  "shown_symbols": 81,
+  "changed_files": [],
+  "files": [
+    {
+      "path": "command.go",
+      "rank": 0.28128774218399033,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "CommandDisplayNameAnnotation",
+          "kind": "const",
+          "line": 35,
+          "rank": 0.001885746709630244,
+          "references": 4,
+          "signature": "CommandDisplayNameAnnotation = \"cobra_annotation_command_display_name\"  helpFlagName    = \"help\" helpCommandName = \"help…"
+        },
+        {
+          "name": "FParseErrWhitelist",
+          "kind": "type",
+          "line": 42,
+          "rank": 0.02061088620369327,
+          "references": 6,
+          "signature": "type FParseErrWhitelist flag.ParseErrorsAllowlist  // Group Structure to manage groups for commands type Group struct"
+        },
+        {
+          "name": "Group",
+          "kind": "struct",
+          "line": 45,
+          "rank": 0.021286087800647373,
+          "references": 12,
+          "signature": "type Group struct"
+        },
+        {
+          "name": "Command",
+          "kind": "struct",
+          "line": 54,
+          "rank": 0.11707237655782288,
+          "references": 442,
+          "signature": "type Command struct"
+        },
+        {
+          "name": "Context",
+          "kind": "method",
+          "line": 269,
+          "rank": 0.008646552995309158,
+          "references": 15,
+          "signature": "func (c *Command) Context() context.Context"
+        },
+        {
+          "name": "SetArgs",
+          "kind": "method",
+          "line": 281,
+          "rank": 0.0014748253974452875,
+          "references": 6,
+          "signature": "func (c *Command) SetArgs(a []string)"
+        },
+        {
+          "name": "SetOutput",
+          "kind": "method",
+          "line": 289,
+          "rank": 0.004022086106320672,
+          "references": 9,
+          "signature": "func (c *Command) SetOutput(output io.Writer)"
+        },
+        {
+          "name": "SetOut",
+          "kind": "method",
+          "line": 296,
+          "rank": 0.0016065954276786214,
+          "references": 7,
+          "signature": "func (c *Command) SetOut(newOut io.Writer)"
+        },
+        {
+          "name": "SetErr",
+          "kind": "method",
+          "line": 302,
+          "rank": 0.0016065954276786214,
+          "references": 7,
+          "signature": "func (c *Command) SetErr(newErr io.Writer)"
+        },
+        {
+          "name": "SetGlobalNormalizationFunc",
+          "kind": "method",
+          "line": 382,
+          "rank": 0.001852473372249519,
+          "references": 5,
+          "signature": "func (c *Command) SetGlobalNormalizationFunc(n func(f *flag.FlagSet, name string) flag.NormalizedName)"
+        },
+        {
+          "name": "OutOrStderr",
+          "kind": "method",
+          "line": 398,
+          "rank": 0.001154012394346165,
+          "references": 2,
+          "signature": "func (c *Command) OutOrStderr() io.Writer"
+        },
+        {
+          "name": "ErrOrStderr",
+          "kind": "method",
+          "line": 403,
+          "rank": 0.0010198965163135826,
+          "references": 3,
+          "signature": "func (c *Command) ErrOrStderr() io.Writer"
+        },
+        {
+          "name": "getOut",
+          "kind": "method",
+          "line": 412,
+          "rank": 0.0012488756961987204,
+          "references": 2,
+          "signature": "func (c *Command) getOut(def io.Writer) io.Writer"
+        },
+        {
+          "name": "Usage",
+          "kind": "method",
+          "line": 478,
+          "rank": 0.0013076750986041614,
+          "references": 9,
+          "signature": "func (c *Command) Usage() error"
+        },
+        {
+          "name": "Root",
+          "kind": "method",
+          "line": 892,
+          "rank": 0.0012495632161817261,
+          "references": 12,
+          "signature": "func (c *Command) Root() *Command"
+        },
+        {
+          "name": "Execute",
+          "kind": "method",
+          "line": 1070,
+          "rank": 0.005015463087576595,
+          "references": 9,
+          "signature": "func (c *Command) Execute() error"
+        },
+        {
+          "name": "ExecuteC",
+          "kind": "method",
+          "line": 1084,
+          "rank": 0.003429310004100354,
+          "references": 4,
+          "signature": "func (c *Command) ExecuteC() (cmd *Command, err error)"
+        },
+        {
+          "name": "commandSorterByName",
+          "kind": "type",
+          "line": 1325,
+          "rank": 0.0021139135515677644,
+          "references": 4,
+          "signature": "type commandSorterByName []*Command  func (c commandSorterByName) Len() int"
+        },
+        {
+          "name": "Commands",
+          "kind": "method",
+          "line": 1332,
+          "rank": 0.0013188159046754176,
+          "references": 19,
+          "signature": "func (c *Command) Commands() []*Command"
+        },
+        {
+          "name": "AddCommand",
+          "kind": "method",
+          "line": 1342,
+          "rank": 0.005716034289037746,
+          "references": 135,
+          "signature": "func (c *Command) AddCommand(cmds ...*Command)"
+        },
+        {
+          "name": "Print",
+          "kind": "method",
+          "line": 1435,
+          "rank": 0.0014846830399101532,
+          "references": 8,
+          "signature": "func (c *Command) Print(i ...interface{})"
+        },
+        {
+          "name": "PrintErr",
+          "kind": "method",
+          "line": 1450,
+          "rank": 0.00109741689468432,
+          "references": 4,
+          "signature": "func (c *Command) PrintErr(i ...interface{})"
+        },
+        {
+          "name": "CommandPath",
+          "kind": "method",
+          "line": 1465,
+          "rank": 0.004020600196115452,
+          "references": 23,
+          "signature": "func (c *Command) CommandPath() string"
+        },
+        {
+          "name": "DisplayName",
+          "kind": "method",
+          "line": 1474,
+          "rank": 0.004959752865383932,
+          "references": 13,
+          "signature": "func (c *Command) DisplayName() string"
+        },
+        {
+          "name": "Name",
+          "kind": "method",
+          "line": 1541,
+          "rank": 0.0097579022484472,
+          "references": 85,
+          "signature": "func (c *Command) Name() string"
+        },
+        {
+          "name": "Runnable",
+          "kind": "method",
+          "line": 1596,
+          "rank": 0.001469421321387844,
+          "references": 8,
+          "signature": "func (c *Command) Runnable() bool"
+        },
+        {
+          "name": "IsAvailableCommand",
+          "kind": "method",
+          "line": 1607,
+          "rank": 0.0018034046768755129,
+          "references": 18,
+          "signature": "func (c *Command) IsAvailableCommand() bool"
+        },
+        {
+          "name": "IsAdditionalHelpTopicCommand",
+          "kind": "method",
+          "line": 1628,
+          "rank": 0.0011450412504415803,
+          "references": 11,
+          "signature": "func (c *Command) IsAdditionalHelpTopicCommand() bool"
+        },
+        {
+          "name": "HasParent",
+          "kind": "method",
+          "line": 1677,
+          "rank": 0.004855782771847724,
+          "references": 25,
+          "signature": "func (c *Command) HasParent() bool"
+        },
+        {
+          "name": "Flags",
+          "kind": "method",
+          "line": 1688,
+          "rank": 0.006647765694253918,
+          "references": 90,
+          "signature": "func (c *Command) Flags() *flag.FlagSet"
+        },
+        {
+          "name": "LocalFlags",
+          "kind": "method",
+          "line": 1716,
+          "rank": 0.0014918346503388644,
+          "references": 10,
+          "signature": "func (c *Command) LocalFlags() *flag.FlagSet"
+        },
+        {
+          "name": "InheritedFlags",
+          "kind": "method",
+          "line": 1744,
+          "rank": 0.001203410358925894,
+          "references": 13,
+          "signature": "func (c *Command) InheritedFlags() *flag.FlagSet"
+        },
+        {
+          "name": "PersistentFlags",
+          "kind": "method",
+          "line": 1775,
+          "rank": 0.003434210596768821,
+          "references": 40,
+          "signature": "func (c *Command) PersistentFlags() *flag.FlagSet"
+        },
+        {
+          "name": "HasAvailableFlags",
+          "kind": "method",
+          "line": 1822,
+          "rank": 0.0011300767836978603,
+          "references": 7,
+          "signature": "func (c *Command) HasAvailableFlags() bool"
+        },
+        {
+          "name": "Flag",
+          "kind": "method",
+          "line": 1844,
+          "rank": 0.002270960237382432,
+          "references": 27,
+          "signature": "func (c *Command) Flag(name string) (flag *flag.Flag)"
+        },
+        {
+          "name": "persistentFlag",
+          "kind": "method",
+          "line": 1855,
+          "rank": 0.001054705452959265,
+          "references": 3,
+          "signature": "func (c *Command) persistentFlag(name string) (flag *flag.Flag)"
+        },
+        {
+          "name": "Parent",
+          "kind": "method",
+          "line": 1892,
+          "rank": 0.0023362736771796503,
+          "references": 13,
+          "signature": "func (c *Command) Parent() *Command"
+        },
+        {
+          "name": "mergePersistentFlags",
+          "kind": "method",
+          "line": 1898,
+          "rank": 0.0016428876517077201,
+          "references": 13,
+          "signature": "func (c *Command) mergePersistentFlags()"
+        },
+        {
+          "name": "tmplFunc",
+          "kind": "struct",
+          "line": 1937,
+          "rank": 0.025843826058604302,
+          "references": 3,
+          "signature": "type tmplFunc struct"
+        }
+      ]
+    },
+    {
+      "path": "completions.go",
+      "rank": 0.2470834555058082,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "ShellCompRequestCmd",
+          "kind": "const",
+          "line": 31,
+          "rank": 0.0012296384667588678,
+          "references": 20,
+          "signature": "ShellCompRequestCmd = \"__complete\" // ShellCompNoDescRequestCmd is the name of the hidden command that is used to reques…"
+        },
+        {
+          "name": "ShellCompNoDescRequestCmd",
+          "kind": "const",
+          "line": 34,
+          "rank": 0.0024633444058412375,
+          "references": 50,
+          "signature": "ShellCompNoDescRequestCmd = \"__completeNoDesc\" )  // Global map of flag completion functions. Make sure to use flagCompl…"
+        },
+        {
+          "name": "ShellCompDirective",
+          "kind": "type",
+          "line": 45,
+          "rank": 0.03536379961449468,
+          "references": 40,
+          "signature": "type ShellCompDirective int  type flagCompError struct"
+        },
+        {
+          "name": "flagCompError",
+          "kind": "struct",
+          "line": 47,
+          "rank": 0.003515602282225195,
+          "references": 3,
+          "signature": "type flagCompError struct"
+        },
+        {
+          "name": "Error",
+          "kind": "method",
+          "line": 52,
+          "rank": 0.007445137529291566,
+          "references": 59,
+          "signature": "func (e *flagCompError) Error() string"
+        },
+        {
+          "name": "ShellCompDirectiveError",
+          "kind": "const",
+          "line": 58,
+          "rank": 0.011451578930259927,
+          "references": 6,
+          "signature": "ShellCompDirectiveError ShellCompDirective = 1 << iota  // ShellCompDirectiveNoSpace indicates that the shell should not…"
+        },
+        {
+          "name": "ShellCompDirectiveNoSpace",
+          "kind": "const",
+          "line": 62,
+          "rank": 0.011544164402861325,
+          "references": 10,
+          "signature": "ShellCompDirectiveNoSpace  // ShellCompDirectiveNoFileComp indicates that the shell should not provide // file completio…"
+        },
+        {
+          "name": "ShellCompDirectiveNoFileComp",
+          "kind": "const",
+          "line": 66,
+          "rank": 0.012587982484349345,
+          "references": 29,
+          "signature": "ShellCompDirectiveNoFileComp  // ShellCompDirectiveFilterFileExt indicates that the provided completions // should be us…"
+        },
+        {
+          "name": "ShellCompDirectiveFilterFileExt",
+          "kind": "const",
+          "line": 73,
+          "rank": 0.011467339509749255,
+          "references": 7,
+          "signature": "ShellCompDirectiveFilterFileExt  // ShellCompDirectiveFilterDirs indicates that only directory names should // be provid…"
+        },
+        {
+          "name": "ShellCompDirectiveFilterDirs",
+          "kind": "const",
+          "line": 80,
+          "rank": 0.011467339509749255,
+          "references": 7,
+          "signature": "ShellCompDirectiveFilterDirs  // ShellCompDirectiveKeepOrder indicates that the shell should preserve the order // in wh…"
+        },
+        {
+          "name": "ShellCompDirectiveKeepOrder",
+          "kind": "const",
+          "line": 84,
+          "rank": 0.011414774806439208,
+          "references": 6,
+          "signature": "ShellCompDirectiveKeepOrder  // ==========================================================================="
+        },
+        {
+          "name": "shellCompDirectiveMaxValue",
+          "kind": "const",
+          "line": 90,
+          "rank": 0.01111257888491945,
+          "references": 1,
+          "signature": "shellCompDirectiveMaxValue  // ShellCompDirectiveDefault indicates to let the shell perform its default // behavior afte…"
+        },
+        {
+          "name": "ShellCompDirectiveDefault",
+          "kind": "const",
+          "line": 95,
+          "rank": 0.0012411942924133062,
+          "references": 18,
+          "signature": "ShellCompDirectiveDefault ShellCompDirective = 0 )  const ("
+        },
+        {
+          "name": "CompletionOptions",
+          "kind": "struct",
+          "line": 107,
+          "rank": 0.013232746152456952,
+          "references": 8,
+          "signature": "type CompletionOptions struct"
+        },
+        {
+          "name": "string",
+          "kind": "method",
+          "line": 200,
+          "rank": 0.10035526913893758,
+          "references": 308,
+          "signature": "func (d ShellCompDirective) string() string"
+        },
+        {
+          "name": "CompDebug",
+          "kind": "function",
+          "line": 955,
+          "rank": 0.001190965095061062,
+          "references": 2,
+          "signature": "func CompDebug(msg string, printToStdErr bool)"
+        }
+      ]
+    },
+    {
+      "path": "args.go",
+      "rank": 0.02749419298914311,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "PositionalArgs",
+          "kind": "type",
+          "line": 22,
+          "rank": 0.016797290282259177,
+          "references": 8,
+          "signature": "type PositionalArgs func(cmd *Command, args []string) error  // legacyArgs validation has the following behaviour"
+        },
+        {
+          "name": "NoArgs",
+          "kind": "function",
+          "line": 42,
+          "rank": 0.002168911332444404,
+          "references": 40,
+          "signature": "func NoArgs(cmd *Command, args []string) error"
+        },
+        {
+          "name": "OnlyValidArgs",
+          "kind": "function",
+          "line": 51,
+          "rank": 0.001405337460678251,
+          "references": 16,
+          "signature": "func OnlyValidArgs(cmd *Command, args []string) error"
+        },
+        {
+          "name": "ArbitraryArgs",
+          "kind": "function",
+          "line": 82,
+          "rank": 0.001198311297696477,
+          "references": 11,
+          "signature": "func ArbitraryArgs(cmd *Command, args []string) error"
+        },
+        {
+          "name": "MinimumNArgs",
+          "kind": "function",
+          "line": 87,
+          "rank": 0.0011763915813072566,
+          "references": 13,
+          "signature": "func MinimumNArgs(n int) PositionalArgs"
+        },
+        {
+          "name": "MaximumNArgs",
+          "kind": "function",
+          "line": 97,
+          "rank": 0.0009972227091626011,
+          "references": 8,
+          "signature": "func MaximumNArgs(n int) PositionalArgs"
+        },
+        {
+          "name": "ExactArgs",
+          "kind": "function",
+          "line": 107,
+          "rank": 0.001499757539117934,
+          "references": 17,
+          "signature": "func ExactArgs(n int) PositionalArgs"
+        },
+        {
+          "name": "RangeArgs",
+          "kind": "function",
+          "line": 117,
+          "rank": 0.0009972227091626011,
+          "references": 8,
+          "signature": "func RangeArgs(min int, max int) PositionalArgs"
+        },
+        {
+          "name": "MatchAll",
+          "kind": "function",
+          "line": 127,
+          "rank": 0.0012537480773143997,
+          "references": 13,
+          "signature": "func MatchAll(pargs ...PositionalArgs) PositionalArgs"
+        }
+      ]
+    },
+    {
+      "path": "cobra.go",
+      "rank": 0.020630134768627725,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "tmpl",
+          "kind": "function",
+          "line": 179,
+          "rank": 0.014746859047649672,
+          "references": 7,
+          "signature": "func tmpl(text string) *tmplFunc"
+        },
+        {
+          "name": "CheckErr",
+          "kind": "function",
+          "line": 235,
+          "rank": 0.0027990086973612095,
+          "references": 6,
+          "signature": "func CheckErr(msg interface{})"
+        },
+        {
+          "name": "WriteStringAndCheck",
+          "kind": "function",
+          "line": 243,
+          "rank": 0.003084267023616843,
+          "references": 21,
+          "signature": "func WriteStringAndCheck(b io.StringWriter, s string)"
+        }
+      ]
+    },
+    {
+      "path": "doc/man_docs.go",
+      "rank": 0.003393153118383222,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "GenManHeader",
+          "kind": "struct",
+          "line": 94,
+          "rank": 0.0023916499108296344,
+          "references": 14,
+          "signature": "type GenManHeader struct"
+        },
+        {
+          "name": "GenMan",
+          "kind": "function",
+          "line": 105,
+          "rank": 0.0010015032075535873,
+          "references": 7,
+          "signature": "func GenMan(cmd *cobra.Command, header *GenManHeader, w io.Writer) error"
+        }
+      ]
+    },
+    {
+      "path": "active_help.go",
+      "rank": 0.0032722228452460008,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "activeHelpMarker",
+          "kind": "const",
+          "line": 23,
+          "rank": 0.0010837849081895023,
+          "references": 8,
+          "signature": "activeHelpMarker = \"_activeHelp_ \" // The below values should not be changed: programs will be using them explicitly // …"
+        },
+        {
+          "name": "activeHelpEnvVarSuffix",
+          "kind": "const",
+          "line": 26,
+          "rank": 0.0011753592553622497,
+          "references": 2,
+          "signature": "activeHelpEnvVarSuffix  = \"ACTIVE_HELP\" activeHelpGlobalEnvVar  = configEnvVarGlobalPrefix + \"_\" + activeHelpEnvVarSuffi…"
+        },
+        {
+          "name": "activeHelpEnvVar",
+          "kind": "function",
+          "line": 58,
+          "rank": 0.0010130786816942483,
+          "references": 11,
+          "signature": "func activeHelpEnvVar(name string) string"
+        }
+      ]
+    },
+    {
+      "path": "bash_completions.go",
+      "rank": 0.003131390189276039,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "BashCompFilenameExt",
+          "kind": "const",
+          "line": 30,
+          "rank": 0.000993756281160327,
+          "references": 4,
+          "signature": "BashCompFilenameExt     = \"cobra_annotation_bash_completion_filename_extensions\" BashCompCustom          = \"cobra_annota…"
+        },
+        {
+          "name": "BashCompOneRequiredFlag",
+          "kind": "const",
+          "line": 32,
+          "rank": 0.0011382683084654843,
+          "references": 4,
+          "signature": "BashCompOneRequiredFlag = \"cobra_annotation_bash_completion_one_required_flag\" BashCompSubdirsInDir    = \"cobra_annotati…"
+        },
+        {
+          "name": "BashCompSubdirsInDir",
+          "kind": "const",
+          "line": 33,
+          "rank": 0.0009993655996502271,
+          "references": 5,
+          "signature": "BashCompSubdirsInDir    = \"cobra_annotation_bash_completion_subdirs_in_dir\" )  func writePreamble(buf io.StringWriter, n…"
+        }
+      ]
+    },
+    {
+      "path": "doc/util.go",
+      "rank": 0.0017183403314982846,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "byName",
+          "kind": "type",
+          "line": 48,
+          "rank": 0.0017183403314982846,
+          "references": 7,
+          "signature": "type byName []*cobra.Command  func (s byName) Len() int"
+        }
+      ]
+    },
+    {
+      "path": "flag_groups.go",
+      "rank": 0.001366688317957705,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "sortedKeys",
+          "kind": "function",
+          "line": 209,
+          "rank": 0.001366688317957705,
+          "references": 3,
+          "signature": "func sortedKeys(m map[string]map[string]bool) []string"
+        }
+      ]
+    },
+    {
+      "path": "zsh_completions.go",
+      "rank": 0.001272771459080031,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "genZshCompletion",
+          "kind": "method",
+          "line": 80,
+          "rank": 0.001272771459080031,
+          "references": 3,
+          "signature": "func (c *Command) genZshCompletion(w io.Writer, includeDesc bool) error"
+        }
+      ]
+    },
+    {
+      "path": "powershell_completions.go",
+      "rank": 0.0012489277721069803,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "genPowerShellCompletion",
+          "kind": "method",
+          "line": 313,
+          "rank": 0.0012489277721069803,
+          "references": 3,
+          "signature": "func (c *Command) genPowerShellCompletion(w io.Writer, includeDesc bool) error"
+        }
+      ]
+    },
+    {
+      "path": "doc/yaml_docs.go",
+      "rank": 0.0010141160438310465,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "GenYamlCustom",
+          "kind": "function",
+          "line": 93,
+          "rank": 0.0010141160438310465,
+          "references": 2,
+          "signature": "func GenYamlCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string) string) error"
+        }
+      ]
+    },
+    {
+      "path": "doc/md_docs.go",
+      "rank": 0.0009922591173092583,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "GenMarkdownCustom",
+          "kind": "function",
+          "line": 57,
+          "rank": 0.0009922591173092583,
+          "references": 2,
+          "signature": "func GenMarkdownCustom(cmd *cobra.Command, w io.Writer, linkHandler func(string) string) error"
+        }
+      ]
+    }
+  ],
+  "edge_source": "t0-treesitter"
+}

@@ -1,0 +1,105 @@
+{
+  "findings": [
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `updateMaterialPath` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/storage/database.js",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 237,
+      "message": "method `ArchiveDatabase.updateMaterialPath` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "ArchiveDatabase.updateMaterialPath"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `buildSrcShareLink` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "web/src/archive/exporter.js",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 77,
+      "message": "function `buildSrcShareLink` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "buildSrcShareLink"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `signOut` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "web/src/scraper/googleAuth.js",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 124,
+      "message": "method `GoogleSession.signOut` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "GoogleSession.signOut"
+    }
+  ],
+  "index": {
+    "by_language": {
+      "html": 2,
+      "javascript": 62,
+      "text": 3
+    },
+    "db_path": "/workspace/repos/classroom-archiver/.plumbgraph/index.db",
+    "edges": 872,
+    "files_hashed": 0,
+    "files_parsed": 0,
+    "files_removed": 0,
+    "files_seen": 62,
+    "files_skipped_large": 0,
+    "files_unchanged": 62,
+    "files_with_syntax_errors": 0,
+    "imports": 206,
+    "parse_errors": 0,
+    "refs": 11941,
+    "resolved": false,
+    "symbols": 364,
+    "text_files": 5
+  },
+  "limitations": [
+    "tier-0 (tree-sitter, name-based) analysis: no type information, reflection or macro expansion; no SCIP index was used",
+    "never delete on `medium` or `low` findings without checking usages yourself; `high` means no use was found in indexed code, not that deletion is proven safe",
+    "files excluded by .gitignore, vendor/build directories and files over 2 MiB are not indexed",
+    "3 finding(s) are exported symbols. If this project is a library, re-run with --lib to treat exported symbols as public API (app mode assumes only main/init/tests are entry points)"
+  ],
+  "scip": null,
+  "summary": {
+    "high": 0,
+    "low": 0,
+    "medium": 3,
+    "total": 3
+  }
+}

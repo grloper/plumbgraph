@@ -1,0 +1,180 @@
+{
+ "repo": "cobra",
+ "lang": "go",
+ "results": [
+  {
+   "kind": "skip",
+   "file": "bash_completions_test.go",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "bash_completionsV2_test.go",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "fish_completions_test.go",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "flag_groups_test.go",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "bash_completions_test.go",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced"
+   ],
+   "levels": [
+    "low"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "fish_completions_test.go",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced"
+   ],
+   "levels": [
+    "low"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "doc/yaml_docs_test.go",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced"
+   ],
+   "levels": [
+    "low"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "command_test.go",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced"
+   ],
+   "levels": [
+    "low"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "bash_completions_test.go",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "fish_completions_test.go",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "deleted-test"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "doc/yaml_docs_test.go",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "deleted-test"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "command_test.go",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "benign",
+   "file": "bash_completions_test.go",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  },
+  {
+   "kind": "benign",
+   "file": "bash_completionsV2_test.go",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  },
+  {
+   "kind": "benign",
+   "file": "fish_completions_test.go",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  }
+ ],
+ "recall": "12/12",
+ "false_pos_on_benign": "0/3"
+}

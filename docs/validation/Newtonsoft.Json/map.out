@@ -1,0 +1,90 @@
+# plumb map: 29 files, 60 of 3031 symbols (~1461 tokens, budget 1500)
+Src/Newtonsoft.Json/Utilities/LinqBridge.cs
+  62: public static IEnumerable<TResult> Empty<TResult>()
+  159: public static IEnumerable<TSource> Where<TSource>( this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+  182: public static IEnumerable<TSource> Where<TSource>( this IEnumerable<TSource> source, Func<TSource, int, bool> predicate)
+  365: private static class Futures<T>
+  394: public static TSource First<TSource>( this IEnumerable<TSource> source)
+  404: public static TSource First<TSource>( this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+  728: public static int Count<TSource>( this IEnumerable<TSource> source)
+  756: public static int Count<TSource>( this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+  1807: [DebuggerStepThrough] private static void CheckNotNull<T>(T value, string name) where T : class
+  1814: private static class Sequence<T>
+  2880: public IEnumerator<IGrouping<TKey, TElement>> GetEnumerator()
+  2927: public IEnumerator<T> GetEnumerator()
+Src/Newtonsoft.Json/Linq/Extensions.cs
+  160: public static U? Value<U>(this IEnumerable<JToken> value)
+  172: public static U? Value<T, U>(this IEnumerable<T> value) where T : JToken
+  246: internal static IEnumerable<U?> Convert<T, U>(this IEnumerable<T> source) where T : JToken
+  256: internal static U? Convert<T, U>(this T token) where T : JToken?
+Src/Newtonsoft.Json/Linq/JToken.cs
+  55: public abstract partial class JToken : IJEnumerable<JToken>, IJsonLineInfo #if HAVE_ICLONEABLE , ICloneable #endif
+  368: public virtual T? Value<T>(object key)
+Src/Newtonsoft.Json/Utilities/StringUtils.cs
+  54: public static string FormatWith(this string format, IFormatProvider provider, object? arg0)
+  59: public static string FormatWith(this string format, IFormatProvider provider, object? arg0, object? arg1)
+  64: public static string FormatWith(this string format, IFormatProvider provider, object? arg0, object? arg1, object? arg2)
+  69: public static string FormatWith(this string format, IFormatProvider provider, object? arg0, object? arg1, object? arg2, …
+  74: private static string FormatWith(this string format, IFormatProvider provider, params object?[] args)
+Src/Newtonsoft.Json/Utilities/ValidationUtils.cs
+  32: internal static class ValidationUtils
+  34: public static void ArgumentNotNull([NotNull]object? value, string parameterName)
+Src/Newtonsoft.Json/Utilities/MiscellaneousUtils.cs
+  41: internal static class MiscellaneousUtils
+  47: [Conditional("DEBUG")] public static void Assert([DoesNotReturnIf(false)] bool condition, string? message = null)
+Src/Newtonsoft.Json/JsonConvert.cs
+  53: public static class JsonConvert
+  577: [DebuggerStepThrough] [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] [RequiresDynamicCode(MiscellaneousUtils…
+  596: [DebuggerStepThrough] [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] [RequiresDynamicCode(MiscellaneousUtils…
+  639: [DebuggerStepThrough] [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] [RequiresDynamicCode(MiscellaneousUtils…
+  682: [DebuggerStepThrough] [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] [RequiresDynamicCode(MiscellaneousUtils…
+Src/Newtonsoft.Json/JsonConverter.cs
+  37: public abstract class JsonConverter
+  83: public abstract class JsonConverter<T> : JsonConverter
+Src/Newtonsoft.Json/Linq/JToken.Async.cs
+  37: public abstract partial class JToken
+Src/Newtonsoft.Json/Utilities/DictionaryWrapper.cs
+  88: public void Add(TKey key, TValue value)
+  259: public void Add(KeyValuePair<TKey, TValue> item)
+  444: void IDictionary.Add(object key, object? value)
+Src/Newtonsoft.Json/Linq/JObject.cs
+  56: public partial class JObject : JContainer, IDictionary<string, JToken?>, INotifyPropertyChanged #if HAVE_COMPONENT_MODEL…
+  277: public JProperty? Property(string name)
+  290: public JProperty? Property(string name, StringComparison comparison)
+Src/Newtonsoft.Json/JsonSerializerSettings.cs
+  46: public class JsonSerializerSettings
+Src/Newtonsoft.Json/Serialization/FormatterConverter.cs
+  13: public object Convert(object value, Type type)
+  19: public object Convert(object value, TypeCode typeCode)
+Src/Newtonsoft.Json/JsonToken.cs
+  35: public enum JsonToken
+Src/Newtonsoft.Json/Serialization/JsonProperty.cs
+  41: public class JsonProperty
+Src/Newtonsoft.Json/Linq/JValue.cs
+  46: public partial class JValue : JToken, IEquatable<JValue>, IFormattable, IComparable, IComparable<JValue> #if HAVE_ICONVE…
+Src/Newtonsoft.Json/JsonSerializer.cs
+  47: [RequiresUnreferencedCode(MiscellaneousUtils.TrimWarning)] [RequiresDynamicCode(MiscellaneousUtils.AotWarning)] public c…
+Src/Newtonsoft.Json/JsonReader.cs
+  41: public abstract partial class JsonReader : IDisposable
+Src/Newtonsoft.Json/Linq/JTokenType.cs
+  31: public enum JTokenType
+Src/Newtonsoft.Json/Formatting.cs
+  31: public enum Formatting
+Src/Newtonsoft.Json/Linq/JValue.Async.cs
+  40: public partial class JValue
+Src/Newtonsoft.Json/JsonTextReader.cs
+  57: public partial class JsonTextReader : JsonReader, IJsonLineInfo
+Src/Newtonsoft.Json/JsonTextReader.Async.cs
+  41: public partial class JsonTextReader
+Src/Newtonsoft.Json/Schema/JsonSchema.cs
+  46: [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more …
+Src/Newtonsoft.Json/Linq/JObject.Async.cs
+  37: public partial class JObject
+Src/Newtonsoft.Json/JsonWriter.cs
+  46: public abstract partial class JsonWriter : IDisposable
+Src/Newtonsoft.Json/JsonException.cs
+  38: #if HAVE_BINARY_EXCEPTION_SERIALIZATION [Serializable] #endif public class JsonException : Exception
+Src/Newtonsoft.Json/JsonPosition.cs
+  35: internal enum JsonContainerType
+Src/Newtonsoft.Json/Linq/JProperty.cs
+  39: public partial class JProperty : JContainer

@@ -1,0 +1,144 @@
+# plumb map: 18 files, 125 of 265 symbols (~1441 tokens, budget 1500)
+src/detect.rs
+  21: pub enum Enforcement
+  39: pub struct Config
+  66: fn default() -> Self
+  92: const PAGE_MASK: u64 = 4095;
+  112: pub struct SyscallCtx
+  124: struct Evidence
+  139: struct MemorySpan
+  145: fn new(start: u64, len: u64) -> Option<Self>
+  155: fn contains(self, address: u64) -> bool
+  161: struct MemoryEvidence
+  167: struct ChainState
+  204: struct PendingCompletion
+  211: pub struct Detector
+  225: pub fn new(cfg: Config) -> Self
+  238: pub fn on_syscall(&mut self, proc_key: i32, ctx: &SyscallCtx, map: &MemoryMap) -> Vec<Event>
+  494: pub fn clear_evidence(&mut self, proc_key: i32)
+  514: pub fn retire_thread(&mut self, pid: i32)
+  523: pub fn retire(&mut self, proc_key: i32)
+src/maps.rs
+  15: pub enum RegionKind
+  30: pub struct Region
+  42: pub fn contains(&self, addr: u64) -> bool
+  53: pub fn label(&self) -> String
+  66: fn perms(&self) -> String
+  78: fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result
+  92: pub struct MemoryMap
+  98: pub fn read(pid: i32) -> io::Result<Self>
+  106: pub fn parse(raw: &str) -> Self
+  119: pub fn region_at(&self, addr: u64) -> Option<&Region>
+  124: pub fn regions(&self) -> &[Region]
+  128: pub fn is_empty(&self) -> bool
+  133: fn parse_perms(field: &str) -> Option<(bool, bool, bool, bool)>
+  141: fn classify(path: &str) -> RegionKind
+  156: fn take_field<'a>(rest: &mut &'a str) -> Option<&'a str>
+  167: fn parse_line(line: &str) -> Option<Region>
+src/event.rs
+  11: pub enum Severity
+  23: pub fn as_str(self) -> &'static str
+  35: pub enum Kind
+  63: pub fn as_str(self) -> &'static str
+  82: pub struct Event
+  98: pub fn now( pid: i32, severity: Severity, kind: Kind,
+  143: pub fn to_line(&self, color: bool) -> String
+  176: pub fn sanitize_display(s: &str) -> String
+  181: pub(crate) fn json_escape(s: &str) -> String
+src/engine.rs
+  35: struct AddrSpace
+  44: fn new() -> Self
+  57: pub struct SyscallEntry
+  71: pub enum Action
+  90: pub struct Summary
+  102: fn record(&mut self, ev: &Event)
+  116: pub struct ProcStat
+  126: fn new(tgid: i32) -> Self
+  137: fn record(&mut self, ev: &Event)
+  152: pub trait Reporter
+  172: pub trait Backend
+  183: pub struct Engine
+  203: pub fn new(cfg: Config) -> Self
+  220: pub fn register_space(&mut self, tgid: i32)
+  516: fn read_comm(pid: i32) -> String
+src/tracer.rs
+  59: struct PendingSyscall
+  64: struct AltStack
+  86: struct SyscallInfo
+  95: enum SyscallStop
+  101: const PTRACE_GET_SYSCALL_INFO: u32 = 0x420e;
+  121: fn decode_syscall_info(info: &SyscallInfo, size: i64) -> io::Result<SyscallStop>
+  149: struct FnReporter<F>(F);
+  158: enum Target
+  170: pub struct Tracer
+  180: pub fn spawn(argv: &[String], cfg: Config) -> io::Result<Self>
+  185: pub fn spawn_with_output( argv: &[String], cfg: Config, redirect_stdout: bool,
+  294: pub fn run<F>(self, on_event: F) -> io::Result<Summary> where F: FnMut(&Event),
+  305: pub fn run_with<R>(self, mut reporter: R) -> io::Result<Summary> where R: Reporter,
+  892: fn wait_tracee(pid: Pid) -> io::Result<WaitStatus>
+  906: fn release_attached(pid: Pid)
+  943: fn nix_err(e: nix::errno::Errno) -> io::Error
+src/ui.rs
+  32: pub struct Dashboard
+  51: pub fn new( mode: String, enforcement: Enforcement, min: Severity,
+  76: fn frame( &self, stats: &[ProcStat], summary: &Summary,
+  297: fn bar_plain(left: &str, right: &str, cols: usize) -> String
+  352: fn human(n: u64) -> String
+  353: const UNITS: [(&str, f64); 4] = [("T", 1e12), ("G", 1e9), ("M", 1e6), ("k", 1e3)];
+  363: fn clip(s: &str, w: usize) -> String
+  412: const RESTORE: &[u8] = b"\x1b[?25h\x1b[?1049l";
+src/provenance.rs
+  13: pub enum Origin
+  56: pub fn classify_rip(map: &MemoryMap, rip: u64) -> Origin
+  83: pub enum StackState
+  119: pub fn classify_rsp(map: &MemoryMap, rsp: u64) -> StackState
+  133: pub struct Prot
+  140: pub fn from_raw(prot: u64) -> Self
+src/syscalls.rs
+  17: pub const SENSITIVE: &[u64] = &[ // Code execution / launching new programs. 59,  // execve 322, // execveat
+  68: pub const MEMORY_OPS: &[u64] = &[ 9,   // mmap 10,  // mprotect 329, // pkey_mprotect
+  98: pub fn is_network_input(nr: u64) -> bool
+  109: pub fn name(nr: u64) -> Cow<'static, str>
+scripts/wraith_report.py
+  29: class Summary(TypedDict)
+  45: class ReportInputError(ValueError)
+  180: def summary(self) -> Summary
+  226: def error(self, _message: str) -> None
+  231: def main(argv: list[str] | None = None) -> int
+scripts/benchmark_workloads.py
+  38: class EvidenceError(ValueError)
+  58: def execute_process(command, timeout)
+  81: def parse_sample(raw, workload, expected, traced)
+  145: def rank(percent)
+  153: def emit_completion(name, count, checksum, durations, **extra)
+  246: def small_command(command)
+  407: def main()
+src/bin/wraith.rs
+  57: fn run(args: Vec<String>) -> io::Result<ExitCode>
+  476: fn proc_matches(comm: &str, cmdline: &str, needles: &[String], all: bool) -> bool
+  487: fn parse_region(s: &str) -> io::Result<(u64, u64)>
+  500: const HUGE_SPAN: u64 = 1 << 32; // 4 GiB if end - start > HUGE_SPAN
+  520: fn bad(msg: &str) -> io::Error
+scripts/check_brand.py
+  10: def png_size(path)
+  17: def gif_metadata(path)
+  28: def subblocks(position)
+  71: def validate(root)
+  93: def main()
+src/doctor.rs
+  14: pub enum Status
+  21: fn label(self) -> &'static str
+  31: pub struct Check
+  43: pub fn ready(&self) -> bool
+scripts/render_brand.py
+  21: def font(size, mono=False, heading=False)
+  84: def main()
+scripts/check_docs.py
+  13: def validate(root)
+  53: def main()
+scripts/benchmark.py
+  23: def main()
+scripts/record_demo.py
+  14: def main()
+src/bin/mt_shellcode_sim.rs
+  27: const PAYLOAD: [u8; 19] = [ 0xbf, 0x02, 0x00, 0x00, 0x00, // mov edi, 2 0xbe, 0x01, 0x00, 0x00, 0x00, // mov esi, 1 0x31…

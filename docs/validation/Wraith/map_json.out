@@ -1,0 +1,1138 @@
+{
+  "text": "# plumb map: 18 files, 125 of 265 symbols (~1441 tokens, budget 1500)\nsrc/detect.rs\n  21: pub enum Enforcement\n  39: pub struct Config\n  66: fn default() -> Self\n  92: const PAGE_MASK: u64 = 4095;\n  112: pub struct SyscallCtx\n  124: struct Evidence\n  139: struct MemorySpan\n  145: fn new(start: u64, len: u64) -> Option<Self>\n  155: fn contains(self, address: u64) -> bool\n  161: struct MemoryEvidence\n  167: struct ChainState\n  204: struct PendingCompletion\n  211: pub struct Detector\n  225: pub fn new(cfg: Config) -> Self\n  238: pub fn on_syscall(&mut self, proc_key: i32, ctx: &SyscallCtx, map: &MemoryMap) -> Vec<Event>\n  494: pub fn clear_evidence(&mut self, proc_key: i32)\n  514: pub fn retire_thread(&mut self, pid: i32)\n  523: pub fn retire(&mut self, proc_key: i32)\nsrc/maps.rs\n  15: pub enum RegionKind\n  30: pub struct Region\n  42: pub fn contains(&self, addr: u64) -> bool\n  53: pub fn label(&self) -> String\n  66: fn perms(&self) -> String\n  78: fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result\n  92: pub struct MemoryMap\n  98: pub fn read(pid: i32) -> io::Result<Self>\n  106: pub fn parse(raw: &str) -> Self\n  119: pub fn region_at(&self, addr: u64) -> Option<&Region>\n  124: pub fn regions(&self) -> &[Region]\n  128: pub fn is_empty(&self) -> bool\n  133: fn parse_perms(field: &str) -> Option<(bool, bool, bool, bool)>\n  141: fn classify(path: &str) -> RegionKind\n  156: fn take_field<'a>(rest: &mut &'a str) -> Option<&'a str>\n  167: fn parse_line(line: &str) -> Option<Region>\nsrc/event.rs\n  11: pub enum Severity\n  23: pub fn as_str(self) -> &'static str\n  35: pub enum Kind\n  63: pub fn as_str(self) -> &'static str\n  82: pub struct Event\n  98: pub fn now( pid: i32, severity: Severity, kind: Kind,\n  143: pub fn to_line(&self, color: bool) -> String\n  176: pub fn sanitize_display(s: &str) -> String\n  181: pub(crate) fn json_escape(s: &str) -> String\nsrc/engine.rs\n  35: struct AddrSpace\n  44: fn new() -> Self\n  57: pub struct SyscallEntry\n  71: pub enum Action\n  90: pub struct Summary\n  102: fn record(&mut self, ev: &Event)\n  116: pub struct ProcStat\n  126: fn new(tgid: i32) -> Self\n  137: fn record(&mut self, ev: &Event)\n  152: pub trait Reporter\n  172: pub trait Backend\n  183: pub struct Engine\n  203: pub fn new(cfg: Config) -> Self\n  220: pub fn register_space(&mut self, tgid: i32)\n  516: fn read_comm(pid: i32) -> String\nsrc/tracer.rs\n  59: struct PendingSyscall\n  64: struct AltStack\n  86: struct SyscallInfo\n  95: enum SyscallStop\n  101: const PTRACE_GET_SYSCALL_INFO: u32 = 0x420e;\n  121: fn decode_syscall_info(info: &SyscallInfo, size: i64) -> io::Result<SyscallStop>\n  149: struct FnReporter<F>(F);\n  158: enum Target\n  170: pub struct Tracer\n  180: pub fn spawn(argv: &[String], cfg: Config) -> io::Result<Self>\n  185: pub fn spawn_with_output( argv: &[String], cfg: Config, redirect_stdout: bool,\n  294: pub fn run<F>(self, on_event: F) -> io::Result<Summary> where F: FnMut(&Event),\n  305: pub fn run_with<R>(self, mut reporter: R) -> io::Result<Summary> where R: Reporter,\n  892: fn wait_tracee(pid: Pid) -> io::Result<WaitStatus>\n  906: fn release_attached(pid: Pid)\n  943: fn nix_err(e: nix::errno::Errno) -> io::Error\nsrc/ui.rs\n  32: pub struct Dashboard\n  51: pub fn new( mode: String, enforcement: Enforcement, min: Severity,\n  76: fn frame( &self, stats: &[ProcStat], summary: &Summary,\n  297: fn bar_plain(left: &str, right: &str, cols: usize) -> String\n  352: fn human(n: u64) -> String\n  353: const UNITS: [(&str, f64); 4] = [(\"T\", 1e12), (\"G\", 1e9), (\"M\", 1e6), (\"k\", 1e3)];\n  363: fn clip(s: &str, w: usize) -> String\n  412: const RESTORE: &[u8] = b\"\\x1b[?25h\\x1b[?1049l\";\nsrc/provenance.rs\n  13: pub enum Origin\n  56: pub fn classify_rip(map: &MemoryMap, rip: u64) -> Origin\n  83: pub enum StackState\n  119: pub fn classify_rsp(map: &MemoryMap, rsp: u64) -> StackState\n  133: pub struct Prot\n  140: pub fn from_raw(prot: u64) -> Self\nsrc/syscalls.rs\n  17: pub const SENSITIVE: &[u64] = &[ // Code execution / launching new programs. 59,  // execve 322, // execveat\n  68: pub const MEMORY_OPS: &[u64] = &[ 9,   // mmap 10,  // mprotect 329, // pkey_mprotect\n  98: pub fn is_network_input(nr: u64) -> bool\n  109: pub fn name(nr: u64) -> Cow<'static, str>\nscripts/wraith_report.py\n  29: class Summary(TypedDict)\n  45: class ReportInputError(ValueError)\n  180: def summary(self) -> Summary\n  226: def error(self, _message: str) -> None\n  231: def main(argv: list[str] | None = None) -> int\nscripts/benchmark_workloads.py\n  38: class EvidenceError(ValueError)\n  58: def execute_process(command, timeout)\n  81: def parse_sample(raw, workload, expected, traced)\n  145: def rank(percent)\n  153: def emit_completion(name, count, checksum, durations, **extra)\n  246: def small_command(command)\n  407: def main()\nsrc/bin/wraith.rs\n  57: fn run(args: Vec<String>) -> io::Result<ExitCode>\n  476: fn proc_matches(comm: &str, cmdline: &str, needles: &[String], all: bool) -> bool\n  487: fn parse_region(s: &str) -> io::Result<(u64, u64)>\n  500: const HUGE_SPAN: u64 = 1 << 32; // 4 GiB if end - start > HUGE_SPAN\n  520: fn bad(msg: &str) -> io::Error\nscripts/check_brand.py\n  10: def png_size(path)\n  17: def gif_metadata(path)\n  28: def subblocks(position)\n  71: def validate(root)\n  93: def main()\nsrc/doctor.rs\n  14: pub enum Status\n  21: fn label(self) -> &'static str\n  31: pub struct Check\n  43: pub fn ready(&self) -> bool\nscripts/render_brand.py\n  21: def font(size, mono=False, heading=False)\n  84: def main()\nscripts/check_docs.py\n  13: def validate(root)\n  53: def main()\nscripts/benchmark.py\n  23: def main()\nscripts/record_demo.py\n  14: def main()\nsrc/bin/mt_shellcode_sim.rs\n  27: const PAYLOAD: [u8; 19] = [ 0xbf, 0x02, 0x00, 0x00, 0x00, // mov edi, 2 0xbe, 0x01, 0x00, 0x00, 0x00, // mov esi, 1 0x31…\n",
+  "tokens_estimated": 1442,
+  "budget": 1500,
+  "token_estimate_method": "ceil(chars/4); not a real tokenizer",
+  "total_symbols": 265,
+  "shown_symbols": 125,
+  "changed_files": [],
+  "files": [
+    {
+      "path": "src/detect.rs",
+      "rank": 0.11995782274200659,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Enforcement",
+          "kind": "enum",
+          "line": 21,
+          "rank": 0.024165692625285028,
+          "references": 18,
+          "signature": "pub enum Enforcement"
+        },
+        {
+          "name": "Config",
+          "kind": "struct",
+          "line": 39,
+          "rank": 0.017564207422413523,
+          "references": 75,
+          "signature": "pub struct Config"
+        },
+        {
+          "name": "default",
+          "kind": "method",
+          "line": 66,
+          "rank": 0.02531662534419359,
+          "references": 74,
+          "signature": "fn default() -> Self"
+        },
+        {
+          "name": "PAGE_MASK",
+          "kind": "const",
+          "line": 92,
+          "rank": 0.0014180722059866217,
+          "references": 1,
+          "signature": "const PAGE_MASK: u64 = 4095;"
+        },
+        {
+          "name": "SyscallCtx",
+          "kind": "struct",
+          "line": 112,
+          "rank": 0.004303308021166959,
+          "references": 8,
+          "signature": "pub struct SyscallCtx"
+        },
+        {
+          "name": "Evidence",
+          "kind": "struct",
+          "line": 124,
+          "rank": 0.002179529179430485,
+          "references": 4,
+          "signature": "struct Evidence"
+        },
+        {
+          "name": "MemorySpan",
+          "kind": "struct",
+          "line": 139,
+          "rank": 0.003632469157189806,
+          "references": 6,
+          "signature": "struct MemorySpan"
+        },
+        {
+          "name": "new",
+          "kind": "method",
+          "line": 145,
+          "rank": 0.011347082809673026,
+          "references": 52,
+          "signature": "fn new(start: u64, len: u64) -> Option<Self>"
+        },
+        {
+          "name": "contains",
+          "kind": "method",
+          "line": 155,
+          "rank": 0.003717430977294736,
+          "references": 32,
+          "signature": "fn contains(self, address: u64) -> bool"
+        },
+        {
+          "name": "MemoryEvidence",
+          "kind": "struct",
+          "line": 161,
+          "rank": 0.0015152755345874047,
+          "references": 2,
+          "signature": "struct MemoryEvidence"
+        },
+        {
+          "name": "ChainState",
+          "kind": "struct",
+          "line": 167,
+          "rank": 0.0019163102109365998,
+          "references": 2,
+          "signature": "struct ChainState"
+        },
+        {
+          "name": "PendingCompletion",
+          "kind": "struct",
+          "line": 204,
+          "rank": 0.001784609651948404,
+          "references": 2,
+          "signature": "struct PendingCompletion"
+        },
+        {
+          "name": "Detector",
+          "kind": "struct",
+          "line": 211,
+          "rank": 0.005348404620863196,
+          "references": 30,
+          "signature": "pub struct Detector"
+        },
+        {
+          "name": "new",
+          "kind": "method",
+          "line": 225,
+          "rank": 0.009014953538035568,
+          "references": 51,
+          "signature": "pub fn new(cfg: Config) -> Self"
+        },
+        {
+          "name": "on_syscall",
+          "kind": "method",
+          "line": 238,
+          "rank": 0.0020022605365381495,
+          "references": 29,
+          "signature": "pub fn on_syscall(&mut self, proc_key: i32, ctx: &SyscallCtx, map: &MemoryMap) -> Vec<Event>"
+        },
+        {
+          "name": "clear_evidence",
+          "kind": "method",
+          "line": 494,
+          "rank": 0.001968663441743187,
+          "references": 2,
+          "signature": "pub fn clear_evidence(&mut self, proc_key: i32)"
+        },
+        {
+          "name": "retire_thread",
+          "kind": "method",
+          "line": 514,
+          "rank": 0.0012164683013899378,
+          "references": 2,
+          "signature": "pub fn retire_thread(&mut self, pid: i32)"
+        },
+        {
+          "name": "retire",
+          "kind": "method",
+          "line": 523,
+          "rank": 0.0015464591633303458,
+          "references": 4,
+          "signature": "pub fn retire(&mut self, proc_key: i32)"
+        }
+      ]
+    },
+    {
+      "path": "src/maps.rs",
+      "rank": 0.11205127560508973,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "RegionKind",
+          "kind": "enum",
+          "line": 15,
+          "rank": 0.016134203228860798,
+          "references": 11,
+          "signature": "pub enum RegionKind"
+        },
+        {
+          "name": "Region",
+          "kind": "struct",
+          "line": 30,
+          "rank": 0.02348309402924876,
+          "references": 5,
+          "signature": "pub struct Region"
+        },
+        {
+          "name": "contains",
+          "kind": "method",
+          "line": 42,
+          "rank": 0.0031940393632027843,
+          "references": 24,
+          "signature": "pub fn contains(&self, addr: u64) -> bool"
+        },
+        {
+          "name": "label",
+          "kind": "method",
+          "line": 53,
+          "rank": 0.002038099296070736,
+          "references": 9,
+          "signature": "pub fn label(&self) -> String"
+        },
+        {
+          "name": "perms",
+          "kind": "method",
+          "line": 66,
+          "rank": 0.0017241752052678297,
+          "references": 2,
+          "signature": "fn perms(&self) -> String"
+        },
+        {
+          "name": "fmt",
+          "kind": "method",
+          "line": 78,
+          "rank": 0.0020098727687584885,
+          "references": 2,
+          "signature": "fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result"
+        },
+        {
+          "name": "MemoryMap",
+          "kind": "struct",
+          "line": 92,
+          "rank": 0.011438144312987987,
+          "references": 42,
+          "signature": "pub struct MemoryMap"
+        },
+        {
+          "name": "read",
+          "kind": "method",
+          "line": 98,
+          "rank": 0.00908213930406806,
+          "references": 13,
+          "signature": "pub fn read(pid: i32) -> io::Result<Self>"
+        },
+        {
+          "name": "parse",
+          "kind": "method",
+          "line": 106,
+          "rank": 0.01589720449407513,
+          "references": 37,
+          "signature": "pub fn parse(raw: &str) -> Self"
+        },
+        {
+          "name": "region_at",
+          "kind": "method",
+          "line": 119,
+          "rank": 0.0022116968372793678,
+          "references": 18,
+          "signature": "pub fn region_at(&self, addr: u64) -> Option<&Region>"
+        },
+        {
+          "name": "regions",
+          "kind": "method",
+          "line": 124,
+          "rank": 0.00983945200696354,
+          "references": 13,
+          "signature": "pub fn regions(&self) -> &[Region]"
+        },
+        {
+          "name": "is_empty",
+          "kind": "method",
+          "line": 128,
+          "rank": 0.0036551195647801875,
+          "references": 25,
+          "signature": "pub fn is_empty(&self) -> bool"
+        },
+        {
+          "name": "parse_perms",
+          "kind": "function",
+          "line": 133,
+          "rank": 0.001675565745063425,
+          "references": 1,
+          "signature": "fn parse_perms(field: &str) -> Option<(bool, bool, bool, bool)>"
+        },
+        {
+          "name": "classify",
+          "kind": "function",
+          "line": 141,
+          "rank": 0.001675565745063425,
+          "references": 1,
+          "signature": "fn classify(path: &str) -> RegionKind"
+        },
+        {
+          "name": "take_field",
+          "kind": "function",
+          "line": 156,
+          "rank": 0.001675565745063425,
+          "references": 1,
+          "signature": "fn take_field<'a>(rest: &mut &'a str) -> Option<&'a str>"
+        },
+        {
+          "name": "parse_line",
+          "kind": "function",
+          "line": 167,
+          "rank": 0.006317337958335757,
+          "references": 1,
+          "signature": "fn parse_line(line: &str) -> Option<Region>"
+        }
+      ]
+    },
+    {
+      "path": "src/event.rs",
+      "rank": 0.0841892760966614,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Severity",
+          "kind": "enum",
+          "line": 11,
+          "rank": 0.027049380726647896,
+          "references": 53,
+          "signature": "pub enum Severity"
+        },
+        {
+          "name": "as_str",
+          "kind": "method",
+          "line": 23,
+          "rank": 0.001734491227771627,
+          "references": 10,
+          "signature": "pub fn as_str(self) -> &'static str"
+        },
+        {
+          "name": "Kind",
+          "kind": "enum",
+          "line": 35,
+          "rank": 0.017385449921380608,
+          "references": 54,
+          "signature": "pub enum Kind"
+        },
+        {
+          "name": "as_str",
+          "kind": "method",
+          "line": 63,
+          "rank": 0.001734491227771627,
+          "references": 10,
+          "signature": "pub fn as_str(self) -> &'static str"
+        },
+        {
+          "name": "Event",
+          "kind": "struct",
+          "line": 82,
+          "rank": 0.026006330118762234,
+          "references": 44,
+          "signature": "pub struct Event"
+        },
+        {
+          "name": "now",
+          "kind": "method",
+          "line": 98,
+          "rank": 0.0060947353638139,
+          "references": 26,
+          "signature": "pub fn now( pid: i32, severity: Severity, kind: Kind,"
+        },
+        {
+          "name": "to_line",
+          "kind": "method",
+          "line": 143,
+          "rank": 0.0012270495430913436,
+          "references": 10,
+          "signature": "pub fn to_line(&self, color: bool) -> String"
+        },
+        {
+          "name": "sanitize_display",
+          "kind": "function",
+          "line": 176,
+          "rank": 0.0018175377306516127,
+          "references": 5,
+          "signature": "pub fn sanitize_display(s: &str) -> String"
+        },
+        {
+          "name": "json_escape",
+          "kind": "function",
+          "line": 181,
+          "rank": 0.0011398102367705535,
+          "references": 3,
+          "signature": "pub(crate) fn json_escape(s: &str) -> String"
+        }
+      ]
+    },
+    {
+      "path": "src/engine.rs",
+      "rank": 0.052892050171897534,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "AddrSpace",
+          "kind": "struct",
+          "line": 35,
+          "rank": 0.00330309351247474,
+          "references": 9,
+          "signature": "struct AddrSpace"
+        },
+        {
+          "name": "new",
+          "kind": "method",
+          "line": 44,
+          "rank": 0.004114074007785938,
+          "references": 42,
+          "signature": "fn new() -> Self"
+        },
+        {
+          "name": "SyscallEntry",
+          "kind": "struct",
+          "line": 57,
+          "rank": 0.003015819623689073,
+          "references": 12,
+          "signature": "pub struct SyscallEntry"
+        },
+        {
+          "name": "Action",
+          "kind": "enum",
+          "line": 71,
+          "rank": 0.0014235065382772988,
+          "references": 9,
+          "signature": "pub enum Action"
+        },
+        {
+          "name": "Summary",
+          "kind": "struct",
+          "line": 90,
+          "rank": 0.003840918307239594,
+          "references": 19,
+          "signature": "pub struct Summary"
+        },
+        {
+          "name": "record",
+          "kind": "method",
+          "line": 102,
+          "rank": 0.006750417081350252,
+          "references": 9,
+          "signature": "fn record(&mut self, ev: &Event)"
+        },
+        {
+          "name": "ProcStat",
+          "kind": "struct",
+          "line": 116,
+          "rank": 0.003968175983074485,
+          "references": 15,
+          "signature": "pub struct ProcStat"
+        },
+        {
+          "name": "new",
+          "kind": "method",
+          "line": 126,
+          "rank": 0.004114074007785938,
+          "references": 42,
+          "signature": "fn new(tgid: i32) -> Self"
+        },
+        {
+          "name": "record",
+          "kind": "method",
+          "line": 137,
+          "rank": 0.006750417081350252,
+          "references": 9,
+          "signature": "fn record(&mut self, ev: &Event)"
+        },
+        {
+          "name": "Reporter",
+          "kind": "trait",
+          "line": 152,
+          "rank": 0.0061036712316285885,
+          "references": 19,
+          "signature": "pub trait Reporter"
+        },
+        {
+          "name": "Backend",
+          "kind": "trait",
+          "line": 172,
+          "rank": 0.00116145244118623,
+          "references": 1,
+          "signature": "pub trait Backend"
+        },
+        {
+          "name": "Engine",
+          "kind": "struct",
+          "line": 183,
+          "rank": 0.0017541044985843602,
+          "references": 17,
+          "signature": "pub struct Engine"
+        },
+        {
+          "name": "new",
+          "kind": "method",
+          "line": 203,
+          "rank": 0.0037874730690225207,
+          "references": 41,
+          "signature": "pub fn new(cfg: Config) -> Self"
+        },
+        {
+          "name": "register_space",
+          "kind": "method",
+          "line": 220,
+          "rank": 0.0011121895079425196,
+          "references": 11,
+          "signature": "pub fn register_space(&mut self, tgid: i32)"
+        },
+        {
+          "name": "read_comm",
+          "kind": "function",
+          "line": 516,
+          "rank": 0.001692663280505739,
+          "references": 2,
+          "signature": "fn read_comm(pid: i32) -> String"
+        }
+      ]
+    },
+    {
+      "path": "src/tracer.rs",
+      "rank": 0.03017559224457251,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "PendingSyscall",
+          "kind": "struct",
+          "line": 59,
+          "rank": 0.0013732033794004162,
+          "references": 2,
+          "signature": "struct PendingSyscall"
+        },
+        {
+          "name": "AltStack",
+          "kind": "struct",
+          "line": 64,
+          "rank": 0.0015648433252747538,
+          "references": 2,
+          "signature": "struct AltStack"
+        },
+        {
+          "name": "SyscallInfo",
+          "kind": "struct",
+          "line": 86,
+          "rank": 0.0015837330260120323,
+          "references": 5,
+          "signature": "struct SyscallInfo"
+        },
+        {
+          "name": "SyscallStop",
+          "kind": "enum",
+          "line": 95,
+          "rank": 0.0014093952573453025,
+          "references": 5,
+          "signature": "enum SyscallStop"
+        },
+        {
+          "name": "PTRACE_GET_SYSCALL_INFO",
+          "kind": "const",
+          "line": 101,
+          "rank": 0.001277325404638817,
+          "references": 2,
+          "signature": "const PTRACE_GET_SYSCALL_INFO: u32 = 0x420e;"
+        },
+        {
+          "name": "decode_syscall_info",
+          "kind": "function",
+          "line": 121,
+          "rank": 0.0012223442816952303,
+          "references": 4,
+          "signature": "fn decode_syscall_info(info: &SyscallInfo, size: i64) -> io::Result<SyscallStop>"
+        },
+        {
+          "name": "FnReporter",
+          "kind": "struct",
+          "line": 149,
+          "rank": 0.0012224103799814813,
+          "references": 1,
+          "signature": "struct FnReporter<F>(F);"
+        },
+        {
+          "name": "Target",
+          "kind": "enum",
+          "line": 158,
+          "rank": 0.0018229115819026797,
+          "references": 6,
+          "signature": "enum Target"
+        },
+        {
+          "name": "Tracer",
+          "kind": "struct",
+          "line": 170,
+          "rank": 0.0014325901625317039,
+          "references": 10,
+          "signature": "pub struct Tracer"
+        },
+        {
+          "name": "spawn",
+          "kind": "method",
+          "line": 180,
+          "rank": 0.004047988345127626,
+          "references": 9,
+          "signature": "pub fn spawn(argv: &[String], cfg: Config) -> io::Result<Self>"
+        },
+        {
+          "name": "spawn_with_output",
+          "kind": "method",
+          "line": 185,
+          "rank": 0.002395429812012547,
+          "references": 2,
+          "signature": "pub fn spawn_with_output( argv: &[String], cfg: Config, redirect_stdout: bool,"
+        },
+        {
+          "name": "run",
+          "kind": "method",
+          "line": 294,
+          "rank": 0.002535786651314543,
+          "references": 10,
+          "signature": "pub fn run<F>(self, on_event: F) -> io::Result<Summary> where F: FnMut(&Event),"
+        },
+        {
+          "name": "run_with",
+          "kind": "method",
+          "line": 305,
+          "rank": 0.0011773261637487789,
+          "references": 2,
+          "signature": "pub fn run_with<R>(self, mut reporter: R) -> io::Result<Summary> where R: Reporter,"
+        },
+        {
+          "name": "wait_tracee",
+          "kind": "function",
+          "line": 892,
+          "rank": 0.002275834612045096,
+          "references": 6,
+          "signature": "fn wait_tracee(pid: Pid) -> io::Result<WaitStatus>"
+        },
+        {
+          "name": "release_attached",
+          "kind": "function",
+          "line": 906,
+          "rank": 0.0011305874513658663,
+          "references": 3,
+          "signature": "fn release_attached(pid: Pid)"
+        },
+        {
+          "name": "nix_err",
+          "kind": "function",
+          "line": 943,
+          "rank": 0.003703882410175635,
+          "references": 9,
+          "signature": "fn nix_err(e: nix::errno::Errno) -> io::Error"
+        }
+      ]
+    },
+    {
+      "path": "src/ui.rs",
+      "rank": 0.019204707962074307,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Dashboard",
+          "kind": "struct",
+          "line": 32,
+          "rank": 0.002431237754941846,
+          "references": 4,
+          "signature": "pub struct Dashboard"
+        },
+        {
+          "name": "new",
+          "kind": "method",
+          "line": 51,
+          "rank": 0.006129859944929046,
+          "references": 20,
+          "signature": "pub fn new( mode: String, enforcement: Enforcement, min: Severity,"
+        },
+        {
+          "name": "frame",
+          "kind": "method",
+          "line": 76,
+          "rank": 0.001114743707595928,
+          "references": 8,
+          "signature": "fn frame( &self, stats: &[ProcStat], summary: &Summary,"
+        },
+        {
+          "name": "bar_plain",
+          "kind": "function",
+          "line": 297,
+          "rank": 0.0013189121819057745,
+          "references": 2,
+          "signature": "fn bar_plain(left: &str, right: &str, cols: usize) -> String"
+        },
+        {
+          "name": "human",
+          "kind": "function",
+          "line": 352,
+          "rank": 0.0014480299260497564,
+          "references": 4,
+          "signature": "fn human(n: u64) -> String"
+        },
+        {
+          "name": "UNITS",
+          "kind": "const",
+          "line": 353,
+          "rank": 0.0018586375679964543,
+          "references": 1,
+          "signature": "const UNITS: [(&str, f64); 4] = [(\"T\", 1e12), (\"G\", 1e9), (\"M\", 1e6), (\"k\", 1e3)];"
+        },
+        {
+          "name": "clip",
+          "kind": "function",
+          "line": 363,
+          "rank": 0.0035720184032127715,
+          "references": 7,
+          "signature": "fn clip(s: &str, w: usize) -> String"
+        },
+        {
+          "name": "RESTORE",
+          "kind": "const",
+          "line": 412,
+          "rank": 0.001331268475442729,
+          "references": 2,
+          "signature": "const RESTORE: &[u8] = b\"\\x1b[?25h\\x1b[?1049l\";"
+        }
+      ]
+    },
+    {
+      "path": "src/provenance.rs",
+      "rank": 0.016247019173942508,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Origin",
+          "kind": "enum",
+          "line": 13,
+          "rank": 0.003895646809268338,
+          "references": 13,
+          "signature": "pub enum Origin"
+        },
+        {
+          "name": "classify_rip",
+          "kind": "function",
+          "line": 56,
+          "rank": 0.0017673421302321244,
+          "references": 9,
+          "signature": "pub fn classify_rip(map: &MemoryMap, rip: u64) -> Origin"
+        },
+        {
+          "name": "StackState",
+          "kind": "enum",
+          "line": 83,
+          "rank": 0.0030503854879050858,
+          "references": 7,
+          "signature": "pub enum StackState"
+        },
+        {
+          "name": "classify_rsp",
+          "kind": "function",
+          "line": 119,
+          "rank": 0.0011791812921869106,
+          "references": 4,
+          "signature": "pub fn classify_rsp(map: &MemoryMap, rsp: u64) -> StackState"
+        },
+        {
+          "name": "Prot",
+          "kind": "struct",
+          "line": 133,
+          "rank": 0.0026425307479854524,
+          "references": 3,
+          "signature": "pub struct Prot"
+        },
+        {
+          "name": "from_raw",
+          "kind": "method",
+          "line": 140,
+          "rank": 0.0037119327063645977,
+          "references": 8,
+          "signature": "pub fn from_raw(prot: u64) -> Self"
+        }
+      ]
+    },
+    {
+      "path": "src/syscalls.rs",
+      "rank": 0.014760105300016663,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "SENSITIVE",
+          "kind": "const",
+          "line": 17,
+          "rank": 0.0011215681476347181,
+          "references": 1,
+          "signature": "pub const SENSITIVE: &[u64] = &[ // Code execution / launching new programs. 59,  // execve 322, // execveat"
+        },
+        {
+          "name": "MEMORY_OPS",
+          "kind": "const",
+          "line": 68,
+          "rank": 0.001120549915694717,
+          "references": 1,
+          "signature": "pub const MEMORY_OPS: &[u64] = &[ 9,   // mmap 10,  // mprotect 329, // pkey_mprotect"
+        },
+        {
+          "name": "is_network_input",
+          "kind": "function",
+          "line": 98,
+          "rank": 0.0012833766613714222,
+          "references": 3,
+          "signature": "pub fn is_network_input(nr: u64) -> bool"
+        },
+        {
+          "name": "name",
+          "kind": "function",
+          "line": 109,
+          "rank": 0.011234610575315806,
+          "references": 33,
+          "signature": "pub fn name(nr: u64) -> Cow<'static, str>"
+        }
+      ]
+    },
+    {
+      "path": "scripts/wraith_report.py",
+      "rank": 0.013400716555616924,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Summary",
+          "kind": "class",
+          "line": 29,
+          "rank": 0.003262228522522117,
+          "references": 13,
+          "signature": "class Summary(TypedDict)"
+        },
+        {
+          "name": "ReportInputError",
+          "kind": "class",
+          "line": 45,
+          "rank": 0.00392685343472054,
+          "references": 11,
+          "signature": "class ReportInputError(ValueError)"
+        },
+        {
+          "name": "summary",
+          "kind": "method",
+          "line": 180,
+          "rank": 0.003020807239006846,
+          "references": 46,
+          "signature": "def summary(self) -> Summary"
+        },
+        {
+          "name": "error",
+          "kind": "method",
+          "line": 226,
+          "rank": 0.0018894743015073134,
+          "references": 14,
+          "signature": "def error(self, _message: str) -> None"
+        },
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 231,
+          "rank": 0.0013013530578601068,
+          "references": 6,
+          "signature": "def main(argv: list[str] | None = None) -> int"
+        }
+      ]
+    },
+    {
+      "path": "scripts/benchmark_workloads.py",
+      "rank": 0.010654625173542761,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "EvidenceError",
+          "kind": "class",
+          "line": 38,
+          "rank": 0.0024797683405778895,
+          "references": 9,
+          "signature": "class EvidenceError(ValueError)"
+        },
+        {
+          "name": "execute_process",
+          "kind": "function",
+          "line": 58,
+          "rank": 0.001233619914767138,
+          "references": 5,
+          "signature": "def execute_process(command, timeout)"
+        },
+        {
+          "name": "parse_sample",
+          "kind": "function",
+          "line": 81,
+          "rank": 0.0019036850480872998,
+          "references": 13,
+          "signature": "def parse_sample(raw, workload, expected, traced)"
+        },
+        {
+          "name": "rank",
+          "kind": "function",
+          "line": 145,
+          "rank": 0.001387480638246953,
+          "references": 1,
+          "signature": "def rank(percent)"
+        },
+        {
+          "name": "emit_completion",
+          "kind": "function",
+          "line": 153,
+          "rank": 0.0012530823939753896,
+          "references": 3,
+          "signature": "def emit_completion(name, count, checksum, durations, **extra)"
+        },
+        {
+          "name": "small_command",
+          "kind": "function",
+          "line": 246,
+          "rank": 0.0010956357800279847,
+          "references": 3,
+          "signature": "def small_command(command)"
+        },
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 407,
+          "rank": 0.0013013530578601066,
+          "references": 6,
+          "signature": "def main()"
+        }
+      ]
+    },
+    {
+      "path": "src/bin/wraith.rs",
+      "rank": 0.009095452008230693,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "run",
+          "kind": "function",
+          "line": 57,
+          "rank": 0.0031250272274100715,
+          "references": 10,
+          "signature": "fn run(args: Vec<String>) -> io::Result<ExitCode>"
+        },
+        {
+          "name": "proc_matches",
+          "kind": "function",
+          "line": 476,
+          "rank": 0.0020320750548030162,
+          "references": 5,
+          "signature": "fn proc_matches(comm: &str, cmdline: &str, needles: &[String], all: bool) -> bool"
+        },
+        {
+          "name": "parse_region",
+          "kind": "function",
+          "line": 487,
+          "rank": 0.0012558977085710497,
+          "references": 2,
+          "signature": "fn parse_region(s: &str) -> io::Result<(u64, u64)>"
+        },
+        {
+          "name": "HUGE_SPAN",
+          "kind": "const",
+          "line": 500,
+          "rank": 0.0011615686566671052,
+          "references": 1,
+          "signature": "const HUGE_SPAN: u64 = 1 << 32; // 4 GiB if end - start > HUGE_SPAN"
+        },
+        {
+          "name": "bad",
+          "kind": "function",
+          "line": 520,
+          "rank": 0.0015208833607794497,
+          "references": 4,
+          "signature": "fn bad(msg: &str) -> io::Error"
+        }
+      ]
+    },
+    {
+      "path": "scripts/check_brand.py",
+      "rank": 0.008305030341944809,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "png_size",
+          "kind": "function",
+          "line": 10,
+          "rank": 0.0014858502125233138,
+          "references": 2,
+          "signature": "def png_size(path)"
+        },
+        {
+          "name": "gif_metadata",
+          "kind": "function",
+          "line": 17,
+          "rank": 0.0016920294235617632,
+          "references": 3,
+          "signature": "def gif_metadata(path)"
+        },
+        {
+          "name": "subblocks",
+          "kind": "function",
+          "line": 28,
+          "rank": 0.001449654993585429,
+          "references": 1,
+          "signature": "def subblocks(position)"
+        },
+        {
+          "name": "validate",
+          "kind": "function",
+          "line": 71,
+          "rank": 0.001842502343491151,
+          "references": 3,
+          "signature": "def validate(root)"
+        },
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 93,
+          "rank": 0.001834993368783152,
+          "references": 7,
+          "signature": "def main()"
+        }
+      ]
+    },
+    {
+      "path": "src/doctor.rs",
+      "rank": 0.006501454897855323,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Status",
+          "kind": "enum",
+          "line": 14,
+          "rank": 0.0024458724280744305,
+          "references": 4,
+          "signature": "pub enum Status"
+        },
+        {
+          "name": "label",
+          "kind": "method",
+          "line": 21,
+          "rank": 0.001531634775471125,
+          "references": 7,
+          "signature": "fn label(self) -> &'static str"
+        },
+        {
+          "name": "Check",
+          "kind": "struct",
+          "line": 31,
+          "rank": 0.0014067992482643243,
+          "references": 3,
+          "signature": "pub struct Check"
+        },
+        {
+          "name": "ready",
+          "kind": "method",
+          "line": 43,
+          "rank": 0.0011171484460454437,
+          "references": 6,
+          "signature": "pub fn ready(&self) -> bool"
+        }
+      ]
+    },
+    {
+      "path": "scripts/render_brand.py",
+      "rank": 0.0035525670320284597,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "font",
+          "kind": "function",
+          "line": 21,
+          "rank": 0.0017175736632453076,
+          "references": 5,
+          "signature": "def font(size, mono=False, heading=False)"
+        },
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 84,
+          "rank": 0.001834993368783152,
+          "references": 7,
+          "signature": "def main()"
+        }
+      ]
+    },
+    {
+      "path": "scripts/check_docs.py",
+      "rank": 0.0024822402379658117,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "validate",
+          "kind": "function",
+          "line": 13,
+          "rank": 0.0011808871801057051,
+          "references": 1,
+          "signature": "def validate(root)"
+        },
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 53,
+          "rank": 0.0013013530578601066,
+          "references": 6,
+          "signature": "def main()"
+        }
+      ]
+    },
+    {
+      "path": "scripts/benchmark.py",
+      "rank": 0.0013013530578601066,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 23,
+          "rank": 0.0013013530578601066,
+          "references": 6,
+          "signature": "def main()"
+        }
+      ]
+    },
+    {
+      "path": "scripts/record_demo.py",
+      "rank": 0.0013013530578601066,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "main",
+          "kind": "function",
+          "line": 14,
+          "rank": 0.0013013530578601066,
+          "references": 6,
+          "signature": "def main()"
+        }
+      ]
+    },
+    {
+      "path": "src/bin/mt_shellcode_sim.rs",
+      "rank": 0.0010795231057924369,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "PAYLOAD",
+          "kind": "const",
+          "line": 27,
+          "rank": 0.0010795231057924369,
+          "references": 1,
+          "signature": "const PAYLOAD: [u8; 19] = [ 0xbf, 0x02, 0x00, 0x00, 0x00, // mov edi, 2 0xbe, 0x01, 0x00, 0x00, 0x00, // mov esi, 1 0x31…"
+        }
+      ]
+    }
+  ],
+  "edge_source": "t0-treesitter"
+}

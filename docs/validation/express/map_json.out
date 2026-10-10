@@ -1,0 +1,404 @@
+{
+  "text": "# plumb map: 16 files, 35 of 35 symbols (~439 tokens, budget 1500)\nlib/response.js\n  924: function sendfile(res, file, options, callback)\n  929: function onaborted()\n  939: function ondirectory()\n  949: function onerror(err)\n  956: function onend()\n  963: function onfile()\n  968: function onfinish(err)\n  986: function onstream()\n  1026: function stringify (value, replacer, spaces, escape)\nexamples/view-locals/index.js\n  17: function ferrets(user)\n  48: function count(req, res, next)\n  56: function users(req, res, next)\n  86: function count2(req, res, next)\n  94: function users2(req, res, next)\nexamples/route-middleware/index.js\n  25: function loadUser(req, res, next)\n  36: function andRestrictToSelf(req, res, next)\n  50: function andRestrictTo(role)\nlib/utils.js\n  89: function acceptParams (str)\n  249: function createETagGenerator (options)\n  267: function parseExtendedQueryString(str)\nexamples/web-service/index.js\n  15: function error(status, msg)\nexamples/error/index.js\n  20: function error(err, req, res, next)\nlib/view.js\n  52: function View(name, options)\n  197: function tryStat(path)\nexamples/auth/index.js\n  60: function authenticate(name, pass, fn)\n  75: function restrict(req, res, next)\nlib/application.js\n  615: function logerror(err)\n  625: function tryRender(view, options, callback)\nexamples/online/index.js\n  40: function list(ids)\nexamples/content-negotiation/index.js\n  33: function format(path)\nexamples/view-locals/user.js\n  7: function User(name, age, species)\nexamples/view-constructor/github-view.js\n  23: function GithubView(name, options)\nlib/express.js\n  36: function createApplication()\nexamples/search/index.js\n  29: async function initializeRedis()\nlib/request.js\n  521: function defineGetter(obj, name, getter)\n",
+  "tokens_estimated": 439,
+  "budget": 1500,
+  "token_estimate_method": "ceil(chars/4); not a real tokenizer",
+  "total_symbols": 35,
+  "shown_symbols": 35,
+  "changed_files": [],
+  "files": [
+    {
+      "path": "lib/response.js",
+      "rank": 0.009896742459687923,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "sendfile",
+          "kind": "function",
+          "line": 924,
+          "rank": 0.0009581467281653961,
+          "references": 1,
+          "signature": "function sendfile(res, file, options, callback)"
+        },
+        {
+          "name": "onaborted",
+          "kind": "function",
+          "line": 929,
+          "rank": 0.0012869883622438703,
+          "references": 1,
+          "signature": "function onaborted()"
+        },
+        {
+          "name": "ondirectory",
+          "kind": "function",
+          "line": 939,
+          "rank": 0.0010364115313874769,
+          "references": 1,
+          "signature": "function ondirectory()"
+        },
+        {
+          "name": "onerror",
+          "kind": "function",
+          "line": 949,
+          "rank": 0.0014078880188712203,
+          "references": 3,
+          "signature": "function onerror(err)"
+        },
+        {
+          "name": "onend",
+          "kind": "function",
+          "line": 956,
+          "rank": 0.0010364115313874769,
+          "references": 1,
+          "signature": "function onend()"
+        },
+        {
+          "name": "onfile",
+          "kind": "function",
+          "line": 963,
+          "rank": 0.0010364115313874769,
+          "references": 1,
+          "signature": "function onfile()"
+        },
+        {
+          "name": "onfinish",
+          "kind": "function",
+          "line": 968,
+          "rank": 0.0010364115313874769,
+          "references": 1,
+          "signature": "function onfinish(err)"
+        },
+        {
+          "name": "onstream",
+          "kind": "function",
+          "line": 986,
+          "rank": 0.0010364115313874769,
+          "references": 1,
+          "signature": "function onstream()"
+        },
+        {
+          "name": "stringify",
+          "kind": "function",
+          "line": 1026,
+          "rank": 0.0010616616934700518,
+          "references": 3,
+          "signature": "function stringify (value, replacer, spaces, escape)"
+        }
+      ]
+    },
+    {
+      "path": "examples/view-locals/index.js",
+      "rank": 0.008460049454450665,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "ferrets",
+          "kind": "function",
+          "line": 17,
+          "rank": 0.0011717628740969851,
+          "references": 2,
+          "signature": "function ferrets(user)"
+        },
+        {
+          "name": "count",
+          "kind": "function",
+          "line": 48,
+          "rank": 0.004088684709614994,
+          "references": 18,
+          "signature": "function count(req, res, next)"
+        },
+        {
+          "name": "users",
+          "kind": "function",
+          "line": 56,
+          "rank": 0.0011965884108342936,
+          "references": 3,
+          "signature": "function users(req, res, next)"
+        },
+        {
+          "name": "count2",
+          "kind": "function",
+          "line": 86,
+          "rank": 0.001001506729952196,
+          "references": 1,
+          "signature": "function count2(req, res, next)"
+        },
+        {
+          "name": "users2",
+          "kind": "function",
+          "line": 94,
+          "rank": 0.001001506729952196,
+          "references": 1,
+          "signature": "function users2(req, res, next)"
+        }
+      ]
+    },
+    {
+      "path": "examples/route-middleware/index.js",
+      "rank": 0.0030927042973866257,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "loadUser",
+          "kind": "function",
+          "line": 25,
+          "rank": 0.0010309014324622085,
+          "references": 1,
+          "signature": "function loadUser(req, res, next)"
+        },
+        {
+          "name": "andRestrictToSelf",
+          "kind": "function",
+          "line": 36,
+          "rank": 0.0010309014324622085,
+          "references": 1,
+          "signature": "function andRestrictToSelf(req, res, next)"
+        },
+        {
+          "name": "andRestrictTo",
+          "kind": "function",
+          "line": 50,
+          "rank": 0.0010309014324622085,
+          "references": 1,
+          "signature": "function andRestrictTo(role)"
+        }
+      ]
+    },
+    {
+      "path": "lib/utils.js",
+      "rank": 0.00295277854486725,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "acceptParams",
+          "kind": "function",
+          "line": 89,
+          "rank": 0.00098425951495575,
+          "references": 1,
+          "signature": "function acceptParams (str)"
+        },
+        {
+          "name": "createETagGenerator",
+          "kind": "function",
+          "line": 249,
+          "rank": 0.00098425951495575,
+          "references": 1,
+          "signature": "function createETagGenerator (options)"
+        },
+        {
+          "name": "parseExtendedQueryString",
+          "kind": "function",
+          "line": 267,
+          "rank": 0.00098425951495575,
+          "references": 1,
+          "signature": "function parseExtendedQueryString(str)"
+        }
+      ]
+    },
+    {
+      "path": "examples/web-service/index.js",
+      "rank": 0.002212841552498235,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "error",
+          "kind": "function",
+          "line": 15,
+          "rank": 0.002212841552498235,
+          "references": 15,
+          "signature": "function error(status, msg)"
+        }
+      ]
+    },
+    {
+      "path": "examples/error/index.js",
+      "rank": 0.0021883225038687947,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "error",
+          "kind": "function",
+          "line": 20,
+          "rank": 0.0021883225038687947,
+          "references": 14,
+          "signature": "function error(err, req, res, next)"
+        }
+      ]
+    },
+    {
+      "path": "lib/view.js",
+      "rank": 0.002034290581786967,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "View",
+          "kind": "function",
+          "line": 52,
+          "rank": 0.0010171452908934835,
+          "references": 1,
+          "signature": "function View(name, options)"
+        },
+        {
+          "name": "tryStat",
+          "kind": "function",
+          "line": 197,
+          "rank": 0.0010171452908934835,
+          "references": 1,
+          "signature": "function tryStat(path)"
+        }
+      ]
+    },
+    {
+      "path": "examples/auth/index.js",
+      "rank": 0.00197009525446625,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "authenticate",
+          "kind": "function",
+          "line": 60,
+          "rank": 0.000985047627233125,
+          "references": 1,
+          "signature": "function authenticate(name, pass, fn)"
+        },
+        {
+          "name": "restrict",
+          "kind": "function",
+          "line": 75,
+          "rank": 0.000985047627233125,
+          "references": 1,
+          "signature": "function restrict(req, res, next)"
+        }
+      ]
+    },
+    {
+      "path": "lib/application.js",
+      "rank": 0.0019303258964694873,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "logerror",
+          "kind": "function",
+          "line": 615,
+          "rank": 0.0009651629482347436,
+          "references": 1,
+          "signature": "function logerror(err)"
+        },
+        {
+          "name": "tryRender",
+          "kind": "function",
+          "line": 625,
+          "rank": 0.0009651629482347436,
+          "references": 1,
+          "signature": "function tryRender(view, options, callback)"
+        }
+      ]
+    },
+    {
+      "path": "examples/online/index.js",
+      "rank": 0.0017196003119341469,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "list",
+          "kind": "function",
+          "line": 40,
+          "rank": 0.0017196003119341469,
+          "references": 8,
+          "signature": "function list(ids)"
+        }
+      ]
+    },
+    {
+      "path": "examples/content-negotiation/index.js",
+      "rank": 0.001291915948047659,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "format",
+          "kind": "function",
+          "line": 33,
+          "rank": 0.001291915948047659,
+          "references": 9,
+          "signature": "function format(path)"
+        }
+      ]
+    },
+    {
+      "path": "examples/view-locals/user.js",
+      "rank": 0.0011790444955100162,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "User",
+          "kind": "function",
+          "line": 7,
+          "rank": 0.0011790444955100162,
+          "references": 2,
+          "signature": "function User(name, age, species)"
+        }
+      ]
+    },
+    {
+      "path": "examples/view-constructor/github-view.js",
+      "rank": 0.0010670113040801117,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "GithubView",
+          "kind": "function",
+          "line": 23,
+          "rank": 0.0010670113040801117,
+          "references": 1,
+          "signature": "function GithubView(name, options)"
+        }
+      ]
+    },
+    {
+      "path": "lib/express.js",
+      "rank": 0.0010568264684955749,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "createApplication",
+          "kind": "function",
+          "line": 36,
+          "rank": 0.0010568264684955749,
+          "references": 1,
+          "signature": "function createApplication()"
+        }
+      ]
+    },
+    {
+      "path": "examples/search/index.js",
+      "rank": 0.0010253989758347184,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "initializeRedis",
+          "kind": "function",
+          "line": 29,
+          "rank": 0.0010253989758347184,
+          "references": 1,
+          "signature": "async function initializeRedis()"
+        }
+      ]
+    },
+    {
+      "path": "lib/request.js",
+      "rank": 0.0009606549062547028,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "defineGetter",
+          "kind": "function",
+          "line": 521,
+          "rank": 0.0009606549062547028,
+          "references": 1,
+          "signature": "function defineGetter(obj, name, getter)"
+        }
+      ]
+    }
+  ],
+  "edge_source": "t0-treesitter"
+}

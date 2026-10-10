@@ -1,0 +1,4 @@
+indexed 110 file(s): parsed 0, unchanged 110, removed 0
+symbols 4112, references 69377, imports 500, edges 42187
+languages: rust=110 text=18
+db: /workspace/repos/ripgrep/.plumbgraph/index.db

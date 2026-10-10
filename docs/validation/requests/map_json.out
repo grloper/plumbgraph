@@ -1,0 +1,798 @@
+{
+  "text": "# plumb map: 14 files, 86 of 321 symbols (~1456 tokens, budget 1500)\nsrc/requests/models.py\n  108: class RequestEncodingMixin\n  254: class RequestHooksMixin\n  284: class Request(RequestHooksMixin)\n  360: def prepare(self) -> PreparedRequest\n  378: class PreparedRequest(RequestEncodingMixin, RequestHooksMixin)\n  424: def prepare( self, method: str | None = None, url: _t.UriType | None = None,\n  732: class Response\n  862: def ok(self) -> bool\n  877: def is_redirect(self) -> bool\n  907: def iter_content( self, chunk_size: int | None = 1, decode_unicode: Literal[False] = False ) -> Iterator[bytes]: ... @ov…\n  911: def iter_content( self, chunk_size: int | None = 1, *, decode_unicode: Literal[True] ) -> Iterator[str | bytes]: ... def…\n  914: def iter_content( self, chunk_size: int | None = 1, decode_unicode: bool = False ) -> Iterator[str | bytes]\n  1035: def content(self) -> bytes\n  1054: def text(self) -> str\n  1091: def json(self, **kwargs: Any) -> Any\n  1144: def raise_for_status(self) -> None\n  1173: def close(self) -> None\nsrc/requests/cookies.py\n  54: def get_host(self) -> str\n  110: def host(self) -> str\n  185: class CookieConflictError(RuntimeError)\n  191: class RequestsCookieJar(CookieJar, MutableMapping[str, str | None]):  # type: ignore[misc] \"\"\"Compatibility class; is a …\n  211: def get(  # type: ignore[override] self, name: str, default: str | None = None,\n  229: def set( self, name: str, value: str | Morsel[dict[str, str]] | None, **kwargs: Any ) -> Cookie | None\n  267: def itervalues(self) -> Iterator[str | None]\n  276: def values(self) -> list[str | None]:  # type: ignore[override] \"\"\"Dict-like values() that returns a list of values of c…\n  284: def iteritems(self) -> Iterator[tuple[str, str | None]]\n  293: def items(self) -> list[tuple[str, str | None]]:  # type: ignore[override] \"\"\"Dict-like items() that returns a list of n…\n  382: def set_cookie(self, cookie: Cookie, *args: Any, **kwargs: Any) -> None\n  391: def update(  # type: ignore[override] self, other: CookieJar | SupportsKeysAndGetItem[str, str] ) -> None\n  423: def _find_no_duplicates( self, name: str, domain: str | None = None, path: str | None = None ) -> str\n  467: def copy(self) -> RequestsCookieJar\n  494: def create_cookie(name: str, value: str, **kwargs: Any) -> Cookie\n  531: def morsel_to_cookie(morsel: Morsel[Any]) -> Cookie\nsrc/requests/structures.py\n  20: class CaseInsensitiveDict(MutableMapping[str, _VT], Generic[_VT])\n  96: class LookupDict(dict[str, _VT])\n  124: def get(self, key: str, default: None = None) -> _VT | None: ...  @overload def get(self, key: str, default: _D | _VT) -…\n  127: def get(self, key: str, default: _D | _VT) -> _D | _VT: ...  def get(self, key: str, default: _D | None = None) -> _VT |…\n  129: def get(self, key: str, default: _D | None = None) -> _VT | _D | None\nsrc/requests/sessions.py\n  127: class SessionRedirectMixin\n  132: def send(self, request: PreparedRequest, **kwargs: Any) -> Response: ...  def get_redirect_target(self, resp: Response) …\n  154: def should_strip_auth(self, old_url: str, new_url: str) -> bool\n  395: class Session(SessionRedirectMixin)\n  511: def prepare_request(self, request: Request) -> PreparedRequest\n  557: def request( self, method: str, url: _t.UriType,\n  655: def get( self, url: _t.UriType, params: _t.ParamsType = None,\n  695: def post( self, url: _t.UriType, data: _t.DataType = None,\n  752: def send(self, request: PreparedRequest, **kwargs: Any) -> Response\n  883: def close(self) -> None\n  908: def session() -> Session\nsrc/requests/exceptions.py\n  20: class RequestException(IOError)\n  38: class InvalidJSONError(RequestException)\n  42: class JSONDecodeError(InvalidJSONError, CompatJSONDecodeError)\n  66: class HTTPError(RequestException)\n  70: class ConnectionError(RequestException)\n  82: class Timeout(RequestException)\n  118: class InvalidURL(RequestException, ValueError)\n  153: class RequestsWarning(Warning)\n  157: class FileModeWarning(RequestsWarning, DeprecationWarning)\nsrc/requests/utils.py\n  160: def super_len(o: Any) -> int\n  283: def guess_filename(obj: Any) -> str | None\n  290: def extract_zipped_paths(path: str) -> str\n  475: def unquote_header_value(value: str, is_filename: bool = False) -> str\n  522: def get_encodings_from_content(content: str) -> list[str]\n  726: def address_in_network(ip: str, net: str) -> bool\n  741: def dotted_netmask(mask: int) -> str\n  752: def is_ipv4_address(string_ip: str) -> bool\n  763: def is_valid_cidr(string_network: str) -> bool\n  810: def should_bypass_proxies(url: str, no_proxy: str | None) -> bool\n  873: def get_environ_proxies(url: str, no_proxy: str | None = None) -> dict[str, str]\n  1008: def guess_json_utf(data: bytes) -> str | None\n  1070: def get_auth_from_url(url: str) -> tuple[str, str]\nsrc/requests/_types.py\n  39: def items(self) -> Iterable[tuple[_KT_co, _VT_co]]: ...   # These are needed at runtime for default_hooks() return type\n  47: def is_prepared(request: PreparedRequest) -> TypeIs[_ValidatedRequest]\n  157: class BaseRequestKwargs(TypedDict, total=False)\n  170: class RequestKwargs(BaseRequestKwargs, total=False)\n  177: class GetKwargs(BaseRequestKwargs, total=False)\nsrc/requests/api.py\n  24: def request( method: str, url: _t.UriType, **kwargs: Unpack[_t.RequestKwargs] ) -> Response\nsrc/requests/adapters.py\n  122: class BaseAdapter\n  158: class HTTPAdapter(BaseAdapter)\nsrc/requests/auth.py\n  34: def _basic_auth_str(username: bytes | str, password: bytes | str) -> str\n  78: class AuthBase\nsrc/requests/help.py\n  35: def _implementation()\n  67: def info() -> dict[str, Any]\nsrc/requests/_internal_utils.py\n  26: def to_native_string(string: str | bytes, encoding: str = \"ascii\") -> str\nsrc/requests/hooks.py\n  25: def default_hooks() -> dict[str, list[_t.HookType]]\nsrc/requests/status_codes.py\n  116: def doc(code: int) -> str\n",
+  "tokens_estimated": 1457,
+  "budget": 1500,
+  "token_estimate_method": "ceil(chars/4); not a real tokenizer",
+  "total_symbols": 321,
+  "shown_symbols": 86,
+  "changed_files": [],
+  "files": [
+    {
+      "path": "src/requests/models.py",
+      "rank": 0.0821195190124133,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "RequestEncodingMixin",
+          "kind": "class",
+          "line": 108,
+          "rank": 0.002279611110270769,
+          "references": 1,
+          "signature": "class RequestEncodingMixin"
+        },
+        {
+          "name": "RequestHooksMixin",
+          "kind": "class",
+          "line": 254,
+          "rank": 0.003936250702857724,
+          "references": 2,
+          "signature": "class RequestHooksMixin"
+        },
+        {
+          "name": "Request",
+          "kind": "class",
+          "line": 284,
+          "rank": 0.009623127043626663,
+          "references": 68,
+          "signature": "class Request(RequestHooksMixin)"
+        },
+        {
+          "name": "prepare",
+          "kind": "method",
+          "line": 360,
+          "rank": 0.004442867995474956,
+          "references": 54,
+          "signature": "def prepare(self) -> PreparedRequest"
+        },
+        {
+          "name": "PreparedRequest",
+          "kind": "class",
+          "line": 378,
+          "rank": 0.014280936279119852,
+          "references": 39,
+          "signature": "class PreparedRequest(RequestEncodingMixin, RequestHooksMixin)"
+        },
+        {
+          "name": "prepare",
+          "kind": "method",
+          "line": 424,
+          "rank": 0.005324036815519477,
+          "references": 55,
+          "signature": "def prepare( self, method: str | None = None, url: _t.UriType | None = None,"
+        },
+        {
+          "name": "Response",
+          "kind": "class",
+          "line": 732,
+          "rank": 0.015417634827894612,
+          "references": 46,
+          "signature": "class Response"
+        },
+        {
+          "name": "ok",
+          "kind": "method",
+          "line": 862,
+          "rank": 0.0015905706510913234,
+          "references": 6,
+          "signature": "def ok(self) -> bool"
+        },
+        {
+          "name": "is_redirect",
+          "kind": "method",
+          "line": 877,
+          "rank": 0.001510015268442425,
+          "references": 14,
+          "signature": "def is_redirect(self) -> bool"
+        },
+        {
+          "name": "iter_content",
+          "kind": "method",
+          "line": 907,
+          "rank": 0.0019578596561758655,
+          "references": 7,
+          "signature": "def iter_content( self, chunk_size: int | None = 1, decode_unicode: Literal[False] = False ) -> Iterator[bytes]: ... @ov…"
+        },
+        {
+          "name": "iter_content",
+          "kind": "method",
+          "line": 911,
+          "rank": 0.0019578596561758655,
+          "references": 7,
+          "signature": "def iter_content( self, chunk_size: int | None = 1, *, decode_unicode: Literal[True] ) -> Iterator[str | bytes]: ... def…"
+        },
+        {
+          "name": "iter_content",
+          "kind": "method",
+          "line": 914,
+          "rank": 0.0019578596561758655,
+          "references": 7,
+          "signature": "def iter_content( self, chunk_size: int | None = 1, decode_unicode: bool = False ) -> Iterator[str | bytes]"
+        },
+        {
+          "name": "content",
+          "kind": "method",
+          "line": 1035,
+          "rank": 0.006512796054677909,
+          "references": 20,
+          "signature": "def content(self) -> bytes"
+        },
+        {
+          "name": "text",
+          "kind": "method",
+          "line": 1054,
+          "rank": 0.0026219093292842123,
+          "references": 12,
+          "signature": "def text(self) -> str"
+        },
+        {
+          "name": "json",
+          "kind": "method",
+          "line": 1091,
+          "rank": 0.0053975753482521345,
+          "references": 38,
+          "signature": "def json(self, **kwargs: Any) -> Any"
+        },
+        {
+          "name": "raise_for_status",
+          "kind": "method",
+          "line": 1144,
+          "rank": 0.0014313984638763375,
+          "references": 5,
+          "signature": "def raise_for_status(self) -> None"
+        },
+        {
+          "name": "close",
+          "kind": "method",
+          "line": 1173,
+          "rank": 0.0018772101534973067,
+          "references": 14,
+          "signature": "def close(self) -> None"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/cookies.py",
+      "rank": 0.05816501761054297,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "get_host",
+          "kind": "method",
+          "line": 54,
+          "rank": 0.0020746142937324483,
+          "references": 2,
+          "signature": "def get_host(self) -> str"
+        },
+        {
+          "name": "host",
+          "kind": "method",
+          "line": 110,
+          "rank": 0.003191421034355328,
+          "references": 39,
+          "signature": "def host(self) -> str"
+        },
+        {
+          "name": "CookieConflictError",
+          "kind": "class",
+          "line": 185,
+          "rank": 0.0024720918305474963,
+          "references": 4,
+          "signature": "class CookieConflictError(RuntimeError)"
+        },
+        {
+          "name": "RequestsCookieJar",
+          "kind": "class",
+          "line": 191,
+          "rank": 0.015219838554788177,
+          "references": 27,
+          "signature": "class RequestsCookieJar(CookieJar, MutableMapping[str, str | None]):  # type: ignore[misc] \"\"\"Compatibility class; is a …"
+        },
+        {
+          "name": "get",
+          "kind": "method",
+          "line": 211,
+          "rank": 0.006581190568076762,
+          "references": 119,
+          "signature": "def get(  # type: ignore[override] self, name: str, default: str | None = None,"
+        },
+        {
+          "name": "set",
+          "kind": "method",
+          "line": 229,
+          "rank": 0.002550478964773849,
+          "references": 28,
+          "signature": "def set( self, name: str, value: str | Morsel[dict[str, str]] | None, **kwargs: Any ) -> Cookie | None"
+        },
+        {
+          "name": "itervalues",
+          "kind": "method",
+          "line": 267,
+          "rank": 0.001749753341205921,
+          "references": 1,
+          "signature": "def itervalues(self) -> Iterator[str | None]"
+        },
+        {
+          "name": "values",
+          "kind": "method",
+          "line": 276,
+          "rank": 0.003064501886161507,
+          "references": 6,
+          "signature": "def values(self) -> list[str | None]:  # type: ignore[override] \"\"\"Dict-like values() that returns a list of values of c…"
+        },
+        {
+          "name": "iteritems",
+          "kind": "method",
+          "line": 284,
+          "rank": 0.0017514616088730817,
+          "references": 3,
+          "signature": "def iteritems(self) -> Iterator[tuple[str, str | None]]"
+        },
+        {
+          "name": "items",
+          "kind": "method",
+          "line": 293,
+          "rank": 0.0026211812944692404,
+          "references": 24,
+          "signature": "def items(self) -> list[tuple[str, str | None]]:  # type: ignore[override] \"\"\"Dict-like items() that returns a list of n…"
+        },
+        {
+          "name": "set_cookie",
+          "kind": "method",
+          "line": 382,
+          "rank": 0.0022009255386595933,
+          "references": 5,
+          "signature": "def set_cookie(self, cookie: Cookie, *args: Any, **kwargs: Any) -> None"
+        },
+        {
+          "name": "update",
+          "kind": "method",
+          "line": 391,
+          "rank": 0.003474864083924163,
+          "references": 13,
+          "signature": "def update(  # type: ignore[override] self, other: CookieJar | SupportsKeysAndGetItem[str, str] ) -> None"
+        },
+        {
+          "name": "_find_no_duplicates",
+          "kind": "method",
+          "line": 423,
+          "rank": 0.003434465551977712,
+          "references": 2,
+          "signature": "def _find_no_duplicates( self, name: str, domain: str | None = None, path: str | None = None ) -> str"
+        },
+        {
+          "name": "copy",
+          "kind": "method",
+          "line": 467,
+          "rank": 0.002512585730897651,
+          "references": 13,
+          "signature": "def copy(self) -> RequestsCookieJar"
+        },
+        {
+          "name": "create_cookie",
+          "kind": "function",
+          "line": 494,
+          "rank": 0.002531702402963076,
+          "references": 3,
+          "signature": "def create_cookie(name: str, value: str, **kwargs: Any) -> Cookie"
+        },
+        {
+          "name": "morsel_to_cookie",
+          "kind": "function",
+          "line": 531,
+          "rank": 0.0027339409251369664,
+          "references": 6,
+          "signature": "def morsel_to_cookie(morsel: Morsel[Any]) -> Cookie"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/structures.py",
+      "rank": 0.0362157030292273,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "CaseInsensitiveDict",
+          "kind": "class",
+          "line": 20,
+          "rank": 0.012982752512622152,
+          "references": 35,
+          "signature": "class CaseInsensitiveDict(MutableMapping[str, _VT], Generic[_VT])"
+        },
+        {
+          "name": "LookupDict",
+          "kind": "class",
+          "line": 96,
+          "rank": 0.0032772465615413747,
+          "references": 3,
+          "signature": "class LookupDict(dict[str, _VT])"
+        },
+        {
+          "name": "get",
+          "kind": "method",
+          "line": 124,
+          "rank": 0.00697394210661139,
+          "references": 116,
+          "signature": "def get(self, key: str, default: None = None) -> _VT | None: ...  @overload def get(self, key: str, default: _D | _VT) -…"
+        },
+        {
+          "name": "get",
+          "kind": "method",
+          "line": 127,
+          "rank": 0.00697394210661139,
+          "references": 116,
+          "signature": "def get(self, key: str, default: _D | _VT) -> _D | _VT: ...  def get(self, key: str, default: _D | None = None) -> _VT |…"
+        },
+        {
+          "name": "get",
+          "kind": "method",
+          "line": 129,
+          "rank": 0.0060078197418409985,
+          "references": 115,
+          "signature": "def get(self, key: str, default: _D | None = None) -> _VT | _D | None"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/sessions.py",
+      "rank": 0.03584755285940757,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "SessionRedirectMixin",
+          "kind": "class",
+          "line": 127,
+          "rank": 0.002158757030826946,
+          "references": 2,
+          "signature": "class SessionRedirectMixin"
+        },
+        {
+          "name": "send",
+          "kind": "method",
+          "line": 132,
+          "rank": 0.0015810779719822093,
+          "references": 14,
+          "signature": "def send(self, request: PreparedRequest, **kwargs: Any) -> Response: ...  def get_redirect_target(self, resp: Response) …"
+        },
+        {
+          "name": "should_strip_auth",
+          "kind": "method",
+          "line": 154,
+          "rank": 0.0014497273989882856,
+          "references": 6,
+          "signature": "def should_strip_auth(self, old_url: str, new_url: str) -> bool"
+        },
+        {
+          "name": "Session",
+          "kind": "class",
+          "line": 395,
+          "rank": 0.00885032071373919,
+          "references": 59,
+          "signature": "class Session(SessionRedirectMixin)"
+        },
+        {
+          "name": "prepare_request",
+          "kind": "method",
+          "line": 511,
+          "rank": 0.0015339217057825016,
+          "references": 13,
+          "signature": "def prepare_request(self, request: Request) -> PreparedRequest"
+        },
+        {
+          "name": "request",
+          "kind": "method",
+          "line": 557,
+          "rank": 0.0058633464113807725,
+          "references": 49,
+          "signature": "def request( self, method: str, url: _t.UriType,"
+        },
+        {
+          "name": "get",
+          "kind": "method",
+          "line": 655,
+          "rank": 0.005676020911127325,
+          "references": 108,
+          "signature": "def get( self, url: _t.UriType, params: _t.ParamsType = None,"
+        },
+        {
+          "name": "post",
+          "kind": "method",
+          "line": 695,
+          "rank": 0.0022500682518850207,
+          "references": 23,
+          "signature": "def post( self, url: _t.UriType, data: _t.DataType = None,"
+        },
+        {
+          "name": "send",
+          "kind": "method",
+          "line": 752,
+          "rank": 0.0014988812578446765,
+          "references": 13,
+          "signature": "def send(self, request: PreparedRequest, **kwargs: Any) -> Response"
+        },
+        {
+          "name": "close",
+          "kind": "method",
+          "line": 883,
+          "rank": 0.0014838046805621967,
+          "references": 13,
+          "signature": "def close(self) -> None"
+        },
+        {
+          "name": "session",
+          "kind": "function",
+          "line": 908,
+          "rank": 0.003501626525288452,
+          "references": 31,
+          "signature": "def session() -> Session"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/exceptions.py",
+      "rank": 0.03509329711957347,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "RequestException",
+          "kind": "class",
+          "line": 20,
+          "rank": 0.016473309999878068,
+          "references": 17,
+          "signature": "class RequestException(IOError)"
+        },
+        {
+          "name": "InvalidJSONError",
+          "kind": "class",
+          "line": 38,
+          "rank": 0.0033526085748350498,
+          "references": 4,
+          "signature": "class InvalidJSONError(RequestException)"
+        },
+        {
+          "name": "JSONDecodeError",
+          "kind": "class",
+          "line": 42,
+          "rank": 0.003041220086528744,
+          "references": 8,
+          "signature": "class JSONDecodeError(InvalidJSONError, CompatJSONDecodeError)"
+        },
+        {
+          "name": "HTTPError",
+          "kind": "class",
+          "line": 66,
+          "rank": 0.0024432937160194512,
+          "references": 7,
+          "signature": "class HTTPError(RequestException)"
+        },
+        {
+          "name": "ConnectionError",
+          "kind": "class",
+          "line": 70,
+          "rank": 0.0025332191722251675,
+          "references": 10,
+          "signature": "class ConnectionError(RequestException)"
+        },
+        {
+          "name": "Timeout",
+          "kind": "class",
+          "line": 82,
+          "rank": 0.0016504437149199409,
+          "references": 7,
+          "signature": "class Timeout(RequestException)"
+        },
+        {
+          "name": "InvalidURL",
+          "kind": "class",
+          "line": 118,
+          "rank": 0.002229427146943165,
+          "references": 9,
+          "signature": "class InvalidURL(RequestException, ValueError)"
+        },
+        {
+          "name": "RequestsWarning",
+          "kind": "class",
+          "line": 153,
+          "rank": 0.0021666232528106794,
+          "references": 2,
+          "signature": "class RequestsWarning(Warning)"
+        },
+        {
+          "name": "FileModeWarning",
+          "kind": "class",
+          "line": 157,
+          "rank": 0.001203151455413205,
+          "references": 2,
+          "signature": "class FileModeWarning(RequestsWarning, DeprecationWarning)"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/utils.py",
+      "rank": 0.023758757775136793,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "super_len",
+          "kind": "function",
+          "line": 160,
+          "rank": 0.004128577120759166,
+          "references": 14,
+          "signature": "def super_len(o: Any) -> int"
+        },
+        {
+          "name": "guess_filename",
+          "kind": "function",
+          "line": 283,
+          "rank": 0.0012543378949597143,
+          "references": 3,
+          "signature": "def guess_filename(obj: Any) -> str | None"
+        },
+        {
+          "name": "extract_zipped_paths",
+          "kind": "function",
+          "line": 290,
+          "rank": 0.0015880571451373602,
+          "references": 3,
+          "signature": "def extract_zipped_paths(path: str) -> str"
+        },
+        {
+          "name": "unquote_header_value",
+          "kind": "function",
+          "line": 475,
+          "rank": 0.0017455072933685832,
+          "references": 4,
+          "signature": "def unquote_header_value(value: str, is_filename: bool = False) -> str"
+        },
+        {
+          "name": "get_encodings_from_content",
+          "kind": "function",
+          "line": 522,
+          "rank": 0.0013896715618018755,
+          "references": 3,
+          "signature": "def get_encodings_from_content(content: str) -> list[str]"
+        },
+        {
+          "name": "address_in_network",
+          "kind": "function",
+          "line": 726,
+          "rank": 0.0014476887210976646,
+          "references": 3,
+          "signature": "def address_in_network(ip: str, net: str) -> bool"
+        },
+        {
+          "name": "dotted_netmask",
+          "kind": "function",
+          "line": 741,
+          "rank": 0.0014242023063479154,
+          "references": 2,
+          "signature": "def dotted_netmask(mask: int) -> str"
+        },
+        {
+          "name": "is_ipv4_address",
+          "kind": "function",
+          "line": 752,
+          "rank": 0.0014476887210976646,
+          "references": 3,
+          "signature": "def is_ipv4_address(string_ip: str) -> bool"
+        },
+        {
+          "name": "is_valid_cidr",
+          "kind": "function",
+          "line": 763,
+          "rank": 0.0014476887210976646,
+          "references": 3,
+          "signature": "def is_valid_cidr(string_network: str) -> bool"
+        },
+        {
+          "name": "should_bypass_proxies",
+          "kind": "function",
+          "line": 810,
+          "rank": 0.002204693112688068,
+          "references": 9,
+          "signature": "def should_bypass_proxies(url: str, no_proxy: str | None) -> bool"
+        },
+        {
+          "name": "get_environ_proxies",
+          "kind": "function",
+          "line": 873,
+          "rank": 0.0017633186016338207,
+          "references": 6,
+          "signature": "def get_environ_proxies(url: str, no_proxy: str | None = None) -> dict[str, str]"
+        },
+        {
+          "name": "guess_json_utf",
+          "kind": "function",
+          "line": 1008,
+          "rank": 0.0024451446589613055,
+          "references": 4,
+          "signature": "def guess_json_utf(data: bytes) -> str | None"
+        },
+        {
+          "name": "get_auth_from_url",
+          "kind": "function",
+          "line": 1070,
+          "rank": 0.0014721819161859924,
+          "references": 5,
+          "signature": "def get_auth_from_url(url: str) -> tuple[str, str]"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/_types.py",
+      "rank": 0.012778045379049897,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "items",
+          "kind": "method",
+          "line": 39,
+          "rank": 0.0019181925419574323,
+          "references": 14,
+          "signature": "def items(self) -> Iterable[tuple[_KT_co, _VT_co]]: ...   # These are needed at runtime for default_hooks() return type"
+        },
+        {
+          "name": "is_prepared",
+          "kind": "function",
+          "line": 47,
+          "rank": 0.0014831173278572701,
+          "references": 9,
+          "signature": "def is_prepared(request: PreparedRequest) -> TypeIs[_ValidatedRequest]"
+        },
+        {
+          "name": "BaseRequestKwargs",
+          "kind": "class",
+          "line": 157,
+          "rank": 0.004820302422649843,
+          "references": 4,
+          "signature": "class BaseRequestKwargs(TypedDict, total=False)"
+        },
+        {
+          "name": "RequestKwargs",
+          "kind": "class",
+          "line": 170,
+          "rank": 0.0025825334282763173,
+          "references": 7,
+          "signature": "class RequestKwargs(BaseRequestKwargs, total=False)"
+        },
+        {
+          "name": "GetKwargs",
+          "kind": "class",
+          "line": 177,
+          "rank": 0.001973899658309036,
+          "references": 2,
+          "signature": "class GetKwargs(BaseRequestKwargs, total=False)"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/api.py",
+      "rank": 0.008984155161362941,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "request",
+          "kind": "function",
+          "line": 24,
+          "rank": 0.008984155161362941,
+          "references": 43,
+          "signature": "def request( method: str, url: _t.UriType, **kwargs: Unpack[_t.RequestKwargs] ) -> Response"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/adapters.py",
+      "rank": 0.008390710382245408,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "BaseAdapter",
+          "kind": "class",
+          "line": 122,
+          "rank": 0.004366663912686671,
+          "references": 4,
+          "signature": "class BaseAdapter"
+        },
+        {
+          "name": "HTTPAdapter",
+          "kind": "class",
+          "line": 158,
+          "rank": 0.004024046469558737,
+          "references": 13,
+          "signature": "class HTTPAdapter(BaseAdapter)"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/auth.py",
+      "rank": 0.002926816789886503,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "_basic_auth_str",
+          "kind": "function",
+          "line": 34,
+          "rank": 0.001449937336405899,
+          "references": 6,
+          "signature": "def _basic_auth_str(username: bytes | str, password: bytes | str) -> str"
+        },
+        {
+          "name": "AuthBase",
+          "kind": "class",
+          "line": 78,
+          "rank": 0.0014768794534806041,
+          "references": 4,
+          "signature": "class AuthBase"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/help.py",
+      "rank": 0.0026079161942239824,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "_implementation",
+          "kind": "function",
+          "line": 35,
+          "rank": 0.0009021981785580343,
+          "references": 1,
+          "signature": "def _implementation()"
+        },
+        {
+          "name": "info",
+          "kind": "function",
+          "line": 67,
+          "rank": 0.0017057180156659483,
+          "references": 4,
+          "signature": "def info() -> dict[str, Any]"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/_internal_utils.py",
+      "rank": 0.0019164806064921268,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "to_native_string",
+          "kind": "function",
+          "line": 26,
+          "rank": 0.0019164806064921268,
+          "references": 8,
+          "signature": "def to_native_string(string: str | bytes, encoding: str = \"ascii\") -> str"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/hooks.py",
+      "rank": 0.0018582914013752548,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "default_hooks",
+          "kind": "function",
+          "line": 25,
+          "rank": 0.0018582914013752548,
+          "references": 7,
+          "signature": "def default_hooks() -> dict[str, list[_t.HookType]]"
+        }
+      ]
+    },
+    {
+      "path": "src/requests/status_codes.py",
+      "rank": 0.001263879647644339,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "doc",
+          "kind": "function",
+          "line": 116,
+          "rank": 0.001263879647644339,
+          "references": 3,
+          "signature": "def doc(code: int) -> str"
+        }
+      ]
+    }
+  ],
+  "edge_source": "t0-treesitter"
+}

@@ -1,0 +1,190 @@
+{
+ "repo": "express",
+ "lang": "js",
+ "results": [
+  {
+   "kind": "skip",
+   "file": "test/express.static.js",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "test/acceptance/route-separation.js",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "test/app.router.js",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "test/Route.js",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "test/app.router.js",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertion-loosened",
+    "trivial-assertion"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "test/Route.js",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertion-loosened",
+    "trivial-assertion"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "test/utils.js",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertion-loosened",
+    "trivial-assertion"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "test/app.routes.error.js",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertion-loosened",
+    "trivial-assertion"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "test/app.router.js",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "test/utils.js",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "test/app.listen.js",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "deleted-test"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "test/Router.js",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "benign",
+   "file": "test/express.static.js",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  },
+  {
+   "kind": "benign",
+   "file": "test/acceptance/route-separation.js",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  },
+  {
+   "kind": "benign",
+   "file": "test/app.router.js",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  }
+ ],
+ "recall": "12/12",
+ "false_pos_on_benign": "0/3"
+}

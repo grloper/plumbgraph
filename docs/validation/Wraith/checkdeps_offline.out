@@ -1,0 +1,52 @@
+{
+  "external_imports": 7,
+  "findings": [
+    {
+      "category": "deps",
+      "confidence": 0.45,
+      "evidence": [
+        "`PIL` is imported at scripts/render_brand.py:10",
+        "no pypi manifest found for this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "scripts/render_brand.py",
+      "fp_risks": [
+        "no manifest was found, so declared dependencies are unknown",
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 10,
+      "message": "`PIL` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "PIL"
+    }
+  ],
+  "imports_checked": 197,
+  "lookups": [
+    {
+      "ecosystem": "crates.io",
+      "package": "libc",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "libfuzzer-sys",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "nix",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "pillow",
+      "result": "unknown (offline mode)"
+    }
+  ],
+  "offline": true,
+  "registry": "offline"
+}

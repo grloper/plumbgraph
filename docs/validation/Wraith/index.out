@@ -1,0 +1,4 @@
+indexed 34 file(s): parsed 34, unchanged 0, removed 0
+symbols 627, references 14459, imports 197, edges 2495
+languages: python=11 rust=23 text=6
+db: /workspace/repos/Wraith/.plumbgraph/index.db

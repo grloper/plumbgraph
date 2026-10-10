@@ -1,0 +1,4 @@
+indexed 14626 file(s): parsed 0, unchanged 14626, removed 0
+symbols 202644, references 7341384, imports 151752, edges 6046589
+languages: csharp=16 go=4 html=114 java=7 javascript=120 python=73 rust=89 text=1908 tsx=271 typescript=14046
+db: /workspace/repos/vscode/.plumbgraph/index.db

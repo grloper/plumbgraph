@@ -1,0 +1,657 @@
+{
+  "text": "# plumb map: 19 files, 64 of 1331 symbols (~1465 tokens, budget 1500)\ngson/src/main/java/com/google/gson/Gson.java\n  156: public final class Gson\n  243: public Gson()\n  315: public boolean serializeNulls()\n  565: public String toJson(Object src)\n  590: public String toJson(Object src, Type typeOfSrc)\n  612: public void toJson(Object src, Appendable writer) throws JsonIOException\n  640: public void toJson(Object src, Type typeOfSrc, Appendable writer) throws JsonIOException\n  670: public void toJson(Object src, Type typeOfSrc, JsonWriter writer) throws JsonIOException\n  708: public String toJson(JsonElement jsonElement)\n  722: public void toJson(JsonElement jsonElement, Appendable writer) throws JsonIOException\n  751: public void toJson(JsonElement jsonElement, JsonWriter writer) throws JsonIOException\n  850: public <T> T fromJson(String json, Class<T> classOfT) throws JsonSyntaxException\n  878: @SuppressWarnings({\"unchecked\", \"TypeParameterUnusedInFormals\"}) public <T> T fromJson(String json, Type typeOfT) throws…\n  909: public <T> T fromJson(String json, TypeToken<T> typeOfT) throws JsonSyntaxException\n  940: public <T> T fromJson(Reader json, Class<T> classOfT) throws JsonSyntaxException, JsonIOException\n  970: @SuppressWarnings({\"unchecked\", \"TypeParameterUnusedInFormals\"}) public <T> T fromJson(Reader json, Type typeOfT) throws…\n  1001: public <T> T fromJson(Reader json, TypeToken<T> typeOfT) throws JsonIOException, JsonSyntaxException\n  1045: @SuppressWarnings({\"unchecked\", \"TypeParameterUnusedInFormals\"}) public <T> T fromJson(JsonReader reader, Type typeOfT) …\n  1087: public <T> T fromJson(JsonReader reader, TypeToken<T> typeOfT) throws JsonIOException, JsonSyntaxException\n  1159: public <T> T fromJson(JsonElement json, Class<T> classOfT) throws JsonSyntaxException\n  1185: @SuppressWarnings({\"unchecked\", \"TypeParameterUnusedInFormals\"}) public <T> T fromJson(JsonElement json, Type typeOfT) t…\n  1212: public <T> T fromJson(JsonElement json, TypeToken<T> typeOfT) throws JsonSyntaxException\ngson/src/main/java/com/google/gson/stream/JsonWriter.java\n  162: public class JsonWriter implements Closeable, Flushable\n  480: private int peek()\n  498: @CanIgnoreReturnValue public JsonWriter name(String name) throws IOException\n  512: private void writeDeferredName() throws IOException\n  526: @CanIgnoreReturnValue public JsonWriter value(String value) throws IOException\n  542: @CanIgnoreReturnValue public JsonWriter value(boolean value) throws IOException\n  556: @CanIgnoreReturnValue public JsonWriter value(Boolean value) throws IOException\n  577: @CanIgnoreReturnValue public JsonWriter value(float value) throws IOException\n  597: @CanIgnoreReturnValue public JsonWriter value(double value) throws IOException\n  613: @CanIgnoreReturnValue public JsonWriter value(long value) throws IOException\n  632: @CanIgnoreReturnValue public JsonWriter value(Number value) throws IOException\n  775: private void newline() throws IOException\n  805: @SuppressWarnings(\"fallthrough\") private void beforeValue() throws IOException\ngson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java\n  80: private void put(JsonElement value)\n  160: @CanIgnoreReturnValue @Override public JsonWriter value(String value) throws IOException\n  170: @CanIgnoreReturnValue @Override public JsonWriter value(boolean value) throws IOException\n  177: @CanIgnoreReturnValue @Override public JsonWriter value(Boolean value) throws IOException\n  187: @CanIgnoreReturnValue @Override public JsonWriter value(float value) throws IOException\n  197: @CanIgnoreReturnValue @Override public JsonWriter value(double value) throws IOException\n  207: @CanIgnoreReturnValue @Override public JsonWriter value(long value) throws IOException\n  214: @CanIgnoreReturnValue @Override public JsonWriter value(Number value) throws IOException\ngson/src/main/java/com/google/gson/internal/Streams.java\n  122: @Override public Writer append(CharSequence csq) throws IOException\n  128: @Override public Writer append(CharSequence csq, int start, int end) throws IOException\n  144: @Override public int length()\ngson/src/main/java/com/google/gson/reflect/TypeToken.java\n  54: public class TypeToken<T>\n  339: @Override public final int hashCode()\ngson/src/main/java/com/google/gson/JsonElement.java\n  96: public abstract class JsonElement\ngson/src/main/java/com/google/gson/Strictness.java\n  20: public enum Strictness\ngson/src/main/java/com/google/gson/internal/LinkedTreeMap.java\n  89: @Override public int size()\n  591: @Override public int size()\n  632: @Override public int size()\ngson/src/main/java/com/google/gson/TypeAdapterFactory.java\n  165: public interface TypeAdapterFactory\ngson/src/main/java/com/google/gson/TypeAdapter.java\n  122: public abstract class TypeAdapter<T>\ngson/src/main/java/com/google/gson/stream/JsonReader.java\n  211: public class JsonReader implements Closeable\ngson/src/main/java/com/google/gson/GsonBuilder.java\n  93: public final class GsonBuilder\ngson/src/main/java/com/google/gson/JsonPrimitive.java\n  35: public final class JsonPrimitive extends JsonElement\ngson/src/main/java/com/google/gson/JsonParseException.java\n  32: public class JsonParseException extends RuntimeException\ngson/src/main/java/com/google/gson/annotations/SerializedName.java\n  83: @Documented @Retention(RetentionPolicy.RUNTIME) @Target({ElementType.FIELD, ElementType.METHOD}) public @interface Seria…\ngson/src/main/java/com/google/gson/internal/Excluder.java\n  49: public final class Excluder implements TypeAdapterFactory, Cloneable\ngson/src/main/java/com/google/gson/internal/JsonReaderInternalAccess.java\n  23: public abstract class JsonReaderInternalAccess\ngson/src/main/java/com/google/gson/JsonNull.java\n  26: public final class JsonNull extends JsonElement\ngson/src/main/java/com/google/gson/FormattingStyle.java\n  39: public final class FormattingStyle\n",
+  "tokens_estimated": 1466,
+  "budget": 1500,
+  "token_estimate_method": "ceil(chars/4); not a real tokenizer",
+  "total_symbols": 1331,
+  "shown_symbols": 64,
+  "changed_files": [],
+  "files": [
+    {
+      "path": "gson/src/main/java/com/google/gson/Gson.java",
+      "rank": 0.08989562765499257,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Gson",
+          "kind": "class",
+          "line": 156,
+          "rank": 0.009375500937223762,
+          "references": 657,
+          "signature": "public final class Gson"
+        },
+        {
+          "name": "Gson",
+          "kind": "method",
+          "line": 243,
+          "rank": 0.00007336006323060886,
+          "references": 0,
+          "signature": "public Gson()"
+        },
+        {
+          "name": "serializeNulls",
+          "kind": "method",
+          "line": 315,
+          "rank": 0.0037855872857232215,
+          "references": 27,
+          "signature": "public boolean serializeNulls()"
+        },
+        {
+          "name": "toJson",
+          "kind": "method",
+          "line": 565,
+          "rank": 0.003938432494020902,
+          "references": 541,
+          "signature": "public String toJson(Object src)"
+        },
+        {
+          "name": "toJson",
+          "kind": "method",
+          "line": 590,
+          "rank": 0.0039524424277394,
+          "references": 541,
+          "signature": "public String toJson(Object src, Type typeOfSrc)"
+        },
+        {
+          "name": "toJson",
+          "kind": "method",
+          "line": 612,
+          "rank": 0.003971839553407339,
+          "references": 541,
+          "signature": "public void toJson(Object src, Appendable writer) throws JsonIOException"
+        },
+        {
+          "name": "toJson",
+          "kind": "method",
+          "line": 640,
+          "rank": 0.0040894563909643,
+          "references": 541,
+          "signature": "public void toJson(Object src, Type typeOfSrc, Appendable writer) throws JsonIOException"
+        },
+        {
+          "name": "toJson",
+          "kind": "method",
+          "line": 670,
+          "rank": 0.004372390290066235,
+          "references": 542,
+          "signature": "public void toJson(Object src, Type typeOfSrc, JsonWriter writer) throws JsonIOException"
+        },
+        {
+          "name": "toJson",
+          "kind": "method",
+          "line": 708,
+          "rank": 0.003983805218882195,
+          "references": 541,
+          "signature": "public String toJson(JsonElement jsonElement)"
+        },
+        {
+          "name": "toJson",
+          "kind": "method",
+          "line": 722,
+          "rank": 0.004104048131927085,
+          "references": 541,
+          "signature": "public void toJson(JsonElement jsonElement, Appendable writer) throws JsonIOException"
+        },
+        {
+          "name": "toJson",
+          "kind": "method",
+          "line": 751,
+          "rank": 0.004372390290066235,
+          "references": 542,
+          "signature": "public void toJson(JsonElement jsonElement, JsonWriter writer) throws JsonIOException"
+        },
+        {
+          "name": "fromJson",
+          "kind": "method",
+          "line": 850,
+          "rank": 0.003973600937743298,
+          "references": 575,
+          "signature": "public <T> T fromJson(String json, Class<T> classOfT) throws JsonSyntaxException"
+        },
+        {
+          "name": "fromJson",
+          "kind": "method",
+          "line": 878,
+          "rank": 0.003973600937743298,
+          "references": 575,
+          "signature": "@SuppressWarnings({\"unchecked\", \"TypeParameterUnusedInFormals\"}) public <T> T fromJson(String json, Type typeOfT) throws…"
+        },
+        {
+          "name": "fromJson",
+          "kind": "method",
+          "line": 909,
+          "rank": 0.003910933044954239,
+          "references": 575,
+          "signature": "public <T> T fromJson(String json, TypeToken<T> typeOfT) throws JsonSyntaxException"
+        },
+        {
+          "name": "fromJson",
+          "kind": "method",
+          "line": 940,
+          "rank": 0.00398218564559767,
+          "references": 575,
+          "signature": "public <T> T fromJson(Reader json, Class<T> classOfT) throws JsonSyntaxException, JsonIOException"
+        },
+        {
+          "name": "fromJson",
+          "kind": "method",
+          "line": 970,
+          "rank": 0.00398218564559767,
+          "references": 575,
+          "signature": "@SuppressWarnings({\"unchecked\", \"TypeParameterUnusedInFormals\"}) public <T> T fromJson(Reader json, Type typeOfT) throws…"
+        },
+        {
+          "name": "fromJson",
+          "kind": "method",
+          "line": 1001,
+          "rank": 0.003971795910254133,
+          "references": 575,
+          "signature": "public <T> T fromJson(Reader json, TypeToken<T> typeOfT) throws JsonIOException, JsonSyntaxException"
+        },
+        {
+          "name": "fromJson",
+          "kind": "method",
+          "line": 1045,
+          "rank": 0.003997417933006885,
+          "references": 575,
+          "signature": "@SuppressWarnings({\"unchecked\", \"TypeParameterUnusedInFormals\"}) public <T> T fromJson(JsonReader reader, Type typeOfT) …"
+        },
+        {
+          "name": "fromJson",
+          "kind": "method",
+          "line": 1087,
+          "rank": 0.004184698929098325,
+          "references": 576,
+          "signature": "public <T> T fromJson(JsonReader reader, TypeToken<T> typeOfT) throws JsonIOException, JsonSyntaxException"
+        },
+        {
+          "name": "fromJson",
+          "kind": "method",
+          "line": 1159,
+          "rank": 0.00398218564559767,
+          "references": 575,
+          "signature": "public <T> T fromJson(JsonElement json, Class<T> classOfT) throws JsonSyntaxException"
+        },
+        {
+          "name": "fromJson",
+          "kind": "method",
+          "line": 1185,
+          "rank": 0.00398218564559767,
+          "references": 575,
+          "signature": "@SuppressWarnings({\"unchecked\", \"TypeParameterUnusedInFormals\"}) public <T> T fromJson(JsonElement json, Type typeOfT) t…"
+        },
+        {
+          "name": "fromJson",
+          "kind": "method",
+          "line": 1212,
+          "rank": 0.003935584296550399,
+          "references": 575,
+          "signature": "public <T> T fromJson(JsonElement json, TypeToken<T> typeOfT) throws JsonSyntaxException"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/stream/JsonWriter.java",
+      "rank": 0.07337619964163732,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "JsonWriter",
+          "kind": "class",
+          "line": 162,
+          "rank": 0.015153266248123624,
+          "references": 312,
+          "signature": "public class JsonWriter implements Closeable, Flushable"
+        },
+        {
+          "name": "peek",
+          "kind": "method",
+          "line": 480,
+          "rank": 0.0036560847822895135,
+          "references": 121,
+          "signature": "private int peek()"
+        },
+        {
+          "name": "name",
+          "kind": "method",
+          "line": 498,
+          "rank": 0.004548021727927254,
+          "references": 147,
+          "signature": "@CanIgnoreReturnValue public JsonWriter name(String name) throws IOException"
+        },
+        {
+          "name": "writeDeferredName",
+          "kind": "method",
+          "line": 512,
+          "rank": 0.004522131057256474,
+          "references": 11,
+          "signature": "private void writeDeferredName() throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 526,
+          "rank": 0.005201534483587746,
+          "references": 498,
+          "signature": "@CanIgnoreReturnValue public JsonWriter value(String value) throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 542,
+          "rank": 0.005120716614196429,
+          "references": 498,
+          "signature": "@CanIgnoreReturnValue public JsonWriter value(boolean value) throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 556,
+          "rank": 0.0051668341765378455,
+          "references": 498,
+          "signature": "@CanIgnoreReturnValue public JsonWriter value(Boolean value) throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 577,
+          "rank": 0.005265709170796012,
+          "references": 498,
+          "signature": "@CanIgnoreReturnValue public JsonWriter value(float value) throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 597,
+          "rank": 0.005265709170796012,
+          "references": 498,
+          "signature": "@CanIgnoreReturnValue public JsonWriter value(double value) throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 613,
+          "rank": 0.005120716614196429,
+          "references": 498,
+          "signature": "@CanIgnoreReturnValue public JsonWriter value(long value) throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 632,
+          "rank": 0.005370653617053971,
+          "references": 498,
+          "signature": "@CanIgnoreReturnValue public JsonWriter value(Number value) throws IOException"
+        },
+        {
+          "name": "newline",
+          "kind": "method",
+          "line": 775,
+          "rank": 0.004674585001935684,
+          "references": 12,
+          "signature": "private void newline() throws IOException"
+        },
+        {
+          "name": "beforeValue",
+          "kind": "method",
+          "line": 805,
+          "rank": 0.00431023697694033,
+          "references": 10,
+          "signature": "@SuppressWarnings(\"fallthrough\") private void beforeValue() throws IOException"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java",
+      "rank": 0.029111612863350372,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "put",
+          "kind": "method",
+          "line": 80,
+          "rank": 0.004222161201952785,
+          "references": 76,
+          "signature": "private void put(JsonElement value)"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 160,
+          "rank": 0.0035615084313126216,
+          "references": 212,
+          "signature": "@CanIgnoreReturnValue @Override public JsonWriter value(String value) throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 170,
+          "rank": 0.0035282467256858635,
+          "references": 212,
+          "signature": "@CanIgnoreReturnValue @Override public JsonWriter value(boolean value) throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 177,
+          "rank": 0.0035615084313126225,
+          "references": 212,
+          "signature": "@CanIgnoreReturnValue @Override public JsonWriter value(Boolean value) throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 187,
+          "rank": 0.003557356339063081,
+          "references": 212,
+          "signature": "@CanIgnoreReturnValue @Override public JsonWriter value(float value) throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 197,
+          "rank": 0.003557356339063081,
+          "references": 212,
+          "signature": "@CanIgnoreReturnValue @Override public JsonWriter value(double value) throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 207,
+          "rank": 0.0035282467256858635,
+          "references": 212,
+          "signature": "@CanIgnoreReturnValue @Override public JsonWriter value(long value) throws IOException"
+        },
+        {
+          "name": "value",
+          "kind": "method",
+          "line": 214,
+          "rank": 0.0035952286692744525,
+          "references": 212,
+          "signature": "@CanIgnoreReturnValue @Override public JsonWriter value(Number value) throws IOException"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/internal/Streams.java",
+      "rank": 0.021822664676539004,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "append",
+          "kind": "method",
+          "line": 122,
+          "rank": 0.008668214860741739,
+          "references": 46,
+          "signature": "@Override public Writer append(CharSequence csq) throws IOException"
+        },
+        {
+          "name": "append",
+          "kind": "method",
+          "line": 128,
+          "rank": 0.008668214860741739,
+          "references": 46,
+          "signature": "@Override public Writer append(CharSequence csq, int start, int end) throws IOException"
+        },
+        {
+          "name": "length",
+          "kind": "method",
+          "line": 144,
+          "rank": 0.004486234955055528,
+          "references": 96,
+          "signature": "@Override public int length()"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/reflect/TypeToken.java",
+      "rank": 0.020701695791972067,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "TypeToken",
+          "kind": "class",
+          "line": 54,
+          "rank": 0.011110685393217683,
+          "references": 273,
+          "signature": "public class TypeToken<T>"
+        },
+        {
+          "name": "hashCode",
+          "kind": "method",
+          "line": 339,
+          "rank": 0.009591010398754384,
+          "references": 10,
+          "signature": "@Override public final int hashCode()"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/JsonElement.java",
+      "rank": 0.015222755446737426,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "JsonElement",
+          "kind": "class",
+          "line": 96,
+          "rank": 0.015222755446737426,
+          "references": 252,
+          "signature": "public abstract class JsonElement"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/Strictness.java",
+      "rank": 0.011985228817038267,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Strictness",
+          "kind": "enum",
+          "line": 20,
+          "rank": 0.011985228817038267,
+          "references": 132,
+          "signature": "public enum Strictness"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/internal/LinkedTreeMap.java",
+      "rank": 0.011840349869366731,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "size",
+          "kind": "method",
+          "line": 89,
+          "rank": 0.0039467832897889105,
+          "references": 35,
+          "signature": "@Override public int size()"
+        },
+        {
+          "name": "size",
+          "kind": "method",
+          "line": 591,
+          "rank": 0.0039467832897889105,
+          "references": 35,
+          "signature": "@Override public int size()"
+        },
+        {
+          "name": "size",
+          "kind": "method",
+          "line": 632,
+          "rank": 0.0039467832897889105,
+          "references": 35,
+          "signature": "@Override public int size()"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/TypeAdapterFactory.java",
+      "rank": 0.009647219046229664,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "TypeAdapterFactory",
+          "kind": "interface",
+          "line": 165,
+          "rank": 0.009647219046229664,
+          "references": 99,
+          "signature": "public interface TypeAdapterFactory"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/TypeAdapter.java",
+      "rank": 0.009360049723436709,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "TypeAdapter",
+          "kind": "class",
+          "line": 122,
+          "rank": 0.009360049723436709,
+          "references": 213,
+          "signature": "public abstract class TypeAdapter<T>"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/stream/JsonReader.java",
+      "rank": 0.008358913526250709,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "JsonReader",
+          "kind": "class",
+          "line": 211,
+          "rank": 0.008358913526250709,
+          "references": 562,
+          "signature": "public class JsonReader implements Closeable"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/GsonBuilder.java",
+      "rank": 0.006867139953714336,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "GsonBuilder",
+          "kind": "class",
+          "line": 93,
+          "rank": 0.006867139953714336,
+          "references": 344,
+          "signature": "public final class GsonBuilder"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/JsonPrimitive.java",
+      "rank": 0.006757154931190126,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "JsonPrimitive",
+          "kind": "class",
+          "line": 35,
+          "rank": 0.006757154931190126,
+          "references": 203,
+          "signature": "public final class JsonPrimitive extends JsonElement"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/JsonParseException.java",
+      "rank": 0.005545095610525091,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "JsonParseException",
+          "kind": "class",
+          "line": 32,
+          "rank": 0.005545095610525091,
+          "references": 71,
+          "signature": "public class JsonParseException extends RuntimeException"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/annotations/SerializedName.java",
+      "rank": 0.005216221539479613,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "SerializedName",
+          "kind": "interface",
+          "line": 83,
+          "rank": 0.005216221539479613,
+          "references": 33,
+          "signature": "@Documented @Retention(RetentionPolicy.RUNTIME) @Target({ElementType.FIELD, ElementType.METHOD}) public @interface Seria…"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/internal/Excluder.java",
+      "rank": 0.003995765953702917,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Excluder",
+          "kind": "class",
+          "line": 49,
+          "rank": 0.003995765953702917,
+          "references": 24,
+          "signature": "public final class Excluder implements TypeAdapterFactory, Cloneable"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/internal/JsonReaderInternalAccess.java",
+      "rank": 0.003918930193350495,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "JsonReaderInternalAccess",
+          "kind": "class",
+          "line": 23,
+          "rank": 0.003918930193350495,
+          "references": 7,
+          "signature": "public abstract class JsonReaderInternalAccess"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/JsonNull.java",
+      "rank": 0.0036447224095669186,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "JsonNull",
+          "kind": "class",
+          "line": 26,
+          "rank": 0.0036447224095669186,
+          "references": 58,
+          "signature": "public final class JsonNull extends JsonElement"
+        }
+      ]
+    },
+    {
+      "path": "gson/src/main/java/com/google/gson/FormattingStyle.java",
+      "rank": 0.0031803303647902226,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "FormattingStyle",
+          "kind": "class",
+          "line": 39,
+          "rank": 0.0031803303647902226,
+          "references": 26,
+          "signature": "public final class FormattingStyle"
+        }
+      ]
+    }
+  ],
+  "edge_source": "t0-treesitter"
+}
