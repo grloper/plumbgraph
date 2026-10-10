@@ -622,6 +622,10 @@ fn resolve_imports(store: &Store, root: &Path, packs: &PackSet) -> Result<()> {
     Ok(())
 }
 
+/// A bare/member name with more same-named definitions than this and no import or same-file
+/// match is "ambiguous": no name-based edges are created for it.
+pub const MAX_AMBIGUOUS_CANDIDATES: usize = 32;
+
 fn build_edges(store: &Store) -> Result<()> {
     store.conn.execute("DELETE FROM edge", [])?;
     let g = Graph::load(store)?;
@@ -646,6 +650,12 @@ fn build_edges(store: &Store) -> Result<()> {
     }
     let mut ins = store.conn.prepare("INSERT INTO edge(src_symbol,src_file,dst_symbol,dst_name,kind,line,confidence,source,resolved) VALUES(?1,?2,?3,?4,?5,?6,?7,'t0-treesitter',?8)")?;
     let empty = (HashSet::new(), HashSet::new());
+    // One edge per (source symbol or module-level file, destination, kind): the first reference
+    // keeps its line, the best confidence wins. Without this a hot name (`String`, `Name`) used
+    // thousands of times in one function inserted thousands of identical rows.
+    let mut seen: HashMap<(Option<i64>, i64, i64, bool, &str), usize> = HashMap::new();
+    type Pending<'a> = (Option<i64>, i64, i64, &'a str, &'a str, u32, f64, bool);
+    let mut pending: Vec<Pending> = vec![];
     for r in &g.refs {
         let Some(all) = by_name.get(r.name.as_str()) else {
             continue;
@@ -695,6 +705,11 @@ fn build_edges(store: &Store) -> Result<()> {
                 (via_import, c, true)
             } else if cands.len() == 1 {
                 (cands.clone(), 0.5, false)
+            } else if cands.len() > MAX_AMBIGUOUS_CANDIDATES {
+                // `Name`, `String`, `Run`: hundreds of same-named definitions and nothing to
+                // choose between them. No edges are created (they would be noise for map and
+                // impact and cost gigabytes on a large repo); dead-code skips such names.
+                continue;
             } else {
                 (cands.clone(), 0.4, false)
             }
@@ -710,10 +725,36 @@ fn build_edges(store: &Store) -> Result<()> {
             .and_then(|ix| sym_by_file_idx.get(&(r.file_id, ix)).copied());
         for i in chosen {
             let dst = &g.symbols[i];
-            ins.execute(params![
-                src_symbol, r.file_id, dst.id, r.name, r.kind, r.line, conf, resolved
-            ])?;
+            let key = (
+                src_symbol,
+                if src_symbol.is_none() { r.file_id } else { 0 },
+                dst.id,
+                resolved,
+                r.kind.as_str(),
+            );
+            if let Some(&ix) = seen.get(&key) {
+                if conf > pending[ix].6 {
+                    pending[ix].6 = conf;
+                }
+            } else {
+                seen.insert(key, pending.len());
+                pending.push((
+                    src_symbol,
+                    r.file_id,
+                    dst.id,
+                    r.name.as_str(),
+                    r.kind.as_str(),
+                    r.line,
+                    conf,
+                    resolved,
+                ));
+            }
         }
+    }
+    for (src_symbol, file_id, dst, name, kind, line, conf, resolved) in pending {
+        ins.execute(params![
+            src_symbol, file_id, dst, name, kind, line, conf, resolved
+        ])?;
     }
     Ok(())
 }
