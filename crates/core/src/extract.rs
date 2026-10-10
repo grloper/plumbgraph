@@ -865,6 +865,9 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
     let mut import_node_ids: HashSet<usize> = HashSet::new();
     let mut by_stmt: Vec<(usize, ImportFact)> = vec![];
     let mut name_only: HashMap<usize, Vec<String>> = HashMap::new();
+    // `x as y` bindings: a use of `y` in this file is a use of `x`.
+    let mut aliases: HashMap<String, String> = HashMap::new();
+    let mut alias_stmts: HashSet<usize> = HashSet::new();
     {
         let mut qc = QueryCursor::new();
         let mut it = qc.matches(imports_q, root, src);
@@ -887,6 +890,11 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
                     _ => {}
                 }
             }
+            if let Some(stmt) = stmt {
+                if alias_stmts.insert(stmt.id()) {
+                    collect_import_aliases(stmt, src, &mut aliases);
+                }
+            }
             if let (Some(stmt), None) = (stmt, &module) {
                 name_only
                     .entry(stmt.id())
@@ -905,6 +913,14 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
                         }
                     }
                     _ => "import",
+                };
+                let kind = if kind == "import"
+                    && family == Family::Python
+                    && in_import_error_guard(stmt, src)
+                {
+                    "optional"
+                } else {
+                    kind
                 };
                 import_node_ids.insert(stmt.id());
                 by_stmt.push((
@@ -1059,10 +1075,85 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
             r.src = stack.last().copied();
         }
     }
+    for (_, r) in refs.iter_mut() {
+        if let Some(orig) = aliases.get(&r.name) {
+            // a local definition with the alias's name wins
+            if !syms.iter().any(|s| s.name == r.name) {
+                r.name = orig.clone();
+            }
+        }
+    }
     facts.refs = refs.into_iter().map(|(_, r)| r).collect();
     facts.symbols = syms;
     facts.strings = strings;
     Ok(facts)
+}
+
+/// True when `stmt` sits in the body of a Python `try:` whose handlers catch ImportError /
+/// ModuleNotFoundError (or are bare): the import is an optional-dependency / compat probe.
+fn in_import_error_guard(stmt: tree_sitter::Node, src: &[u8]) -> bool {
+    let mut child = stmt;
+    while let Some(p) = child.parent() {
+        match p.kind() {
+            "function_definition" | "class_definition" => return false,
+            "try_statement" => {
+                // only the `try:` body counts, not handlers / else / finally
+                let in_body = p
+                    .child_by_field_name("body")
+                    .map(|b| b.id() == child.id())
+                    .unwrap_or(false);
+                if in_body {
+                    let mut c = p.walk();
+                    let catches = p.children(&mut c).any(|h| {
+                        if h.kind() != "except_clause" && h.kind() != "except_group_clause" {
+                            return false;
+                        }
+                        let t = text(h, src);
+                        let head = t.lines().next().unwrap_or("");
+                        head.contains("ImportError")
+                            || head.contains("ModuleNotFoundError")
+                            || head.trim_start_matches("except").trim().starts_with(':')
+                    });
+                    if catches {
+                        return true;
+                    }
+                }
+            }
+            _ => {}
+        }
+        child = p;
+    }
+    false
+}
+
+/// Collect `original as alias` pairs from an import statement (Rust `use_as_clause`, Python
+/// `aliased_import`, JS/TS `import_specifier`). The original is the last path segment.
+fn collect_import_aliases(stmt: tree_sitter::Node, src: &[u8], out: &mut HashMap<String, String>) {
+    let mut stack = vec![stmt];
+    while let Some(n) = stack.pop() {
+        let (orig_field, alias_field) = match n.kind() {
+            "use_as_clause" => ("path", "alias"),
+            "aliased_import" | "import_specifier" => ("name", "alias"),
+            _ => ("", ""),
+        };
+        if !orig_field.is_empty() {
+            if let (Some(o), Some(a)) = (
+                n.child_by_field_name(orig_field),
+                n.child_by_field_name(alias_field),
+            ) {
+                let o = text(o, src);
+                let orig = o.rsplit([':', '.']).next().unwrap_or(o);
+                let alias = text(a, src);
+                if !orig.is_empty() && !alias.is_empty() && orig != alias {
+                    out.insert(alias.to_string(), orig.to_string());
+                }
+            }
+        }
+        let mut cc = n.walk();
+        for ch in n.children(&mut cc) {
+            stack.push(ch);
+        }
+    }
 }
 
 /// Name of the first annotation on a Java declaration that is not a compiler/lint marker.
@@ -1345,5 +1436,41 @@ mod tests {
             "src/a.test.js"
         ));
         assert!(!is_test_path(set.by_id("javascript").unwrap(), "src/a.js"));
+    }
+
+    #[test]
+    fn aliased_imports_count_as_references_to_the_original_name() {
+        // `use x as y`, `from m import x as y`, `import { x as y }`: a use of the alias is a use of `x`.
+        let f = ex(
+            "rust",
+            "src/main.rs",
+            "use util::{helper as h, other::deep as d};\nfn main() { h(); d(); }\n",
+        );
+        let names: Vec<_> = f.refs.iter().map(|r| r.name.as_str()).collect();
+        assert!(
+            names.contains(&"helper") && names.contains(&"deep"),
+            "rust: {names:?}"
+        );
+        let f = ex(
+            "python",
+            "a.py",
+            "from b import helper as h\ndef main():\n    h()\n",
+        );
+        let names: Vec<_> = f.refs.iter().map(|r| r.name.as_str()).collect();
+        assert!(names.contains(&"helper"), "python: {names:?}");
+        let f = ex(
+            "javascript",
+            "a.js",
+            "import { helper as h } from './b.js';\nh();\n",
+        );
+        let names: Vec<_> = f.refs.iter().map(|r| r.name.as_str()).collect();
+        assert!(names.contains(&"helper"), "js: {names:?}");
+        // a local symbol that shadows the alias name keeps its own refs
+        let f = ex(
+            "python",
+            "a.py",
+            "from b import helper as h\ndef h2(): pass\nh2()\n",
+        );
+        assert!(f.refs.iter().any(|r| r.name == "h2"));
     }
 }

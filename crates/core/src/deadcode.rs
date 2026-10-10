@@ -355,6 +355,14 @@ pub fn dead_code(g: &Graph, opts: &DeadCodeOptions) -> Vec<Finding> {
         }
         if opts.mode == Mode::Lib && s.exported {
             prod_roots.push(i);
+            continue;
+        }
+        if by_name.get(s.name.as_str()).map(|v| v.len()).unwrap_or(0)
+            > crate::index::MAX_AMBIGUOUS_CANDIDATES
+        {
+            // hundreds of same-named definitions (`String`, `Name`, `Run`): name-based edges were
+            // not created for them, so liveness cannot be judged; treat as live and don't report
+            prod_roots.push(i);
         }
     }
     prod_roots.extend(prod_module_dst.iter().copied());
@@ -414,6 +422,11 @@ pub fn dead_code(g: &Graph, opts: &DeadCodeOptions) -> Vec<Finding> {
             continue;
         };
         if sym_is_test(i) || f.is_generated || s.keep.is_some() || allow_reason.contains_key(&i) {
+            continue;
+        }
+        if by_name.get(s.name.as_str()).map(|v| v.len()).unwrap_or(0)
+            > crate::index::MAX_AMBIGUOUS_CANDIDATES
+        {
             continue;
         }
         if !opts.kinds.iter().any(|k| k == &s.kind) || s.entry.is_some() {
