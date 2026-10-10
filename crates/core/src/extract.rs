@@ -549,6 +549,24 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
         if kind == "impl" {
             qname = impl_ty.clone();
         }
+        // Go methods live outside their type: qualify with the receiver (`Context.JSON`)
+        if d.def.kind() == "method_declaration" {
+            if let Some(recv) = d.def.child_by_field_name("receiver") {
+                let rt = text(recv, src)
+                    .trim_matches(|c| c == '(' || c == ')')
+                    .split_whitespace()
+                    .last()
+                    .unwrap_or("")
+                    .trim_start_matches('*')
+                    .split('[')
+                    .next()
+                    .unwrap_or("")
+                    .to_string();
+                if !rt.is_empty() {
+                    qname = format!("{rt}.{name}");
+                }
+            }
+        }
         let mut exported;
         let mut is_test = file_is_test || parent.map(|p| syms[p].is_test).unwrap_or(false);
         let mut entry: Option<String> = None;
@@ -1472,5 +1490,13 @@ mod tests {
             "from b import helper as h\ndef h2(): pass\nh2()\n",
         );
         assert!(f.refs.iter().any(|r| r.name == "h2"));
+    }
+
+    #[test]
+    fn go_methods_are_qualified_by_receiver_type() {
+        let f = ex("go", "a.go", "package a\ntype Context struct{}\ntype Box[T any] struct{}\nfunc (c *Context) JSON() {}\nfunc (b Box[T]) Get() {}\nfunc Free() {}\n");
+        assert_eq!(sym(&f, "JSON").qname, "Context.JSON");
+        assert_eq!(sym(&f, "Get").qname, "Box.Get");
+        assert_eq!(sym(&f, "Free").qname, "Free");
     }
 }
