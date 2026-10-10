@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.0.0] - DRAFT (unreleased, awaiting owner approval; not tagged, not published)
+## [1.0.0] - 2026-10-10
 
 ### Added
 - `plumb map`: ranked (PageRank), token-budgeted repo map; changed-file aware (`--base`).
