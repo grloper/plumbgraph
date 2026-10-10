@@ -64,6 +64,10 @@ fn equivalent_existing_patterns_are_respected() {
         "/.plumbgraph\n",
         "**/.plumbgraph/*\n!**/.plumbgraph/allow.toml\n",
         ".plumbgraph/*\r\n",
+        // the user deliberately commits the index: appending `.plumbgraph/*` would win
+        // (last match) and silently undo that
+        "!.plumbgraph/\n",
+        ".plumbgraph*\n",
     ] {
         let t = repo();
         std::fs::write(t.path().join(".gitignore"), existing).unwrap();

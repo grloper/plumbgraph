@@ -211,26 +211,19 @@ pub fn init_with(
 /// git cannot re-include a file whose parent directory is excluded.
 pub const GITIGNORE_LINES: &[&str] = &[".plumbgraph/*", "!.plumbgraph/allow.toml"];
 
-/// Does an existing `.gitignore` already exclude `.plumbgraph` in some spelling
-/// (`.plumbgraph`, `/.plumbgraph/`, `.plumbgraph/*`, `**/.plumbgraph/**`, ...)?
-fn gitignore_covers_plumbgraph(text: &str) -> bool {
+/// Does the user already manage `.plumbgraph` in this `.gitignore`? Any rule (not a comment)
+/// that mentions it counts: an exclusion in any spelling (`/.plumbgraph/`, `**/.plumbgraph/*`,
+/// `.plumbgraph*`) or a negation (`!.plumbgraph/`), which our appended lines would override,
+/// because the last matching rule wins.
+fn gitignore_mentions_plumbgraph(text: &str) -> bool {
     text.lines().any(|l| {
         let l = l.trim_start_matches('\u{feff}').trim();
-        if l.starts_with('#') || l.starts_with('!') {
-            return false;
-        }
-        let l = l.trim_start_matches('/');
-        let l = l.strip_prefix("**/").unwrap_or(l);
-        let l = l
-            .strip_suffix("/**")
-            .or_else(|| l.strip_suffix("/*"))
-            .unwrap_or(l);
-        l.trim_end_matches('/') == ".plumbgraph"
+        !l.starts_with('#') && l.contains(".plumbgraph")
     })
 }
 
 /// Add `GITIGNORE_LINES` to `<root>/.gitignore` when `root` is inside a git work tree and the
-/// file does not already cover `.plumbgraph`. Never rewrites a file it cannot read as UTF-8.
+/// file has no rule about `.plumbgraph` yet. Never rewrites a file it cannot read as UTF-8.
 fn ensure_gitignore(root: &Path, rep: &mut InitReport, dry: bool, enabled: bool) -> Result<()> {
     let wanted = GITIGNORE_LINES.join(" and ");
     if !enabled {
@@ -261,7 +254,7 @@ fn ensure_gitignore(root: &Path, rep: &mut InitReport, dry: bool, enabled: bool)
         Err(e) if e.kind() == std::io::ErrorKind::NotFound => String::new(),
         Err(e) => return Err(e).with_context(|| format!("reading {}", shown(&gi))),
     };
-    if gitignore_covers_plumbgraph(&cur) {
+    if gitignore_mentions_plumbgraph(&cur) {
         rep.unchanged.push(shown(&gi));
         return Ok(());
     }

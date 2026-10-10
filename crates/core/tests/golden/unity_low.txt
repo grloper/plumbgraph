@@ -1,4 +1,6 @@
 high   0.95 dead-code          class     MathUtil Assets/Scripts/MathUtil.cs:4
+high   0.95 dead-code          class     Pooled Assets/Scripts/Pooled.cs:7
+high   0.95 dead-code          class     TextEditor Server/TextEditor.cs:6
 high   0.95 dead-code          class     Worker Server/Worker.cs:7
 high   0.95 dead-code          method    BuildTools.OrphanTool Assets/Editor/BuildTools.cs:20
 high   0.95 dead-code          method    MathUtil.Start Assets/Scripts/MathUtil.cs:7
@@ -10,6 +12,13 @@ medium 0.71 dead-code          method    Enemy.EnemyDeadHelper Assets/Scripts/En
 medium 0.71 dead-code          method    GameSettings.StaleSettingsHelper Assets/Scripts/GameSettings.cs:11
 medium 0.71 dead-code          method    NetPlayer.NetDeadHelper Assets/Scripts/Net/NetPlayer.cs:10
 medium 0.71 dead-code          method    Player.NeverCalled Assets/Scripts/Player.cs:46
+medium 0.71 dead-code          method    Pooled.CompareTo Assets/Scripts/Pooled.cs:10
+medium 0.71 dead-code          method    Pooled.Dispose Assets/Scripts/Pooled.cs:9
+medium 0.71 dead-code          method    Pooled.Update Assets/Scripts/Pooled.cs:11
+medium 0.71 dead-code          method    SceneBrowser.UnusedBrowserHelper Assets/Editor/SceneBrowser.cs:13
+medium 0.71 dead-code          method    TextEditor.OnGUI Server/TextEditor.cs:8
+medium 0.71 dead-code          method    TextEditor.OnInspectorGUI Server/TextEditor.cs:9
 medium 0.71 dead-code          method    Worker.Dispose Server/Worker.cs:11
 medium 0.71 dead-code          method    Worker.Start Server/Worker.cs:12
 medium 0.71 dead-code          method    Worker.Update Server/Worker.cs:13
+medium 0.80 dead-code          class     Editor Server/TextEditor.cs:3

@@ -85,6 +85,9 @@ fn scriptableobject_networkbehaviour_and_indirect_subclasses_under_assets() {
         "Enemy.Update",
         "Enemy.OnTriggerEnter",
         "Enemy.Chase",
+        // EditorWindow in a Unity file, incl. the IHasCustomMenu callback
+        "SceneBrowser.OnGUI",
+        "SceneBrowser.AddItemsToMenu",
     ] {
         assert!(!s.contains(&q.to_string()), "false positive {q}: {s:?}");
     }
@@ -122,6 +125,12 @@ fn real_dead_code_in_unity_projects_is_still_reported() {
         "Worker.Update",
         // `[MenuItem]` outside a Unity project is just an attribute
         "Worker.Menu",
+        "SceneBrowser.UnusedBrowserHelper",
+        // under Assets/, but only interfaces as bases: cannot be a MonoBehaviour
+        "Pooled.Update",
+        // a class merely named `Editor` outside a Unity file
+        "TextEditor.OnGUI",
+        "TextEditor.OnInspectorGUI",
     ] {
         assert!(s.contains(&q.to_string()), "missing {q}: {s:?}");
     }

@@ -276,7 +276,8 @@ const UNITY_EDITOR_BASES: &[&str] = &["Editor", "EditorWindow"];
 
 /// Methods the Unity engine calls by name (reflection on the message name, not a virtual call).
 /// MonoBehaviour / ScriptableObject messages, physics (3D and 2D), rendering, input, animation,
-/// StateMachineBehaviour, Editor/EditorWindow and ISerializationCallbackReceiver callbacks.
+/// StateMachineBehaviour, Editor/EditorWindow (incl. IHasCustomMenu) and
+/// ISerializationCallbackReceiver callbacks.
 const UNITY_MESSAGES: &[&str] = &[
     "Awake",
     "Start",
@@ -352,6 +353,7 @@ const UNITY_MESSAGES: &[&str] = &[
     "OnHierarchyChange",
     "OnProjectChange",
     "OnInspectorUpdate",
+    "AddItemsToMenu",
     "OnBeforeSerialize",
     "OnAfterDeserialize",
 ];
@@ -456,9 +458,15 @@ fn unity_class(
             return Some(format!("derives from {b}"));
         }
     }
-    if !bases.is_empty() && under_assets(rel_path) {
+    // .NET naming: `IDisposable`, `IComparable<T>`. A class lists its base class first and
+    // cannot reach MonoBehaviour through an interface.
+    let interface_like = |b: &str| {
+        let mut c = b.chars();
+        c.next() == Some('I') && c.next().is_some_and(|x| x.is_ascii_uppercase())
+    };
+    if under_assets(rel_path) && bases.first().is_some_and(|b| !interface_like(b)) {
         // indirect subclass (`Enemy : Character : MonoBehaviour`): the chain is not resolved,
-        // so any derived class in a Unity project's Assets/ is treated as possibly a component
+        // so a class with a base class in a Unity project's Assets/ may be a component
         return Some(format!(
             "derives from {} under Assets/ (possibly an indirect MonoBehaviour)",
             bases[0]
@@ -924,7 +932,7 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
                                 }
                             } else if entry.is_none() && has("public") {
                                 framework_risk = Some(format!(
-                                    "public method of a Unity class ({why}): may be bound to a UnityEvent (e.g. Button.onClick) or called via SendMessage in a scene/prefab, which is not indexed"
+                                    "public method of a Unity class ({why}): may be bound to a UnityEvent (e.g. Button.onClick), an Animation Event or SendMessage in a scene, prefab or animation clip, which are not indexed"
                                 ));
                             }
                         }
