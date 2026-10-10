@@ -13,6 +13,7 @@ medium 0.71 dead-code          method    Player.NeverCalled Assets/Scripts/Playe
 medium 0.71 dead-code          method    Pooled.CompareTo Assets/Scripts/Pooled.cs:10
 medium 0.71 dead-code          method    Pooled.Dispose Assets/Scripts/Pooled.cs:9
 medium 0.71 dead-code          method    Pooled.Update Assets/Scripts/Pooled.cs:11
+medium 0.71 dead-code          method    SaveData.UnusedSaveHelper Assets/Scripts/SaveData.cs:13
 medium 0.71 dead-code          method    SceneBrowser.UnusedBrowserHelper Assets/Editor/SceneBrowser.cs:13
 medium 0.71 dead-code          method    TextEditor.OnGUI Server/TextEditor.cs:8
 medium 0.71 dead-code          method    TextEditor.OnInspectorGUI Server/TextEditor.cs:9

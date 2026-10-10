@@ -358,6 +358,35 @@ const UNITY_MESSAGES: &[&str] = &[
     "OnAfterDeserialize",
 ];
 
+/// Unity interfaces whose methods the engine calls on any implementing type (not only
+/// components): serialization callbacks, the editor's custom menu, and UI EventSystem handlers.
+const UNITY_CALLBACK_INTERFACES: &[(&str, &str)] = &[
+    ("ISerializationCallbackReceiver", "OnBeforeSerialize"),
+    ("ISerializationCallbackReceiver", "OnAfterDeserialize"),
+    ("IHasCustomMenu", "AddItemsToMenu"),
+    ("IPointerEnterHandler", "OnPointerEnter"),
+    ("IPointerExitHandler", "OnPointerExit"),
+    ("IPointerDownHandler", "OnPointerDown"),
+    ("IPointerUpHandler", "OnPointerUp"),
+    ("IPointerClickHandler", "OnPointerClick"),
+    ("IPointerMoveHandler", "OnPointerMove"),
+    (
+        "IInitializePotentialDragHandler",
+        "OnInitializePotentialDrag",
+    ),
+    ("IBeginDragHandler", "OnBeginDrag"),
+    ("IDragHandler", "OnDrag"),
+    ("IEndDragHandler", "OnEndDrag"),
+    ("IDropHandler", "OnDrop"),
+    ("IScrollHandler", "OnScroll"),
+    ("IUpdateSelectedHandler", "OnUpdateSelected"),
+    ("ISelectHandler", "OnSelect"),
+    ("IDeselectHandler", "OnDeselect"),
+    ("IMoveHandler", "OnMove"),
+    ("ISubmitHandler", "OnSubmit"),
+    ("ICancelHandler", "OnCancel"),
+];
+
 /// Unity attributes that make the engine/editor call the method (or, for `InitializeOnLoad`,
 /// run the class's static constructor). Matched without a trailing `Attribute`.
 const UNITY_ENTRY_ATTRIBUTES: &[&str] = &[
@@ -917,6 +946,21 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
                             if entry.is_none() {
                                 entry =
                                     Some(format!("Unity `[{a}]`: invoked by the engine/editor"));
+                            }
+                        }
+                        if entry.is_none() && cs_unity_file && kind == "method" {
+                            if let Some(p) = parent
+                                .filter(|&p| matches!(syms[p].kind.as_str(), "class" | "struct"))
+                            {
+                                let bases = cs_base_names(defs[p].def, src);
+                                if let Some((iface, _)) = UNITY_CALLBACK_INTERFACES
+                                    .iter()
+                                    .find(|(i, m)| *m == name && bases.iter().any(|b| b == i))
+                                {
+                                    entry = Some(format!(
+                                        "Unity callback `{name}` of `{iface}`: called by the engine"
+                                    ));
+                                }
                             }
                         }
                         let unity_owner = parent

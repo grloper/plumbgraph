@@ -88,6 +88,11 @@ fn scriptableobject_networkbehaviour_and_indirect_subclasses_under_assets() {
         // EditorWindow in a Unity file, incl. the IHasCustomMenu callback
         "SceneBrowser.OnGUI",
         "SceneBrowser.AddItemsToMenu",
+        // Unity callback interfaces, also on classes that are not components
+        "SaveData.OnBeforeSerialize",
+        "SaveData.OnAfterDeserialize",
+        "ClickTarget.OnPointerClick",
+        "ClickTarget.OnDrag",
     ] {
         assert!(!s.contains(&q.to_string()), "false positive {q}: {s:?}");
     }
@@ -128,6 +133,8 @@ fn real_dead_code_in_unity_projects_is_still_reported() {
         "SceneBrowser.UnusedBrowserHelper",
         // under Assets/, but only interfaces as bases: cannot be a MonoBehaviour
         "Pooled.Update",
+        // implementing a callback interface does not make other methods entry points
+        "SaveData.UnusedSaveHelper",
         // a class merely named `Editor` outside a Unity file
         "TextEditor.OnGUI",
         "TextEditor.OnInspectorGUI",
