@@ -886,6 +886,7 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
     // `x as y` bindings: a use of `y` in this file is a use of `x`.
     let mut aliases: HashMap<String, String> = HashMap::new();
     let mut alias_stmts: HashSet<usize> = HashSet::new();
+    let mut reexports: Vec<(usize, RefFact)> = vec![];
     {
         let mut qc = QueryCursor::new();
         let mut it = qc.matches(imports_q, root, src);
@@ -910,7 +911,44 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
             }
             if let Some(stmt) = stmt {
                 if alias_stmts.insert(stmt.id()) {
+                    let n_before = aliases.len();
                     collect_import_aliases(stmt, src, &mut aliases);
+                    // Rust `pub use x as y`: other files call `y`; keep `x` alive from here.
+                    let mut c = stmt.walk();
+                    let is_reexport = stmt.kind() == "use_declaration"
+                        && stmt
+                            .children(&mut c)
+                            .any(|ch| ch.kind() == "visibility_modifier");
+                    if is_reexport && aliases.len() > n_before {
+                        let line = stmt.start_position().row as u32 + 1;
+                        let mut stack = vec![stmt];
+                        let mut origs: Vec<String> = vec![];
+                        while let Some(n) = stack.pop() {
+                            if n.kind() == "use_as_clause" {
+                                if let Some(o) = n.child_by_field_name("path") {
+                                    let o = text(o, src);
+                                    origs
+                                        .push(o.rsplit([':', '.']).next().unwrap_or(o).to_string());
+                                }
+                            }
+                            let mut cc = n.walk();
+                            for ch in n.children(&mut cc) {
+                                stack.push(ch);
+                            }
+                        }
+                        for name in origs {
+                            reexports.push((
+                                stmt.start_byte(),
+                                RefFact {
+                                    name,
+                                    kind: "references".into(),
+                                    line,
+                                    member: false,
+                                    src: None,
+                                },
+                            ));
+                        }
+                    }
                 }
             }
             if let (Some(stmt), None) = (stmt, &module) {
@@ -1007,7 +1045,7 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
         .map(|s| s.as_str())
         .collect();
     let mut strings: BTreeSet<String> = BTreeSet::new();
-    let mut refs: Vec<(usize, RefFact)> = vec![]; // (byte, fact) with src filled afterwards
+    let mut refs: Vec<(usize, RefFact)> = std::mem::take(&mut reexports); // (byte, fact) with src filled afterwards
 
     let mut cursor = root.walk();
     let mut descended = true;
@@ -1490,6 +1528,24 @@ mod tests {
             "from b import helper as h\ndef h2(): pass\nh2()\n",
         );
         assert!(f.refs.iter().any(|r| r.name == "h2"));
+    }
+
+    #[test]
+    fn rust_pub_use_alias_reexport_keeps_the_original_alive() {
+        // `pub(crate) use m::f as g;` is how ripgrep exposes `generate_long`; callers elsewhere
+        // use `g`, which a per-file alias table cannot see. The re-export itself references `f`.
+        let f = ex(
+            "rust",
+            "mod.rs",
+            "pub(crate) use crate::doc::{generate_long as generate_help_long};\nuse crate::x::priv_fn as p;\n",
+        );
+        assert!(
+            f.refs.iter().any(|r| r.name == "generate_long"),
+            "{:?}",
+            f.refs
+        );
+        // a private `use ... as` is not a re-export
+        assert!(!f.refs.iter().any(|r| r.name == "priv_fn"));
     }
 
     #[test]

@@ -240,6 +240,9 @@ enum Cmd {
         /// Write the current findings as the new baseline (exit 0)
         #[arg(long)]
         update_baseline: bool,
+        /// Print at most N new findings (highest confidence first); 0 = all. Verdict and counts always cover every finding.
+        #[arg(long, default_value_t = 200)]
+        max_findings: usize,
         /// Fail when a new finding of at least this level exists
         #[arg(long, value_enum, default_value = "medium")]
         fail_on: FailOn,
@@ -346,8 +349,12 @@ fn note_hidden(hidden: usize) {
 /// JSON output with `findings` capped; `summary`/totals still describe everything and a
 /// `truncated` object says what was left out.
 fn print_json_capped<T: serde::Serialize>(r: &T, max: usize) -> Result<()> {
+    print_json_capped_key(r, max, "findings")
+}
+
+fn print_json_capped_key<T: serde::Serialize>(r: &T, max: usize, key: &str) -> Result<()> {
     let mut v = serde_json::to_value(r)?;
-    if let Some(arr) = v.get_mut("findings").and_then(|f| f.as_array_mut()) {
+    if let Some(arr) = v.get_mut(key).and_then(|f| f.as_array_mut()) {
         let total = arr.len();
         if max > 0 && total > max {
             arr.sort_by(|a, b| {
@@ -804,6 +811,7 @@ fn run(cli: Cli) -> Result<bool> {
             baseline,
             update_baseline,
             fail_on,
+            max_findings,
             semgrep_config,
             lib,
             timeout_secs,
@@ -845,11 +853,13 @@ fn run(cli: Cli) -> Result<bool> {
                 },
             )?;
             if json {
-                print_json(&r)?;
+                print_json_capped_key(&r, max_findings, "new")?;
             } else {
-                for f in &r.new {
+                let (shown, hidden) = capped(&r.new, max_findings);
+                for f in &shown {
                     render(f);
                 }
+                note_hidden(hidden);
                 println!();
                 for s in &r.steps {
                     println!(

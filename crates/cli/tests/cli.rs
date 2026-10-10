@@ -637,3 +637,19 @@ fn closed_stdout_pipe_does_not_panic() {
     assert!(!err.contains("panicked"), "{err}");
     assert!(!err.contains("failed printing"), "{err}");
 }
+
+#[test]
+fn verify_output_is_capped_but_verdict_counts_everything() {
+    let t = many_dead();
+    let out = plumb()
+        .args(["--json", "verify", "--max-findings", "5"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    let v: serde_json::Value = serde_json::from_slice(&out.stdout).unwrap();
+    assert_eq!(v["new"].as_array().unwrap().len(), 5);
+    assert_eq!(v["truncated"]["total"], 30);
+    assert_eq!(v["total_findings"], 30);
+    assert_eq!(v["verdict"], "fail");
+    assert_eq!(out.status.code(), Some(1));
+}
