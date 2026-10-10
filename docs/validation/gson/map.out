@@ -1,0 +1,84 @@
+# plumb map: 19 files, 64 of 1331 symbols (~1465 tokens, budget 1500)
+gson/src/main/java/com/google/gson/Gson.java
+  156: public final class Gson
+  243: public Gson()
+  315: public boolean serializeNulls()
+  565: public String toJson(Object src)
+  590: public String toJson(Object src, Type typeOfSrc)
+  612: public void toJson(Object src, Appendable writer) throws JsonIOException
+  640: public void toJson(Object src, Type typeOfSrc, Appendable writer) throws JsonIOException
+  670: public void toJson(Object src, Type typeOfSrc, JsonWriter writer) throws JsonIOException
+  708: public String toJson(JsonElement jsonElement)
+  722: public void toJson(JsonElement jsonElement, Appendable writer) throws JsonIOException
+  751: public void toJson(JsonElement jsonElement, JsonWriter writer) throws JsonIOException
+  850: public <T> T fromJson(String json, Class<T> classOfT) throws JsonSyntaxException
+  878: @SuppressWarnings({"unchecked", "TypeParameterUnusedInFormals"}) public <T> T fromJson(String json, Type typeOfT) throws…
+  909: public <T> T fromJson(String json, TypeToken<T> typeOfT) throws JsonSyntaxException
+  940: public <T> T fromJson(Reader json, Class<T> classOfT) throws JsonSyntaxException, JsonIOException
+  970: @SuppressWarnings({"unchecked", "TypeParameterUnusedInFormals"}) public <T> T fromJson(Reader json, Type typeOfT) throws…
+  1001: public <T> T fromJson(Reader json, TypeToken<T> typeOfT) throws JsonIOException, JsonSyntaxException
+  1045: @SuppressWarnings({"unchecked", "TypeParameterUnusedInFormals"}) public <T> T fromJson(JsonReader reader, Type typeOfT) …
+  1087: public <T> T fromJson(JsonReader reader, TypeToken<T> typeOfT) throws JsonIOException, JsonSyntaxException
+  1159: public <T> T fromJson(JsonElement json, Class<T> classOfT) throws JsonSyntaxException
+  1185: @SuppressWarnings({"unchecked", "TypeParameterUnusedInFormals"}) public <T> T fromJson(JsonElement json, Type typeOfT) t…
+  1212: public <T> T fromJson(JsonElement json, TypeToken<T> typeOfT) throws JsonSyntaxException
+gson/src/main/java/com/google/gson/stream/JsonWriter.java
+  162: public class JsonWriter implements Closeable, Flushable
+  480: private int peek()
+  498: @CanIgnoreReturnValue public JsonWriter name(String name) throws IOException
+  512: private void writeDeferredName() throws IOException
+  526: @CanIgnoreReturnValue public JsonWriter value(String value) throws IOException
+  542: @CanIgnoreReturnValue public JsonWriter value(boolean value) throws IOException
+  556: @CanIgnoreReturnValue public JsonWriter value(Boolean value) throws IOException
+  577: @CanIgnoreReturnValue public JsonWriter value(float value) throws IOException
+  597: @CanIgnoreReturnValue public JsonWriter value(double value) throws IOException
+  613: @CanIgnoreReturnValue public JsonWriter value(long value) throws IOException
+  632: @CanIgnoreReturnValue public JsonWriter value(Number value) throws IOException
+  775: private void newline() throws IOException
+  805: @SuppressWarnings("fallthrough") private void beforeValue() throws IOException
+gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java
+  80: private void put(JsonElement value)
+  160: @CanIgnoreReturnValue @Override public JsonWriter value(String value) throws IOException
+  170: @CanIgnoreReturnValue @Override public JsonWriter value(boolean value) throws IOException
+  177: @CanIgnoreReturnValue @Override public JsonWriter value(Boolean value) throws IOException
+  187: @CanIgnoreReturnValue @Override public JsonWriter value(float value) throws IOException
+  197: @CanIgnoreReturnValue @Override public JsonWriter value(double value) throws IOException
+  207: @CanIgnoreReturnValue @Override public JsonWriter value(long value) throws IOException
+  214: @CanIgnoreReturnValue @Override public JsonWriter value(Number value) throws IOException
+gson/src/main/java/com/google/gson/internal/Streams.java
+  122: @Override public Writer append(CharSequence csq) throws IOException
+  128: @Override public Writer append(CharSequence csq, int start, int end) throws IOException
+  144: @Override public int length()
+gson/src/main/java/com/google/gson/reflect/TypeToken.java
+  54: public class TypeToken<T>
+  339: @Override public final int hashCode()
+gson/src/main/java/com/google/gson/JsonElement.java
+  96: public abstract class JsonElement
+gson/src/main/java/com/google/gson/Strictness.java
+  20: public enum Strictness
+gson/src/main/java/com/google/gson/internal/LinkedTreeMap.java
+  89: @Override public int size()
+  591: @Override public int size()
+  632: @Override public int size()
+gson/src/main/java/com/google/gson/TypeAdapterFactory.java
+  165: public interface TypeAdapterFactory
+gson/src/main/java/com/google/gson/TypeAdapter.java
+  122: public abstract class TypeAdapter<T>
+gson/src/main/java/com/google/gson/stream/JsonReader.java
+  211: public class JsonReader implements Closeable
+gson/src/main/java/com/google/gson/GsonBuilder.java
+  93: public final class GsonBuilder
+gson/src/main/java/com/google/gson/JsonPrimitive.java
+  35: public final class JsonPrimitive extends JsonElement
+gson/src/main/java/com/google/gson/JsonParseException.java
+  32: public class JsonParseException extends RuntimeException
+gson/src/main/java/com/google/gson/annotations/SerializedName.java
+  83: @Documented @Retention(RetentionPolicy.RUNTIME) @Target({ElementType.FIELD, ElementType.METHOD}) public @interface Seria…
+gson/src/main/java/com/google/gson/internal/Excluder.java
+  49: public final class Excluder implements TypeAdapterFactory, Cloneable
+gson/src/main/java/com/google/gson/internal/JsonReaderInternalAccess.java
+  23: public abstract class JsonReaderInternalAccess
+gson/src/main/java/com/google/gson/JsonNull.java
+  26: public final class JsonNull extends JsonElement
+gson/src/main/java/com/google/gson/FormattingStyle.java
+  39: public final class FormattingStyle

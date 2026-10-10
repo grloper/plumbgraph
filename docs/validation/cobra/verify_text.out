@@ -1,0 +1,232 @@
+MEDIUM 0.77  bash_completions.go:701  method `Command.GenBashCompletionFile` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `GenBashCompletionFile` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  bash_completionsV2.go:470  method `Command.GenBashCompletionFileV2` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `GenBashCompletionFileV2` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  command.go:313  method `Command.SetUsageFunc` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `SetUsageFunc` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  command.go:432  method `Command.getIn` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  command.go:560  const `minUsagePadding` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  command.go:563  method `Command.UsagePadding` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `UsagePadding` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  command.go:592  method `Command.UsageTemplate` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `UsageTemplate` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  command.go:605  method `Command.HelpTemplate` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `HelpTemplate` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  command.go:618  method `Command.VersionTemplate` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `VersionTemplate` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  command.go:1317  method `Command.ResetCommands` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `ResetCommands` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  command.go:1501  method `Command.DebugFlags` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `DebugFlags` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  command.go:1787  method `Command.ResetFlags` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `ResetFlags` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  command.go:1811  method `Command.HasLocalFlags` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `HasLocalFlags` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  command.go:1816  method `Command.HasInheritedFlags` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `HasInheritedFlags` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  command.go:1827  method `Command.HasAvailablePersistentFlags` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `HasAvailablePersistentFlags` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  command.go:1942  const `defaultUsageTemplate` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  command.go:2042  const `defaultHelpTemplate` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  command.go:2064  const `defaultVersionTemplate` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  completions.go:980  function `CompDebugln` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `CompDebugln` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/man_docs.go:118  function `fillHeader` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/man_docs.go:143  function `manPreamble` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/man_docs.go:159  function `manPrintFlags` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/man_docs.go:187  function `manPrintOptions` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/man_docs.go:202  function `genMan` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/md_docs.go:30  const `markdownExtension` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/md_docs.go:32  function `printOptions` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/rest_docs.go:30  function `printOptionsReST` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/rest_docs.go:52  function `defaultLinkHandler` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/rest_docs.go:173  function `indentString` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/util.go:26  function `hasSeeAlso` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/util.go:41  function `forceMultiLine` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/yaml_docs.go:30  struct `cmdOption` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/yaml_docs.go:37  struct `cmdDoc` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  doc/yaml_docs.go:149  function `genFlagResult` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  powershell_completions.go:320  method `Command.genPowerShellCompletionFile` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  powershell_completions.go:331  method `Command.GenPowerShellCompletionFile` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `GenPowerShellCompletionFile` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  powershell_completions.go:342  method `Command.GenPowerShellCompletionFileWithDesc` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `GenPowerShellCompletionFileWithDesc` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  shell_completions.go:90  method `Command.MarkPersistentFlagDirname` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `MarkPersistentFlagDirname` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  zsh_completions.go:25  method `Command.GenZshCompletionFile` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `GenZshCompletionFile` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  zsh_completions.go:36  method `Command.GenZshCompletionFileNoDesc` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `GenZshCompletionFileNoDesc` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  zsh_completions.go:55  method `Command.MarkZshCompPositionalArgumentFile` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `MarkZshCompPositionalArgumentFile` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  zsh_completions.go:66  method `Command.MarkZshCompPositionalArgumentWords` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `MarkZshCompPositionalArgumentWords` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  zsh_completions.go:70  method `Command.genZshCompletionFile` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+
+  dead-code        ran      43 finding(s)
+  check-deps       ran      0 finding(s)  (offline: manifests and local resolution only; pass --online to check registries)
+  test-weakening   ran      0 finding(s)  (vs HEAD)
+  diagnostics      skipped  0 finding(s)  (no saved output (--from) and --run not given; nothing was executed)
+  rule-engines     skipped  0 finding(s)  (semgrep / ast-grep run only with --run)
+
+verify: FAIL  (43 new, 0 baselined, 0 fixed since baseline; fail-on medium)
+note: dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change
+note: baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new
+note: no baseline found at /workspace/repos/cobra/plumb-baseline.json: every finding counts as new (create one with --update-baseline)
+note: nothing was executed (no --run).

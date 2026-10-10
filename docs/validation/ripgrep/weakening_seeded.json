@@ -1,0 +1,176 @@
+{
+ "repo": "ripgrep",
+ "lang": "rs",
+ "results": [
+  {
+   "kind": "skip",
+   "file": "crates/ignore/src/overrides.rs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "crates/core/flags/defs.rs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "crates/pcre2/src/matcher.rs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "tests/macros.rs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "crates/core/flags/defs.rs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "trivial-assertion"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "crates/searcher/src/testutil.rs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "trivial-assertion"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "crates/ignore/src/walk.rs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "trivial-assertion"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "crates/ignore/src/types.rs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "trivial-assertion"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "crates/ignore/src/overrides.rs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "deleted-test"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "crates/core/flags/defs.rs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "deleted-test"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "crates/pcre2/src/matcher.rs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "deleted-test"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "crates/searcher/src/testutil.rs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "deleted-test"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "benign",
+   "file": "crates/ignore/src/overrides.rs",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  },
+  {
+   "kind": "benign",
+   "file": "crates/core/flags/defs.rs",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  },
+  {
+   "kind": "benign",
+   "file": "crates/pcre2/src/matcher.rs",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  }
+ ],
+ "recall": "12/12",
+ "false_pos_on_benign": "0/3"
+}

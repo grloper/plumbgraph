@@ -1,0 +1,1029 @@
+HIGH   0.95  cli/src/util/ring_buffer.rs:55  type `RingBuffer::IntoIter` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `IntoIter` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/chatSessions/vscode-node/sessionOptionGroupBuilder.ts:261  function `resetIsolationLock` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `resetIsolationLock` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/inlineEdits/vscode-node/features/diagnosticsCompletionProcessor.ts:640  method `DiagnosticsCompletionHandlerTelemetry.setDistanceToAlternativeDiagnostic` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `setDistanceToAlternativeDiagnostic` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/inlineEdits/vscode-node/features/diagnosticsCompletionProcessor.ts:646  method `DiagnosticsCompletionHandlerTelemetry.setDistanceToUnknownDiagnostic` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `setDistanceToUnknownDiagnostic` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/inlineEdits/vscode-node/features/diagnosticsCompletionProcessor.ts:652  method `DiagnosticsCompletionHandlerTelemetry.setHasAlternativeDiagnosticForSameRange` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `setHasAlternativeDiagnosticForSameRange` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/intents/node/newIntent.ts:169  method `NewWorkspaceCopilotContentManager._prefetch` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `_prefetch` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/tools/common/toolsRegistry.ts:137  method `ToolRegistry.registerToolExtension` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `registerToolExtension` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/typescriptContext/serverPlugin/fixtures/nes/p1/source/test.ts:46  type `MyType` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `MyType` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/typescriptContext/serverPlugin/fixtures/nes/p1/source/test.ts:50  type `TypeOne` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `TypeOne` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/typescriptContext/serverPlugin/fixtures/nes/p1/source/test.ts:54  type `TypeTwo` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `TypeTwo` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/typescriptContext/vscode-node/ts6/tsContextService.ts:117  method `OnTimeoutData.addRunnableResult` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `addRunnableResult` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/platform/networking/node/nodeFetchFetcher.ts:112  method `createWebSocket.onUpgrade` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onUpgrade` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/platform/networking/node/nodeFetchFetcher.ts:119  method `createWebSocket.onHeaders` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onHeaders` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/platform/parser/node/nodes.ts:66  method `TreeSitterOffsetRange.isTreeSitterOffsetRange` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `isTreeSitterOffsetRange` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/platform/workspaceRecorder/common/resolvedRecording/resolvedRecording.ts:195  method `WorkspaceDocument.getStateIdBeforeOrAtOpIdx` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getStateIdBeforeOrAtOpIdx` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/util/vs/base/common/observableInternal/observables/baseObservable.ts:142  method `DebugHelper.getDependencyGraph` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getDependencyGraph` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/util/vs/base/common/observableInternal/observables/baseObservable.ts:146  method `DebugHelper.getObserverGraph` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getObserverGraph` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_call_not_awaited.cs:5  method `Program.CallingMethodAsync` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `CallingMethodAsync` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_does_not_exist.cs:2  method `Program.PrintMessage` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `PrintMessage` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:21  class `Class2` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class2` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:27  class `Class3` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class3` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:42  class `Class2` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class2` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:48  class `Class3` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class3` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:63  class `Class2` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class2` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:69  class `Class3` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class3` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_has_same_name_as.cs:2  class `Class1.Class11` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class11` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_has_same_name_as.cs:3  class `Class1.Class11.Class111` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class111` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_has_same_name_as.cs:4  class `Class1.Class11.Class112` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class112` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/html-language-features/client/src/htmlClient.ts:169  method `startClientWithParticipants.provideCompletionItem` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `provideCompletionItem` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/ipynb/src/ipynbMain.ts:114  method `activate.dropCustomMetadata` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `dropCustomMetadata` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/microsoft-authentication/packageMocks/dpapi/dpapi.js:7  method `defaultDpapi.protectData` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `protectData` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/microsoft-authentication/packageMocks/dpapi/dpapi.js:10  method `defaultDpapi.unprotectData` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `unprotectData` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/typescript-language-features/src/filesystems/autoInstallerFs.ts:249  method `MappedUri.flatPath` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `flatPath` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/base/browser/ui/tree/tree.ts:230  method `TreeDragOverReactions.acceptBubbleUp` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `acceptBubbleUp` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/base/browser/ui/tree/tree.ts:231  method `TreeDragOverReactions.acceptBubbleDown` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `acceptBubbleDown` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/base/browser/ui/tree/tree.ts:232  method `TreeDragOverReactions.acceptCopyBubbleUp` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `acceptCopyBubbleUp` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/base/browser/ui/tree/tree.ts:233  method `TreeDragOverReactions.acceptCopyBubbleDown` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `acceptCopyBubbleDown` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/base/common/observableInternal/observables/baseObservable.ts:140  method `DebugHelper.getDependencyGraph` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getDependencyGraph` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/base/common/observableInternal/observables/baseObservable.ts:144  method `DebugHelper.getObserverGraph` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getObserverGraph` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/editor/common/model/bracketPairsTextModelPart/bracketPairsTree/parser.ts:34  method `Parser.nodesConstructed` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `nodesConstructed` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/editor/common/model/bracketPairsTextModelPart/bracketPairsTree/parser.ts:41  method `Parser.nodesReused` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `nodesReused` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/editor/common/viewModel/viewModelLines.ts:1066  method `ViewLineInfo.isWrappedLineContinuation` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `isWrappedLineContinuation` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/platform/agentHost/node/claude/claudeElicitation.ts:87  function `_assertElicitationFieldCoversSchema` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `_assertElicitationFieldCoversSchema` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/platform/extensionManagement/common/extensionGalleryService.ts:287  method `Query.withAssetTypes` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `withAssetTypes` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/platform/undoRedo/common/undoRedoService.ts:246  method `ResourceEditStack.setElementsIsValid` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `setElementsIsValid` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/api/common/extHostChatAgents2.ts:1339  method `ExtHostChatAgent.setChatRequestPauseState` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `setChatRequestPauseState` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/api/common/extHostTesting.ts:1199  method `TestObservers.getMirroredTestDataByReference` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getMirroredTestDataByReference` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/contrib/chat/common/chatDebugServiceImpl.ts:61  method `SessionEventBuffer.removeWhere` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `removeWhere` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/configuration/browser/configuration.ts:883  method `CachedWorkspaceConfiguration.getConfigurationModel` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getConfigurationModel` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/configuration/browser/configuration.ts:1010  method `CachedFolderConfiguration.getUnsupportedKeys` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getUnsupportedKeys` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:604  method `fixRegexNewline.onCharacterEnter` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onCharacterEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:636  method `fixRegexNewline.onQuantifierEnter` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onQuantifierEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:639  method `fixRegexNewline.onQuantifierLeave` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onQuantifierLeave` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:642  method `fixRegexNewline.onCharacterClassRangeEnter` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onCharacterClassRangeEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:645  method `fixRegexNewline.onCharacterClassRangeLeave` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onCharacterClassRangeLeave` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:648  method `fixRegexNewline.onCharacterClassEnter` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onCharacterClassEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:651  method `fixRegexNewline.onCharacterClassLeave` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onCharacterClassLeave` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:654  method `fixRegexNewline.onAssertionEnter` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onAssertionEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:659  method `fixRegexNewline.onAssertionLeave` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onAssertionLeave` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/common/byokProvider.ts:25  interface `BYOKBaseModelConfig` appears unused  [t0-treesitter]
+         why:  3 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/common/byokProvider.ts:41  interface `BYOKNoAuthModelConfig` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/customEndpointProvider.ts:48  function `apiTypeToPath` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/customEndpointProvider.ts:62  function `inferApiTypeFromUrl` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/customEndpointProvider.ts:72  function `apiTypeToSupportedEndpoints` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/openRouterProvider.ts:21  interface `OpenRouterModelData` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/openRouterProvider.ts:146  function `isAnthropicModelId` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/xAIProvider.ts:15  interface `XAIModelData` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/chat/vscode-node/sessionTranscriptService.ts:30  function `stripInternalToolCallId` appears unused  [t0-treesitter]
+         why:  3 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/completions-core/vscode-node/lib/src/openai/fetch.fake.ts:103  function `asNumericOffset` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/completions-core/vscode-node/lib/src/openai/fetch.fake.ts:110  function `fakeResponse` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/completions-core/vscode-node/lib/src/prompt/components/splitContextPromptRenderer.tsx:20  function `resetContextIndex` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/completions-core/vscode-node/lib/src/telemetry.ts:479  function `_telemetryExpProblem` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/completions-core/vscode-node/prompt/src/snippetInclusion/windowDelineations.ts:59  type `getIndentationWindowsDelineations.TreeLabel` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/completions-core/vscode-node/prompt/src/snippetInclusion/windowDelineations.ts:74  function `getIndentationWindowsDelineations.getStartLine` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/completions-core/vscode-node/prompt/src/snippetInclusion/windowDelineations.ts:79  function `getIndentationWindowsDelineations.getEndLine` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/completions/common/parseBlock.ts:48  function `isContinuationLine` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/completions/common/parseBlock.ts:59  function `indentationOfLine` appears unused  [t0-treesitter]
+         why:  3 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/completions/common/parseBlock.ts:108  function `contextIndentationFromText.seekNonBlank` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/conversation/vscode-node/feedbackReporter.ts:206  function `appendPromptDetailsSection` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/conversation/vscode-node/feedbackReporter.ts:217  function `appendSTestSection` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/inlineEdits/node/diffNextEdits.ts:34  function `eliminateTrimEmptyLinesDifference` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/inlineEdits/node/diffNextEdits.ts:49  function `getLeadingEmptyLineCount` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/inlineEdits/node/diffNextEdits.ts:58  function `createLineEditFromDiff` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/inlineEdits/node/diffNextEdits.ts:64  function `createSingleLineEditFromDiff` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/inlineEdits/node/importFiltering.ts:29  function `getOldLines` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/inlineEdits/node/rebaseResult.ts:140  function `toBacktickLiteral` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/intents/node/editCodeIntent.ts:293  function `makeEditsConfirmation` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/intents/node/newIntent.ts:351  function `createProjectCommand` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/intents/node/newIntent.ts:359  function `createFileCommand` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/intents/node/newIntent.ts:417  function `convertGitHubItemsToChatResponseFileTree` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/intents/node/newIntent.ts:459  function `getNewPreviewUri` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/intents/node/newIntent.ts:467  class `NewWorkspaceResponseProcessor` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/intents/node/newIntent.ts:478  method `NewWorkspaceResponseProcessor.processResponse` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/intents/node/newIntent.ts:597  method `NewWorkspaceResponseProcessor.pushCommands` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/intents/node/reviewIntent.ts:158  class `ReviewReplyInterpreter` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/intents/node/searchIntent.ts:36  function `createSearchFollowUps` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/intents/node/vscodeIntent.ts:66  method `VSCodeResponseProcessor.processResponse` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/prompt/node/chatParticipantTelemetry.ts:584  method `ChatTelemetry._getTelemetryData` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/prompt/node/gitCommitMessageGenerator.ts:20  type `ResponseFormat` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/prompts/node/git/gitCommitMessagePrompt.tsx:89  class `GitCommitMessageSystemRules` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/prompts/node/inline/adjustSelection.ts:448  method `LinkedOverlayNodeGap.nextLeaf` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/prompts/node/inline/utils/streaming.ts:60  function `getPrefixes` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:16  function `userMsgId` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:17  function `agentMsgId` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:322  function `spanToToolCallEvent` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:347  function `spanToModelTurnEvent` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:367  function `spanToSubagentEvent` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:389  function `resolveHookExecutionContent` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:411  function `spanToHookExecutionEvent` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:436  function `spanToSdkHookEvent` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:449  function `spanToGenericEvent` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:460  function `resolveToolCallContent` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:474  function `resolveModelTurnContent` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:523  function `extractAgentResponseSummary` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:546  function `hasAgentTextResponse` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:560  function `spanStatusToString` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/trajectory/vscode-node/otelSpanToChatDebugEvent.ts:571  function `asNumber` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/typescriptContext/vscode-node/ts6/regionContextProvider.ts:19  type `RegionContextRequestArgs` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/typescriptContext/vscode-node/ts7/regionContextProvider.ts:16  type `StructuralEntity` appears unused  [t0-treesitter]
+         why:  5 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/typescriptContext/vscode-node/ts7/regionContextProvider.ts:18  type `AssignedStructuralNode` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/typescriptContext/vscode-node/ts7/regionContextProvider.ts:20  type `MemberInfo` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/typescriptContext/vscode-node/ts7/regionContextProvider.ts:27  type `ScopeInfo` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/workspaceSemanticSearch/node/semanticSearchTextSearchProvider.ts:613  function `getMatchRanges` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/lib/node/chatLibMain.ts:959  method `setupCompletionServices.getWorkspaceRoot` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/lib/node/chatLibMain.ts:962  method `setupCompletionServices.getFirstOpenDocument` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/lib/node/chatLibMain.ts:1019  method `setupCompletionServices.getImplementation` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/lib/node/chatLibMain.ts:1048  method `setupCompletionServices.isSimulation` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/lib/node/chatLibMain.ts:1049  method `setupCompletionServices.getBuildType` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/lib/node/chatLibMain.ts:1054  method `setupCompletionServices.getBuild` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/authentication/vscode-node/session.ts:17  type `CopilotAuthenticationSessionAccountInformation` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/chunking/node/naiveChunker.ts:16  interface `IChunkedLine` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/chunking/node/naiveChunker.ts:57  method `NaiveChunker._processLinesIntoChunks` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/editing/common/positionOffsetTransformer.ts:43  method `PositionOffsetTransformer._acceptDeleteRange` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/editing/common/positionOffsetTransformer.ts:69  method `PositionOffsetTransformer._acceptInsertText` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/editing/common/positionOffsetTransformer.ts:107  method `PositionOffsetTransformer._setLineText` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/image/common/imageTelemetry.ts:46  interface `ReferenceWithValue` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/image/common/imageTelemetry.ts:249  function `getImageSourceFromReference` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/image/common/imageTelemetry.ts:276  function `getByteData` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/image/common/imageTelemetry.ts:303  function `isArrayIndexKey` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/image/common/imageTelemetry.ts:308  function `isByteValue` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/image/common/imageTelemetry.ts:312  function `getByteLength` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/inlineEdits/common/editReason.ts:84  method `EditReasons.chatApplyEdits` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/inlineEdits/common/editReason.ts:109  method `EditReasons.inlineChatApplyEdit` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/inlineEdits/common/statelessNextEditProviders.ts:16  method `IgnoreEmptyLineAndLeadingTrailingWhitespaceChanges._isWhitespaceOnlyChange` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/inlineEdits/common/statelessNextEditProviders.ts:55  method `IgnoreWhitespaceOnlyChanges._isFormattingOnlyChange` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/inlineEdits/common/workspaceEditTracker/workspaceDocumentEditTracker.ts:198  method `FifoSet.getItemsReversed` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/networking/node/nodeFetchFetcher.ts:158  function `parseRawHeaders` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/otel/node/fileExporters.ts:79  method `BaseFileExporter.forceFlush` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/telemetry/node/baseExperimentationService.ts:322  function `equalMap` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/telemetry/node/spyingTelemetryService.ts:124  type `TelemetryEventMapKeysFilteredByEventName` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/telemetry/node/spyingTelemetryService.ts:129  interface `TelemetryEventMap` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/workspaceChunkSearch/node/scenarioAutomationWorkspaceChunkSearchService.ts:35  interface `BlackbirdSearchResponse` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/platform/workspaceRecorder/common/resolvedRecording/resolvedRecording.ts:191  method `WorkspaceDocument.getEdit` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/equals.ts:115  function `toNormalizedJsonStructure` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:160  function `charactersMatch` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:172  function `getAlternateCodes` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:366  function `cloneMatches` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:377  function `_matchesWords` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:396  function `_matchesWordsCompute` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:572  function `printTables` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:580  function `isSeparatorAtPos` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:615  function `isWhitespaceAtPos` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:629  function `isUpperCaseAtPos` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:837  function `_fillInMaxWordMatchPos` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:849  function `_doScore` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:931  function `fuzzyScoreWithPermutations` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/filters.ts:964  function `nextTypoPermutation` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/lifecycle.ts:172  function `DisposableTracker.computeLeakingDisposables.getStackTracePath` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/lifecycle.ts:173  function `DisposableTracker.computeLeakingDisposables.getStackTracePath.removePrefix` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/naturalLanguage/korean.ts:28  function `disassembleKorean` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/naturalLanguage/korean.ts:96  function `getCodesFromArray` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/naturalLanguage/korean.ts:103  function `addCodesToBuffer` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/naturalLanguage/korean.ts:119  enum `HangulRangeStartCode` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/network.ts:194  method `RemoteAuthoritiesImpl.setPreferredWebSchema` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/network.ts:202  method `RemoteAuthoritiesImpl.setServerRootPath` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/network.ts:206  method `RemoteAuthoritiesImpl.getServerRootPath` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/network.ts:219  method `RemoteAuthoritiesImpl.setConnectionToken` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/network.ts:223  method `RemoteAuthoritiesImpl.getPreferredWebSchema` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/network.ts:301  method `FileAccessImpl.uriToBrowserUri` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/network.ts:337  method `FileAccessImpl.asFileUri` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/network.ts:346  method `FileAccessImpl.uriToFileUri` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/objects.ts:212  function `_stableStringify` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/observableInternal/logging/consoleObservableLogger.ts:262  function `normalText` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/observableInternal/logging/consoleObservableLogger.ts:265  function `formatKind` appears unused  [t0-treesitter]
+         why:  6 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/observableInternal/logging/consoleObservableLogger.ts:268  function `styled` appears unused  [t0-treesitter]
+         why:  10 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/observableInternal/logging/consoleObservableLogger.ts:274  function `styled.objToCss` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/observableInternal/logging/consoleObservableLogger.ts:384  function `padStr` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/strings.ts:532  function `getPrevCodePoint` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/strings.ts:1177  function `getOffsetBeforeLastEmojiComponent` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/strings.ts:1213  function `isEmojiModifier` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/strings.ts:1393  function `toBinary` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/ternarySearchTree.ts:785  method `TernarySearchTree._isBalanced` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/util/vs/base/common/types.ts:298  type `AddFirstParameterToFunction` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_call_not_awaited.cs:10  method `Program.CalledMethodAsync` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:15  class `Class1` appears unused  [t0-treesitter]
+         why:  6 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:36  class `Class1` appears unused  [t0-treesitter]
+         why:  6 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:57  class `Class1` appears unused  [t0-treesitter]
+         why:  6 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_has_same_name_as.cs:1  class `Class1` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/git/src/commands.ts:929  function `CommandCenter.openMergeEditor.findFirstConflictMarker` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/git/src/commands.ts:1940  method `CommandCenter._stageChanges` appears unused  [t0-treesitter]
+         why:  3 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+
+... 769 more finding(s) not shown (lowest confidence last); use --max-findings 0 to print all, or --only <path> to narrow down
+
+969 finding(s): 59 high, 910 medium, 0 low  (indexed 14626 files, 202644 symbols)
+note: tier-0 name-based analysis (no SCIP index); verify medium/low findings before deleting anything.
+note: 534 finding(s) are exported symbols. If this project is a library, re-run with --lib to treat exported symbols as public API (app mode assumes only main/init/tests are entry points)

@@ -1,0 +1,162 @@
+# plumb map: 36 files, 125 of 2777 symbols (~1434 tokens, budget 1500)
+crates/searcher/src/sink.rs
+  226: type Error = S::Error;
+  279: type Error = S::Error;
+  430: pub enum SinkContextKind
+  548: type Error = io::Error;
+  596: type Error = io::Error;
+  646: type Error = io::Error;
+crates/matcher/src/lib.rs
+  69: pub struct Match
+  94: pub fn start(&self) -> usize
+  100: pub fn end(&self) -> usize
+  159: type Output = [u8];
+  175: type Output = str;
+  195: pub struct LineTerminator(LineTerminatorImp);
+  198: enum LineTerminatorImp
+  497: pub struct NoError(());
+  546: pub trait Matcher
+  1135: type Error = M::Error;
+crates/ignore/src/walk.rs
+  31: pub struct DirEntry
+  38: pub fn path(&self) -> &Path
+  81: pub fn depth(&self) -> usize
+  98: pub fn error(&self) -> Option<&Error>
+  138: fn path(&self) -> &Path
+  209: fn depth(&self) -> usize
+  272: fn path(&self) -> &Path
+  318: fn depth(&self) -> usize
+  488: pub struct WalkBuilder
+  521: struct Filter(Arc<dyn Fn(&DirEntry) -> bool + Send + Sync + 'static>);
+  552: pub fn new<P: AsRef<Path>>(path: P) -> WalkBuilder
+  1134: pub fn new<P: AsRef<Path>>(path: P) -> Walk
+crates/globset/src/glob.rs
+  76: pub struct Glob
+  84: fn as_ref(&self) -> &Glob
+  211: pub struct GlobBuilder<'a>
+  220: struct GlobOptions
+  253: struct Tokens(Vec<Token>);
+  270: enum Token
+crates/printer/src/standard.rs
+  36: struct Config
+  99: pub struct StandardBuilder
+  105: pub fn new() -> StandardBuilder
+  480: pub struct Standard<W>
+  515: pub fn sink<'s, M: Matcher>( &'s mut self, matcher: M, ) -> StandardSink<'static, 's, M, W>
+  764: type Error = io::Error;
+  928: fn sink(&self) -> io::Result<()>
+  1536: fn config(&self) -> &'a Config
+  1541: fn wtr(&self) -> &'a RefCell<CounterWriter<W>>
+  1614: fn new(std: &'a StandardImpl<'a, M, W>) -> PreludeWriter<'a, M, W>
+  1739: fn config(&self) -> &Config
+crates/core/flags/mod.rs
+  74: trait Flag: Debug + Send + Sync + UnwindSafe + RefUnwindSafe + 'static
+  192: enum Category
+  268: enum FlagValue
+crates/index/src/literal.rs
+  16: pub enum GramQuery
+  57: fn unwrap(self) -> GramQuery
+  73: fn or(mut queries: Vec<GramQuery>) -> GramQuery
+  101: fn and(mut queries: Vec<GramQuery>) -> GramQuery
+  619: fn len(&self) -> usize
+  637: pub struct GramQueryBuilder
+crates/searcher/src/testutil.rs
+  65: type Error = NoError;
+  129: type Error = io::Error;
+  204: pub(crate) struct SearcherTester
+  250: pub(crate) fn test(&self)
+crates/ignore/src/lib.rs
+  68: pub enum Error
+  367: fn from(err: std::io::Error) -> Error
+  416: pub enum Match<T>
+  464: pub fn inner(&self) -> Option<&T>
+  475: pub fn map<U, F: FnOnce(T) -> U>(self, f: F) -> Match<U>
+crates/cli/src/process.rs
+  16: enum CommandErrorKind
+  23: pub(crate) fn io(ioerr: io::Error) -> CommandError
+  84: pub struct CommandReaderBuilder
+  132: pub fn async_stderr(&mut self, yes: bool) -> &mut CommandReaderBuilder
+crates/printer/src/hyperlink/mod.rs
+  48: pub(crate) fn format(&self) -> &HyperlinkFormat
+  71: pub struct HyperlinkFormat
+  228: const fn format(&self) -> &'static str
+  513: enum Part
+crates/ignore/src/dir.rs
+  94: pub(crate) struct Ignore
+  115: struct IgnoreInner
+  716: pub(crate) struct IgnoreRef<'a>
+  753: pub(crate) struct IgnoreBuilder
+crates/ignore/src/types.rs
+  111: pub struct Glob<'a>(GlobInner<'a>);
+  146: pub struct FileTypeDef
+  185: enum Selection<T>
+  205: fn map<U, F: FnOnce(T) -> U>(self, f: F) -> Selection<U>
+  216: fn inner(&self) -> &T
+crates/globset/src/lib.rs
+  157: pub struct Error
+  167: pub enum ErrorKind
+  211: pub fn kind(&self) -> &ErrorKind
+  309: pub struct GlobSet
+  337: pub fn len(&self) -> usize
+  654: enum GlobSetMatchStrategy
+crates/core/flags/defs.rs
+  1533: struct Debug;
+  7006: struct Text;
+  7969: pub(super) fn string(v: OsString) -> anyhow::Result<String>
+crates/printer/src/stats.rs
+  13: pub struct Stats
+  108: type Output = Stats;
+  116: type Output = Stats;
+crates/pcre2/src/error.rs
+  7: pub struct Error
+  17: pub fn kind(&self) -> &ErrorKind
+  25: pub enum ErrorKind
+crates/regex/src/matcher.rs
+  410: type Captures = RegexCaptures;
+  411: type Error = NoError;
+  524: pub struct RegexCaptures
+crates/regex/src/error.rs
+  7: pub struct Error
+  34: pub fn kind(&self) -> &ErrorKind
+  42: pub enum ErrorKind
+crates/globset/src/fnv.rs
+  2: pub(crate) type HashMap<K, V> = std::collections::HashMap<K, V, std::hash::BuildHasherDefault<Hasher>>;
+  6: pub(crate) struct Hasher(u64);
+crates/ignore/src/overrides.rs
+  28: pub struct Glob<'a>(GlobInner<'a>);
+  32: enum GlobInner<'a>
+crates/regex/src/config.rs
+  25: pub(crate) struct Config
+  232: pub(crate) fn config(&self) -> &Config
+crates/core/flags/config.rs
+  16: pub fn args() -> Vec<OsString>
+crates/ignore/src/gitignore.rs
+  32: pub struct Glob
+  81: pub struct Gitignore
+crates/pcre2/src/matcher.rs
+  12: pub struct RegexMatcherBuilder
+  317: type Error = Error;
+crates/core/haystack.rs
+  16: pub(crate) struct HaystackBuilder
+  85: pub(crate) fn strip_dot_prefix( &mut self, yes: bool, ) -> &mut HaystackBuilder
+crates/printer/src/color.rs
+  24: pub enum ColorError
+crates/globset/src/serde_impl.rs
+  20: type Value = Glob;
+  48: type Value = GlobSet;
+crates/core/flags/parse.rs
+  182: static P: OnceLock<Parser> = OnceLock::new();
+crates/core/flags/lowargs.rs
+  33: pub(crate) struct LowArgs
+crates/searcher/src/searcher/mod.rs
+  298: pub struct SearcherBuilder
+crates/cli/src/human.rs
+  19: fn format(original: &str) -> ParseSizeError
+crates/cli/src/pattern.rs
+  20: pub fn valid_up_to(&self) -> usize
+crates/printer/src/json.rs
+  720: type Error = io::Error;
+crates/printer/src/summary.rs
+  631: type Error = io::Error;
+crates/core/flags/hiargs.rs
+  1246: fn globs( state: &State, low: &LowArgs, ) -> anyhow::Result<ignore::overrides::Override>

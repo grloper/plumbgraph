@@ -1,0 +1,542 @@
+{
+  "findings": [
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "proto/src/main/java/com/google/gson/protobuf/StructTypeAdapter.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 63,
+      "message": "method `StructTypeAdapter.fromValue` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "StructTypeAdapter.fromValue"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "proto/src/main/java/com/google/gson/protobuf/StructTypeAdapter.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 88,
+      "message": "method `StructTypeAdapter.fromListValue` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "StructTypeAdapter.fromListValue"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 60,
+      "message": "method `Main.testTypeTokenWriteRead` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testTypeTokenWriteRead"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 92,
+      "message": "method `Main.fromJson` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.fromJson"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 96,
+      "message": "method `Main.testNamedFields` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testNamedFields"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 110,
+      "message": "method `Main.testSerializedName` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testSerializedName"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 126,
+      "message": "method `Main.testConstructorNoArgs` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testConstructorNoArgs"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 150,
+      "message": "method `Main.testConstructorHasArgs` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testConstructorHasArgs"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 168,
+      "message": "method `Main.testUnreferencedConstructorNoArgs` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testUnreferencedConstructorNoArgs"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 191,
+      "message": "method `Main.testUnreferencedConstructorHasArgs` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testUnreferencedConstructorHasArgs"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 208,
+      "message": "method `Main.testNoJdkUnsafe` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testNoJdkUnsafe"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 228,
+      "message": "method `Main.testEnum` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testEnum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 237,
+      "message": "method `Main.testEnumSerializedName` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testEnumSerializedName"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 249,
+      "message": "method `Main.testExposeAnnotation` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testExposeAnnotation"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 255,
+      "message": "method `Main.testVersionAnnotations` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testVersionAnnotations"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 263,
+      "message": "method `Main.testJsonAdapterAnnotation` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testJsonAdapterAnnotation"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 277,
+      "message": "method `Main.testGenericClasses` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testGenericClasses"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/Main.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 296,
+      "message": "method `Main.testDeserializingInterfaceImpl` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Main.testDeserializingInterfaceImpl"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/NoSerializedNameMain.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "medium",
+      "line": 15,
+      "message": "class `NoSerializedNameMain.TestClassNoArgsConstructor` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "NoSerializedNameMain.TestClassNoArgsConstructor"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/NoSerializedNameMain.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "medium",
+      "line": 22,
+      "message": "class `NoSerializedNameMain.TestClassNotAbstract` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "NoSerializedNameMain.TestClassNotAbstract"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/NoSerializedNameMain.java",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "medium",
+      "line": 26,
+      "message": "class `NoSerializedNameMain.TestClassHasArgsConstructor` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "NoSerializedNameMain.TestClassHasArgsConstructor"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `timeParse` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "metrics/src/main/java/com/google/gson/metrics/ParseBenchmark.java",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 130,
+      "message": "method `ParseBenchmark.timeParse` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "ParseBenchmark.timeParse"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `timeObjectSerialization` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "metrics/src/main/java/com/google/gson/metrics/SerializationBenchmark.java",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 46,
+      "message": "method `SerializationBenchmark.timeObjectSerialization` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "SerializationBenchmark.timeObjectSerialization"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `NoSerializedNameMain` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "test-shrinker/src/main/java/com/example/NoSerializedNameMain.java",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "medium",
+      "line": 12,
+      "message": "class `NoSerializedNameMain` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "NoSerializedNameMain"
+    }
+  ],
+  "index": {
+    "by_language": {
+      "java": 264,
+      "text": 1
+    },
+    "db_path": "/workspace/repos/gson/.plumbgraph/index.db",
+    "edges": 41530,
+    "files_hashed": 0,
+    "files_parsed": 0,
+    "files_removed": 0,
+    "files_seen": 264,
+    "files_skipped_large": 0,
+    "files_unchanged": 264,
+    "files_with_syntax_errors": 0,
+    "imports": 2674,
+    "parse_errors": 0,
+    "refs": 74862,
+    "resolved": false,
+    "symbols": 4247,
+    "text_files": 1
+  },
+  "limitations": [
+    "tier-0 (tree-sitter, name-based) analysis: no type information, reflection or macro expansion; no SCIP index was used",
+    "never delete on `medium` or `low` findings without checking usages yourself; `high` means no use was found in indexed code, not that deletion is proven safe",
+    "files excluded by .gitignore, vendor/build directories and files over 2 MiB are not indexed",
+    "3 finding(s) are exported symbols. If this project is a library, re-run with --lib to treat exported symbols as public API (app mode assumes only main/init/tests are entry points)"
+  ],
+  "scip": null,
+  "summary": {
+    "high": 0,
+    "low": 0,
+    "medium": 24,
+    "total": 24
+  }
+}

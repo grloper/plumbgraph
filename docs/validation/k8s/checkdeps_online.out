@@ -1,0 +1,108 @@
+{
+  "external_imports": 4,
+  "findings": [
+    {
+      "category": "deps",
+      "confidence": 0.45,
+      "evidence": [
+        "`torch` is imported at test/images/node-perf/pytorch-wide-deep/train_wide_deep.py:24",
+        "no pypi manifest found for this file",
+        "pypi has a package named `torch`"
+      ],
+      "file": "test/images/node-perf/pytorch-wide-deep/train_wide_deep.py",
+      "fp_risks": [
+        "no manifest was found, so declared dependencies are unknown",
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 24,
+      "message": "`torch` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "torch"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.45,
+      "evidence": [
+        "`torch` is imported at test/images/node-perf/pytorch-wide-deep/train_wide_deep.py:25",
+        "no pypi manifest found for this file",
+        "pypi has a package named `torch`"
+      ],
+      "file": "test/images/node-perf/pytorch-wide-deep/train_wide_deep.py",
+      "fp_risks": [
+        "no manifest was found, so declared dependencies are unknown",
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 25,
+      "message": "`torch` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "torch.nn"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.45,
+      "evidence": [
+        "`torch` is imported at test/images/node-perf/pytorch-wide-deep/train_wide_deep.py:26",
+        "no pypi manifest found for this file",
+        "pypi has a package named `torch`"
+      ],
+      "file": "test/images/node-perf/pytorch-wide-deep/train_wide_deep.py",
+      "fp_risks": [
+        "no manifest was found, so declared dependencies are unknown",
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 26,
+      "message": "`torch` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "torch.optim"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.45,
+      "evidence": [
+        "`numpy` is imported at test/images/node-perf/pytorch-wide-deep/train_wide_deep.py:27",
+        "no pypi manifest found for this file",
+        "pypi has a package named `numpy`"
+      ],
+      "file": "test/images/node-perf/pytorch-wide-deep/train_wide_deep.py",
+      "fp_risks": [
+        "no manifest was found, so declared dependencies are unknown",
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 27,
+      "message": "`numpy` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "numpy"
+    }
+  ],
+  "imports_checked": 89353,
+  "lookups": [
+    {
+      "ecosystem": "pypi",
+      "package": "numpy",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "pypi",
+      "package": "torch",
+      "result": "exists"
+    }
+  ],
+  "offline": false,
+  "registry": "http"
+}

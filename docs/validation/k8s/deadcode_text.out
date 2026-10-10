@@ -1,0 +1,878 @@
+HIGH   0.95  hack/tools/instrumentation/error.go:39  const `errLabels` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `errLabels` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  hack/tools/instrumentation/error.go:45  const `errorDecodingConstLabels` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `errorDecodingConstLabels` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  hack/tools/instrumentation/error.go:46  const `errorDecodingStabilityLevel` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `errorDecodingStabilityLevel` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  pkg/proxy/winkernel/proxier.go:681  interface `closeable` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `closeable` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  pkg/volume/util/hostutil/hostutil_windows.go:96  function `isSystemCannotAccessErr` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `isSystemCannotAccessErr` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1/marshal.go:37  const `cborUnsignedInteger` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `cborUnsignedInteger` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1/marshal.go:38  const `cborNegativeInteger` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `cborNegativeInteger` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1/marshal.go:39  const `cborByteString` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `cborByteString` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1/marshal.go:40  const `cborTextString` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `cborTextString` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1/marshal.go:43  const `cborTag` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `cborTag` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1/marshal.go:44  const `cborOther` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `cborOther` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1/marshal.go:37  const `cborUnsignedInteger` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `cborUnsignedInteger` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1/marshal.go:38  const `cborNegativeInteger` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `cborNegativeInteger` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1/marshal.go:39  const `cborByteString` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `cborByteString` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1/marshal.go:40  const `cborTextString` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `cborTextString` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1/marshal.go:43  const `cborTag` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `cborTag` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1beta1/marshal.go:44  const `cborOther` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `cborOther` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/apimachinery/pkg/util/validation/field/errors.go:76  const `stabilityLevelUnknown` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `stabilityLevelUnknown` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/code-generator/examples/crd/applyconfiguration/conflicting/v1/testtype.go:217  method `TestTypeApplyConfiguration.ensureTestEmbeddedTypeApplyConfigurationExists` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `ensureTestEmbeddedTypeApplyConfigurationExists` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  staging/src/k8s.io/mount-utils/mount_unsupported.go:96  method `SafeFormatAndMount.diskLooksUnformatted` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `diskLooksUnformatted` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  test/e2e/common/node/pod_resize.go:53  const `reducedCPULimit` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `reducedCPULimit` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  test/e2e/framework/internal/unittests/bugs/bugs.go:111  const `numBugs` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `numBugs` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  test/e2e/framework/network/utils.go:85  const `resizeNodeReadyTimeout` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `resizeNodeReadyTimeout` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  test/e2e/framework/network/utils.go:86  const `resizeNodeNotReadyTimeout` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `resizeNodeNotReadyTimeout` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  test/e2e/network/conntrack.go:54  const `podBackend3` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `podBackend3` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  test/e2e_node_windows/util.go:238  function `systemValidation` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `systemValidation` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  test/integration/scheduler_perf/util.go:66  const `setupNamespace` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `setupNamespace` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  third_party/forked/gonum/graph/simple/simple.go:43  function `isSame` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `isSame` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  cmd/kube-scheduler/app/testing/testserver.go:210  function `createListenerOnFreePort` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  cmd/kubeadm/app/phases/copycerts/testutil_umask.go:25  function `setNoUmask` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  cmd/kubeadm/app/phases/copycerts/testutil_umask_noop.go:21  function `setNoUmask` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/api/service/util.go:28  const `defaultLoadBalancerSourceRanges` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/api/v1/service/util.go:28  const `defaultLoadBalancerSourceRanges` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controller/replication/replication_controller_utils.go:52  function `filterOutCondition` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controller/volume/attachdetach/metrics/metrics.go:36  const `pluginNameNotAvailable` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controller/volume/attachdetach/metrics/metrics.go:167  method `attachDetachStateCollector.getVolumeInUseCount` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controller/volume/attachdetach/metrics/metrics.go:199  method `attachDetachStateCollector.getTotalVolumesCount` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controller/volume/attachdetach/testing/testvolumespec.go:357  function `attachVolumeToNode` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controller/volume/persistentvolume/metrics/metrics.go:51  const `pluginNameNotAvailable` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controller/volume/persistentvolume/metrics/metrics.go:94  struct `pvcBindingMetricDimensions` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controller/volume/persistentvolume/metrics/metrics.go:98  function `getPVCMetricDimensions` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controller/volume/persistentvolume/metrics/metrics.go:194  method `pvAndPVCCountCollector.getPVPluginName` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controller/volume/persistentvolume/metrics/metrics.go:203  method `pvAndPVCCountCollector.pvCollect` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controller/volume/persistentvolume/metrics/metrics.go:242  method `pvAndPVCCountCollector.pvcCollect` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controlplane/apiserver/samples/generic/server/testing/testserver.go:59  const `ecdsaPrivateKey` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/controlplane/apiserver/samples/generic/server/testing/testserver.go:314  function `createLocalhostListenerOnFreePort` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/credentialprovider/config.go:35  const `maxReadLength` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/credentialprovider/keyring.go:186  const `defaultRegistryKey` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/apis/pods/server.go:387  function `convertWatchEventType` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/cm/cpu_following_store_windows.go:147  method `cpuFollowingStore.numaMaskForCPUs` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/kubelet_pods.go:1105  method `Kubelet.makePodDataDirs` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/kubelet_pods.go:1122  method `Kubelet.getPullSecretsForPod` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/kuberuntime/kuberuntime_container_linux.go:541  method `kubeGenericRuntimeManager.applyPodLevelMemoryHigh` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/kuberuntime/kuberuntime_container_unsupported.go:67  method `kubeGenericRuntimeManager.applyPodLevelMemoryHigh` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/kuberuntime/kuberuntime_container_windows.go:203  method `kubeGenericRuntimeManager.applyPodLevelMemoryHigh` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/kuberuntime/labels.go:44  struct `labeledPodSandboxInfo` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/kuberuntime/labels.go:52  struct `annotatedPodSandboxInfo` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/kuberuntime/labels.go:152  function `getPodSandboxInfoFromLabels` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/kuberuntime/labels.go:172  function `getPodSandboxInfoFromAnnotations` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/metrics/collectors/cri_metrics.go:106  method `criMetricsCollector.criMetricToProm` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/metrics/collectors/resource_metrics.go:193  method `resourceMetricsCollector.collectNodeCPUMetrics` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/metrics/collectors/resource_metrics.go:202  method `resourceMetricsCollector.collectNodeMemoryMetrics` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/metrics/collectors/resource_metrics.go:211  method `resourceMetricsCollector.collectNodeSwapMetrics` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/metrics/collectors/resource_metrics.go:220  method `resourceMetricsCollector.collectContainerStartTime` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/metrics/collectors/resource_metrics.go:228  method `resourceMetricsCollector.collectContainerCPUMetrics` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/metrics/collectors/resource_metrics.go:238  method `resourceMetricsCollector.collectContainerMemoryMetrics` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/metrics/collectors/resource_metrics.go:248  method `resourceMetricsCollector.collectContainerSwapMetrics` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/metrics/collectors/resource_metrics.go:268  method `resourceMetricsCollector.collectPodCPUMetrics` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/metrics/collectors/resource_metrics.go:278  method `resourceMetricsCollector.collectPodMemoryMetrics` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/metrics/collectors/resource_metrics.go:288  method `resourceMetricsCollector.collectPodSwapMetrics` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/pluginmanager/metrics/metrics.go:91  method `totalPluginsCollector.getPluginCount` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/pod_workers.go:301  function `newPodSyncerFuncs` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/volumemanager/metrics/metrics.go:30  const `pluginNameNotAvailable` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/kubelet/volumemanager/metrics/metrics.go:133  method `totalVolumesCollector.getVolumeCount` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/proxy/endpoint.go:138  function `newBaseEndpointInfo` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/proxy/ipvs/proxier.go:531  function `getFirstColumn` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/proxy/metrics/metrics_linux.go:80  const `nftCounterListTimeout` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/registry/rbac/validation/rule.go:317  function `newMockRuleResolver` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/backend/api_dispatcher/goroutines_limiter.go:37  function `newGoroutinesLimiter` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/backend/cache/podgroupstate.go:90  method `podGroupStateData.updatePod` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/backend/cache/podgroupstate.go:262  method `compositePodGroupStateData.removeCompositePodGroup` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/backend/cache/podgroupstate.go:274  method `compositePodGroupStateData.removeChild` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/backend/cache/podgroupstate.go:326  method `podGroupState.updatePod` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/backend/cache/podgroupstate.go:484  method `compositePodGroupState.removeCompositePodGroup` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/dynamicresources/claims.go:86  method `claimStore.allUserClaims` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/dynamicresources/claims.go:166  method `claimStore.getInitialExtendedResourceClaimUID` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/dynamicresources/dra_manager.go:456  const `maxDevicesLevel6` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/dynamicresources/extendeddynamicresources.go:592  method `DynamicResources.unreserveExtendedResourceClaim` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/dynamicresources/nodeallocatabledynamicresources.go:686  method `DynamicResources.clearNodeAllocatableResourceClaimStatus` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:29  struct `nodeBuilder` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:33  function `makeNode` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:44  method `nodeBuilder.withLabel` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:52  struct `pvBuilder` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:56  function `makePV` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:67  method `pvBuilder.withNodeAffinity` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:88  method `pvBuilder.withVersion` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:93  method `pvBuilder.withCapacity` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:100  method `pvBuilder.withPhase` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:107  struct `pvcBuilder` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:111  function `makePVC` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:123  method `pvcBuilder.withBoundPV` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:129  method `pvcBuilder.withRequestStorage` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:138  method `pvcBuilder.withPhase` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:160  method `podBuilder.withNodeName` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:170  method `podBuilder.withPVCVolume` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:182  method `podBuilder.withPVCSVolume` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:189  method `podBuilder.withEmptyDirVolume` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:198  method `podBuilder.withGenericEphemeralVolume` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/framework/plugins/volumebinding/test_utils.go:208  method `podBuilder.withCSI` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/metrics/resources/resources.go:162  function `recordMetricWithUnit` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/scheduler/metrics/resources/resources.go:186  function `podRequestsAndLimitsByLifecycle` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/serviceaccount/externaljwt/plugin/plugin.go:113  method `Plugin.signAndAssembleJWT` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/serviceaccount/externaljwt/plugin/plugin.go:148  method `Plugin.validateJWTHeader` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/serviceaccount/externaljwt/plugin/plugin.go:202  function `mergeClaims` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/serviceaccount/externaljwt/plugin/testing/v1/externalsigner_mock.go:243  method `MockSigner.waitForMockServerToStart` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/util/iptables/testing/fake.go:180  method `FakeIPTables.saveTable` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/util/oom/oom_fake.go:25  function `fakeApplyOOMScoreAdj` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/util/procfs/procfs_linux.go:41  function `containerNameFromProcCgroup` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/volume/flexvolume/probe.go:85  method `flexVolumeProber.probeMap` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/volume/flexvolume/probe.go:105  method `flexVolumeProber.probeAll` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/volume/flexvolume/probe.go:130  method `flexVolumeProber.newProbeEvent` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/volume/testing/testing.go:138  function `makeFakeCmd` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  pkg/volume/testing/testing.go:148  function `makeFakeOutput` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  plugin/pkg/auth/authorizer/node/graph.go:242  method `Graph.deleteEdgesLocked` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/helpers.go:239  function `serveDefaultColumnsIfEmpty` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiextensions-apiserver/pkg/cmd/server/testing/testserver.go:272  function `createLocalhostListenerOnFreePort` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiextensions-apiserver/pkg/test/cel.go:106  function `findCEL` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiextensions-apiserver/pkg/test/pattern.go:53  function `findPattern` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiextensions-apiserver/test/integration/fixtures/resources.go:346  function `waitForCRDReadyWatchUnsafe` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiextensions-apiserver/test/integration/fixtures/resources.go:361  function `waitForCRDReady` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiextensions-apiserver/test/integration/fixtures/server.go:56  function `startDefaultServer` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiextensions-apiserver/test/integration/helpers.go:68  function `newNamespacedCustomResourceVersionedClient` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiextensions-apiserver/test/integration/helpers.go:77  function `newNamespacedCustomResourceClient` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiextensions-apiserver/test/integration/helpers.go:120  function `getSchemaForVersion` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiextensions-apiserver/test/integration/helpers.go:130  function `getSubresourcesForVersion` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apimachinery/pkg/runtime/testing/validation.go:49  function `runValidation` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apimachinery/pkg/runtime/testing/validation.go:81  function `runUpdateValidation` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apimachinery/pkg/util/intstr/intstr.go:225  function `getIntOrPercentValue` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/versionconverter.go:117  function `isNoCorrespondingTypeError` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apimachinery/pkg/util/strategicpatch/testing/openapi.go:55  function `getSchema` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apimachinery/pkg/util/strategicpatch/types.go:28  const `patchStrategyOpenapiextensionKey` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apimachinery/pkg/util/strategicpatch/types.go:29  const `patchMergeKeyOpenapiextensionKey` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apimachinery/pkg/util/strategicpatch/types.go:172  function `parsePatchMetadata` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/configuration/configuration_manager.go:29  const `defaultInterval` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/configuration/configuration_manager.go:30  const `defaultFailureThreshold` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/configuration/configuration_manager.go:31  const `defaultBootstrapRetries` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/configuration/configuration_manager.go:32  const `defaultBootstrapGraceperiod` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/configuration/configuration_manager.go:80  function `newPoller` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/metrics/metrics.go:57  const `kindWebhook` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/metrics/metrics.go:58  const `kindPolicy` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/plugin/policy/generic/policy_test_context.go:397  method `E].waitForDelete` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/plugin/policy/generic/policy_test_context.go:529  method `E].deleteOne` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:174  method `AdmissionPolicy.setHasParams` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:343  struct `policyEvaluationState` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:349  method `Evaluator.preparePolicyEvaluation` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:559  method `Evaluator.evalMatchConditionsWithInputs` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:602  method `Evaluator.evalAuditAnnotationsWithInputs` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:648  method `Evaluator.evalMessageExpressions` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:667  function `messageResultAt` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:674  function `validationMessage` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:697  method `Evaluator.newCompiler` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:701  method `Evaluator.newCompilerWithMode` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:713  method `Evaluator.compileVariableList` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:723  method `Evaluator.evaluateMutatingWithInputs` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:727  method `Evaluator.evaluateMutatingWithBindings` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:731  method `Evaluator.evaluateMutatingWithBindingsAndNamespace` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:747  function `mutationExpressionAccessor` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:758  function `messageExpressionDeclarations` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:763  function `messageExpressionOptionalBindings` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:770  function `auditAnnotationOptionalBindings` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:774  method `Evaluator.optionalDeclarations` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:785  method `Evaluator.mutationDeclarations` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:793  method `Evaluator.expressionMode` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:804  method `Evaluator.runtimeMatchCELCostBudget` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:821  function `evaluationValue` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go:828  function `budgetCost` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:55  struct `admissionInputFile` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:65  function `parseAdmissionPolicy` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:91  function `parseFlatPolicy` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:119  function `parseValidatingAdmissionPolicy` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:156  function `parseMutatingAdmissionPolicy` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:191  function `parseValidatingWebhookConfiguration` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:223  function `parseMutatingWebhookConfiguration` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:253  function `appendVariables` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:269  function `appendValidations` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:284  function `appendMatchConditions` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:298  function `appendAuditAnnotations` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:316  function `parseAdmissionPolicyFile` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:324  function `parseAdmissionInput` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:359  function `decodeRawExtension` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:389  function `parseAdmissionInputFile` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go:397  function `appendMutations` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/apis/authorization/v1/encoding.go:96  function `fromAuthorizerConditions` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/authorization/union/union.go:188  method `unionAuthzHandler.evaluateConditions` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/cel/library/cidr.go:144  method `cidrs.declarations` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/cel/library/cost.go:69  const `selectorLengthToRequirementCount` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/cel/library/cost.go:71  const `costPerRequirement` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/cel/library/cost.go:77  function `selectorCostEstimate` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/cel/library/cost.go:570  method `CostEstimator.sizeEstimate` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  staging/src/k8s.io/apiserver/pkg/cel/library/cost.go:580  method `CostEstimator.listElementNode` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+
+... 4796 more finding(s) not shown (lowest confidence last); use --max-findings 0 to print all, or --only <path> to narrow down
+
+4996 finding(s): 28 high, 4968 medium, 0 low  (indexed 13558 files, 145092 symbols)
+note: tier-0 name-based analysis (no SCIP index); verify medium/low findings before deleting anything.
+note: 4114 finding(s) are exported symbols. If this project is a library, re-run with --lib to treat exported symbols as public API (app mode assumes only main/init/tests are entry points)

@@ -1,0 +1,836 @@
+{
+  "text": "# plumb map: 48 files, 61 of 83112 symbols (~1459 tokens, budget 1500)\nstaging/src/k8s.io/client-go/applyconfigurations/meta/v1/objectmeta.go\n  31: type ObjectMetaApplyConfiguration struct\n  149: func ObjectMeta() *ObjectMetaApplyConfiguration\nstaging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go\n  42: type TypeMeta struct\n  131: type ObjectMeta struct\n  832: type Status struct\nstaging/src/k8s.io/apiserver/pkg/endpoints/handlers/rest.go\n  111: func (scope *RequestScope) err(err error, w http.ResponseWriter, req *http.Request)\nstaging/src/k8s.io/client-go/applyconfigurations/meta/v1/typemeta.go\n  27: type TypeMetaApplyConfiguration struct\n  43: func TypeMeta() *TypeMetaApplyConfiguration\nstaging/src/k8s.io/code-generator/cmd/validation-gen/validators/validators.go\n  98: type Scope string  // Note: All of these values should be strings which can be used in an error // message such as \"may …\n  135: type Context struct\nstaging/src/k8s.io/apimachinery/pkg/conversion/converter.go\n  94: type Scope interface\n  142: type Meta struct\nstaging/src/k8s.io/apimachinery/pkg/apis/meta/v1/time.go\n  33: type Time struct\ntest/e2e/framework/ginkgowrapper.go\n  185: func Context(args ...interface{}) bool\n  198: func registerInSuite(ginkgoCall func(string, ...interface{}) bool, args []interface{}) bool\npkg/kubelet/images/pullmanager/locks.go\n  48: func (s *StripedLockSet) Lock(key string)\n  52: func (s *StripedLockSet) Unlock(key string)\nstaging/src/k8s.io/apimachinery/pkg/util/validation/field/path.go\n  49: type Path struct\nstaging/src/k8s.io/code-generator/pkg/apidefinitions/spec.go\n  23: type Spec struct\n  53: type ValueMode int  const ( // Boolean identifies \"true\"/\"false\" values that explicitly turn on or\nstaging/src/k8s.io/dynamic-resource-allocation/leaderelection/leaderelection.go\n  54: type leaderElection struct\n  139: func Context(ctx context.Context) Option\ntest/e2e/invariants/logcheck/logcheck.go\n  129: type logCheck struct\n  145: func (c logCheck) any() bool\nstaging/src/k8s.io/apiserver/pkg/storage/value/transformer.go\n  37: type Context interface\n  73: func (c DefaultContext) AuthenticatedData() []byte\nstaging/src/k8s.io/apimachinery/pkg/apis/meta/v1/duration.go\n  27: type Duration struct\npkg/kubelet/cm/topologymanager/scope.go\n  42: type Scope interface\n  57: type scope struct\npkg/scheduler/backend/queue/active_queue.go\n  390: func (aq *activeQueue) len() int\npkg/scheduler/backend/queue/pod_group_member_pods.go\n  60: func (p *podGroupMemberPods) len() int\npkg/scheduler/backend/queue/backoff_queue.go\n  416: func (bq *backoffQueue) len() int\npkg/scheduler/framework/plugins/dynamicresources/claims.go\n  68: func (cs *claimStore) len() int\npkg/proxy/ipvs/graceful_termination.go\n  86: func (q *graceTerminateRSList) len() int\nstaging/src/k8s.io/apimachinery/pkg/types/uid.go\n  22: type UID string\nstaging/src/k8s.io/code-generator/cmd/client-gen/types/types.go\n  38: type Group string  func (g Group) String() string\nstaging/src/k8s.io/apiserver/pkg/cel/library/format.go\n  97: type format struct{}  func (*format) LibraryName() string\nstaging/src/k8s.io/apimachinery/pkg/runtime/interfaces.go\n  337: type Object interface\npkg/volume/plugins.go\n  439: type Spec struct\nstaging/src/k8s.io/kubectl/pkg/cmd/diff/diff.go\n  317: type Object interface\nstaging/src/k8s.io/client-go/tools/cache/controller.go\n  293: type Object interface\nstaging/src/k8s.io/ktesting/format/format.go\n  40: func Object(object interface{}, indentation uint) string\nstaging/src/k8s.io/apimachinery/pkg/apis/meta/v1/meta.go\n  34: type Object interface\nstaging/src/k8s.io/code-generator/cmd/deepcopy-gen/output_tests/otherpkg/interfaces.go\n  19: type Object interface\nstaging/src/k8s.io/kube-scheduler/framework/types.go\n  134: type EventResource string  // Constants for GVKs. //\nstaging/src/k8s.io/apimachinery/pkg/runtime/schema/interfaces.go\n  22: type ObjectKind interface\nstaging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/mode/doc.go\n  115: type TypeMeta int\nstaging/src/k8s.io/apimachinery/pkg/runtime/types.go\n  38: type TypeMeta struct\nstaging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/levels/modes/doc.go\n  103: type TypeMeta int\nstaging/src/k8s.io/code-generator/cmd/defaulter-gen/output_tests/empty/type.go\n  27: type TypeMeta struct\nstaging/src/k8s.io/kubectl/pkg/util/i18n/i18n.go\n  202: func T(defaultValue string, args ...int) string\nstaging/src/k8s.io/apimachinery/pkg/util/wait/wait.go\n  43: type Group struct\nstaging/src/k8s.io/client-go/tools/clientcmd/api/types.go\n  162: type Context struct\nstaging/src/k8s.io/client-go/tools/clientcmd/api/v1/types.go\n  152: type Context struct\nstaging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/options/subfields/doc.go\n  38: type ObjectMeta struct\nstaging/src/k8s.io/apimachinery/pkg/util/intstr/intstr.go\n  49: type Type int64  const ( Int    Type = iota // The IntOrString holds an int.\nstaging/src/k8s.io/code-generator/cmd/deepcopy-gen/output_tests/aliases/doc.go\n  42: type Pointer *int type PointerAlias *Builtin type Struct Foo type Map map[string]int\npkg/scheduler/framework/plugins/tainttoleration/taint_toleration.go\n  51: Name = names.TaintToleration // preScoreStateKey is the key in CycleState to TaintToleration pre-computed data for Scori…\ntest/e2e/storage/drivers/csi-test/mock/service/service.go\n  36: Name = \"io.kubernetes.storage.mock\"  // VendorVersion is the version returned by GetPluginInfo. VendorVersion = \"0.3.0\"\npkg/scheduler/framework/plugins/noderesources/fit.go\n  53: Name = names.NodeResourcesFit  // preFilterStateKey is the key in CycleState to NodeResourcesFit pre-computed data. // U…\npkg/scheduler/framework/plugins/defaultbinder/default_binder.go\n  32: const Name = names.DefaultBinder  // DefaultBinder binds pods to nodes using a k8s client. type DefaultBinder struct\n",
+  "tokens_estimated": 1459,
+  "budget": 1500,
+  "token_estimate_method": "ceil(chars/4); not a real tokenizer",
+  "total_symbols": 83112,
+  "shown_symbols": 61,
+  "changed_files": [],
+  "files": [
+    {
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/meta/v1/objectmeta.go",
+      "rank": 0.0038002724006514143,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "ObjectMetaApplyConfiguration",
+          "kind": "struct",
+          "line": 31,
+          "rank": 0.0027835115069672293,
+          "references": 3077,
+          "signature": "type ObjectMetaApplyConfiguration struct"
+        },
+        {
+          "name": "ObjectMeta",
+          "kind": "function",
+          "line": 149,
+          "rank": 0.001016760893684185,
+          "references": 7016,
+          "signature": "func ObjectMeta() *ObjectMetaApplyConfiguration"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go",
+      "rank": 0.0033618823866479373,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "TypeMeta",
+          "kind": "struct",
+          "line": 42,
+          "rank": 0.0015358315256472153,
+          "references": 2385,
+          "signature": "type TypeMeta struct"
+        },
+        {
+          "name": "ObjectMeta",
+          "kind": "struct",
+          "line": 131,
+          "rank": 0.0010321513302538141,
+          "references": 7017,
+          "signature": "type ObjectMeta struct"
+        },
+        {
+          "name": "Status",
+          "kind": "struct",
+          "line": 832,
+          "rank": 0.0007938995307469075,
+          "references": 2403,
+          "signature": "type Status struct"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apiserver/pkg/endpoints/handlers/rest.go",
+      "rank": 0.0033388749014514616,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "err",
+          "kind": "method",
+          "line": 111,
+          "rank": 0.0033388749014514616,
+          "references": 28854,
+          "signature": "func (scope *RequestScope) err(err error, w http.ResponseWriter, req *http.Request)"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/meta/v1/typemeta.go",
+      "rank": 0.0032426551096617047,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "TypeMetaApplyConfiguration",
+          "kind": "struct",
+          "line": 27,
+          "rank": 0.002054311051666599,
+          "references": 881,
+          "signature": "type TypeMetaApplyConfiguration struct"
+        },
+        {
+          "name": "TypeMeta",
+          "kind": "function",
+          "line": 43,
+          "rank": 0.001188344057995106,
+          "references": 2368,
+          "signature": "func TypeMeta() *TypeMetaApplyConfiguration"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/validators/validators.go",
+      "rank": 0.0031006413082894247,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Scope",
+          "kind": "type",
+          "line": 98,
+          "rank": 0.0019725741231729588,
+          "references": 7967,
+          "signature": "type Scope string  // Note: All of these values should be strings which can be used in an error // message such as \"may …"
+        },
+        {
+          "name": "Context",
+          "kind": "struct",
+          "line": 135,
+          "rank": 0.0011280671851164662,
+          "references": 10307,
+          "signature": "type Context struct"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apimachinery/pkg/conversion/converter.go",
+      "rank": 0.0028717170013061377,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Scope",
+          "kind": "interface",
+          "line": 94,
+          "rank": 0.0018439423001234978,
+          "references": 7958,
+          "signature": "type Scope interface"
+        },
+        {
+          "name": "Meta",
+          "kind": "struct",
+          "line": 142,
+          "rank": 0.0010277747011826401,
+          "references": 8,
+          "signature": "type Meta struct"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/time.go",
+      "rank": 0.002728841203782502,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Time",
+          "kind": "struct",
+          "line": 33,
+          "rank": 0.002728841203782502,
+          "references": 2525,
+          "signature": "type Time struct"
+        }
+      ]
+    },
+    {
+      "path": "test/e2e/framework/ginkgowrapper.go",
+      "rank": 0.002413555778246303,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Context",
+          "kind": "function",
+          "line": 185,
+          "rank": 0.0015343683178287565,
+          "references": 12605,
+          "signature": "func Context(args ...interface{}) bool"
+        },
+        {
+          "name": "registerInSuite",
+          "kind": "function",
+          "line": 198,
+          "rank": 0.0008791874604175462,
+          "references": 7,
+          "signature": "func registerInSuite(ginkgoCall func(string, ...interface{}) bool, args []interface{}) bool"
+        }
+      ]
+    },
+    {
+      "path": "pkg/kubelet/images/pullmanager/locks.go",
+      "rank": 0.002328384767669571,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Lock",
+          "kind": "method",
+          "line": 48,
+          "rank": 0.001166147201468015,
+          "references": 2215,
+          "signature": "func (s *StripedLockSet) Lock(key string)"
+        },
+        {
+          "name": "Unlock",
+          "kind": "method",
+          "line": 52,
+          "rank": 0.001162237566201556,
+          "references": 2179,
+          "signature": "func (s *StripedLockSet) Unlock(key string)"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apimachinery/pkg/util/validation/field/path.go",
+      "rank": 0.0022936380039930903,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Path",
+          "kind": "struct",
+          "line": 49,
+          "rank": 0.0022936380039930903,
+          "references": 3282,
+          "signature": "type Path struct"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/code-generator/pkg/apidefinitions/spec.go",
+      "rank": 0.0022041956515971494,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Spec",
+          "kind": "struct",
+          "line": 23,
+          "rank": 0.0011876166623365364,
+          "references": 8738,
+          "signature": "type Spec struct"
+        },
+        {
+          "name": "ValueMode",
+          "kind": "type",
+          "line": 53,
+          "rank": 0.001016578989260613,
+          "references": 7,
+          "signature": "type ValueMode int  const ( // Boolean identifies \"true\"/\"false\" values that explicitly turn on or"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/dynamic-resource-allocation/leaderelection/leaderelection.go",
+      "rank": 0.0021582223393547774,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "leaderElection",
+          "kind": "struct",
+          "line": 54,
+          "rank": 0.000896642300258388,
+          "references": 11,
+          "signature": "type leaderElection struct"
+        },
+        {
+          "name": "Context",
+          "kind": "function",
+          "line": 139,
+          "rank": 0.0012615800390963895,
+          "references": 10308,
+          "signature": "func Context(ctx context.Context) Option"
+        }
+      ]
+    },
+    {
+      "path": "test/e2e/invariants/logcheck/logcheck.go",
+      "rank": 0.002142468008295237,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "logCheck",
+          "kind": "struct",
+          "line": 129,
+          "rank": 0.0009856274374135808,
+          "references": 5,
+          "signature": "type logCheck struct"
+        },
+        {
+          "name": "any",
+          "kind": "method",
+          "line": 145,
+          "rank": 0.0011568405708816563,
+          "references": 907,
+          "signature": "func (c logCheck) any() bool"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apiserver/pkg/storage/value/transformer.go",
+      "rank": 0.002131127438666688,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Context",
+          "kind": "interface",
+          "line": 37,
+          "rank": 0.001149389883267398,
+          "references": 10312,
+          "signature": "type Context interface"
+        },
+        {
+          "name": "AuthenticatedData",
+          "kind": "method",
+          "line": 73,
+          "rank": 0.0009817375553992898,
+          "references": 8,
+          "signature": "func (c DefaultContext) AuthenticatedData() []byte"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/duration.go",
+      "rank": 0.0020479755805330162,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Duration",
+          "kind": "struct",
+          "line": 27,
+          "rank": 0.0020479755805330162,
+          "references": 3549,
+          "signature": "type Duration struct"
+        }
+      ]
+    },
+    {
+      "path": "pkg/kubelet/cm/topologymanager/scope.go",
+      "rank": 0.0020125084983441473,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Scope",
+          "kind": "interface",
+          "line": 42,
+          "rank": 0.001835376582268735,
+          "references": 7955,
+          "signature": "type Scope interface"
+        },
+        {
+          "name": "scope",
+          "kind": "struct",
+          "line": 57,
+          "rank": 0.0001771319160754121,
+          "references": 376,
+          "signature": "type scope struct"
+        }
+      ]
+    },
+    {
+      "path": "pkg/scheduler/backend/queue/active_queue.go",
+      "rank": 0.0015367014671953427,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "len",
+          "kind": "method",
+          "line": 390,
+          "rank": 0.0015367014671953427,
+          "references": 16961,
+          "signature": "func (aq *activeQueue) len() int"
+        }
+      ]
+    },
+    {
+      "path": "pkg/scheduler/backend/queue/pod_group_member_pods.go",
+      "rank": 0.0015365132785884542,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "len",
+          "kind": "method",
+          "line": 60,
+          "rank": 0.0015365132785884542,
+          "references": 16957,
+          "signature": "func (p *podGroupMemberPods) len() int"
+        }
+      ]
+    },
+    {
+      "path": "pkg/scheduler/backend/queue/backoff_queue.go",
+      "rank": 0.0015364924050142294,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "len",
+          "kind": "method",
+          "line": 416,
+          "rank": 0.0015364924050142294,
+          "references": 16957,
+          "signature": "func (bq *backoffQueue) len() int"
+        }
+      ]
+    },
+    {
+      "path": "pkg/scheduler/framework/plugins/dynamicresources/claims.go",
+      "rank": 0.001534759202134443,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "len",
+          "kind": "method",
+          "line": 68,
+          "rank": 0.001534759202134443,
+          "references": 16886,
+          "signature": "func (cs *claimStore) len() int"
+        }
+      ]
+    },
+    {
+      "path": "pkg/proxy/ipvs/graceful_termination.go",
+      "rank": 0.0015340224070104142,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "len",
+          "kind": "method",
+          "line": 86,
+          "rank": 0.0015340224070104142,
+          "references": 16850,
+          "signature": "func (q *graceTerminateRSList) len() int"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apimachinery/pkg/types/uid.go",
+      "rank": 0.0015074043899945995,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "UID",
+          "kind": "type",
+          "line": 22,
+          "rank": 0.0015074043899945995,
+          "references": 3905,
+          "signature": "type UID string"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/code-generator/cmd/client-gen/types/types.go",
+      "rank": 0.0014579496184434144,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Group",
+          "kind": "type",
+          "line": 38,
+          "rank": 0.0014579496184434144,
+          "references": 2612,
+          "signature": "type Group string  func (g Group) String() string"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apiserver/pkg/cel/library/format.go",
+      "rank": 0.0014475712870145024,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "format",
+          "kind": "struct",
+          "line": 97,
+          "rank": 0.0014475712870145024,
+          "references": 247,
+          "signature": "type format struct{}  func (*format) LibraryName() string"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apimachinery/pkg/runtime/interfaces.go",
+      "rank": 0.001363792584600975,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Object",
+          "kind": "interface",
+          "line": 337,
+          "rank": 0.001363792584600975,
+          "references": 6622,
+          "signature": "type Object interface"
+        }
+      ]
+    },
+    {
+      "path": "pkg/volume/plugins.go",
+      "rank": 0.0013530164282706727,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Spec",
+          "kind": "struct",
+          "line": 439,
+          "rank": 0.0013530164282706727,
+          "references": 9547,
+          "signature": "type Spec struct"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/kubectl/pkg/cmd/diff/diff.go",
+      "rank": 0.001289572275921371,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Object",
+          "kind": "interface",
+          "line": 317,
+          "rank": 0.001289572275921371,
+          "references": 6623,
+          "signature": "type Object interface"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/client-go/tools/cache/controller.go",
+      "rank": 0.0012712292373234723,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Object",
+          "kind": "interface",
+          "line": 293,
+          "rank": 0.0012712292373234723,
+          "references": 6621,
+          "signature": "type Object interface"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/ktesting/format/format.go",
+      "rank": 0.0012690159166288191,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Object",
+          "kind": "function",
+          "line": 40,
+          "rank": 0.0012690159166288191,
+          "references": 6609,
+          "signature": "func Object(object interface{}, indentation uint) string"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/meta.go",
+      "rank": 0.0012652994878150422,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Object",
+          "kind": "interface",
+          "line": 34,
+          "rank": 0.0012652994878150422,
+          "references": 6611,
+          "signature": "type Object interface"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/code-generator/cmd/deepcopy-gen/output_tests/otherpkg/interfaces.go",
+      "rank": 0.0012572111201818175,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Object",
+          "kind": "interface",
+          "line": 19,
+          "rank": 0.0012572111201818175,
+          "references": 6608,
+          "signature": "type Object interface"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/kube-scheduler/framework/types.go",
+      "rank": 0.0012245411125997663,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "EventResource",
+          "kind": "type",
+          "line": 134,
+          "rank": 0.0012245411125997663,
+          "references": 28,
+          "signature": "type EventResource string  // Constants for GVKs. //"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apimachinery/pkg/runtime/schema/interfaces.go",
+      "rank": 0.001210913263370528,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "ObjectKind",
+          "kind": "interface",
+          "line": 22,
+          "rank": 0.001210913263370528,
+          "references": 103,
+          "signature": "type ObjectKind interface"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/mode/doc.go",
+      "rank": 0.0012006633140481278,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "TypeMeta",
+          "kind": "type",
+          "line": 115,
+          "rank": 0.0012006633140481278,
+          "references": 2375,
+          "signature": "type TypeMeta int"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apimachinery/pkg/runtime/types.go",
+      "rank": 0.0011938291464176085,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "TypeMeta",
+          "kind": "struct",
+          "line": 38,
+          "rank": 0.0011938291464176085,
+          "references": 2369,
+          "signature": "type TypeMeta struct"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/levels/modes/doc.go",
+      "rank": 0.0011935628153018417,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "TypeMeta",
+          "kind": "type",
+          "line": 103,
+          "rank": 0.0011935628153018417,
+          "references": 2374,
+          "signature": "type TypeMeta int"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/code-generator/cmd/defaulter-gen/output_tests/empty/type.go",
+      "rank": 0.001188344057995106,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "TypeMeta",
+          "kind": "struct",
+          "line": 27,
+          "rank": 0.001188344057995106,
+          "references": 2368,
+          "signature": "type TypeMeta struct"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/kubectl/pkg/util/i18n/i18n.go",
+      "rank": 0.001138807532252225,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "T",
+          "kind": "function",
+          "line": 202,
+          "rank": 0.001138807532252225,
+          "references": 16363,
+          "signature": "func T(defaultValue string, args ...int) string"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apimachinery/pkg/util/wait/wait.go",
+      "rank": 0.0011308250347303846,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Group",
+          "kind": "struct",
+          "line": 43,
+          "rank": 0.0011308250347303846,
+          "references": 2606,
+          "signature": "type Group struct"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/client-go/tools/clientcmd/api/types.go",
+      "rank": 0.0011290142800846345,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Context",
+          "kind": "struct",
+          "line": 162,
+          "rank": 0.0011290142800846345,
+          "references": 10308,
+          "signature": "type Context struct"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/client-go/tools/clientcmd/api/v1/types.go",
+      "rank": 0.0011260869931749634,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Context",
+          "kind": "struct",
+          "line": 152,
+          "rank": 0.0011260869931749634,
+          "references": 10306,
+          "signature": "type Context struct"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/options/subfields/doc.go",
+      "rank": 0.0010171200974001045,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "ObjectMeta",
+          "kind": "struct",
+          "line": 38,
+          "rank": 0.0010171200974001045,
+          "references": 7017,
+          "signature": "type ObjectMeta struct"
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/apimachinery/pkg/util/intstr/intstr.go",
+      "rank": 0.00100486741477276,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Type",
+          "kind": "type",
+          "line": 49,
+          "rank": 0.00100486741477276,
+          "references": 3232,
+          "signature": "type Type int64  const ( Int    Type = iota // The IntOrString holds an int."
+        }
+      ]
+    },
+    {
+      "path": "staging/src/k8s.io/code-generator/cmd/deepcopy-gen/output_tests/aliases/doc.go",
+      "rank": 0.0009987323766198237,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Pointer",
+          "kind": "type",
+          "line": 42,
+          "rank": 0.0009987323766198237,
+          "references": 3715,
+          "signature": "type Pointer *int type PointerAlias *Builtin type Struct Foo type Map map[string]int"
+        }
+      ]
+    },
+    {
+      "path": "pkg/scheduler/framework/plugins/tainttoleration/taint_toleration.go",
+      "rank": 0.0009008247448785183,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Name",
+          "kind": "const",
+          "line": 51,
+          "rank": 0.0009008247448785183,
+          "references": 7853,
+          "signature": "Name = names.TaintToleration // preScoreStateKey is the key in CycleState to TaintToleration pre-computed data for Scori…"
+        }
+      ]
+    },
+    {
+      "path": "test/e2e/storage/drivers/csi-test/mock/service/service.go",
+      "rank": 0.0008959232611513551,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Name",
+          "kind": "const",
+          "line": 36,
+          "rank": 0.0008959232611513551,
+          "references": 7769,
+          "signature": "Name = \"io.kubernetes.storage.mock\"  // VendorVersion is the version returned by GetPluginInfo. VendorVersion = \"0.3.0\""
+        }
+      ]
+    },
+    {
+      "path": "pkg/scheduler/framework/plugins/noderesources/fit.go",
+      "rank": 0.000875190550802566,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Name",
+          "kind": "const",
+          "line": 53,
+          "rank": 0.000875190550802566,
+          "references": 7821,
+          "signature": "Name = names.NodeResourcesFit  // preFilterStateKey is the key in CycleState to NodeResourcesFit pre-computed data. // U…"
+        }
+      ]
+    },
+    {
+      "path": "pkg/scheduler/framework/plugins/defaultbinder/default_binder.go",
+      "rank": 0.0008748741725683978,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Name",
+          "kind": "const",
+          "line": 32,
+          "rank": 0.0008748741725683978,
+          "references": 7906,
+          "signature": "const Name = names.DefaultBinder  // DefaultBinder binds pods to nodes using a k8s client. type DefaultBinder struct"
+        }
+      ]
+    }
+  ],
+  "edge_source": "t0-treesitter"
+}

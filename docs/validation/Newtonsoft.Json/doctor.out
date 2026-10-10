@@ -1,0 +1,152 @@
+[
+  {
+    "id": "rust-analyzer-scip",
+    "kind": "scip-indexer",
+    "program": "rust-analyzer",
+    "available": true,
+    "path": "/home/box/.cargo/bin/rust-analyzer",
+    "relevant": false,
+    "runs_project_code": true,
+    "install_hint": "rustup component add rust-analyzer"
+  },
+  {
+    "id": "scip-typescript",
+    "kind": "scip-indexer",
+    "program": "scip-typescript",
+    "available": false,
+    "path": null,
+    "relevant": false,
+    "runs_project_code": true,
+    "install_hint": "npm i -g @sourcegraph/scip-typescript"
+  },
+  {
+    "id": "scip-python",
+    "kind": "scip-indexer",
+    "program": "scip-python",
+    "available": false,
+    "path": null,
+    "relevant": false,
+    "runs_project_code": true,
+    "install_hint": "npm i -g @sourcegraph/scip-python"
+  },
+  {
+    "id": "scip-go",
+    "kind": "scip-indexer",
+    "program": "scip-go",
+    "available": false,
+    "path": null,
+    "relevant": false,
+    "runs_project_code": true,
+    "install_hint": "go install github.com/scip-code/scip-go/cmd/scip-go@latest"
+  },
+  {
+    "id": "scip-java",
+    "kind": "scip-indexer",
+    "program": "scip-java",
+    "available": false,
+    "path": null,
+    "relevant": false,
+    "runs_project_code": true,
+    "install_hint": "see https://github.com/scip-code/scip-java (runs your Maven/Gradle build)"
+  },
+  {
+    "id": "scip-dotnet",
+    "kind": "scip-indexer",
+    "program": "scip-dotnet",
+    "available": false,
+    "path": null,
+    "relevant": true,
+    "runs_project_code": true,
+    "install_hint": "dotnet tool install --global scip-dotnet"
+  },
+  {
+    "id": "cargo-check",
+    "kind": "diagnostics",
+    "program": "cargo",
+    "available": true,
+    "path": "/home/box/.cargo/bin/cargo",
+    "relevant": false,
+    "runs_project_code": true,
+    "install_hint": "rustup"
+  },
+  {
+    "id": "clippy",
+    "kind": "diagnostics",
+    "program": "cargo-clippy",
+    "available": true,
+    "path": "/home/box/.cargo/bin/cargo-clippy",
+    "relevant": false,
+    "runs_project_code": true,
+    "install_hint": "rustup component add clippy"
+  },
+  {
+    "id": "tsc",
+    "kind": "diagnostics",
+    "program": "tsc",
+    "available": false,
+    "path": null,
+    "relevant": false,
+    "runs_project_code": false,
+    "install_hint": "npm i -D typescript"
+  },
+  {
+    "id": "ruff",
+    "kind": "diagnostics",
+    "program": "ruff",
+    "available": false,
+    "path": null,
+    "relevant": false,
+    "runs_project_code": false,
+    "install_hint": "uv tool install ruff"
+  },
+  {
+    "id": "pyright",
+    "kind": "diagnostics",
+    "program": "pyright",
+    "available": false,
+    "path": null,
+    "relevant": false,
+    "runs_project_code": false,
+    "install_hint": "uv tool install pyright"
+  },
+  {
+    "id": "semgrep",
+    "kind": "rule-engine",
+    "program": "semgrep",
+    "available": false,
+    "path": null,
+    "relevant": true,
+    "runs_project_code": false,
+    "install_hint": "uv tool install semgrep (LGPL-2.1; invoked as a subprocess only)"
+  },
+  {
+    "id": "ast-grep",
+    "kind": "rule-engine",
+    "program": "ast-grep",
+    "available": false,
+    "path": null,
+    "relevant": true,
+    "runs_project_code": false,
+    "install_hint": "npm i -g @ast-grep/cli"
+  },
+  {
+    "id": "gopls",
+    "kind": "language-server",
+    "program": "gopls",
+    "available": false,
+    "path": null,
+    "relevant": false,
+    "runs_project_code": true,
+    "install_hint": "go install golang.org/x/tools/gopls@latest"
+  },
+  {
+    "id": "pyright-langserver",
+    "kind": "language-server",
+    "program": "pyright-langserver",
+    "available": false,
+    "path": null,
+    "relevant": false,
+    "runs_project_code": false,
+    "install_hint": "uv tool install pyright"
+  }
+]

@@ -1,0 +1,155 @@
+# plumb map: 39 files, 115 of 305 symbols (~1440 tokens, budget 1500)
+web/src/archive/importer.js
+  9: export class LoadedArchive
+  16: get graph()
+  20: get meta()
+  29: resolve(localPath)
+  50: function normalizeKey(localPath)
+  76: function importJsonText(text, source)
+  87: async function importZipBlob(blob)
+web/src/util/dom.js
+  7: export function el(tag, props =
+  29: function appendChildren(node, children)
+  38: export function clear(node)
+  43: export function mount(node, children)
+  85: export function icon(name,
+src/parsers/classroom.js
+  3: function hash(value)
+  7: export function formatDueDate(dueDate, dueTime)
+  22: export function mapCourseWorkType(courseWork)
+  56: function normalizeDriveAttachment(materialId, driveFile)
+  82: function normalizeLinkAttachment(materialId, link)
+  107: function normalizeYoutubeAttachment(materialId, video)
+  123: function normalizeFormAttachment(materialId, form)
+  139: export function extractAttachments(materials = [], materialId)
+src/storage/database.js
+  6: function stringify(value)
+  10: function parseJson(value, fallback = null)
+  19: export class ArchiveDatabase
+  352: getCoursesGraph()
+  444: close()
+web/src/ui/coursePicker.js
+  38: function toggleOpen(e)
+  54: function handleOutsideClick(e)
+  58: function handleKeydown(e)
+  62: function updateTrigger()
+  96: function notifyChange()
+  101: function getVisibleCourses()
+  111: function renderList()
+web/src/util/hash.js
+  10: export function shortHash(value)
+  18: function fnv1a(str, seed)
+  28: function toHex8(n)
+src/config.js
+  9: function resolveFromRoot(value, fallback)
+  14: function parseBool(value, fallback = false)
+  19: function parseInteger(value, fallback)
+  24: function parseList(value, fallback = [])
+web/src/scraper/googleAuth.js
+  16: export function loadGis()
+  58: get isSignedIn()
+  62: async init()
+  73: requestToken({ prompt = '' } =
+  104: async getToken()
+  139: function describeTokenError(response)
+web/src/scraper/normalize.js
+  57: function normalizeDriveAttachment(materialId, driveFile)
+  74: export function extractDriveFileId(url)
+  83: function normalizeLinkAttachment(materialId, link)
+  107: function normalizeYoutubeAttachment(materialId, video)
+  123: function normalizeFormAttachment(materialId, form)
+  139: export function extractAttachments(materials = [], materialId)
+web/src/scraper/classroomApi.js
+  9: function buildUrl(path, params =
+  20: async function listAll(session, path, key, params =
+  35: async function safeList(label, fn, onWarn)
+web/src/scraper/googleFetch.js
+  6: export async function googleFetch(session, url,
+  43: async function extractError(res)
+  53: export function sleep(ms)
+src/utils/retry.js
+  1: export function sleep(ms)
+  7: function getStatus(error)
+  11: export function isRetryable(error)
+  28: export async function retry(fn, options =
+web/src/util/paths.js
+  12: export function safeSegment(input, fallback = 'untitled')
+  29: export function joinPath(...parts)
+  36: export function extname(name = '')
+web/src/archive/format.js
+  126: export function normalizeArchive(input, meta =
+  146: export function sanitizeGraph(graph)
+  189: export function countGraph(graph)
+  247: export async function decodeSharePayload(encoded)
+  264: export function makeShareable(archive)
+web/src/util/base64.js
+  78: function padding(len)
+  83: function toBase64(binary)
+  88: function fromBase64(b64)
+  93: function utf8Encode(str)
+web/src/ui/app.js
+  41: function refreshTopbarActions(bar = appRoot?._topbar)
+  61: function navigate(hash)
+  72: async function route()
+  127: function setLoaded(loaded)
+src/utils/paths.js
+  30: export function safeSegment(input, fallback = 'untitled')
+  48: export async function ensureProjectFolders(activeConfig = config)
+  61: export function resolveOutputPath(relativePath, activeConfig = config)
+scripts/check-web.js
+  13: function collect(dir)
+src/api/ui/canvas.js
+  1: class ArchiveCanvas
+  10: init()
+  16: resize()
+  21: animate()
+src/system/preflight.js
+  6: function hasEnvCredentials(activeConfig = config)
+  30: export async function getPreflightStatus(activeConfig = config)
+  62: export function printPreflightStatus(status)
+  86: export async function runPreflight(activeConfig = config)
+scripts/build-standalone.js
+  36: function run(command, args, cwd = rootDir)
+  65: async function main()
+src/utils/args.js
+  1: function npmConfigKey(flagName)
+  5: export function hasFlag(flagName, argv = process.argv, env = process.env)
+web/src/ui/toast.js
+  4: function ensureWrap()
+  12: export function toast(message, kind = 'default', duration = 3200)
+src/auth/googleApi.js
+  21: function normalizeCredentials(raw, activeConfig)
+  133: export async function getOAuthClient(options =
+src/utils/runtimePaths.js
+  6: export function getSourcePath(...segments)
+  10: export function quoteForCmd(value)
+web/src/ui/viewer.js
+  192: function renderContent()
+  362: function emptyState(title, subtitle)
+web/src/scraper/scrapeEngine.js
+  157: async function worker()
+  209: async function worker()
+web/src/archive/exporter.js
+  81: function stripHash(url)
+src/api/server.js
+  78: async function main()
+src/auth/login.js
+  8: async function main()
+src/crawler/run.js
+  60: async function main()
+src/export/export.js
+  7: async function main()
+src/system/engine.js
+  24: async function main()
+web/src/util/format.js
+  3: export function bytesToSize(bytes)
+src/downloaders/driveDownloader.js
+  77: async function writeStreamToFile(stream, targetPath)
+src/utils/logger.js
+  8: export async function createLogger(activeConfig = config)
+web/src/ui/theme.js
+  11: export function currentTheme()
+web/src/util/vendor.js
+  6: export function loadJsZip()
+src/storage/exporter.js
+  6: export async function exportArchive(db, activeConfig = config)

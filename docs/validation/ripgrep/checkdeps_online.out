@@ -1,0 +1,222 @@
+{
+  "external_imports": 57,
+  "findings": [
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`serde_json as json` is imported at tests/json.rs:4",
+        "not declared in any crates.io manifest covering this file",
+        "registry not consulted or inconclusive: invalid package name for this ecosystem"
+      ],
+      "file": "tests/json.rs",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 4,
+      "message": "`serde_json as json` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "serde_json as json"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.6,
+      "evidence": [
+        "no file matching `imp` found relative to crates/core/index/mod.rs"
+      ],
+      "file": "crates/core/index/mod.rs",
+      "fp_risks": [
+        "a `#[path]` attribute or build-generated module may exist"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 5,
+      "message": "import `imp` does not resolve to any indexed file",
+      "rule": "unresolved-import",
+      "severity": "error",
+      "source": "t0-import-resolution",
+      "symbol": "imp"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.6,
+      "evidence": [
+        "no file matching `imp` found relative to crates/core/index/mod.rs"
+      ],
+      "file": "crates/core/index/mod.rs",
+      "fp_risks": [
+        "a `#[path]` attribute or build-generated module may exist"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 8,
+      "message": "import `imp` does not resolve to any indexed file",
+      "rule": "unresolved-import",
+      "severity": "error",
+      "source": "t0-import-resolution",
+      "symbol": "imp"
+    }
+  ],
+  "imports_checked": 500,
+  "lookups": [
+    {
+      "ecosystem": "crates.io",
+      "package": "aho-corasick",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "anyhow",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "arbitrary",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "bstr",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "crossbeam-channel",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "crossbeam-deque",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "encoding_rs",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "encoding_rs_io",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "fst",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "glob",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "lexopt",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "libc",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "libfuzzer-sys",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "log",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "memchr",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "memmap2",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "pcre2",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "redb",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "regex",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "regex-automata",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "regex-syntax",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "same-file",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "serde",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "serde_derive",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "serde_json",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "serde_json as json",
+      "result": "unknown (invalid package name for this ecosystem)"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "termcolor",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "textwrap",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "tikv-jemallocator",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "walkdir",
+      "result": "exists"
+    },
+    {
+      "ecosystem": "crates.io",
+      "package": "winapi-util",
+      "result": "exists"
+    }
+  ],
+  "offline": false,
+  "registry": "http"
+}

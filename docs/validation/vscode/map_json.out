@@ -1,0 +1,869 @@
+{
+  "text": "# plumb map: 47 files, 66 of 144129 symbols (~1457 tokens, budget 1500)\nsrc/vs/base/common/uri.ts\n  102: export class URI implements UriComponents\n  271: static parse(value: string, _strict: boolean = false): URI\n  386: toString(skipEncoding: boolean = false): string\n  426: export interface UriComponents\n  467: override toString(skipEncoding: boolean = false): string\n  666: function _asFormatted(uri: URI, skipEncoding: boolean): string\nsrc/vs/base/common/lifecycle.ts\n  312: export interface IDisposable\n  332: export function dispose<T extends IDisposable>(arg: T | Iterable<T> | undefined): any\n  416: export class DisposableStore implements IDisposable\n  526: export abstract class Disposable implements IDisposable\n  801: get(key: K): V | undefined\nsrc/vs/workbench/contrib/tasks/common/tasks.ts\n  32: export enum ShellQuoting\n  324: export interface IQuotedString\n  329: export type CommandString = string | IQuotedString;\n  332: export function value(value: CommandString): string\nsrc/vs/workbench/contrib/tasks/common/taskConfiguration.ts\n  233: export type CommandString = Types.SingleOrMany<string> |\n  236: export function value(value: CommandString): string\nsrc/vs/workbench/contrib/chat/common/model/objectMutationLog.ts\n  92: export function key<T, R = T>(comparator?: (a: R, b: R) => boolean): TransformValue<T, R>\n  103: export function value<T, R>(comparator?: (a: R, b: R) => boolean): TransformValue<T, R>\nextensions/json-language-features/client/src/jsonClient.ts\n  376: type T = SymbolInformation[] | DocumentSymbol[];\nsrc/vs/base/common/platform.ts\n  173: export function value(): string\nsrc/vs/base/common/types.ts\n  11: export function isString(str: unknown): str is string\n  18: export function isStringArray(value: unknown): value is string[]\nextensions/copilot/src/util/vs/base/common/platform.ts\n  172: export function value(): string\nsrc/vs/platform/agentHost/node/copilot/copilotToolDisplay.ts\n  1134: function str(value: unknown): string | undefined\nsrc/vs/nls.ts\n  85: export function localize(data: ILocalizeInfo | string /* | number when built */, message: string /* | null when built */…\nsrc/vs/workbench/contrib/mergeEditor/browser/model/modifiedBaseRange.ts\n  263: export enum ModifiedBaseRangeStateKind\nsrc/vs/base/common/event.ts\n  46: export interface Event<T>\n  1411: fire(event: T): void\nsrc/vs/platform/agentHost/common/agent.ts\n  1288: export function uri(provider: AgentProvider, rawSessionId: string): URI\n  1296: export function id(session: URI | string): string\nsrc/vs/workbench/contrib/chat/common/promptSyntax/chatPromptFilesContribution.ts\n  105: function key(extensionId: ExtensionIdentifier, type: PromptsType, path: string)\nsrc/vs/editor/common/model/bracketPairsTextModelPart/bracketPairsTree/ast.ts\n  14: export const enum AstNodeKind\nsrc/vs/platform/instantiation/common/instantiation.ts\n  109: export function createDecorator<T>(serviceId: string): ServiceIdentifier<T>\nsrc/vs/workbench/api/worker/extensionHostWorker.ts\n  249: export function create()\nsrc/vs/workbench/api/common/extHostTypes.ts\n  1884: get base(): string\n  1887: set base(base: string)\nsrc/vs/platform/configuration/common/configurationModels.ts\n  71: get overrides(): IOverrides[]\n  109: get overrides()\nsrc/vs/workbench/contrib/mcp/common/mcpTypes.ts\n  939: export interface Error\nextensions/terminal-suggest/src/fig/shared/internal.ts\n  32: export type Arg = Metadata.ArgMeta;\nsrc/vs/platform/mcp/common/modelContextProtocol.ts\n  160: export interface Error\nextensions/copilot/src/extension/typescriptContext/serverPlugin/src/common/protocol.ts\n  532: export type Error =\nextensions/copilot/src/extension/typescriptContext/common/serverProtocol.ts\n  532: export type Error =\ncli/src/options.rs\n  65: type Error = String;\ncli/src/msgpack_rpc.rs\n  137: type Error = io::Error;\nextensions/copilot/src/extension/common/modelContextProtocol.ts\n  133: export interface Error\ncli/src/desktop/version_manager.rs\n  69: type Error = InvalidRequestedVersion;\nsrc/vs/workbench/contrib/notebook/browser/viewModel/cellOutputTextHelper.ts\n  13: interface Error\nsrc/vs/workbench/contrib/chat/common/attachments/chatVariableEntries.ts\n  425: export function id(data: IDiagnosticVariableEntryFilterData)\nsrc/vs/workbench/contrib/performance/electron-browser/rendererAutoProfiler.ts\n  108: private async _store(profile: IV8Profile, sessionId: string): Promise<void>\nsrc/vs/workbench/services/extensions/common/extensionHostKind.ts\n  9: export const enum ExtensionHostKind\nextensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/copilotCLIPromptReferences.ts\n  154: export function id(data: Record<string, unknown> &\ncli/src/util/errors.rs\n  265: pub struct InvalidRequestedVersion();\nextensions/typescript-language-features/src/filesystems/autoInstallerFs.ts\n  243: get scheme()\nsrc/vs/workbench/contrib/chat/browser/widgetHosts/viewPane/chatContextUsageDetails.ts\n  30: export interface IChatContextUsageData\nsrc/vs/editor/common/core/range.ts\n  33: export class Range\nsrc/vs/sessions/contrib/github/browser/fetchers/githubPRCIFetcher.ts\n  151: function e(value: string): string\nsrc/vs/sessions/contrib/github/browser/fetchers/githubPRFetcher.ts\n  458: function e(value: string): string\nsrc/vs/platform/agentHost/node/missionControl/missionControlSessionMirror.ts\n  637: private _session(sessionId: string): SessionSpool\nsrc/vs/code/electron-main/main.ts\n  92: class CodeMain\nsrc/vs/platform/actions/common/actions.ts\n  723: export abstract class Action2\nextensions/copilot/src/util/vs/base/common/uri.ts\n  104: export class URI implements UriComponents\nsrc/vs/editor/standalone/browser/standaloneThemeService.ts\n  66: public get base(): string\nsrc/vs/base/common/jsonSchema.ts\n  8: export interface IJSONSchema\nextensions/copilot/src/platform/filesystem/common/fileTypes.ts\n  40: get base(): string\n",
+  "tokens_estimated": 1457,
+  "budget": 1500,
+  "token_estimate_method": "ceil(chars/4); not a real tokenizer",
+  "total_symbols": 144129,
+  "shown_symbols": 66,
+  "changed_files": [],
+  "files": [
+    {
+      "path": "src/vs/base/common/uri.ts",
+      "rank": 0.012488088146426962,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "URI",
+          "kind": "class",
+          "line": 102,
+          "rank": 0.007041271854851678,
+          "references": 14809,
+          "signature": "export class URI implements UriComponents"
+        },
+        {
+          "name": "parse",
+          "kind": "method",
+          "line": 271,
+          "rank": 0.0013009480586508439,
+          "references": 2846,
+          "signature": "static parse(value: string, _strict: boolean = false): URI"
+        },
+        {
+          "name": "toString",
+          "kind": "method",
+          "line": 386,
+          "rank": 0.000877737797975113,
+          "references": 4378,
+          "signature": "toString(skipEncoding: boolean = false): string"
+        },
+        {
+          "name": "UriComponents",
+          "kind": "interface",
+          "line": 426,
+          "rank": 0.0008969726157412023,
+          "references": 665,
+          "signature": "export interface UriComponents"
+        },
+        {
+          "name": "toString",
+          "kind": "method",
+          "line": 467,
+          "rank": 0.000877737797975113,
+          "references": 4378,
+          "signature": "override toString(skipEncoding: boolean = false): string"
+        },
+        {
+          "name": "_asFormatted",
+          "kind": "function",
+          "line": 666,
+          "rank": 0.0014934200212330126,
+          "references": 2,
+          "signature": "function _asFormatted(uri: URI, skipEncoding: boolean): string"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/base/common/lifecycle.ts",
+      "rank": 0.008740785541832143,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "IDisposable",
+          "kind": "interface",
+          "line": 312,
+          "rank": 0.002671662788304516,
+          "references": 2634,
+          "signature": "export interface IDisposable"
+        },
+        {
+          "name": "dispose",
+          "kind": "function",
+          "line": 332,
+          "rank": 0.0028482513397465694,
+          "references": 3335,
+          "signature": "export function dispose<T extends IDisposable>(arg: T | Iterable<T> | undefined): any"
+        },
+        {
+          "name": "DisposableStore",
+          "kind": "class",
+          "line": 416,
+          "rank": 0.0009459015880932883,
+          "references": 3828,
+          "signature": "export class DisposableStore implements IDisposable"
+        },
+        {
+          "name": "Disposable",
+          "kind": "class",
+          "line": 526,
+          "rank": 0.0013451172459209447,
+          "references": 3897,
+          "signature": "export abstract class Disposable implements IDisposable"
+        },
+        {
+          "name": "get",
+          "kind": "method",
+          "line": 801,
+          "rank": 0.0009298525797668236,
+          "references": 8452,
+          "signature": "get(key: K): V | undefined"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/contrib/tasks/common/tasks.ts",
+      "rank": 0.00791958826728922,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "ShellQuoting",
+          "kind": "enum",
+          "line": 32,
+          "rank": 0.0006727614175058734,
+          "references": 8,
+          "signature": "export enum ShellQuoting"
+        },
+        {
+          "name": "IQuotedString",
+          "kind": "interface",
+          "line": 324,
+          "rank": 0.0015783988783810538,
+          "references": 1,
+          "signature": "export interface IQuotedString"
+        },
+        {
+          "name": "CommandString",
+          "kind": "type",
+          "line": 329,
+          "rank": 0.0018554496214477417,
+          "references": 16,
+          "signature": "export type CommandString = string | IQuotedString;"
+        },
+        {
+          "name": "value",
+          "kind": "function",
+          "line": 332,
+          "rank": 0.0038129783499545513,
+          "references": 7648,
+          "signature": "export function value(value: CommandString): string"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/contrib/tasks/common/taskConfiguration.ts",
+      "rank": 0.0052549890655537,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "CommandString",
+          "kind": "type",
+          "line": 233,
+          "rank": 0.0013354518009645701,
+          "references": 23,
+          "signature": "export type CommandString = Types.SingleOrMany<string> |"
+        },
+        {
+          "name": "value",
+          "kind": "function",
+          "line": 236,
+          "rank": 0.00391953726458913,
+          "references": 7594,
+          "signature": "export function value(value: CommandString): string"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/contrib/chat/common/model/objectMutationLog.ts",
+      "rank": 0.004846263637733971,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "key",
+          "kind": "function",
+          "line": 92,
+          "rank": 0.0017392597483572158,
+          "references": 6540,
+          "signature": "export function key<T, R = T>(comparator?: (a: R, b: R) => boolean): TransformValue<T, R>"
+        },
+        {
+          "name": "value",
+          "kind": "function",
+          "line": 103,
+          "rank": 0.0031070038893767546,
+          "references": 7507,
+          "signature": "export function value<T, R>(comparator?: (a: R, b: R) => boolean): TransformValue<T, R>"
+        }
+      ]
+    },
+    {
+      "path": "extensions/json-language-features/client/src/jsonClient.ts",
+      "rank": 0.0042237972515154956,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "T",
+          "kind": "type",
+          "line": 376,
+          "rank": 0.0042237972515154956,
+          "references": 6074,
+          "signature": "type T = SymbolInformation[] | DocumentSymbol[];"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/base/common/platform.ts",
+      "rank": 0.003830156584723244,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "value",
+          "kind": "function",
+          "line": 173,
+          "rank": 0.003830156584723244,
+          "references": 9481,
+          "signature": "export function value(): string"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/base/common/types.ts",
+      "rank": 0.003649526396185868,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "isString",
+          "kind": "function",
+          "line": 11,
+          "rank": 0.0026458125916798882,
+          "references": 317,
+          "signature": "export function isString(str: unknown): str is string"
+        },
+        {
+          "name": "isStringArray",
+          "kind": "function",
+          "line": 18,
+          "rank": 0.00100371380450598,
+          "references": 25,
+          "signature": "export function isStringArray(value: unknown): value is string[]"
+        }
+      ]
+    },
+    {
+      "path": "extensions/copilot/src/util/vs/base/common/platform.ts",
+      "rank": 0.003082369791634086,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "value",
+          "kind": "function",
+          "line": 172,
+          "rank": 0.003082369791634086,
+          "references": 7520,
+          "signature": "export function value(): string"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/platform/agentHost/node/copilot/copilotToolDisplay.ts",
+      "rank": 0.002857081826445445,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "str",
+          "kind": "function",
+          "line": 1134,
+          "rank": 0.002857081826445445,
+          "references": 597,
+          "signature": "function str(value: unknown): string | undefined"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/nls.ts",
+      "rank": 0.002669168406745726,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "localize",
+          "kind": "function",
+          "line": 85,
+          "rank": 0.002669168406745726,
+          "references": 8865,
+          "signature": "export function localize(data: ILocalizeInfo | string /* | number when built */, message: string /* | null when built */…"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/contrib/mergeEditor/browser/model/modifiedBaseRange.ts",
+      "rank": 0.002282142751421003,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "ModifiedBaseRangeStateKind",
+          "kind": "enum",
+          "line": 263,
+          "rank": 0.002282142751421003,
+          "references": 31,
+          "signature": "export enum ModifiedBaseRangeStateKind"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/base/common/event.ts",
+      "rank": 0.002224303083148627,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Event",
+          "kind": "interface",
+          "line": 46,
+          "rank": 0.0015217970660596476,
+          "references": 4562,
+          "signature": "export interface Event<T>"
+        },
+        {
+          "name": "fire",
+          "kind": "method",
+          "line": 1411,
+          "rank": 0.0007025060170889791,
+          "references": 4295,
+          "signature": "fire(event: T): void"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/platform/agentHost/common/agent.ts",
+      "rank": 0.0019523649475221229,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "uri",
+          "kind": "function",
+          "line": 1288,
+          "rank": 0.000664864674572847,
+          "references": 5960,
+          "signature": "export function uri(provider: AgentProvider, rawSessionId: string): URI"
+        },
+        {
+          "name": "id",
+          "kind": "function",
+          "line": 1296,
+          "rank": 0.0012875002729492758,
+          "references": 7787,
+          "signature": "export function id(session: URI | string): string"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/contrib/chat/common/promptSyntax/chatPromptFilesContribution.ts",
+      "rank": 0.0017378517966656535,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "key",
+          "kind": "function",
+          "line": 105,
+          "rank": 0.0017378517966656535,
+          "references": 6530,
+          "signature": "function key(extensionId: ExtensionIdentifier, type: PromptsType, path: string)"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/editor/common/model/bracketPairsTextModelPart/bracketPairsTree/ast.ts",
+      "rank": 0.001698961156632372,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "AstNodeKind",
+          "kind": "enum",
+          "line": 14,
+          "rank": 0.001698961156632372,
+          "references": 26,
+          "signature": "export const enum AstNodeKind"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/platform/instantiation/common/instantiation.ts",
+      "rank": 0.0016037361912501255,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "createDecorator",
+          "kind": "function",
+          "line": 109,
+          "rank": 0.0016037361912501255,
+          "references": 716,
+          "signature": "export function createDecorator<T>(serviceId: string): ServiceIdentifier<T>"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/api/worker/extensionHostWorker.ts",
+      "rank": 0.0015219860364134113,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "create",
+          "kind": "function",
+          "line": 249,
+          "rank": 0.0015219860364134113,
+          "references": 1,
+          "signature": "export function create()"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/api/common/extHostTypes.ts",
+      "rank": 0.001420474407213043,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "base",
+          "kind": "method",
+          "line": 1884,
+          "rank": 0.0007584690745531597,
+          "references": 587,
+          "signature": "get base(): string"
+        },
+        {
+          "name": "base",
+          "kind": "method",
+          "line": 1887,
+          "rank": 0.0006620053326598834,
+          "references": 586,
+          "signature": "set base(base: string)"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/platform/configuration/common/configurationModels.ts",
+      "rank": 0.001359052462962142,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "overrides",
+          "kind": "method",
+          "line": 71,
+          "rank": 0.0006993506230749835,
+          "references": 594,
+          "signature": "get overrides(): IOverrides[]"
+        },
+        {
+          "name": "overrides",
+          "kind": "method",
+          "line": 109,
+          "rank": 0.0006597018398871586,
+          "references": 593,
+          "signature": "get overrides()"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/contrib/mcp/common/mcpTypes.ts",
+      "rank": 0.00135237440456016,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "interface",
+          "line": 939,
+          "rank": 0.00135237440456016,
+          "references": 9500,
+          "signature": "export interface Error"
+        }
+      ]
+    },
+    {
+      "path": "extensions/terminal-suggest/src/fig/shared/internal.ts",
+      "rank": 0.0012142846730958344,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Arg",
+          "kind": "type",
+          "line": 32,
+          "rank": 0.0012142846730958344,
+          "references": 29,
+          "signature": "export type Arg = Metadata.ArgMeta;"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/platform/mcp/common/modelContextProtocol.ts",
+      "rank": 0.0012006186880540505,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "interface",
+          "line": 160,
+          "rank": 0.0012006186880540505,
+          "references": 9231,
+          "signature": "export interface Error"
+        }
+      ]
+    },
+    {
+      "path": "extensions/copilot/src/extension/typescriptContext/serverPlugin/src/common/protocol.ts",
+      "rank": 0.001198113081760713,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 532,
+          "rank": 0.001198113081760713,
+          "references": 9236,
+          "signature": "export type Error ="
+        }
+      ]
+    },
+    {
+      "path": "extensions/copilot/src/extension/typescriptContext/common/serverProtocol.ts",
+      "rank": 0.001195720037829821,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 532,
+          "rank": 0.001195720037829821,
+          "references": 9233,
+          "signature": "export type Error ="
+        }
+      ]
+    },
+    {
+      "path": "cli/src/options.rs",
+      "rank": 0.00119503299973953,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 65,
+          "rank": 0.00119503299973953,
+          "references": 9233,
+          "signature": "type Error = String;"
+        }
+      ]
+    },
+    {
+      "path": "cli/src/msgpack_rpc.rs",
+      "rank": 0.001192577013773064,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 137,
+          "rank": 0.001192577013773064,
+          "references": 9226,
+          "signature": "type Error = io::Error;"
+        }
+      ]
+    },
+    {
+      "path": "extensions/copilot/src/extension/common/modelContextProtocol.ts",
+      "rank": 0.0011921240275875294,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "interface",
+          "line": 133,
+          "rank": 0.0011921240275875294,
+          "references": 9220,
+          "signature": "export interface Error"
+        }
+      ]
+    },
+    {
+      "path": "cli/src/desktop/version_manager.rs",
+      "rank": 0.0011917873382000998,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "type",
+          "line": 69,
+          "rank": 0.0011917873382000998,
+          "references": 9219,
+          "signature": "type Error = InvalidRequestedVersion;"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/contrib/notebook/browser/viewModel/cellOutputTextHelper.ts",
+      "rank": 0.001191745547667888,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Error",
+          "kind": "interface",
+          "line": 13,
+          "rank": 0.001191745547667888,
+          "references": 9220,
+          "signature": "interface Error"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/contrib/chat/common/attachments/chatVariableEntries.ts",
+      "rank": 0.0011188115819173198,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "id",
+          "kind": "function",
+          "line": 425,
+          "rank": 0.0011188115819173198,
+          "references": 7720,
+          "signature": "export function id(data: IDiagnosticVariableEntryFilterData)"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/contrib/performance/electron-browser/rendererAutoProfiler.ts",
+      "rank": 0.0010843719058938497,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "_store",
+          "kind": "method",
+          "line": 108,
+          "rank": 0.0010843719058938497,
+          "references": 1110,
+          "signature": "private async _store(profile: IV8Profile, sessionId: string): Promise<void>"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/services/extensions/common/extensionHostKind.ts",
+      "rank": 0.0010625002039682204,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "ExtensionHostKind",
+          "kind": "enum",
+          "line": 9,
+          "rank": 0.0010625002039682204,
+          "references": 65,
+          "signature": "export const enum ExtensionHostKind"
+        }
+      ]
+    },
+    {
+      "path": "extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/copilotCLIPromptReferences.ts",
+      "rank": 0.001037051635536862,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "id",
+          "kind": "function",
+          "line": 154,
+          "rank": 0.001037051635536862,
+          "references": 6836,
+          "signature": "export function id(data: Record<string, unknown> &"
+        }
+      ]
+    },
+    {
+      "path": "cli/src/util/errors.rs",
+      "rank": 0.001014365264527041,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "InvalidRequestedVersion",
+          "kind": "struct",
+          "line": 265,
+          "rank": 0.001014365264527041,
+          "references": 3,
+          "signature": "pub struct InvalidRequestedVersion();"
+        }
+      ]
+    },
+    {
+      "path": "extensions/typescript-language-features/src/filesystems/autoInstallerFs.ts",
+      "rank": 0.0009271206564335182,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "scheme",
+          "kind": "method",
+          "line": 243,
+          "rank": 0.0009271206564335182,
+          "references": 2493,
+          "signature": "get scheme()"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/workbench/contrib/chat/browser/widgetHosts/viewPane/chatContextUsageDetails.ts",
+      "rank": 0.0008930377107650203,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "IChatContextUsageData",
+          "kind": "interface",
+          "line": 30,
+          "rank": 0.0008930377107650203,
+          "references": 9,
+          "signature": "export interface IChatContextUsageData"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/editor/common/core/range.ts",
+      "rank": 0.0007538919024755912,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Range",
+          "kind": "class",
+          "line": 33,
+          "rank": 0.0007538919024755912,
+          "references": 2883,
+          "signature": "export class Range"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/sessions/contrib/github/browser/fetchers/githubPRCIFetcher.ts",
+      "rank": 0.0007175360678016241,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "e",
+          "kind": "function",
+          "line": 151,
+          "rank": 0.0007175360678016241,
+          "references": 6478,
+          "signature": "function e(value: string): string"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/sessions/contrib/github/browser/fetchers/githubPRFetcher.ts",
+      "rank": 0.0007174168609953562,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "e",
+          "kind": "function",
+          "line": 458,
+          "rank": 0.0007174168609953562,
+          "references": 6480,
+          "signature": "function e(value: string): string"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/platform/agentHost/node/missionControl/missionControlSessionMirror.ts",
+      "rank": 0.0007095832995666737,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "_session",
+          "kind": "method",
+          "line": 637,
+          "rank": 0.0007095832995666737,
+          "references": 481,
+          "signature": "private _session(sessionId: string): SessionSpool"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/code/electron-main/main.ts",
+      "rank": 0.0007063479514746758,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "CodeMain",
+          "kind": "class",
+          "line": 92,
+          "rank": 0.0007063479514746758,
+          "references": 1,
+          "signature": "class CodeMain"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/platform/actions/common/actions.ts",
+      "rank": 0.0006848070195241879,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "Action2",
+          "kind": "class",
+          "line": 723,
+          "rank": 0.0006848070195241879,
+          "references": 941,
+          "signature": "export abstract class Action2"
+        }
+      ]
+    },
+    {
+      "path": "extensions/copilot/src/util/vs/base/common/uri.ts",
+      "rank": 0.0006843299158080612,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "URI",
+          "kind": "class",
+          "line": 104,
+          "rank": 0.0006843299158080612,
+          "references": 1399,
+          "signature": "export class URI implements UriComponents"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/editor/standalone/browser/standaloneThemeService.ts",
+      "rank": 0.0006763263234014637,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "base",
+          "kind": "method",
+          "line": 66,
+          "rank": 0.0006763263234014637,
+          "references": 580,
+          "signature": "public get base(): string"
+        }
+      ]
+    },
+    {
+      "path": "src/vs/base/common/jsonSchema.ts",
+      "rank": 0.0006651896765606971,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "IJSONSchema",
+          "kind": "interface",
+          "line": 8,
+          "rank": 0.0006651896765606971,
+          "references": 225,
+          "signature": "export interface IJSONSchema"
+        }
+      ]
+    },
+    {
+      "path": "extensions/copilot/src/platform/filesystem/common/fileTypes.ts",
+      "rank": 0.0006611755914583342,
+      "changed": false,
+      "symbols": [
+        {
+          "name": "base",
+          "kind": "method",
+          "line": 40,
+          "rank": 0.0006611755914583342,
+          "references": 576,
+          "signature": "get base(): string"
+        }
+      ]
+    }
+  ],
+  "edge_source": "t0-treesitter"
+}

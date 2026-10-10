@@ -1,0 +1,4 @@
+indexed 141 file(s): parsed 0, unchanged 141, removed 0
+symbols 586, references 27450, imports 400, edges 2142
+languages: html=8 javascript=141 text=1
+db: /workspace/repos/express/.plumbgraph/index.db

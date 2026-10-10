@@ -1,0 +1,115 @@
+{
+  "baseline_path": "/workspace/repos/classroom-archiver/plumb-baseline.json",
+  "baseline_updated": false,
+  "baselined": 0,
+  "executed": false,
+  "fail_on": "medium",
+  "fixed": 0,
+  "limitations": [
+    "dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change",
+    "baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new",
+    "no baseline found at /workspace/repos/classroom-archiver/plumb-baseline.json: every finding counts as new (create one with --update-baseline)"
+  ],
+  "new": [
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `updateMaterialPath` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "src/storage/database.js",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 237,
+      "message": "method `ArchiveDatabase.updateMaterialPath` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "ArchiveDatabase.updateMaterialPath"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `buildSrcShareLink` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "web/src/archive/exporter.js",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 77,
+      "message": "function `buildSrcShareLink` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "buildSrcShareLink"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `signOut` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "web/src/scraper/googleAuth.js",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 124,
+      "message": "method `GoogleSession.signOut` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "GoogleSession.signOut"
+    }
+  ],
+  "steps": [
+    {
+      "findings": 3,
+      "name": "dead-code",
+      "note": null,
+      "status": "ran"
+    },
+    {
+      "findings": 0,
+      "name": "check-deps",
+      "note": "offline: manifests and local resolution only; pass --online to check registries",
+      "status": "ran"
+    },
+    {
+      "findings": 0,
+      "name": "test-weakening",
+      "note": "vs HEAD",
+      "status": "ran"
+    },
+    {
+      "findings": 0,
+      "name": "diagnostics",
+      "note": "no saved output (--from) and --run not given; nothing was executed",
+      "status": "skipped"
+    },
+    {
+      "findings": 0,
+      "name": "rule-engines",
+      "note": "semgrep / ast-grep run only with --run",
+      "status": "skipped"
+    }
+  ],
+  "total_findings": 3,
+  "verdict": "fail"
+}

@@ -1,0 +1,24 @@
+MEDIUM 0.77  src/maps.rs:48  method `Region::is_file_backed` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `is_file_backed` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+LOW    0.45  scripts/render_brand.py:10  `PIL` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `PIL` is imported at scripts/render_brand.py:10
+         why:  no pypi manifest found for this file
+         why:  registry not consulted or inconclusive: offline mode
+         risk: no manifest was found, so declared dependencies are unknown
+         risk: a Python import name can differ from its distribution name (known mappings are built in; others are not)
+
+  dead-code        ran      1 finding(s)
+  check-deps       ran      1 finding(s)  (offline: manifests and local resolution only; pass --online to check registries)
+  test-weakening   ran      0 finding(s)  (vs HEAD)
+  diagnostics      skipped  0 finding(s)  (no saved output (--from) and --run not given; nothing was executed)
+  rule-engines     skipped  0 finding(s)  (semgrep / ast-grep run only with --run)
+
+verify: FAIL  (2 new, 0 baselined, 0 fixed since baseline; fail-on medium)
+note: dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change
+note: baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new
+note: no baseline found at /workspace/repos/Wraith/plumb-baseline.json: every finding counts as new (create one with --update-baseline)
+note: nothing was executed (no --run).

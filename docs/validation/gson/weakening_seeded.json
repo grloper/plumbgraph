@@ -1,0 +1,136 @@
+{
+ "repo": "gson",
+ "lang": "java",
+ "results": [
+  {
+   "kind": "skip",
+   "file": "gson/src/test/java/com/google/gson/functional/StreamingTypeAdaptersTest.java",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "gson/src/test/java/com/google/gson/functional/RuntimeTypeAdapterFactoryFunctionalTest.java",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "gson/src/test/java/com/google/gson/internal/UnsafeAllocatorInstantiationTest.java",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "gson/src/test/java/com/google/gson/functional/PrimitiveCharacterTest.java",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "gson/src/test/java/com/google/gson/functional/StreamingTypeAdaptersTest.java",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "gson/src/test/java/com/google/gson/internal/UnsafeAllocatorInstantiationTest.java",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "gson/src/test/java/com/google/gson/functional/PrimitiveCharacterTest.java",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "gson/src/test/java/com/google/gson/internal/GsonTypesTest.java",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "benign",
+   "file": "gson/src/test/java/com/google/gson/functional/StreamingTypeAdaptersTest.java",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  },
+  {
+   "kind": "benign",
+   "file": "gson/src/test/java/com/google/gson/functional/RuntimeTypeAdapterFactoryFunctionalTest.java",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  },
+  {
+   "kind": "benign",
+   "file": "gson/src/test/java/com/google/gson/internal/UnsafeAllocatorInstantiationTest.java",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  }
+ ],
+ "recall": "8/8",
+ "false_pos_on_benign": "0/3"
+}

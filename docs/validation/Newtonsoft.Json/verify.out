@@ -1,0 +1,1681 @@
+{
+  "baseline_path": "/workspace/repos/Newtonsoft.Json/plumb-baseline.json",
+  "baseline_updated": false,
+  "baselined": 0,
+  "executed": false,
+  "fail_on": "medium",
+  "fixed": 0,
+  "limitations": [
+    "dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change",
+    "baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new",
+    "no baseline found at /workspace/repos/Newtonsoft.Json/plumb-baseline.json: every finding counts as new (create one with --update-baseline)"
+  ],
+  "new": [
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Repeat` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 142,
+      "message": "method `Enumerable.Repeat` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Repeat"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `TakeWhile` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 329,
+      "message": "method `Enumerable.TakeWhile` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.TakeWhile"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `ElementAtOrDefault` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 612,
+      "message": "method `Enumerable.ElementAtOrDefault` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.ElementAtOrDefault"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `LongCount` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 784,
+      "message": "method `Enumerable.LongCount` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.LongCount"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `DefaultIfEmpty` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 1193,
+      "message": "method `Enumerable.DefaultIfEmpty` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.DefaultIfEmpty"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `OrderByDescending` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 1484,
+      "message": "method `Enumerable.OrderByDescending` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.OrderByDescending"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `ThenBy` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 1512,
+      "message": "method `Enumerable.ThenBy` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.ThenBy"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `ThenByDescending` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 1539,
+      "message": "method `Enumerable.ThenByDescending` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.ThenByDescending"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Intersect` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 1599,
+      "message": "method `Enumerable.Intersect` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Intersect"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `Except` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 1624,
+      "message": "method `Enumerable.Except` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Except"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.95,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `GroupJoin` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "high",
+      "line": 1772,
+      "message": "method `Enumerable.GroupJoin` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.GroupJoin"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/JsonSerializer.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 549,
+      "message": "method `JsonSerializer.IsCheckAdditionalContentSet` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "JsonSerializer.IsCheckAdditionalContentSet"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Linq/JContainer.Async.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 40,
+      "message": "method `JContainer.ReadTokenFromAsync` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "JContainer.ReadTokenFromAsync"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Linq/JContainer.Async.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 58,
+      "message": "method `JContainer.ReadContentFromAsync` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "JContainer.ReadContentFromAsync"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.71,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `CastInstance` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Linq/JPropertyDescriptor.cs",
+      "fp_risks": [
+        "method of a class that extends/implements another type: it may override or implement a base/framework method that is called from outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 46,
+      "message": "method `JPropertyDescriptor.CastInstance` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "JPropertyDescriptor.CastInstance"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.71,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `ChangeItemKey` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Linq/JPropertyKeyedCollection.cs",
+      "fp_risks": [
+        "method of a class that extends/implements another type: it may override or implement a base/framework method that is called from outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 51,
+      "message": "method `JPropertyKeyedCollection.ChangeItemKey` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "JPropertyKeyedCollection.ChangeItemKey"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `CreateAsync` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Linq/JRaw.Async.cs",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 44,
+      "message": "method `JRaw.CreateAsync` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "JRaw.CreateAsync"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.76,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `SetDynamicCodeGeneration` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Serialization/JsonTypeReflector.cs",
+      "fp_risks": [
+        "dynamic-access markers in this file: System.Reflection",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 491,
+      "message": "method `JsonTypeReflector.SetDynamicCodeGeneration` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "JsonTypeReflector.SetDynamicCodeGeneration"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/Base64Encoder.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 197,
+      "message": "method `Base64Encoder.FlushAsync` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Base64Encoder.FlushAsync"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/BidirectionalDictionary.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 65,
+      "message": "method `BidirectionalDictionary.Set` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "BidirectionalDictionary.Set"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 52,
+      "message": "method `Enumerable.AsEnumerable` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.AsEnumerable"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 120,
+      "message": "method `Enumerable.Range` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Range"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 132,
+      "message": "method `Enumerable.RangeYield` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.RangeYield"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 149,
+      "message": "method `Enumerable.RepeatYield` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.RepeatYield"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 343,
+      "message": "method `Enumerable.TakeWhile` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.TakeWhile"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 353,
+      "message": "method `Enumerable.TakeWhileYield` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.TakeWhileYield"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 768,
+      "message": "method `Enumerable.LongCount` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.LongCount"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1204,
+      "message": "method `Enumerable.DefaultIfEmpty` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.DefaultIfEmpty"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1213,
+      "message": "method `Enumerable.DefaultIfEmptyYield` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.DefaultIfEmptyYield"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1496,
+      "message": "method `Enumerable.OrderByDescending` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.OrderByDescending"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1524,
+      "message": "method `Enumerable.ThenBy` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.ThenBy"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1551,
+      "message": "method `Enumerable.ThenByDescending` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.ThenByDescending"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "2 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1565,
+      "message": "method `Enumerable.IntersectExceptImpl` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.IntersectExceptImpl"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1611,
+      "message": "method `Enumerable.Intersect` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Intersect"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1636,
+      "message": "method `Enumerable.Except` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Except"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "1 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1789,
+      "message": "method `Enumerable.GroupJoin` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.GroupJoin"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1836,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1854,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "10 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1865,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "9 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1892,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1904,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1922,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "10 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1933,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "9 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 1960,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2022,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2040,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "10 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2051,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "9 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2078,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2090,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2108,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "10 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2119,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "9 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2146,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2208,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2226,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "10 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2237,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "9 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2264,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2276,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2294,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "10 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2305,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "9 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2332,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2394,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2412,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "10 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2423,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "9 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2450,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2462,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2480,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "10 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2491,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "9 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2518,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2580,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2598,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "10 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2618,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "9 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2645,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2657,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2675,
+      "message": "method `Enumerable.Sum` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Sum"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "10 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2686,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "9 reference(s) found, but only from code that is itself unreachable",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2713,
+      "message": "method `Enumerable.Average` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Enumerable.Average"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.71,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `ApplyResultSelector` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/LinqBridge.cs",
+      "fp_risks": [
+        "method of a class that extends/implements another type: it may override or implement a base/framework method that is called from outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 2866,
+      "message": "method `Lookup.ApplyResultSelector` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "Lookup.ApplyResultSelector"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.76,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)",
+        "the name `AssignableToTypeNameIncludingInterfaces` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "Src/Newtonsoft.Json/Utilities/TypeExtensions.cs",
+      "fp_risks": [
+        "dynamic-access markers in this file: System.Reflection, GetMethod(",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 581,
+      "message": "method `TypeExtensions.AssignableToTypeNameIncludingInterfaces` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "TypeExtensions.AssignableToTypeNameIncludingInterfaces"
+    }
+  ],
+  "steps": [
+    {
+      "findings": 78,
+      "name": "dead-code",
+      "note": null,
+      "status": "ran"
+    },
+    {
+      "findings": 0,
+      "name": "check-deps",
+      "note": "offline: manifests and local resolution only; pass --online to check registries",
+      "status": "ran"
+    },
+    {
+      "findings": 0,
+      "name": "test-weakening",
+      "note": "vs HEAD",
+      "status": "ran"
+    },
+    {
+      "findings": 0,
+      "name": "diagnostics",
+      "note": "no saved output (--from) and --run not given; nothing was executed",
+      "status": "skipped"
+    },
+    {
+      "findings": 0,
+      "name": "rule-engines",
+      "note": "semgrep / ast-grep run only with --run",
+      "status": "skipped"
+    }
+  ],
+  "total_findings": 78,
+  "verdict": "fail"
+}

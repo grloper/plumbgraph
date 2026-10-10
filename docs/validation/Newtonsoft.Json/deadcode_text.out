@@ -1,0 +1,388 @@
+HIGH   0.95  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:142  method `Enumerable.Repeat` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Repeat` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:329  method `Enumerable.TakeWhile` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `TakeWhile` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:612  method `Enumerable.ElementAtOrDefault` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `ElementAtOrDefault` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:784  method `Enumerable.LongCount` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `LongCount` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1193  method `Enumerable.DefaultIfEmpty` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `DefaultIfEmpty` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1484  method `Enumerable.OrderByDescending` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `OrderByDescending` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1512  method `Enumerable.ThenBy` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `ThenBy` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1539  method `Enumerable.ThenByDescending` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `ThenByDescending` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1599  method `Enumerable.Intersect` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Intersect` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1624  method `Enumerable.Except` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Except` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1772  method `Enumerable.GroupJoin` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `GroupJoin` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/JsonSerializer.cs:549  method `JsonSerializer.IsCheckAdditionalContentSet` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Linq/JContainer.Async.cs:40  method `JContainer.ReadTokenFromAsync` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Linq/JContainer.Async.cs:58  method `JContainer.ReadContentFromAsync` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/Base64Encoder.cs:197  method `Base64Encoder.FlushAsync` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/BidirectionalDictionary.cs:65  method `BidirectionalDictionary.Set` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:52  method `Enumerable.AsEnumerable` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:120  method `Enumerable.Range` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:132  method `Enumerable.RangeYield` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:149  method `Enumerable.RepeatYield` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:343  method `Enumerable.TakeWhile` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:353  method `Enumerable.TakeWhileYield` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:768  method `Enumerable.LongCount` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1204  method `Enumerable.DefaultIfEmpty` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1213  method `Enumerable.DefaultIfEmptyYield` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1496  method `Enumerable.OrderByDescending` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1524  method `Enumerable.ThenBy` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1551  method `Enumerable.ThenByDescending` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1565  method `Enumerable.IntersectExceptImpl` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1611  method `Enumerable.Intersect` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1636  method `Enumerable.Except` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1789  method `Enumerable.GroupJoin` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1836  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1854  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1865  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  10 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1892  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  9 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1904  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1922  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1933  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  10 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:1960  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  9 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2022  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2040  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2051  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  10 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2078  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  9 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2090  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2108  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2119  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  10 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2146  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  9 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2208  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2226  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2237  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  10 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2264  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  9 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2276  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2294  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2305  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  10 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2332  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  9 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2394  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2412  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2423  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  10 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2450  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  9 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2462  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2480  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2491  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  10 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2518  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  9 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2580  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2598  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2618  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  10 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2645  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  9 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2657  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2675  method `Enumerable.Sum` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2686  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  10 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2713  method `Enumerable.Average` appears unused  [t0-treesitter]
+         why:  9 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.77  Src/Newtonsoft.Json/Linq/JRaw.Async.cs:44  method `JRaw.CreateAsync` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  the name `CreateAsync` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: exported/public: may be used by consumers outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.76  Src/Newtonsoft.Json/Serialization/JsonTypeReflector.cs:491  method `JsonTypeReflector.SetDynamicCodeGeneration` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `SetDynamicCodeGeneration` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: dynamic-access markers in this file: System.Reflection
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.76  Src/Newtonsoft.Json/Utilities/TypeExtensions.cs:581  method `TypeExtensions.AssignableToTypeNameIncludingInterfaces` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `AssignableToTypeNameIncludingInterfaces` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: dynamic-access markers in this file: System.Reflection, GetMethod(
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.71  Src/Newtonsoft.Json/Linq/JPropertyDescriptor.cs:46  method `JPropertyDescriptor.CastInstance` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `CastInstance` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: method of a class that extends/implements another type: it may override or implement a base/framework method that is called from outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.71  Src/Newtonsoft.Json/Linq/JPropertyKeyedCollection.cs:51  method `JPropertyKeyedCollection.ChangeItemKey` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `ChangeItemKey` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: method of a class that extends/implements another type: it may override or implement a base/framework method that is called from outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.71  Src/Newtonsoft.Json/Utilities/LinqBridge.cs:2866  method `Lookup.ApplyResultSelector` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `ApplyResultSelector` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: method of a class that extends/implements another type: it may override or implement a base/framework method that is called from outside the indexed code
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+
+78 finding(s): 11 high, 67 medium, 0 low  (indexed 951 files, 9334 symbols)
+note: tier-0 name-based analysis (no SCIP index); verify medium/low findings before deleting anything.
+note: 1 finding(s) are exported symbols. If this project is a library, re-run with --lib to treat exported symbols as public API (app mode assumes only main/init/tests are entry points)

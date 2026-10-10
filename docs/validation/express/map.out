@@ -1,0 +1,52 @@
+# plumb map: 16 files, 35 of 35 symbols (~439 tokens, budget 1500)
+lib/response.js
+  924: function sendfile(res, file, options, callback)
+  929: function onaborted()
+  939: function ondirectory()
+  949: function onerror(err)
+  956: function onend()
+  963: function onfile()
+  968: function onfinish(err)
+  986: function onstream()
+  1026: function stringify (value, replacer, spaces, escape)
+examples/view-locals/index.js
+  17: function ferrets(user)
+  48: function count(req, res, next)
+  56: function users(req, res, next)
+  86: function count2(req, res, next)
+  94: function users2(req, res, next)
+examples/route-middleware/index.js
+  25: function loadUser(req, res, next)
+  36: function andRestrictToSelf(req, res, next)
+  50: function andRestrictTo(role)
+lib/utils.js
+  89: function acceptParams (str)
+  249: function createETagGenerator (options)
+  267: function parseExtendedQueryString(str)
+examples/web-service/index.js
+  15: function error(status, msg)
+examples/error/index.js
+  20: function error(err, req, res, next)
+lib/view.js
+  52: function View(name, options)
+  197: function tryStat(path)
+examples/auth/index.js
+  60: function authenticate(name, pass, fn)
+  75: function restrict(req, res, next)
+lib/application.js
+  615: function logerror(err)
+  625: function tryRender(view, options, callback)
+examples/online/index.js
+  40: function list(ids)
+examples/content-negotiation/index.js
+  33: function format(path)
+examples/view-locals/user.js
+  7: function User(name, age, species)
+examples/view-constructor/github-view.js
+  23: function GithubView(name, options)
+lib/express.js
+  36: function createApplication()
+examples/search/index.js
+  29: async function initializeRedis()
+lib/request.js
+  521: function defineGetter(obj, name, getter)

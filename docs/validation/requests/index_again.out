@@ -1,0 +1,4 @@
+indexed 37 file(s): parsed 0, unchanged 37, removed 0
+symbols 911, references 14971, imports 311, edges 3134
+languages: html=1 python=37 text=2
+db: /workspace/repos/requests/.plumbgraph/index.db

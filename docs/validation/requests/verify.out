@@ -1,0 +1,260 @@
+{
+  "baseline_path": "/workspace/repos/requests/plumb-baseline.json",
+  "baseline_updated": false,
+  "baselined": 0,
+  "executed": false,
+  "fail_on": "medium",
+  "fixed": 0,
+  "limitations": [
+    "dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change",
+    "baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new",
+    "no baseline found at /workspace/repos/requests/plumb-baseline.json: every finding counts as new (create one with --update-baseline)"
+  ],
+  "new": [
+    {
+      "category": "dead",
+      "confidence": 0.77,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "the name `FlaskyStyle` occurs nowhere else in the indexed code (identifiers, strings, import lists)"
+      ],
+      "file": "docs/_themes/flask_theme_support.py",
+      "fp_risks": [
+        "exported/public: may be used by consumers outside the indexed code",
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "class",
+      "level": "medium",
+      "line": 7,
+      "message": "class `FlaskyStyle` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "FlaskyStyle"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`pygments` is imported at docs/_themes/flask_theme_support.py:2",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "docs/_themes/flask_theme_support.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 2,
+      "message": "`pygments` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "pygments.style"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`pygments` is imported at docs/_themes/flask_theme_support.py:3",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "docs/_themes/flask_theme_support.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 3,
+      "message": "`pygments` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "pygments.token"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "setup.py",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 7,
+      "message": "`setuptools` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.35,
+      "evidence": [
+        "`simplejson` is imported at src/requests/compat.py:69",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "src/requests/compat.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)",
+        "the import is guarded by try/except ImportError (optional or compatibility import)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 69,
+      "message": "`simplejson` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "simplejson"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`simplejson` is imported at src/requests/compat.py:76",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "src/requests/compat.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 76,
+      "message": "`simplejson` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "simplejson"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.35,
+      "evidence": [
+        "`StringIO` is imported at tests/compat.py:4",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "tests/compat.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)",
+        "the import is guarded by try/except ImportError (optional or compatibility import)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 4,
+      "message": "`StringIO` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "StringIO"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.35,
+      "evidence": [
+        "`cStringIO` is imported at tests/compat.py:9",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "tests/compat.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)",
+        "the import is guarded by try/except ImportError (optional or compatibility import)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 9,
+      "message": "`cStringIO` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "cStringIO"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`BaseHTTPServer` is imported at tests/conftest.py:4",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "tests/conftest.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 4,
+      "message": "`BaseHTTPServer` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "BaseHTTPServer"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.55,
+      "evidence": [
+        "`SimpleHTTPServer` is imported at tests/conftest.py:5",
+        "not declared in any pypi manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "tests/conftest.py",
+      "fp_risks": [
+        "a Python import name can differ from its distribution name (known mappings are built in; others are not)"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 5,
+      "message": "`SimpleHTTPServer` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "SimpleHTTPServer"
+    }
+  ],
+  "steps": [
+    {
+      "findings": 1,
+      "name": "dead-code",
+      "note": null,
+      "status": "ran"
+    },
+    {
+      "findings": 9,
+      "name": "check-deps",
+      "note": "offline: manifests and local resolution only; pass --online to check registries",
+      "status": "ran"
+    },
+    {
+      "findings": 0,
+      "name": "test-weakening",
+      "note": "vs HEAD",
+      "status": "ran"
+    },
+    {
+      "findings": 0,
+      "name": "diagnostics",
+      "note": "no saved output (--from) and --run not given; nothing was executed",
+      "status": "skipped"
+    },
+    {
+      "findings": 0,
+      "name": "rule-engines",
+      "note": "semgrep / ast-grep run only with --run",
+      "status": "skipped"
+    }
+  ],
+  "total_findings": 10,
+  "verdict": "fail"
+}

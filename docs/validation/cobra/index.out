@@ -1,0 +1,4 @@
+indexed 36 file(s): parsed 36, unchanged 0, removed 0
+symbols 674, references 22870, imports 190, edges 3444
+languages: go=36
+db: /workspace/repos/cobra/.plumbgraph/index.db

@@ -1,16 +1,5 @@
 {
-  "baseline_path": "/workspace/repos/k8s/plumb-baseline.json",
-  "baseline_updated": false,
-  "baselined": 0,
-  "executed": false,
-  "fail_on": "medium",
-  "fixed": 0,
-  "limitations": [
-    "dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change",
-    "baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new",
-    "no baseline found at /workspace/repos/k8s/plumb-baseline.json: every finding counts as new (create one with --update-baseline)"
-  ],
-  "new": [
+  "findings": [
     {
       "category": "dead",
       "confidence": 0.95,
@@ -634,26 +623,6 @@
         "reachable only from tests (no production code reaches it)",
         "private to its module/crate (complete scope visibility)"
       ],
-      "file": "cmd/kube-scheduler/app/testing/testserver.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 210,
-      "message": "function `createListenerOnFreePort` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "createListenerOnFreePort"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
       "file": "cmd/kubeadm/app/phases/copycerts/testutil_umask.go",
       "fp_risks": [
         "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
@@ -694,326 +663,6 @@
         "reachable only from tests (no production code reaches it)",
         "private to its module/crate (complete scope visibility)"
       ],
-      "file": "pkg/api/service/util.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "const",
-      "level": "medium",
-      "line": 28,
-      "message": "const `defaultLoadBalancerSourceRanges` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "defaultLoadBalancerSourceRanges"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/api/v1/service/util.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "const",
-      "level": "medium",
-      "line": 28,
-      "message": "const `defaultLoadBalancerSourceRanges` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "defaultLoadBalancerSourceRanges"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controller/replication/replication_controller_utils.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 52,
-      "message": "function `filterOutCondition` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "filterOutCondition"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controller/volume/attachdetach/metrics/metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "const",
-      "level": "medium",
-      "line": 36,
-      "message": "const `pluginNameNotAvailable` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "pluginNameNotAvailable"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controller/volume/attachdetach/metrics/metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 167,
-      "message": "method `attachDetachStateCollector.getVolumeInUseCount` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "attachDetachStateCollector.getVolumeInUseCount"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controller/volume/attachdetach/metrics/metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 199,
-      "message": "method `attachDetachStateCollector.getTotalVolumesCount` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "attachDetachStateCollector.getTotalVolumesCount"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controller/volume/attachdetach/testing/testvolumespec.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 357,
-      "message": "function `attachVolumeToNode` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "attachVolumeToNode"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controller/volume/persistentvolume/metrics/metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "const",
-      "level": "medium",
-      "line": 51,
-      "message": "const `pluginNameNotAvailable` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "pluginNameNotAvailable"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controller/volume/persistentvolume/metrics/metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "struct",
-      "level": "medium",
-      "line": 94,
-      "message": "struct `pvcBindingMetricDimensions` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "pvcBindingMetricDimensions"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controller/volume/persistentvolume/metrics/metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 98,
-      "message": "function `getPVCMetricDimensions` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "getPVCMetricDimensions"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controller/volume/persistentvolume/metrics/metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 194,
-      "message": "method `pvAndPVCCountCollector.getPVPluginName` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "pvAndPVCCountCollector.getPVPluginName"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controller/volume/persistentvolume/metrics/metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 203,
-      "message": "method `pvAndPVCCountCollector.pvCollect` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "pvAndPVCCountCollector.pvCollect"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controller/volume/persistentvolume/metrics/metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 242,
-      "message": "method `pvAndPVCCountCollector.pvcCollect` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "pvAndPVCCountCollector.pvcCollect"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controlplane/apiserver/samples/generic/server/testing/testserver.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "const",
-      "level": "medium",
-      "line": 59,
-      "message": "const `ecdsaPrivateKey` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "ecdsaPrivateKey"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/controlplane/apiserver/samples/generic/server/testing/testserver.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 314,
-      "message": "function `createLocalhostListenerOnFreePort` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "createLocalhostListenerOnFreePort"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/credentialprovider/config.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "const",
-      "level": "medium",
-      "line": 35,
-      "message": "const `maxReadLength` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "maxReadLength"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
       "file": "pkg/credentialprovider/keyring.go",
       "fp_risks": [
         "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
@@ -1026,87 +675,6 @@
       "severity": "warning",
       "source": "t0-treesitter",
       "symbol": "defaultRegistryKey"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/apis/pods/server.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 387,
-      "message": "function `convertWatchEventType` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "convertWatchEventType"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/cm/cpu_following_store_windows.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 147,
-      "message": "method `cpuFollowingStore.numaMaskForCPUs` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "cpuFollowingStore.numaMaskForCPUs"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "1 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/kubelet_pods.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 1105,
-      "message": "method `Kubelet.makePodDataDirs` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Kubelet.makePodDataDirs"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/kubelet_pods.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 1122,
-      "message": "method `Kubelet.getPullSecretsForPod` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Kubelet.getPullSecretsForPod"
     },
     {
       "category": "dead",
@@ -1258,246 +826,6 @@
         "reachable only from tests (no production code reaches it)",
         "private to its module/crate (complete scope visibility)"
       ],
-      "file": "pkg/kubelet/metrics/collectors/cri_metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 106,
-      "message": "method `criMetricsCollector.criMetricToProm` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "criMetricsCollector.criMetricToProm"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/metrics/collectors/resource_metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 193,
-      "message": "method `resourceMetricsCollector.collectNodeCPUMetrics` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "resourceMetricsCollector.collectNodeCPUMetrics"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/metrics/collectors/resource_metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 202,
-      "message": "method `resourceMetricsCollector.collectNodeMemoryMetrics` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "resourceMetricsCollector.collectNodeMemoryMetrics"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/metrics/collectors/resource_metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 211,
-      "message": "method `resourceMetricsCollector.collectNodeSwapMetrics` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "resourceMetricsCollector.collectNodeSwapMetrics"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/metrics/collectors/resource_metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 220,
-      "message": "method `resourceMetricsCollector.collectContainerStartTime` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "resourceMetricsCollector.collectContainerStartTime"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/metrics/collectors/resource_metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 228,
-      "message": "method `resourceMetricsCollector.collectContainerCPUMetrics` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "resourceMetricsCollector.collectContainerCPUMetrics"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/metrics/collectors/resource_metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 238,
-      "message": "method `resourceMetricsCollector.collectContainerMemoryMetrics` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "resourceMetricsCollector.collectContainerMemoryMetrics"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/metrics/collectors/resource_metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 248,
-      "message": "method `resourceMetricsCollector.collectContainerSwapMetrics` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "resourceMetricsCollector.collectContainerSwapMetrics"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/metrics/collectors/resource_metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 268,
-      "message": "method `resourceMetricsCollector.collectPodCPUMetrics` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "resourceMetricsCollector.collectPodCPUMetrics"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/metrics/collectors/resource_metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 278,
-      "message": "method `resourceMetricsCollector.collectPodMemoryMetrics` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "resourceMetricsCollector.collectPodMemoryMetrics"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/metrics/collectors/resource_metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 288,
-      "message": "method `resourceMetricsCollector.collectPodSwapMetrics` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "resourceMetricsCollector.collectPodSwapMetrics"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/pluginmanager/metrics/metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 91,
-      "message": "method `totalPluginsCollector.getPluginCount` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "totalPluginsCollector.getPluginCount"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
       "file": "pkg/kubelet/pod_workers.go",
       "fp_risks": [
         "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
@@ -1510,46 +838,6 @@
       "severity": "warning",
       "source": "t0-treesitter",
       "symbol": "newPodSyncerFuncs"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/volumemanager/metrics/metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "const",
-      "level": "medium",
-      "line": 30,
-      "message": "const `pluginNameNotAvailable` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "pluginNameNotAvailable"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/kubelet/volumemanager/metrics/metrics.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 133,
-      "message": "method `totalVolumesCollector.getVolumeCount` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "totalVolumesCollector.getVolumeCount"
     },
     {
       "category": "dead",
@@ -1590,46 +878,6 @@
       "severity": "warning",
       "source": "t0-treesitter",
       "symbol": "getFirstColumn"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/proxy/metrics/metrics_linux.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "const",
-      "level": "medium",
-      "line": 80,
-      "message": "const `nftCounterListTimeout` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "nftCounterListTimeout"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/registry/rbac/validation/rule.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 317,
-      "message": "function `newMockRuleResolver` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "newMockRuleResolver"
     },
     {
       "category": "dead",
@@ -1684,175 +932,12 @@
       ],
       "kind": "method",
       "level": "medium",
-      "line": 262,
-      "message": "method `compositePodGroupStateData.removeCompositePodGroup` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "compositePodGroupStateData.removeCompositePodGroup"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/scheduler/backend/cache/podgroupstate.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 274,
-      "message": "method `compositePodGroupStateData.removeChild` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "compositePodGroupStateData.removeChild"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/scheduler/backend/cache/podgroupstate.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
       "line": 326,
       "message": "method `podGroupState.updatePod` is only used by tests",
       "rule": "used-only-by-tests",
       "severity": "warning",
       "source": "t0-treesitter",
       "symbol": "podGroupState.updatePod"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/scheduler/backend/cache/podgroupstate.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 484,
-      "message": "method `compositePodGroupState.removeCompositePodGroup` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "compositePodGroupState.removeCompositePodGroup"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "1 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/scheduler/framework/plugins/dynamicresources/claims.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 86,
-      "message": "method `claimStore.allUserClaims` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "claimStore.allUserClaims"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "1 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/scheduler/framework/plugins/dynamicresources/claims.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 166,
-      "message": "method `claimStore.getInitialExtendedResourceClaimUID` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "claimStore.getInitialExtendedResourceClaimUID"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/scheduler/framework/plugins/dynamicresources/dra_manager.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "const",
-      "level": "medium",
-      "line": 456,
-      "message": "const `maxDevicesLevel6` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "maxDevicesLevel6"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "1 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/scheduler/framework/plugins/dynamicresources/extendeddynamicresources.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 592,
-      "message": "method `DynamicResources.unreserveExtendedResourceClaim` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "DynamicResources.unreserveExtendedResourceClaim"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/scheduler/framework/plugins/dynamicresources/nodeallocatabledynamicresources.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 686,
-      "message": "method `DynamicResources.clearNodeAllocatableResourceClaimStatus` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "DynamicResources.clearNodeAllocatableResourceClaimStatus"
     },
     {
       "category": "dead",
@@ -2261,287 +1346,6 @@
         "reachable only from tests (no production code reaches it)",
         "private to its module/crate (complete scope visibility)"
       ],
-      "file": "pkg/scheduler/metrics/resources/resources.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 162,
-      "message": "function `recordMetricWithUnit` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "recordMetricWithUnit"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/scheduler/metrics/resources/resources.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 186,
-      "message": "function `podRequestsAndLimitsByLifecycle` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "podRequestsAndLimitsByLifecycle"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/serviceaccount/externaljwt/plugin/plugin.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 113,
-      "message": "method `Plugin.signAndAssembleJWT` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Plugin.signAndAssembleJWT"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/serviceaccount/externaljwt/plugin/plugin.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 148,
-      "message": "method `Plugin.validateJWTHeader` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Plugin.validateJWTHeader"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/serviceaccount/externaljwt/plugin/plugin.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 202,
-      "message": "function `mergeClaims` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "mergeClaims"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/serviceaccount/externaljwt/plugin/testing/v1/externalsigner_mock.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 243,
-      "message": "method `MockSigner.waitForMockServerToStart` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "MockSigner.waitForMockServerToStart"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/util/iptables/testing/fake.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 180,
-      "message": "method `FakeIPTables.saveTable` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "FakeIPTables.saveTable"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "1 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/util/oom/oom_fake.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 25,
-      "message": "function `fakeApplyOOMScoreAdj` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "fakeApplyOOMScoreAdj"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/util/procfs/procfs_linux.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 41,
-      "message": "function `containerNameFromProcCgroup` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "containerNameFromProcCgroup"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/volume/flexvolume/probe.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 85,
-      "message": "method `flexVolumeProber.probeMap` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "flexVolumeProber.probeMap"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/volume/flexvolume/probe.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 105,
-      "message": "method `flexVolumeProber.probeAll` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "flexVolumeProber.probeAll"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/volume/flexvolume/probe.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 130,
-      "message": "method `flexVolumeProber.newProbeEvent` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "flexVolumeProber.newProbeEvent"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/volume/testing/testing.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 138,
-      "message": "function `makeFakeCmd` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "makeFakeCmd"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "pkg/volume/testing/testing.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 148,
-      "message": "function `makeFakeOutput` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "makeFakeOutput"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
       "file": "plugin/pkg/auth/authorizer/node/graph.go",
       "fp_risks": [
         "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
@@ -2554,147 +1358,6 @@
       "severity": "warning",
       "source": "t0-treesitter",
       "symbol": "Graph.deleteEdgesLocked"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "1 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/helpers.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 239,
-      "message": "function `serveDefaultColumnsIfEmpty` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "serveDefaultColumnsIfEmpty"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiextensions-apiserver/pkg/cmd/server/testing/testserver.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 272,
-      "message": "function `createLocalhostListenerOnFreePort` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "createLocalhostListenerOnFreePort"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiextensions-apiserver/pkg/test/cel.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 106,
-      "message": "function `findCEL` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "findCEL"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiextensions-apiserver/pkg/test/pattern.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 53,
-      "message": "function `findPattern` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "findPattern"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiextensions-apiserver/test/integration/fixtures/resources.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 346,
-      "message": "function `waitForCRDReadyWatchUnsafe` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "waitForCRDReadyWatchUnsafe"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiextensions-apiserver/test/integration/fixtures/resources.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 361,
-      "message": "function `waitForCRDReady` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "waitForCRDReady"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiextensions-apiserver/test/integration/fixtures/server.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 56,
-      "message": "function `startDefaultServer` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "startDefaultServer"
     },
     {
       "category": "dead",
@@ -2775,171 +1438,6 @@
       "severity": "warning",
       "source": "t0-treesitter",
       "symbol": "getSubresourcesForVersion"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apimachinery/pkg/runtime/testing/validation.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 49,
-      "message": "function `runValidation` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "runValidation"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apimachinery/pkg/runtime/testing/validation.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 81,
-      "message": "function `runUpdateValidation` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "runUpdateValidation"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "1 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apimachinery/pkg/util/intstr/intstr.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 225,
-      "message": "function `getIntOrPercentValue` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "getIntOrPercentValue"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "1 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/versionconverter.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 117,
-      "message": "function `isNoCorrespondingTypeError` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "isNoCorrespondingTypeError"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apimachinery/pkg/util/strategicpatch/testing/openapi.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 55,
-      "message": "function `getSchema` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "getSchema"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "1 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apimachinery/pkg/util/strategicpatch/types.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "const",
-      "level": "medium",
-      "line": 28,
-      "message": "const `patchStrategyOpenapiextensionKey` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "patchStrategyOpenapiextensionKey"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "1 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apimachinery/pkg/util/strategicpatch/types.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "const",
-      "level": "medium",
-      "line": 29,
-      "message": "const `patchMergeKeyOpenapiextensionKey` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "patchMergeKeyOpenapiextensionKey"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "2 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apimachinery/pkg/util/strategicpatch/types.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 172,
-      "message": "function `parsePatchMetadata` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "parsePatchMetadata"
     },
     {
       "category": "dead",
@@ -3088,46 +1586,6 @@
         "reachable only from tests (no production code reaches it)",
         "private to its module/crate (complete scope visibility)"
       ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/plugin/policy/generic/policy_test_context.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 397,
-      "message": "method `E].waitForDelete` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "E].waitForDelete"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/plugin/policy/generic/policy_test_context.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 529,
-      "message": "method `E].deleteOne` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "E].deleteOne"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
       "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
       "fp_risks": [
         "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
@@ -3148,18 +1606,700 @@
         "reachable only from tests (no production code reaches it)",
         "private to its module/crate (complete scope visibility)"
       ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
+      "file": "staging/src/k8s.io/apiserver/pkg/endpoints/handlers/patch.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "type",
+      "level": "medium",
+      "line": 276,
+      "message": "type `mutateObjectUpdateFunc` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "mutateObjectUpdateFunc"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "staging/src/k8s.io/apiserver/pkg/server/httplog/httplog.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 179,
+      "message": "function `newLogged` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "newLogged"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "staging/src/k8s.io/apiserver/pkg/storage/etcd3/metrics/timestamped_resource_gauge_collector.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 54,
+      "message": "method `timestampedResourceGaugeCollector.setClock` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "timestampedResourceGaugeCollector.setClock"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "staging/src/k8s.io/apiserver/pkg/storage/testing/correctness/correctness.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 1933,
+      "message": "function `dropLabel` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "dropLabel"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "staging/src/k8s.io/client-go/tools/cache/delta_fifo.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 787,
+      "message": "function `copyDeltas` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "copyDeltas"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "staging/src/k8s.io/client-go/tools/remotecommand/websocket.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 499,
+      "message": "method `heartbeat.setMessage` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "heartbeat.setMessage"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "staging/src/k8s.io/code-generator/cmd/prerelease-lifecycle-gen/prerelease-lifecycle-generators/status.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 54,
+      "message": "function `extractEnabledTypeTag` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "extractEnabledTypeTag"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "staging/src/k8s.io/cri-streaming/pkg/streaming/portforward/httpstream.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 152,
+      "message": "method `httpStreamHandler.hasStreamPair` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "httpStreamHandler.hasStreamPair"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "staging/src/k8s.io/csi-translation-lib/plugins/gce_pd.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 51,
+      "message": "const `nodeIDFmt` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "nodeIDFmt"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "staging/src/k8s.io/kube-aggregator/pkg/controllers/openapi/controller.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 35,
+      "message": "const `successfulUpdateDelayLocal` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "successfulUpdateDelayLocal"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "staging/src/k8s.io/kubectl/pkg/cmd/attach/attach.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 68,
+      "message": "const `defaultPodLogsTimeout` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "defaultPodLogsTimeout"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e/framework/internal/unittests/bugs/bugs.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 112,
+      "message": "const `bugOutput` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "bugOutput"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e/network/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 256,
+      "message": "function `testEndpointReachability` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "testEndpointReachability"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e/windows/node_shutdown.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 56,
+      "message": "const `nodeStatusUpdateTimeout` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "nodeStatusUpdateTimeout"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_kubeadm/const.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 20,
+      "message": "const `kubePublicNamespace` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "kubePublicNamespace"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_kubeadm/const.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 23,
+      "message": "const `anonymousUser` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "anonymousUser"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/benchmark_util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 48,
+      "message": "function `dumpDataToFile` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "dumpDataToFile"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/benchmark_util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 62,
+      "message": "function `logPerfData` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "logPerfData"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/benchmark_util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 74,
+      "message": "function `logDensityTimeSeries` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "logDensityTimeSeries"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/benchmark_util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 101,
+      "message": "function `getCumulatedPodTimeSeries` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getCumulatedPodTimeSeries"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/benchmark_util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 112,
+      "message": "function `getLatencyPerfData` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getLatencyPerfData"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/benchmark_util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 135,
+      "message": "function `getThroughputPerfData` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getThroughputPerfData"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/benchmark_util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 158,
+      "message": "function `getTestNodeInfo` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getTestNodeInfo"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/benchmark_util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 198,
+      "message": "function `printPerfData` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "printPerfData"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/container_lifecycle_pod_construction.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 323,
+      "message": "function `parseOutput` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "parseOutput"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/container_lifecycle_pod_construction.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 376,
+      "message": "function `preparePod` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "preparePod"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/container_lifecycle_pod_construction.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 419,
+      "message": "function `startedPostStartGate` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "startedPostStartGate"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/image_list.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 72,
+      "message": "function `updateImageAllowList` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "updateImageAllowList"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/image_list.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 221,
+      "message": "function `getContainerImageFromE2ETestDaemonset` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getContainerImageFromE2ETestDaemonset"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/image_list.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 239,
+      "message": "function `getSRIOVDevicePluginImage` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getSRIOVDevicePluginImage"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/numa_alignment.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 80,
+      "message": "function `getCPUsPerNUMANode` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getCPUsPerNUMANode"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/numa_alignment.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 92,
+      "message": "function `getCPUToNUMANodeMapFromEnv` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getCPUToNUMANodeMapFromEnv"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/numa_alignment.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 141,
+      "message": "function `getPCIDeviceToNumaNodeMapFromEnv` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getPCIDeviceToNumaNodeMapFromEnv"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/numa_alignment.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 164,
+      "message": "function `makeEnvMap` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "makeEnvMap"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/numa_alignment.go",
       "fp_risks": [
         "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
       ],
       "kind": "struct",
       "level": "medium",
-      "line": 343,
-      "message": "struct `policyEvaluationState` is only used by tests",
+      "line": 180,
+      "message": "struct `testEnvInfo` is only used by tests",
       "rule": "used-only-by-tests",
       "severity": "warning",
       "source": "t0-treesitter",
-      "symbol": "policyEvaluationState"
+      "symbol": "testEnvInfo"
     },
     {
       "category": "dead",
@@ -3168,98 +2308,18 @@
         "reachable only from tests (no production code reaches it)",
         "private to its module/crate (complete scope visibility)"
       ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 349,
-      "message": "method `Evaluator.preparePolicyEvaluation` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.preparePolicyEvaluation"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 559,
-      "message": "method `Evaluator.evalMatchConditionsWithInputs` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.evalMatchConditionsWithInputs"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 602,
-      "message": "method `Evaluator.evalAuditAnnotationsWithInputs` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.evalAuditAnnotationsWithInputs"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 648,
-      "message": "method `Evaluator.evalMessageExpressions` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.evalMessageExpressions"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
+      "file": "test/e2e_node/numa_alignment.go",
       "fp_risks": [
         "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
       ],
       "kind": "function",
       "level": "medium",
-      "line": 667,
-      "message": "function `messageResultAt` is only used by tests",
+      "line": 187,
+      "message": "function `containerWantsDevices` is only used by tests",
       "rule": "used-only-by-tests",
       "severity": "warning",
       "source": "t0-treesitter",
-      "symbol": "messageResultAt"
+      "symbol": "containerWantsDevices"
     },
     {
       "category": "dead",
@@ -3268,18 +2328,18 @@
         "reachable only from tests (no production code reaches it)",
         "private to its module/crate (complete scope visibility)"
       ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
+      "file": "test/e2e_node/numa_alignment.go",
       "fp_risks": [
         "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
       ],
       "kind": "function",
       "level": "medium",
-      "line": 674,
-      "message": "function `validationMessage` is only used by tests",
+      "line": 192,
+      "message": "function `checkNUMAAlignment` is only used by tests",
       "rule": "used-only-by-tests",
       "severity": "warning",
       "source": "t0-treesitter",
-      "symbol": "validationMessage"
+      "symbol": "checkNUMAAlignment"
     },
     {
       "category": "dead",
@@ -3288,338 +2348,18 @@
         "reachable only from tests (no production code reaches it)",
         "private to its module/crate (complete scope visibility)"
       ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 697,
-      "message": "method `Evaluator.newCompiler` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.newCompiler"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 701,
-      "message": "method `Evaluator.newCompilerWithMode` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.newCompilerWithMode"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 713,
-      "message": "method `Evaluator.compileVariableList` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.compileVariableList"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 723,
-      "message": "method `Evaluator.evaluateMutatingWithInputs` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.evaluateMutatingWithInputs"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 727,
-      "message": "method `Evaluator.evaluateMutatingWithBindings` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.evaluateMutatingWithBindings"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 731,
-      "message": "method `Evaluator.evaluateMutatingWithBindingsAndNamespace` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.evaluateMutatingWithBindingsAndNamespace"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 747,
-      "message": "function `mutationExpressionAccessor` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "mutationExpressionAccessor"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 758,
-      "message": "function `messageExpressionDeclarations` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "messageExpressionDeclarations"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 763,
-      "message": "function `messageExpressionOptionalBindings` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "messageExpressionOptionalBindings"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 770,
-      "message": "function `auditAnnotationOptionalBindings` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "auditAnnotationOptionalBindings"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 774,
-      "message": "method `Evaluator.optionalDeclarations` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.optionalDeclarations"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 785,
-      "message": "method `Evaluator.mutationDeclarations` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.mutationDeclarations"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 793,
-      "message": "method `Evaluator.expressionMode` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.expressionMode"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 804,
-      "message": "method `Evaluator.runtimeMatchCELCostBudget` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "Evaluator.runtimeMatchCELCostBudget"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 821,
-      "message": "function `evaluationValue` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "evaluationValue"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/evaluator.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 828,
-      "message": "function `budgetCost` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "budgetCost"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
+      "file": "test/e2e_node/numa_alignment.go",
       "fp_risks": [
         "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
       ],
       "kind": "struct",
       "level": "medium",
-      "line": 55,
-      "message": "struct `admissionInputFile` is only used by tests",
+      "line": 223,
+      "message": "struct `pciDeviceInfo` is only used by tests",
       "rule": "used-only-by-tests",
       "severity": "warning",
       "source": "t0-treesitter",
-      "symbol": "admissionInputFile"
+      "symbol": "pciDeviceInfo"
     },
     {
       "category": "dead",
@@ -3628,18 +2368,1660 @@
         "reachable only from tests (no production code reaches it)",
         "private to its module/crate (complete scope visibility)"
       ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
+      "file": "test/e2e_node/numa_alignment.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 230,
+      "message": "function `getPCIDeviceInfo` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getPCIDeviceInfo"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/numa_alignment.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 270,
+      "message": "function `numaNodeFromSysFsEntry` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "numaNodeFromSysFsEntry"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/resource_collector.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 50,
+      "message": "const `cadvisorImageName` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "cadvisorImageName"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/resource_collector.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 51,
+      "message": "const `cadvisorPodName` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "cadvisorPodName"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/resource_collector.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 54,
+      "message": "const `houseKeepingInterval` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "houseKeepingInterval"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/resource_collector.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 288,
+      "message": "function `formatCPUSummary` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "formatCPUSummary"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/resource_collector.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 327,
+      "message": "function `getCadvisorPod` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getCadvisorPod"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/resource_collector.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 401,
+      "message": "function `deletePodsSync` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "deletePodsSync"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/resource_collector.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 418,
+      "message": "function `newTestPods` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "newTestPods"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 81,
+      "message": "const `defaultNodeAllocatableCgroup` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "defaultNodeAllocatableCgroup"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 83,
+      "message": "const `defaultPodResourcesPath` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "defaultPodResourcesPath"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 84,
+      "message": "const `defaultPodResourcesTimeout` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "defaultPodResourcesTimeout"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 85,
+      "message": "const `defaultPodResourcesMaxSize` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "defaultPodResourcesMaxSize"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 99,
+      "message": "function `getNodeSummary` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getNodeSummary"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 131,
+      "message": "function `getV1alpha1NodeDevices` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getV1alpha1NodeDevices"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 150,
+      "message": "function `getV1NodeDevices` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getV1NodeDevices"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 169,
+      "message": "function `addAfterEachForCleaningUpPods` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "addAfterEachForCleaningUpPods"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 184,
+      "message": "function `addBeforeEachForCleaningUpPods` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "addBeforeEachForCleaningUpPods"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 221,
+      "message": "function `listNamespaceEvents` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "listNamespaceEvents"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 232,
+      "message": "function `logPodEvents` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "logPodEvents"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 238,
+      "message": "function `logNodeEvents` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "logNodeEvents"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 255,
+      "message": "function `getLocalTestNode` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getLocalTestNode"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 265,
+      "message": "function `getLocalNodeCPUDetails` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getLocalNodeCPUDetails"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 282,
+      "message": "function `logKubeletLatencyMetrics` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "logKubeletLatencyMetrics"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 347,
+      "message": "function `findContainerRuntimeServiceName` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "findContainerRuntimeServiceName"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "type",
+      "level": "medium",
+      "line": 367,
+      "message": "type `containerRuntimeUnitOp` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "containerRuntimeUnitOp"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 370,
+      "message": "const `startContainerRuntimeUnitOp` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "startContainerRuntimeUnitOp"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 371,
+      "message": "const `stopContainerRuntimeUnitOp` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "stopContainerRuntimeUnitOp"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 374,
+      "message": "function `performContainerRuntimeUnitOp` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "performContainerRuntimeUnitOp"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 405,
+      "message": "function `stopContainerRuntime` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "stopContainerRuntime"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 409,
+      "message": "function `startContainerRuntime` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "startContainerRuntime"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 455,
+      "message": "function `toCgroupFsName` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "toCgroupFsName"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 466,
+      "message": "function `reduceAllocatableMemoryUsageIfCgroupv1` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "reduceAllocatableMemoryUsageIfCgroupv1"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 478,
+      "message": "function `withFeatureGate` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "withFeatureGate"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 491,
+      "message": "function `waitForAllContainerRemoval` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "waitForAllContainerRemoval"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 595,
+      "message": "function `nodeNameOrIP` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "nodeNameOrIP"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 614,
+      "message": "function `waitForContainerRemoval` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "waitForContainerRemoval"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 632,
+      "message": "function `deletePodsAsync` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "deletePodsAsync"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 646,
+      "message": "function `deletePodSyncAndWait` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "deletePodSyncAndWait"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 653,
+      "message": "function `getKubeletMetrics` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getKubeletMetrics"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 663,
+      "message": "function `getCounterMetricValue` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getCounterMetricValue"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_criproxy_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 28,
+      "message": "function `addCRIProxyInjector` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "addCRIProxyInjector"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_criproxy_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 37,
+      "message": "function `resetCRIProxyInjector` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "resetCRIProxyInjector"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 42,
+      "message": "function `isHTEnabled` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "isHTEnabled"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 52,
+      "message": "function `isMultiNUMA` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "isMultiNUMA"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 62,
+      "message": "function `getUncoreCPUGroupSize` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getUncoreCPUGroupSize"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 75,
+      "message": "function `getCPUSiblingList` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getCPUSiblingList"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 81,
+      "message": "function `getCoreSiblingList` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getCoreSiblingList"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 88,
+      "message": "function `getNumaNodeCPUs` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getNumaNodeCPUs"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 114,
+      "message": "function `getCPUSocketID` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getCPUSocketID"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_unsupported.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 32,
+      "message": "function `isHTEnabled` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "isHTEnabled"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_unsupported.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 36,
+      "message": "function `isMultiNUMA` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "isMultiNUMA"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_unsupported.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 40,
+      "message": "function `getUncoreCPUGroupSize` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getUncoreCPUGroupSize"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_unsupported.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 44,
+      "message": "function `getCPUSiblingList` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getCPUSiblingList"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_unsupported.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 48,
+      "message": "function `getCoreSiblingList` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getCoreSiblingList"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_unsupported.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 53,
+      "message": "function `getNumaNodeCPUs` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getNumaNodeCPUs"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_machineinfo_unsupported.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 57,
+      "message": "function `getCPUSocketID` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getCPUSocketID"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_sriov.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 35,
+      "message": "function `requireSRIOVDevices` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "requireSRIOVDevices"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_sriov_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 29,
+      "message": "function `countSRIOVDevices` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "countSRIOVDevices"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_sriov_unsupported.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 21,
+      "message": "function `countSRIOVDevices` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "countSRIOVDevices"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_xfs_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 28,
+      "message": "function `detectMountpoint` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "detectMountpoint"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_xfs_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "const",
+      "level": "medium",
+      "line": 50,
+      "message": "const `xfsMagic` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "xfsMagic"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_xfs_linux.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 63,
+      "message": "function `isXfs` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "isXfs"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node/util_xfs_unsupported.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 21,
+      "message": "function `isXfs` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "isXfs"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/image_list.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 56,
+      "message": "function `updateImageAllowList` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "updateImageAllowList"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 221,
+      "message": "function `stopContainerRuntime` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "stopContainerRuntime"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 225,
+      "message": "function `startContainerRuntime` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "startContainerRuntime"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 242,
+      "message": "function `getNodeSummary` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getNodeSummary"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 274,
+      "message": "function `addAfterEachForCleaningUpPods` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "addAfterEachForCleaningUpPods"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 309,
+      "message": "function `listNamespaceEvents` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "listNamespaceEvents"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 320,
+      "message": "function `logPodEvents` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "logPodEvents"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 326,
+      "message": "function `logNodeEvents` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "logNodeEvents"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 340,
+      "message": "function `getLocalTestNode` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getLocalTestNode"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 350,
+      "message": "function `getLocalNodeCPUDetails` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getLocalNodeCPUDetails"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 364,
+      "message": "function `nodeNameOrIP` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "nodeNameOrIP"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 371,
+      "message": "function `logKubeletLatencyMetrics` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "logKubeletLatencyMetrics"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util_affinity_windows.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 34,
+      "message": "function `containerIDForContainer` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "containerIDForContainer"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util_affinity_windows.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 50,
+      "message": "function `getWindowsContainerCPUAffinity` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "getWindowsContainerCPUAffinity"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util_affinity_windows.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 73,
+      "message": "function `countCPUsInAffinities` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "countCPUsInAffinities"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/e2e_node_windows/util_affinity_windows.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 83,
+      "message": "function `windowsAffinitiesOverlap` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "windowsAffinitiesOverlap"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "no reference edges from any code (0 incoming)",
+        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/images/agnhost/external-metrics/provider.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "method",
+      "level": "medium",
+      "line": 107,
+      "message": "method `metricProvider.createMetric` appears unused",
+      "rule": "dead-code",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "metricProvider.createMetric"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/images/agnhost/webhook/convert.go",
+      "fp_risks": [
+        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
+      ],
+      "kind": "function",
+      "level": "medium",
+      "line": 45,
+      "message": "function `convertAdmissionRequestToV1beta1` is only used by tests",
+      "rule": "used-only-by-tests",
+      "severity": "warning",
+      "source": "t0-treesitter",
+      "symbol": "convertAdmissionRequestToV1beta1"
+    },
+    {
+      "category": "dead",
+      "confidence": 0.8,
+      "evidence": [
+        "reachable only from tests (no production code reaches it)",
+        "private to its module/crate (complete scope visibility)"
+      ],
+      "file": "test/images/agnhost/webhook/convert.go",
       "fp_risks": [
         "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
       ],
       "kind": "function",
       "level": "medium",
       "line": 65,
-      "message": "function `parseAdmissionPolicy` is only used by tests",
+      "message": "function `convertAdmissionResponseToV1` is only used by tests",
       "rule": "used-only-by-tests",
       "severity": "warning",
       "source": "t0-treesitter",
-      "symbol": "parseAdmissionPolicy"
+      "symbol": "convertAdmissionResponseToV1"
     },
     {
       "category": "dead",
@@ -3648,18 +4030,18 @@
         "reachable only from tests (no production code reaches it)",
         "private to its module/crate (complete scope visibility)"
       ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
+      "file": "test/integration/apiserver/apidefinitions/helper.go",
       "fp_risks": [
         "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
       ],
       "kind": "function",
       "level": "medium",
-      "line": 91,
-      "message": "function `parseFlatPolicy` is only used by tests",
+      "line": 192,
+      "message": "function `matchesException` is only used by tests",
       "rule": "used-only-by-tests",
       "severity": "warning",
       "source": "t0-treesitter",
-      "symbol": "parseFlatPolicy"
+      "symbol": "matchesException"
     },
     {
       "category": "dead",
@@ -3668,459 +4050,58 @@
         "reachable only from tests (no production code reaches it)",
         "private to its module/crate (complete scope visibility)"
       ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 119,
-      "message": "function `parseValidatingAdmissionPolicy` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "parseValidatingAdmissionPolicy"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 156,
-      "message": "function `parseMutatingAdmissionPolicy` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "parseMutatingAdmissionPolicy"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 191,
-      "message": "function `parseValidatingWebhookConfiguration` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "parseValidatingWebhookConfiguration"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 223,
-      "message": "function `parseMutatingWebhookConfiguration` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "parseMutatingWebhookConfiguration"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 253,
-      "message": "function `appendVariables` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "appendVariables"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 269,
-      "message": "function `appendValidations` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "appendValidations"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 284,
-      "message": "function `appendMatchConditions` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "appendMatchConditions"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 298,
-      "message": "function `appendAuditAnnotations` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "appendAuditAnnotations"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 316,
-      "message": "function `parseAdmissionPolicyFile` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "parseAdmissionPolicyFile"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 324,
-      "message": "function `parseAdmissionInput` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "parseAdmissionInput"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 359,
-      "message": "function `decodeRawExtension` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "decodeRawExtension"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 389,
-      "message": "function `parseAdmissionInputFile` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "parseAdmissionInputFile"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/admission/testing/celtest/parse.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 397,
-      "message": "function `appendMutations` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "appendMutations"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/apis/authorization/v1/encoding.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 96,
-      "message": "function `fromAuthorizerConditions` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "fromAuthorizerConditions"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/authorization/union/union.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 188,
-      "message": "method `unionAuthzHandler.evaluateConditions` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "unionAuthzHandler.evaluateConditions"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/cel/library/cidr.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 144,
-      "message": "method `cidrs.declarations` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "cidrs.declarations"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/cel/library/cost.go",
+      "file": "test/integration/apiserver/cel/admission_test_util.go",
       "fp_risks": [
         "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
       ],
       "kind": "const",
       "level": "medium",
-      "line": 69,
-      "message": "const `selectorLengthToRequirementCount` is only used by tests",
+      "line": 55,
+      "message": "const `testClientUsername` is only used by tests",
       "rule": "used-only-by-tests",
       "severity": "warning",
       "source": "t0-treesitter",
-      "symbol": "selectorLengthToRequirementCount"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/cel/library/cost.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "const",
-      "level": "medium",
-      "line": 71,
-      "message": "const `costPerRequirement` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "costPerRequirement"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "reachable only from tests (no production code reaches it)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/cel/library/cost.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "function",
-      "level": "medium",
-      "line": 77,
-      "message": "function `selectorCostEstimate` is only used by tests",
-      "rule": "used-only-by-tests",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "selectorCostEstimate"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "1 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/cel/library/cost.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 570,
-      "message": "method `CostEstimator.sizeEstimate` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "CostEstimator.sizeEstimate"
-    },
-    {
-      "category": "dead",
-      "confidence": 0.8,
-      "evidence": [
-        "1 reference(s) found, but only from code that is itself unreachable",
-        "not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)",
-        "private to its module/crate (complete scope visibility)"
-      ],
-      "file": "staging/src/k8s.io/apiserver/pkg/cel/library/cost.go",
-      "fp_risks": [
-        "tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files"
-      ],
-      "kind": "method",
-      "level": "medium",
-      "line": 580,
-      "message": "method `CostEstimator.listElementNode` appears unused",
-      "rule": "dead-code",
-      "severity": "warning",
-      "source": "t0-treesitter",
-      "symbol": "CostEstimator.listElementNode"
+      "symbol": "testClientUsername"
     }
   ],
-  "steps": [
-    {
-      "findings": 4996,
-      "name": "dead-code",
-      "note": null,
-      "status": "ran"
+  "index": {
+    "by_language": {
+      "go": 13551,
+      "html": 1,
+      "python": 7,
+      "text": 7718
     },
-    {
-      "findings": 4,
-      "name": "check-deps",
-      "note": "offline: manifests and local resolution only; pass --online to check registries",
-      "status": "ran"
-    },
-    {
-      "findings": 0,
-      "name": "test-weakening",
-      "note": "vs HEAD",
-      "status": "ran"
-    },
-    {
-      "findings": 0,
-      "name": "diagnostics",
-      "note": "no saved output (--from) and --run not given; nothing was executed",
-      "status": "skipped"
-    },
-    {
-      "findings": 0,
-      "name": "rule-engines",
-      "note": "semgrep / ast-grep run only with --run",
-      "status": "skipped"
-    }
+    "db_path": "/workspace/repos/k8s/.plumbgraph/index.db",
+    "edges": 5269587,
+    "files_hashed": 0,
+    "files_parsed": 0,
+    "files_removed": 0,
+    "files_seen": 13558,
+    "files_skipped_large": 0,
+    "files_unchanged": 13558,
+    "files_with_syntax_errors": 0,
+    "imports": 94062,
+    "parse_errors": 0,
+    "refs": 6078895,
+    "resolved": false,
+    "symbols": 145092,
+    "text_files": 7719
+  },
+  "limitations": [
+    "tier-0 (tree-sitter, name-based) analysis: no type information, reflection or macro expansion; no SCIP index was used",
+    "never delete on `medium` or `low` findings without checking usages yourself; `high` means no use was found in indexed code, not that deletion is proven safe",
+    "files excluded by .gitignore, vendor/build directories and files over 2 MiB are not indexed"
   ],
-  "total_findings": 5000,
+  "scip": null,
+  "summary": {
+    "high": 28,
+    "low": 0,
+    "medium": 261,
+    "total": 289
+  },
   "truncated": {
     "hint": "output capped, lowest confidence findings omitted; pass --max-findings 0 for everything or --only <path> to narrow down",
     "shown": 200,
-    "total": 5000
-  },
-  "verdict": "fail"
+    "total": 289
+  }
 }

@@ -1,0 +1,101 @@
+# plumb map: 14 files, 86 of 321 symbols (~1456 tokens, budget 1500)
+src/requests/models.py
+  108: class RequestEncodingMixin
+  254: class RequestHooksMixin
+  284: class Request(RequestHooksMixin)
+  360: def prepare(self) -> PreparedRequest
+  378: class PreparedRequest(RequestEncodingMixin, RequestHooksMixin)
+  424: def prepare( self, method: str | None = None, url: _t.UriType | None = None,
+  732: class Response
+  862: def ok(self) -> bool
+  877: def is_redirect(self) -> bool
+  907: def iter_content( self, chunk_size: int | None = 1, decode_unicode: Literal[False] = False ) -> Iterator[bytes]: ... @ov…
+  911: def iter_content( self, chunk_size: int | None = 1, *, decode_unicode: Literal[True] ) -> Iterator[str | bytes]: ... def…
+  914: def iter_content( self, chunk_size: int | None = 1, decode_unicode: bool = False ) -> Iterator[str | bytes]
+  1035: def content(self) -> bytes
+  1054: def text(self) -> str
+  1091: def json(self, **kwargs: Any) -> Any
+  1144: def raise_for_status(self) -> None
+  1173: def close(self) -> None
+src/requests/cookies.py
+  54: def get_host(self) -> str
+  110: def host(self) -> str
+  185: class CookieConflictError(RuntimeError)
+  191: class RequestsCookieJar(CookieJar, MutableMapping[str, str | None]):  # type: ignore[misc] """Compatibility class; is a …
+  211: def get(  # type: ignore[override] self, name: str, default: str | None = None,
+  229: def set( self, name: str, value: str | Morsel[dict[str, str]] | None, **kwargs: Any ) -> Cookie | None
+  267: def itervalues(self) -> Iterator[str | None]
+  276: def values(self) -> list[str | None]:  # type: ignore[override] """Dict-like values() that returns a list of values of c…
+  284: def iteritems(self) -> Iterator[tuple[str, str | None]]
+  293: def items(self) -> list[tuple[str, str | None]]:  # type: ignore[override] """Dict-like items() that returns a list of n…
+  382: def set_cookie(self, cookie: Cookie, *args: Any, **kwargs: Any) -> None
+  391: def update(  # type: ignore[override] self, other: CookieJar | SupportsKeysAndGetItem[str, str] ) -> None
+  423: def _find_no_duplicates( self, name: str, domain: str | None = None, path: str | None = None ) -> str
+  467: def copy(self) -> RequestsCookieJar
+  494: def create_cookie(name: str, value: str, **kwargs: Any) -> Cookie
+  531: def morsel_to_cookie(morsel: Morsel[Any]) -> Cookie
+src/requests/structures.py
+  20: class CaseInsensitiveDict(MutableMapping[str, _VT], Generic[_VT])
+  96: class LookupDict(dict[str, _VT])
+  124: def get(self, key: str, default: None = None) -> _VT | None: ...  @overload def get(self, key: str, default: _D | _VT) -…
+  127: def get(self, key: str, default: _D | _VT) -> _D | _VT: ...  def get(self, key: str, default: _D | None = None) -> _VT |…
+  129: def get(self, key: str, default: _D | None = None) -> _VT | _D | None
+src/requests/sessions.py
+  127: class SessionRedirectMixin
+  132: def send(self, request: PreparedRequest, **kwargs: Any) -> Response: ...  def get_redirect_target(self, resp: Response) …
+  154: def should_strip_auth(self, old_url: str, new_url: str) -> bool
+  395: class Session(SessionRedirectMixin)
+  511: def prepare_request(self, request: Request) -> PreparedRequest
+  557: def request( self, method: str, url: _t.UriType,
+  655: def get( self, url: _t.UriType, params: _t.ParamsType = None,
+  695: def post( self, url: _t.UriType, data: _t.DataType = None,
+  752: def send(self, request: PreparedRequest, **kwargs: Any) -> Response
+  883: def close(self) -> None
+  908: def session() -> Session
+src/requests/exceptions.py
+  20: class RequestException(IOError)
+  38: class InvalidJSONError(RequestException)
+  42: class JSONDecodeError(InvalidJSONError, CompatJSONDecodeError)
+  66: class HTTPError(RequestException)
+  70: class ConnectionError(RequestException)
+  82: class Timeout(RequestException)
+  118: class InvalidURL(RequestException, ValueError)
+  153: class RequestsWarning(Warning)
+  157: class FileModeWarning(RequestsWarning, DeprecationWarning)
+src/requests/utils.py
+  160: def super_len(o: Any) -> int
+  283: def guess_filename(obj: Any) -> str | None
+  290: def extract_zipped_paths(path: str) -> str
+  475: def unquote_header_value(value: str, is_filename: bool = False) -> str
+  522: def get_encodings_from_content(content: str) -> list[str]
+  726: def address_in_network(ip: str, net: str) -> bool
+  741: def dotted_netmask(mask: int) -> str
+  752: def is_ipv4_address(string_ip: str) -> bool
+  763: def is_valid_cidr(string_network: str) -> bool
+  810: def should_bypass_proxies(url: str, no_proxy: str | None) -> bool
+  873: def get_environ_proxies(url: str, no_proxy: str | None = None) -> dict[str, str]
+  1008: def guess_json_utf(data: bytes) -> str | None
+  1070: def get_auth_from_url(url: str) -> tuple[str, str]
+src/requests/_types.py
+  39: def items(self) -> Iterable[tuple[_KT_co, _VT_co]]: ...   # These are needed at runtime for default_hooks() return type
+  47: def is_prepared(request: PreparedRequest) -> TypeIs[_ValidatedRequest]
+  157: class BaseRequestKwargs(TypedDict, total=False)
+  170: class RequestKwargs(BaseRequestKwargs, total=False)
+  177: class GetKwargs(BaseRequestKwargs, total=False)
+src/requests/api.py
+  24: def request( method: str, url: _t.UriType, **kwargs: Unpack[_t.RequestKwargs] ) -> Response
+src/requests/adapters.py
+  122: class BaseAdapter
+  158: class HTTPAdapter(BaseAdapter)
+src/requests/auth.py
+  34: def _basic_auth_str(username: bytes | str, password: bytes | str) -> str
+  78: class AuthBase
+src/requests/help.py
+  35: def _implementation()
+  67: def info() -> dict[str, Any]
+src/requests/_internal_utils.py
+  26: def to_native_string(string: str | bytes, encoding: str = "ascii") -> str
+src/requests/hooks.py
+  25: def default_hooks() -> dict[str, list[_t.HookType]]
+src/requests/status_codes.py
+  116: def doc(code: int) -> str

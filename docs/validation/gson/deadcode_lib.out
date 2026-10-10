@@ -1,0 +1,36 @@
+{
+  "findings": [],
+  "index": {
+    "by_language": {
+      "java": 264,
+      "text": 1
+    },
+    "db_path": "/workspace/repos/gson/.plumbgraph/index.db",
+    "edges": 41530,
+    "files_hashed": 0,
+    "files_parsed": 0,
+    "files_removed": 0,
+    "files_seen": 264,
+    "files_skipped_large": 0,
+    "files_unchanged": 264,
+    "files_with_syntax_errors": 0,
+    "imports": 2674,
+    "parse_errors": 0,
+    "refs": 74862,
+    "resolved": false,
+    "symbols": 4247,
+    "text_files": 1
+  },
+  "limitations": [
+    "tier-0 (tree-sitter, name-based) analysis: no type information, reflection or macro expansion; no SCIP index was used",
+    "never delete on `medium` or `low` findings without checking usages yourself; `high` means no use was found in indexed code, not that deletion is proven safe",
+    "files excluded by .gitignore, vendor/build directories and files over 2 MiB are not indexed"
+  ],
+  "scip": null,
+  "summary": {
+    "high": 0,
+    "low": 0,
+    "medium": 0,
+    "total": 0
+  }
+}

@@ -1,0 +1,184 @@
+{
+ "repo": "requests",
+ "lang": "py",
+ "results": [
+  {
+   "kind": "skip",
+   "file": "tests/test_utils.py",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "tests/test_help.py",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "tests/test_requests.py",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "tests/test_hooks.py",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "tests/test_testserver.py",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "trivial-assertion"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "tests/test_utils.py",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "trivial-assertion"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "tests/test_structures.py",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "trivial-assertion"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "tests/test_help.py",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "trivial-assertion"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "tests/test_utils.py",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "tests/test_help.py",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "tests/test_requests.py",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "tests/test_lowlevel.py",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "benign",
+   "file": "tests/test_testserver.py",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  },
+  {
+   "kind": "benign",
+   "file": "tests/test_utils.py",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  },
+  {
+   "kind": "benign",
+   "file": "tests/test_structures.py",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  }
+ ],
+ "recall": "12/12",
+ "false_pos_on_benign": "0/3"
+}

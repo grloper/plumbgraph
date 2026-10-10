@@ -1,0 +1,4 @@
+indexed 951 file(s): parsed 0, unchanged 951, removed 0
+symbols 9334, references 224733, imports 5695, edges 137862
+languages: csharp=951 text=25
+db: /workspace/repos/Newtonsoft.Json/.plumbgraph/index.db

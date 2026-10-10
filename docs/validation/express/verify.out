@@ -1,0 +1,520 @@
+{
+  "baseline_path": "/workspace/repos/express/plumb-baseline.json",
+  "baseline_updated": false,
+  "baselined": 0,
+  "executed": false,
+  "fail_on": "medium",
+  "fixed": 0,
+  "limitations": [
+    "dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change",
+    "baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new",
+    "no baseline found at /workspace/repos/express/plumb-baseline.json: every finding counts as new (create one with --update-baseline)"
+  ],
+  "new": [
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`online` is imported at examples/online/index.js:15",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "examples/online/index.js",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 15,
+      "message": "`online` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "online"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`redis` is imported at examples/online/index.js:16",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "examples/online/index.js",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 16,
+      "message": "`redis` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "redis"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.8,
+      "evidence": [
+        "`redis` is imported at examples/search/index.js:16",
+        "not declared in any npm manifest covering this file",
+        "registry not consulted or inconclusive: offline mode"
+      ],
+      "file": "examples/search/index.js",
+      "fp_risks": [],
+      "kind": "import",
+      "level": "medium",
+      "line": 16,
+      "message": "`redis` is imported but not declared in a manifest",
+      "rule": "undeclared-dependency",
+      "severity": "error",
+      "source": "manifest+t0-import",
+      "symbol": "redis"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/auth/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 8,
+      "message": "`pbkdf2-password` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/auth/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 10,
+      "message": "`express-session` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/cookie-sessions/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 7,
+      "message": "`cookie-session` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/cookies/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 9,
+      "message": "`morgan` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/cookies/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 10,
+      "message": "`cookie-parser` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/ejs/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 23,
+      "message": "`ejs` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/error-pages/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 10,
+      "message": "`morgan` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/error/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 8,
+      "message": "`morgan` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/markdown/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 10,
+      "message": "`marked` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/mvc/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 8,
+      "message": "`morgan` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/mvc/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 10,
+      "message": "`express-session` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/mvc/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 11,
+      "message": "`method-override` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/route-separation/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 10,
+      "message": "`morgan` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/route-separation/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 11,
+      "message": "`cookie-parser` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/route-separation/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 12,
+      "message": "`method-override` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/session/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 11,
+      "message": "`express-session` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/session/redis.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 8,
+      "message": "`morgan` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/session/redis.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 9,
+      "message": "`express-session` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/session/redis.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 13,
+      "message": "`connect-redis` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/static-files/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 8,
+      "message": "`morgan` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/vhost/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 8,
+      "message": "`morgan` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/vhost/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 9,
+      "message": "`vhost` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    },
+    {
+      "category": "deps",
+      "confidence": 0.5,
+      "evidence": [
+        "declared only in a dev/test/build section"
+      ],
+      "file": "examples/view-constructor/index.js",
+      "fp_risks": [
+        "the importing file may itself be test/build-only code"
+      ],
+      "kind": "import",
+      "level": "low",
+      "line": 9,
+      "message": "`marked` is only declared as a dev/build dependency",
+      "rule": "dev-dependency-in-source",
+      "severity": "info",
+      "source": "manifest+t0-import"
+    }
+  ],
+  "steps": [
+    {
+      "findings": 0,
+      "name": "dead-code",
+      "note": null,
+      "status": "ran"
+    },
+    {
+      "findings": 26,
+      "name": "check-deps",
+      "note": "offline: manifests and local resolution only; pass --online to check registries",
+      "status": "ran"
+    },
+    {
+      "findings": 0,
+      "name": "test-weakening",
+      "note": "vs HEAD",
+      "status": "ran"
+    },
+    {
+      "findings": 0,
+      "name": "diagnostics",
+      "note": "no saved output (--from) and --run not given; nothing was executed",
+      "status": "skipped"
+    },
+    {
+      "findings": 0,
+      "name": "rule-engines",
+      "note": "semgrep / ast-grep run only with --run",
+      "status": "skipped"
+    }
+  ],
+  "total_findings": 26,
+  "verdict": "fail"
+}

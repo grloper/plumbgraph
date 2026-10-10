@@ -1,0 +1,184 @@
+{
+ "repo": "Newtonsoft.Json",
+ "lang": "cs",
+ "results": [
+  {
+   "kind": "skip",
+   "file": "Src/Newtonsoft.Json.Tests/Serialization/DateOnlyTests.cs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "Src/Newtonsoft.Json.Tests/Serialization/CamelCasePropertyNamesContractResolverTests.cs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "Src/Newtonsoft.Json.Tests/Serialization/ModernNumericTests.cs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "skip",
+   "file": "Src/Newtonsoft.Json.Tests/Schema/JsonSchemaBuilderTests.cs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "added-skip"
+   ],
+   "levels": [
+    "high"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "Src/Newtonsoft.Json.Tests/Serialization/DateOnlyTests.cs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "trivial-assertion"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "Src/Newtonsoft.Json.Tests/Serialization/CamelCasePropertyNamesContractResolverTests.cs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "trivial-assertion"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "Src/Newtonsoft.Json.Tests/Serialization/ModernNumericTests.cs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "trivial-assertion"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "loosen-assert",
+   "file": "Src/Newtonsoft.Json.Tests/Schema/JsonSchemaBuilderTests.cs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "trivial-assertion"
+   ],
+   "levels": [
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "Src/Newtonsoft.Json.Tests/Serialization/DateOnlyTests.cs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "Src/Newtonsoft.Json.Tests/Serialization/CamelCasePropertyNamesContractResolverTests.cs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "Src/Newtonsoft.Json.Tests/Serialization/ModernNumericTests.cs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "delete-test",
+   "file": "Src/Newtonsoft.Json.Tests/Schema/JsonSchemaBuilderTests.cs",
+   "expected": "flag",
+   "detected": true,
+   "rules": [
+    "assertions-reduced",
+    "deleted-test"
+   ],
+   "levels": [
+    "low",
+    "medium"
+   ]
+  },
+  {
+   "kind": "benign",
+   "file": "Src/Newtonsoft.Json.Tests/Serialization/DateOnlyTests.cs",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  },
+  {
+   "kind": "benign",
+   "file": "Src/Newtonsoft.Json.Tests/Serialization/CamelCasePropertyNamesContractResolverTests.cs",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  },
+  {
+   "kind": "benign",
+   "file": "Src/Newtonsoft.Json.Tests/Serialization/ModernNumericTests.cs",
+   "expected": "none",
+   "detected": false,
+   "rules": [],
+   "levels": []
+  }
+ ],
+ "recall": "12/12",
+ "false_pos_on_benign": "0/3"
+}

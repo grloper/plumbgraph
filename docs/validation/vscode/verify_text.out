@@ -1,0 +1,933 @@
+HIGH   0.95  cli/src/util/ring_buffer.rs:55  type `RingBuffer::IntoIter` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `IntoIter` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/chatSessions/vscode-node/sessionOptionGroupBuilder.ts:261  function `resetIsolationLock` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `resetIsolationLock` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/inlineEdits/vscode-node/features/diagnosticsCompletionProcessor.ts:640  method `DiagnosticsCompletionHandlerTelemetry.setDistanceToAlternativeDiagnostic` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `setDistanceToAlternativeDiagnostic` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/inlineEdits/vscode-node/features/diagnosticsCompletionProcessor.ts:646  method `DiagnosticsCompletionHandlerTelemetry.setDistanceToUnknownDiagnostic` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `setDistanceToUnknownDiagnostic` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/inlineEdits/vscode-node/features/diagnosticsCompletionProcessor.ts:652  method `DiagnosticsCompletionHandlerTelemetry.setHasAlternativeDiagnosticForSameRange` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `setHasAlternativeDiagnosticForSameRange` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/intents/node/newIntent.ts:169  method `NewWorkspaceCopilotContentManager._prefetch` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `_prefetch` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/tools/common/toolsRegistry.ts:137  method `ToolRegistry.registerToolExtension` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `registerToolExtension` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/typescriptContext/serverPlugin/fixtures/nes/p1/source/test.ts:46  type `MyType` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `MyType` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/typescriptContext/serverPlugin/fixtures/nes/p1/source/test.ts:50  type `TypeOne` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `TypeOne` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/typescriptContext/serverPlugin/fixtures/nes/p1/source/test.ts:54  type `TypeTwo` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `TypeTwo` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/extension/typescriptContext/vscode-node/ts6/tsContextService.ts:117  method `OnTimeoutData.addRunnableResult` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `addRunnableResult` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/platform/networking/node/nodeFetchFetcher.ts:112  method `createWebSocket.onUpgrade` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onUpgrade` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/platform/networking/node/nodeFetchFetcher.ts:119  method `createWebSocket.onHeaders` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onHeaders` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/platform/parser/node/nodes.ts:66  method `TreeSitterOffsetRange.isTreeSitterOffsetRange` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `isTreeSitterOffsetRange` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/platform/workspaceRecorder/common/resolvedRecording/resolvedRecording.ts:195  method `WorkspaceDocument.getStateIdBeforeOrAtOpIdx` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getStateIdBeforeOrAtOpIdx` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/util/vs/base/common/observableInternal/observables/baseObservable.ts:142  method `DebugHelper.getDependencyGraph` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getDependencyGraph` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/src/util/vs/base/common/observableInternal/observables/baseObservable.ts:146  method `DebugHelper.getObserverGraph` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getObserverGraph` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_call_not_awaited.cs:5  method `Program.CallingMethodAsync` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `CallingMethodAsync` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_does_not_exist.cs:2  method `Program.PrintMessage` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `PrintMessage` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:21  class `Class2` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class2` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:27  class `Class3` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class3` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:42  class `Class2` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class2` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:48  class `Class3` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class3` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:63  class `Class2` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class2` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_field_never_used.cs:69  class `Class3` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class3` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_has_same_name_as.cs:2  class `Class1.Class11` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class11` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_has_same_name_as.cs:3  class `Class1.Class11.Class111` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class111` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/copilot/test/simulation/fixtures/fixing/csharp/roslyn_has_same_name_as.cs:4  class `Class1.Class11.Class112` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `Class112` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/html-language-features/client/src/htmlClient.ts:169  method `startClientWithParticipants.provideCompletionItem` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `provideCompletionItem` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/ipynb/src/ipynbMain.ts:114  method `activate.dropCustomMetadata` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `dropCustomMetadata` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/microsoft-authentication/packageMocks/dpapi/dpapi.js:7  method `defaultDpapi.protectData` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `protectData` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/microsoft-authentication/packageMocks/dpapi/dpapi.js:10  method `defaultDpapi.unprotectData` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `unprotectData` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  extensions/typescript-language-features/src/filesystems/autoInstallerFs.ts:249  method `MappedUri.flatPath` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `flatPath` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/base/browser/ui/tree/tree.ts:230  method `TreeDragOverReactions.acceptBubbleUp` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `acceptBubbleUp` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/base/browser/ui/tree/tree.ts:231  method `TreeDragOverReactions.acceptBubbleDown` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `acceptBubbleDown` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/base/browser/ui/tree/tree.ts:232  method `TreeDragOverReactions.acceptCopyBubbleUp` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `acceptCopyBubbleUp` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/base/browser/ui/tree/tree.ts:233  method `TreeDragOverReactions.acceptCopyBubbleDown` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `acceptCopyBubbleDown` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/base/common/observableInternal/observables/baseObservable.ts:140  method `DebugHelper.getDependencyGraph` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getDependencyGraph` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/base/common/observableInternal/observables/baseObservable.ts:144  method `DebugHelper.getObserverGraph` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getObserverGraph` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/editor/common/model/bracketPairsTextModelPart/bracketPairsTree/parser.ts:34  method `Parser.nodesConstructed` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `nodesConstructed` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/editor/common/model/bracketPairsTextModelPart/bracketPairsTree/parser.ts:41  method `Parser.nodesReused` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `nodesReused` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/editor/common/viewModel/viewModelLines.ts:1066  method `ViewLineInfo.isWrappedLineContinuation` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `isWrappedLineContinuation` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/platform/agentHost/node/claude/claudeElicitation.ts:87  function `_assertElicitationFieldCoversSchema` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `_assertElicitationFieldCoversSchema` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/platform/extensionManagement/common/extensionGalleryService.ts:287  method `Query.withAssetTypes` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `withAssetTypes` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/platform/undoRedo/common/undoRedoService.ts:246  method `ResourceEditStack.setElementsIsValid` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `setElementsIsValid` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/api/common/extHostChatAgents2.ts:1339  method `ExtHostChatAgent.setChatRequestPauseState` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `setChatRequestPauseState` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/api/common/extHostTesting.ts:1199  method `TestObservers.getMirroredTestDataByReference` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getMirroredTestDataByReference` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/contrib/chat/common/chatDebugServiceImpl.ts:61  method `SessionEventBuffer.removeWhere` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `removeWhere` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/configuration/browser/configuration.ts:883  method `CachedWorkspaceConfiguration.getConfigurationModel` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getConfigurationModel` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/configuration/browser/configuration.ts:1010  method `CachedFolderConfiguration.getUnsupportedKeys` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `getUnsupportedKeys` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:604  method `fixRegexNewline.onCharacterEnter` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onCharacterEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:636  method `fixRegexNewline.onQuantifierEnter` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onQuantifierEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:639  method `fixRegexNewline.onQuantifierLeave` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onQuantifierLeave` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:642  method `fixRegexNewline.onCharacterClassRangeEnter` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onCharacterClassRangeEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:645  method `fixRegexNewline.onCharacterClassRangeLeave` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onCharacterClassRangeLeave` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:648  method `fixRegexNewline.onCharacterClassEnter` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onCharacterClassEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:651  method `fixRegexNewline.onCharacterClassLeave` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onCharacterClassLeave` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:654  method `fixRegexNewline.onAssertionEnter` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onAssertionEnter` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  src/vs/workbench/services/search/node/ripgrepTextSearchEngine.ts:659  method `fixRegexNewline.onAssertionLeave` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `onAssertionLeave` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  cli/src/bin/code/legacy_args.rs:8  `cli` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `cli` is imported at cli/src/bin/code/legacy_args.rs:8
+         why:  not declared in any crates.io manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+MEDIUM 0.80  cli/src/bin/code/main.rs:10  `cli` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `cli` is imported at cli/src/bin/code/main.rs:10
+         why:  not declared in any crates.io manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+MEDIUM 0.80  cli/tests/agent_tunnel.rs:8  `cli` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `cli` is imported at cli/tests/agent_tunnel.rs:8
+         why:  not declared in any crates.io manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+MEDIUM 0.80  eslint.config.js:14  import `./.eslint-plugin-local/index.ts` does not resolve to any indexed file  [t0-import-resolution]
+         why:  no file matching `./.eslint-plugin-local/index.ts` found relative to eslint.config.js
+         risk: the target may be generated at build time or excluded from the index (gitignore/vendor dirs)
+MEDIUM 0.80  eslint.config.js:15  import `./extensions/copilot/.eslintplugin/index.ts` does not resolve to any indexed file  [t0-import-resolution]
+         why:  no file matching `./extensions/copilot/.eslintplugin/index.ts` found relative to eslint.config.js
+         risk: the target may be generated at build time or excluded from the index (gitignore/vendor dirs)
+MEDIUM 0.80  extensions/configuration-editing/src/configurationEditingMain.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/configuration-editing/src/configurationEditingMain.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/configuration-editing/src/extensionsProposals.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/configuration-editing/src/extensionsProposals.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/configuration-editing/src/importExportProfiles.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/configuration-editing/src/importExportProfiles.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/configuration-editing/src/node/net.ts:9  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/configuration-editing/src/node/net.ts:9
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/configuration-editing/src/settingsDocumentHelper.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/configuration-editing/src/settingsDocumentHelper.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/configuration-editing/src/test/completion.test.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/configuration-editing/src/test/completion.test.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/chat-lib/vitest.config.ts:6  `vite` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vite` is imported at extensions/copilot/chat-lib/vitest.config.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/script/postinstall.ts:8  import `./build/compressTikToken` does not resolve to any indexed file  [t0-import-resolution]
+         why:  no file matching `./build/compressTikToken` found relative to extensions/copilot/script/postinstall.ts
+         risk: the target may be generated at build time or excluded from the index (gitignore/vendor dirs)
+MEDIUM 0.80  extensions/copilot/script/postinstall.ts:9  import `./build/copyStaticAssets` does not resolve to any indexed file  [t0-import-resolution]
+         why:  no file matching `./build/copyStaticAssets` found relative to extensions/copilot/script/postinstall.ts
+         risk: the target may be generated at build time or excluded from the index (gitignore/vendor dirs)
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/askAgentProvider.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/askAgentProvider.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/cachedAgentFileWriter.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/cachedAgentFileWriter.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/exploreAgentProvider.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/exploreAgentProvider.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/githubOrgChatResourcesService.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/githubOrgChatResourcesService.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/githubOrgCustomAgentProvider.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/githubOrgCustomAgentProvider.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/githubOrgInstructionsProvider.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/githubOrgInstructionsProvider.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/planAgentProvider.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/planAgentProvider.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/promptFileContrib.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/promptFileContrib.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/test/askAgentProvider.spec.ts:6  `chai` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `chai` is imported at extensions/copilot/src/extension/agents/vscode-node/test/askAgentProvider.spec.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/test/askAgentProvider.spec.ts:10  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/test/askAgentProvider.spec.ts:10
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/test/cachedAgentFileWriter.spec.ts:6  `chai` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `chai` is imported at extensions/copilot/src/extension/agents/vscode-node/test/cachedAgentFileWriter.spec.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/test/githubOrgChatResourcesService.spec.ts:6  `chai` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `chai` is imported at extensions/copilot/src/extension/agents/vscode-node/test/githubOrgChatResourcesService.spec.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/test/githubOrgChatResourcesService.spec.ts:8  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/test/githubOrgChatResourcesService.spec.ts:8
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/test/githubOrgCustomAgentProvider.spec.ts:6  `chai` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `chai` is imported at extensions/copilot/src/extension/agents/vscode-node/test/githubOrgCustomAgentProvider.spec.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/test/githubOrgCustomAgentProvider.spec.ts:8  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/test/githubOrgCustomAgentProvider.spec.ts:8
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/test/githubOrgInstructionsProvider.spec.ts:6  `chai` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `chai` is imported at extensions/copilot/src/extension/agents/vscode-node/test/githubOrgInstructionsProvider.spec.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/test/githubOrgInstructionsProvider.spec.ts:8  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/test/githubOrgInstructionsProvider.spec.ts:8
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/test/planAgentProvider.spec.ts:6  `chai` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `chai` is imported at extensions/copilot/src/extension/agents/vscode-node/test/planAgentProvider.spec.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+MEDIUM 0.80  extensions/copilot/src/extension/agents/vscode-node/test/planAgentProvider.spec.ts:10  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/agents/vscode-node/test/planAgentProvider.spec.ts:10
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/api/vscode/extensionApi.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/api/vscode/extensionApi.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/api/vscode/vscodeContextProviderApi.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/api/vscode/vscodeContextProviderApi.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/authentication/vscode-node/authentication.contribution.ts:5  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/authentication/vscode-node/authentication.contribution.ts:5
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/common/anthropicMessageConverter.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/common/anthropicMessageConverter.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/common/byokProvider.ts:5  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/common/byokProvider.ts:5
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/common/byokProvider.ts:25  interface `BYOKBaseModelConfig` appears unused  [t0-treesitter]
+         why:  3 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/common/byokProvider.ts:41  interface `BYOKNoAuthModelConfig` appears unused  [t0-treesitter]
+         why:  2 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/common/geminiMessageConverter.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/common/geminiMessageConverter.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/common/test/geminiMessageConverter.spec.ts:8  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/common/test/geminiMessageConverter.spec.ts:8
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/node/openAIEndpoint.ts:5  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/node/openAIEndpoint.ts:5
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/abstractLanguageModelChatProvider.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/abstractLanguageModelChatProvider.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/anthropicProvider.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/anthropicProvider.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/anthropicProvider.ts:8  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/anthropicProvider.ts:8
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/azureProvider.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/azureProvider.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/azureProvider.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/azureProvider.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/byokContribution.ts:5  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/byokContribution.ts:5
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/byokModelInfo.ts:5  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/byokModelInfo.ts:5
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/byokOTelHelpers.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/byokOTelHelpers.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/customEndpointProvider.ts:48  function `apiTypeToPath` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/customEndpointProvider.ts:62  function `inferApiTypeFromUrl` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/customEndpointProvider.ts:72  function `apiTypeToSupportedEndpoints` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/geminiNativeProvider.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/geminiNativeProvider.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/openRouterProvider.ts:21  interface `OpenRouterModelData` is only used by tests  [t0-treesitter]
+         why:  reachable only from tests (no production code reaches it)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/openRouterProvider.ts:146  function `isAnthropicModelId` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/test/anthropicProvider.spec.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/anthropicProvider.spec.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/test/byokOTelHelpers.spec.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/byokOTelHelpers.spec.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/test/customEndpointProvider.spec.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/customEndpointProvider.spec.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/test/customOAIProvider.spec.ts:8  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/customOAIProvider.spec.ts:8
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/test/geminiNativeProvider.spec.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/geminiNativeProvider.spec.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/test/legacyHost.spec.ts:8  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/legacyHost.spec.ts:8
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/test/legacyHost.spec.ts:20  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/legacyHost.spec.ts:20
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/test/ollamaProvider.spec.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/byok/vscode-node/test/ollamaProvider.spec.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/byok/vscode-node/xAIProvider.ts:15  interface `XAIModelData` appears unused  [t0-treesitter]
+         why:  1 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/chat/test/vscode-node/chatHookService.spec.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chat/test/vscode-node/chatHookService.spec.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chat/vscode-node/chatDebugFileLoggerService.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chat/vscode-node/chatDebugFileLoggerService.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chat/vscode-node/chatHookService.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chat/vscode-node/chatHookService.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chat/vscode-node/chatHookTelemetry.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chat/vscode-node/chatHookTelemetry.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chat/vscode-node/chatQuota.contribution.ts:5  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chat/vscode-node/chatQuota.contribution.ts:5
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chat/vscode-node/hooksOutputChannel.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chat/vscode-node/hooksOutputChannel.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chat/vscode-node/sessionTranscriptService.ts:30  function `stripInternalToolCallId` appears unused  [t0-treesitter]
+         why:  3 reference(s) found, but only from code that is itself unreachable
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+MEDIUM 0.80  extensions/copilot/src/extension/chatInputNotification/vscode-node/byokUtilityModel.contribution.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatInputNotification/vscode-node/byokUtilityModel.contribution.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessionContext/vscode-node/chatSessionContextProvider.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessionContext/vscode-node/chatSessionContextProvider.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/common/chatSessionMetadataStore.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/common/chatSessionMetadataStore.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/common/chatSessionWorkspaceFolderService.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/common/chatSessionWorkspaceFolderService.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/common/chatSessionWorktreeService.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/common/chatSessionWorktreeService.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/common/externalEditTracker.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/common/externalEditTracker.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/common/folderRepositoryManager.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/common/folderRepositoryManager.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/common/sessionEventRenderer.ts:11  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/common/sessionEventRenderer.ts:11
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/common/test/mockChatSessionMetadataStore.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/common/test/mockChatSessionMetadataStore.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/common/workspaceInfo.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/common/workspaceInfo.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/common/copilotCLIPrompt.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/common/copilotCLIPrompt.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/common/copilotCLITools.ts:8  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/common/copilotCLITools.ts:8
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/common/customSessionTitleService.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/common/customSessionTitleService.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/common/delegationSummaryService.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/common/delegationSummaryService.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/common/test/copilotCLITools.spec.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/common/test/copilotCLITools.spec.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/common/utils.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/common/utils.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotCLISkills.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotCLISkills.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotCli.ts:10  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotCli.ts:10
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliPromptResolver.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliPromptResolver.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:10  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:10
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:11  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:11
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:94  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:94
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:2676  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:2676
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:2676  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSession.ts:2676
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSessionService.ts:11  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSessionService.ts:11
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/exitPlanModeHandler.ts:8  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/exitPlanModeHandler.ts:8
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/mcpHandler.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/mcpHandler.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/permissionHelpers.ts:8  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/permissionHelpers.ts:8
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCLISkills.spec.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCLISkills.spec.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCliAgents.spec.ts:18  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCliAgents.spec.ts:18
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCliModels.spec.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCliModels.spec.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCliSessionService.spec.ts:11  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotCliSessionService.spec.ts:11
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:8  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:8
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:211  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:211
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:215  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:215
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1043  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1043
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1113  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1113
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1173  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1173
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1258  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1258
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1330  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1330
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1387  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1387
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1421  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1421
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1445  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1445
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1502  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1502
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1533  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1533
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1566  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1566
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1599  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1599
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1636  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1636
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1696  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1696
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1733  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1733
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1766  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1766
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1798  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/copilotcliSession.spec.ts:1798
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/exitPlanModeHandler.spec.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/exitPlanModeHandler.spec.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/exitPlanModeHandler.spec.ts:8  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/exitPlanModeHandler.spec.ts:8
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/missionControlApiClient.spec.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/missionControlApiClient.spec.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/permissionHelpers.spec.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/permissionHelpers.spec.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/test/testHelpers.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/test/testHelpers.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/node/userInputHelpers.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/node/userInputHelpers.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/askUserQuestionHandler.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/askUserQuestionHandler.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/chatSessionMetadataStoreImpl.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/chatSessionMetadataStoreImpl.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/chatSessionMetadataStoreImpl.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/chatSessionMetadataStoreImpl.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/addFileReference.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/addFileReference.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/addSelection.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/addSelection.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/context.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/context.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/diffCommands.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/diffCommands.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/pickSession.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/pickSession.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/sendContext.ts:7  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/commands/sendContext.ts:7
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+MEDIUM 0.80  extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/contribution.ts:6  `vscode` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `vscode` is imported at extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/contribution.ts:6
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: lookup cap reached
+
+... 4949 more finding(s) not shown (lowest confidence last); use --max-findings 0 to print all, or --only <path> to narrow down
+
+  dead-code        ran      969 finding(s)
+  check-deps       ran      4180 finding(s)  (offline: manifests and local resolution only; pass --online to check registries)
+  test-weakening   ran      0 finding(s)  (vs HEAD)
+  diagnostics      skipped  0 finding(s)  (no saved output (--from) and --run not given; nothing was executed)
+  rule-engines     skipped  0 finding(s)  (semgrep / ast-grep run only with --run)
+
+verify: FAIL  (5149 new, 0 baselined, 0 fixed since baseline; fail-on medium)
+note: dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change
+note: baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new
+note: no baseline found at /workspace/repos/vscode/plumb-baseline.json: every finding counts as new (create one with --update-baseline)
+note: nothing was executed (no --run).

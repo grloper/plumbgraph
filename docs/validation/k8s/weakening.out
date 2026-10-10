@@ -1,0 +1,10 @@
+{
+  "base": "HEAD",
+  "base_commit": "a5081d965140b4ee8311bea358f1afd79b840677",
+  "files_changed": 0,
+  "findings": [],
+  "notes": [
+    "untracked (never `git add`ed) files are not part of `git diff` and are not analysed",
+    "compared against the working tree (tracked files, staged and unstaged changes)"
+  ]
+}

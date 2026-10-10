@@ -1,0 +1,93 @@
+MEDIUM 0.80  examples/online/index.js:15  `online` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `online` is imported at examples/online/index.js:15
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+MEDIUM 0.80  examples/online/index.js:16  `redis` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `redis` is imported at examples/online/index.js:16
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+MEDIUM 0.80  examples/search/index.js:16  `redis` is imported but not declared in a manifest  [manifest+t0-import]
+         why:  `redis` is imported at examples/search/index.js:16
+         why:  not declared in any npm manifest covering this file
+         why:  registry not consulted or inconclusive: offline mode
+LOW    0.50  examples/auth/index.js:8  `pbkdf2-password` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/auth/index.js:10  `express-session` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/cookie-sessions/index.js:7  `cookie-session` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/cookies/index.js:9  `morgan` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/cookies/index.js:10  `cookie-parser` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/ejs/index.js:23  `ejs` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/error-pages/index.js:10  `morgan` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/error/index.js:8  `morgan` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/markdown/index.js:10  `marked` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/mvc/index.js:8  `morgan` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/mvc/index.js:10  `express-session` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/mvc/index.js:11  `method-override` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/route-separation/index.js:10  `morgan` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/route-separation/index.js:11  `cookie-parser` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/route-separation/index.js:12  `method-override` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/session/index.js:11  `express-session` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/session/redis.js:8  `morgan` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/session/redis.js:9  `express-session` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/session/redis.js:13  `connect-redis` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/static-files/index.js:8  `morgan` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/vhost/index.js:8  `morgan` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/vhost/index.js:9  `vhost` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+LOW    0.50  examples/view-constructor/index.js:9  `marked` is only declared as a dev/build dependency  [manifest+t0-import]
+         why:  declared only in a dev/test/build section
+         risk: the importing file may itself be test/build-only code
+
+  dead-code        ran      0 finding(s)
+  check-deps       ran      26 finding(s)  (offline: manifests and local resolution only; pass --online to check registries)
+  test-weakening   ran      0 finding(s)  (vs HEAD)
+  diagnostics      skipped  0 finding(s)  (no saved output (--from) and --run not given; nothing was executed)
+  rule-engines     skipped  0 finding(s)  (semgrep / ast-grep run only with --run)
+
+verify: FAIL  (26 new, 0 baselined, 0 fixed since baseline; fail-on medium)
+note: dead-code findings are name-based unless a SCIP index covers the file (see `plumb scip`); `new` means not in the baseline, not necessarily introduced by this change
+note: baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new
+note: no baseline found at /workspace/repos/express/plumb-baseline.json: every finding counts as new (create one with --update-baseline)
+note: nothing was executed (no --run).

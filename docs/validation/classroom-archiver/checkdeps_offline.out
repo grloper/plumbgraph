@@ -1,0 +1,69 @@
+{
+  "external_imports": 22,
+  "findings": [],
+  "imports_checked": 206,
+  "lookups": [
+    {
+      "ecosystem": "npm",
+      "package": "axios",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "better-sqlite3",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "cheerio",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "cli-progress",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "dotenv",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "fs-extra",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "googleapis",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "open",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "p-limit",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "playwright",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "sqlite3",
+      "result": "unknown (offline mode)"
+    },
+    {
+      "ecosystem": "npm",
+      "package": "winston",
+      "result": "unknown (offline mode)"
+    }
+  ],
+  "offline": true,
+  "registry": "offline"
+}
