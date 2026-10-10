@@ -106,6 +106,9 @@ enum Lang {
     Py,
     Js,
     Rs,
+    Go,
+    Java,
+    Cs,
 }
 
 fn lang_of(path: &str) -> Option<Lang> {
@@ -114,6 +117,9 @@ fn lang_of(path: &str) -> Option<Lang> {
         "py" => Some(Lang::Py),
         "js" | "jsx" | "mjs" | "cjs" | "ts" | "tsx" | "mts" | "cts" => Some(Lang::Js),
         "rs" => Some(Lang::Rs),
+        "go" => Some(Lang::Go),
+        "java" | "kt" => Some(Lang::Java),
+        "cs" => Some(Lang::Cs),
         _ => None,
     }
 }
@@ -138,6 +144,22 @@ fn is_test_file(path: &str, lang: Lang) -> bool {
                 || base.ends_with("_tests.rs")
                 || base == "tests.rs"
         }
+        Lang::Go => base.ends_with("_test.go"),
+        Lang::Java => {
+            lower.contains("/src/test/")
+                || lower.starts_with("src/test/")
+                || base.ends_with("test.java")
+                || base.ends_with("tests.java")
+                || base.ends_with("it.java")
+                || base.ends_with("test.kt")
+        }
+        Lang::Cs => {
+            base.ends_with("test.cs")
+                || base.ends_with("tests.cs")
+                || lower
+                    .split('/')
+                    .any(|c| c.ends_with(".tests") || c.ends_with(".test") || c == "tests")
+        }
     }
 }
 
@@ -152,6 +174,16 @@ struct Rules {
     assert_py: Regex,
     assert_js: Regex,
     assert_rs: Regex,
+    go_test_def: Regex,
+    skip_go: Regex,
+    assert_go: Regex,
+    java_cs_fn: Regex,
+    test_attr_java: Regex,
+    test_attr_cs: Regex,
+    skip_java: Regex,
+    skip_cs: Regex,
+    assert_java: Regex,
+    assert_cs: Regex,
     trivial: Regex,
     loose: Regex,
     strict: Regex,
@@ -175,13 +207,31 @@ impl Rules {
             assert_py: r(r"^\s*assert\b|\bself\.assert\w+\s*\(|\bpytest\.raises\s*\("),
             assert_js: r(r"\bexpect\s*\(|\bassert(?:\.\w+)?\s*\(|\.should\b"),
             assert_rs: r(r"\b(?:debug_)?assert(?:_eq|_ne)?!"),
+            go_test_def: r(r"^\s*func\s+(Test\w*)\s*\("),
+            skip_go: r(r"\bt\.Skip(?:f|Now)?\s*\("),
+            assert_go: r(r"\bt\.(?:Error|Errorf|Fatal|Fatalf)\s*\(|\b(?:assert|require)\.\w+\s*\("),
+            java_cs_fn: r(
+                r"^\s*(?:(?:public|private|protected|internal|static|async|virtual|override|final)\s+)*[\w<>\[\],.?]+\s+(\w+)\s*\(",
+            ),
+            test_attr_java: r(r"^\s*@(?:Test|ParameterizedTest|RepeatedTest|TestFactory)\b"),
+            test_attr_cs: r(r"^\s*\[\s*(?:Fact|Theory|Test|TestCase|TestMethod|DataTestMethod)\b"),
+            skip_java: r(
+                r"@(?:Ignore|Disabled)\b|\bAssumptions?\.assume\w*\s*\(\s*false|\bAssume\.assume\w*\s*\(\s*false",
+            ),
+            skip_cs: r(
+                r"\[\s*(?:Ignore|Explicit)\b|\bSkip\s*=|\bAssert\.(?:Ignore|Inconclusive)\s*\(",
+            ),
+            assert_java: r(r"\bassert\w*\s*\(|\bfail\s*\(|\bverify\s*\("),
+            assert_cs: r(r"\bAssert\.\w+\s*\(|\.Should\(\)|\bAssert\.That\s*\("),
             trivial: r(
-                r"^\s*assert\s+(?:True|1)\s*$|expect\s*\(\s*true\s*\)\s*\.toBe\s*\(\s*true\s*\)|expect\.anything\s*\(\s*\)|\bassert!\s*\(\s*true\s*\)|\bassertTrue\s*\(\s*True\s*\)",
+                r"^\s*assert\s+(?:True|1)\s*$|expect\s*\(\s*true\s*\)\s*\.toBe\s*\(\s*true\s*\)|expect\.anything\s*\(\s*\)|\bassert!\s*\(\s*true\s*\)|\bassertTrue\s*\(\s*True\s*\)|\bassert(?:\.ok)?\s*\(\s*true\s*\)|\bassertTrue\s*\(\s*true\s*\)|\bAssert\.(?:True|IsTrue)\s*\(\s*true\s*\)|\bassert\.True\s*\(\s*t\s*,\s*true\s*\)",
             ),
             loose: r(
-                r"toBeTruthy|toBeDefined|not\.toBeNull|not\.toBeUndefined|\bis not None\b|assertIsNotNone|assertTrue\s*\(|\.is_some\(\)|\.is_ok\(\)",
+                r"toBeTruthy|toBeDefined|not\.toBeNull|not\.toBeUndefined|\bis not None\b|assertIsNotNone|assertTrue\s*\(|\.is_some\(\)|\.is_ok\(\)|assertNotNull|Assert\.NotNull|Assert\.IsNotNull|assert\.NotNil|assert\.ok\(",
             ),
-            strict: r(r"toBe\(|toEqual\(|toStrictEqual\(|==|assertEqual|assertEquals|assert_eq!"),
+            strict: r(
+                r"toBe\(|toEqual\(|toStrictEqual\(|==|assertEqual|assertEquals|assert_eq!|Assert\.(?:AreEqual|Equal)|assert\.Equal|assert\.(?:strict|deep)?(?:Strict)?Equal|\bassertSame",
+            ),
         }
     }
 }
@@ -195,7 +245,32 @@ fn test_name(rules: &Rules, lang: Lang, text: &str) -> Option<String> {
                 .or(c.get(3))
                 .map(|m| m.as_str().to_string())
         }),
-        Lang::Rs => None,
+        Lang::Rs | Lang::Java | Lang::Cs => None,
+        Lang::Go => rules.go_test_def.captures(text).map(|c| c[1].to_string()),
+    }
+}
+
+fn is_attr_lang(lang: Lang) -> bool {
+    matches!(lang, Lang::Rs | Lang::Java | Lang::Cs)
+}
+
+fn is_test_attr(rules: &Rules, lang: Lang, text: &str) -> bool {
+    match lang {
+        Lang::Rs => {
+            let t = text.trim_start();
+            t.starts_with("#[test]") || t.starts_with("#[tokio::test")
+        }
+        Lang::Java => rules.test_attr_java.is_match(text),
+        Lang::Cs => rules.test_attr_cs.is_match(text),
+        _ => false,
+    }
+}
+
+fn attr_fn_name(rules: &Rules, lang: Lang, text: &str) -> Option<String> {
+    match lang {
+        Lang::Rs => rules.rs_fn.captures(text).map(|c| c[1].to_string()),
+        Lang::Java | Lang::Cs => rules.java_cs_fn.captures(text).map(|c| c[1].to_string()),
+        _ => None,
     }
 }
 
@@ -217,15 +292,15 @@ pub fn analyze_diff(diff: &str) -> Vec<Finding> {
             if let Some(n) = test_name(&rules, lang, t) {
                 added_names.insert(n);
             }
-            if lang == Lang::Rs
+            if is_attr_lang(lang)
                 && f.added[..i]
                     .iter()
                     .rev()
-                    .take(3)
-                    .any(|(_, p, hh)| hh == h && p.trim() == "#[test]")
+                    .take(4)
+                    .any(|(_, p, hh)| hh == h && is_test_attr(&rules, lang, p))
             {
-                if let Some(c) = rules.rs_fn.captures(t) {
-                    added_names.insert(c[1].to_string());
+                if let Some(n) = attr_fn_name(&rules, lang, t) {
+                    added_names.insert(n);
                 }
             }
         }
@@ -257,16 +332,14 @@ pub fn analyze_diff(diff: &str) -> Vec<Finding> {
         // deleted tests
         for (i, (ln, t, h)) in f.removed.iter().enumerate() {
             let name = match lang {
-                Lang::Rs => {
-                    // `#[test]` removed, followed by the fn line in the same hunk
-                    if t.trim_start().starts_with("#[test]")
-                        || t.trim_start().starts_with("#[tokio::test")
-                    {
+                Lang::Rs | Lang::Java | Lang::Cs => {
+                    // test attribute removed, followed by the fn line in the same hunk
+                    if (test_file || lang == Lang::Rs) && is_test_attr(&rules, lang, t) {
                         f.removed[i + 1..]
                             .iter()
                             .take(4)
                             .filter(|(_, _, hh)| hh == h)
-                            .find_map(|(_, x, _)| rules.rs_fn.captures(x).map(|c| c[1].to_string()))
+                            .find_map(|(_, x, _)| attr_fn_name(&rules, lang, x))
                     } else {
                         None
                     }
@@ -305,32 +378,48 @@ pub fn analyze_diff(diff: &str) -> Vec<Finding> {
         }
         // added skip / ignore / focus markers
         for (ln, t, _) in &f.added {
-            let hit = match lang {
-                Lang::Py if test_file => {
-                    rules
-                        .skip_py
+            let hit =
+                match lang {
+                    Lang::Py if test_file => rules.skip_py.is_match(t).then_some((
+                        "added-skip",
+                        0.95,
+                        "skip/xfail marker",
+                    )),
+                    Lang::Js if test_file => rules
+                        .skip_js
                         .is_match(t)
-                        .then_some(("added-skip", 0.95, "skip/xfail marker"))
-                }
-                Lang::Js if test_file => rules
-                    .skip_js
-                    .is_match(t)
-                    .then_some(("added-skip", 0.95, "skip/todo marker"))
-                    .or_else(|| {
-                        rules.only_js.is_match(t).then_some((
-                            "added-focus",
-                            0.90,
-                            ".only/focus marker (silently disables all other tests in the run)",
-                        ))
-                    }),
-                Lang::Rs => {
-                    rules
-                        .ignore_rs
-                        .is_match(t)
-                        .then_some(("added-skip", 0.95, "#[ignore]"))
-                }
-                _ => None,
-            };
+                        .then_some(("added-skip", 0.95, "skip/todo marker"))
+                        .or_else(|| {
+                            rules.only_js.is_match(t).then_some((
+                                "added-focus",
+                                0.90,
+                                ".only/focus marker (silently disables all other tests in the run)",
+                            ))
+                        }),
+                    Lang::Rs => {
+                        rules
+                            .ignore_rs
+                            .is_match(t)
+                            .then_some(("added-skip", 0.95, "#[ignore]"))
+                    }
+                    Lang::Go if test_file => {
+                        rules
+                            .skip_go
+                            .is_match(t)
+                            .then_some(("added-skip", 0.95, "t.Skip call"))
+                    }
+                    Lang::Java if test_file => rules.skip_java.is_match(t).then_some((
+                        "added-skip",
+                        0.95,
+                        "@Ignore/@Disabled marker",
+                    )),
+                    Lang::Cs if test_file => rules.skip_cs.is_match(t).then_some((
+                        "added-skip",
+                        0.95,
+                        "Ignore/Skip marker",
+                    )),
+                    _ => None,
+                };
             if let Some((rule, conf, what)) = hit {
                 let mut fd = Finding::new(
                     "weakening",
@@ -348,7 +437,7 @@ pub fn analyze_diff(diff: &str) -> Vec<Finding> {
                     vec!["conditional skips (e.g. platform-specific) can be legitimate".into()];
                 out.push(fd);
             }
-            if test_file && rules.trivial.is_match(t) {
+            if (test_file || lang == Lang::Rs) && rules.trivial.is_match(t) {
                 let mut fd = Finding::new(
                     "weakening",
                     "trivial-assertion",
@@ -371,6 +460,9 @@ pub fn analyze_diff(diff: &str) -> Vec<Finding> {
                 Lang::Py => &rules.assert_py,
                 Lang::Js => &rules.assert_js,
                 Lang::Rs => &rules.assert_rs,
+                Lang::Go => &rules.assert_go,
+                Lang::Java => &rules.assert_java,
+                Lang::Cs => &rules.assert_cs,
             };
             let removed_n = f.removed.iter().filter(|(_, t, _)| re.is_match(t)).count();
             let added_n = f.added.iter().filter(|(_, t, _)| re.is_match(t)).count();
@@ -674,5 +766,102 @@ mod tests {
             .any(|f| f.rule == "deleted-test" && f.symbol.as_deref() == Some("test_two")));
         assert!(detect(d, "--output=/tmp/x", None).is_err());
         assert!(detect(d, "no-such-rev", None).is_err());
+    }
+
+    // ---- found by seeding weakening commits into cobra / gson / Newtonsoft.Json / ripgrep /
+    // express (docs/VALIDATION.md): Go, Java and C# were silently unsupported (0/28 recall) ----
+
+    #[test]
+    fn go_skip_and_deleted_test() {
+        let d = "diff --git a/cmd_test.go b/cmd_test.go\n--- a/cmd_test.go\n+++ b/cmd_test.go\n@@ -10,3 +9,0 @@\n-func TestGone(t *testing.T) {\n-\tt.Fatalf(\"x\")\n-}\n@@ -20,0 +18,1 @@\n+\tt.Skip(\"flaky\")\n";
+        let f = analyze_diff(d);
+        let r = rules(&f);
+        assert!(
+            r.contains(&"deleted-test") && r.contains(&"added-skip"),
+            "{r:?}"
+        );
+        assert_eq!(
+            f.iter()
+                .find(|x| x.rule == "deleted-test")
+                .unwrap()
+                .symbol
+                .as_deref(),
+            Some("TestGone")
+        );
+        // a non-test .go file is ignored
+        let d = d.replace("cmd_test.go", "cmd.go");
+        assert!(analyze_diff(&d).is_empty());
+    }
+
+    #[test]
+    fn java_ignore_and_deleted_test() {
+        let d = "diff --git a/gson/src/test/java/a/FooTest.java b/gson/src/test/java/a/FooTest.java\n--- a/gson/src/test/java/a/FooTest.java\n+++ b/gson/src/test/java/a/FooTest.java\n@@ -10,4 +9,0 @@\n-  @Test\n-  public void testGone() {\n-    assertEquals(1, f());\n-  }\n@@ -30,0 +26,1 @@\n+  @Ignore\n";
+        let f = analyze_diff(d);
+        let r = rules(&f);
+        assert!(
+            r.contains(&"deleted-test") && r.contains(&"added-skip"),
+            "{r:?}"
+        );
+        assert_eq!(
+            f.iter()
+                .find(|x| x.rule == "deleted-test")
+                .unwrap()
+                .symbol
+                .as_deref(),
+            Some("testGone")
+        );
+    }
+
+    #[test]
+    fn csharp_ignore_and_deleted_test() {
+        let d = "diff --git a/Src/X.Tests/FooTests.cs b/Src/X.Tests/FooTests.cs\n--- a/Src/X.Tests/FooTests.cs\n+++ b/Src/X.Tests/FooTests.cs\n@@ -10,5 +9,0 @@\n-        [Fact]\n-        public void TestGone()\n-        {\n-            Assert.Equal(1, F());\n-        }\n@@ -40,0 +35,1 @@\n+        [Fact(Skip = \"flaky\")]\n";
+        let f = analyze_diff(d);
+        let r = rules(&f);
+        assert!(
+            r.contains(&"deleted-test") && r.contains(&"added-skip"),
+            "{r:?}"
+        );
+        assert_eq!(
+            f.iter()
+                .find(|x| x.rule == "deleted-test")
+                .unwrap()
+                .symbol
+                .as_deref(),
+            Some("TestGone")
+        );
+    }
+
+    #[test]
+    fn trivial_assertions_in_rust_unit_tests_inside_src_and_js_assert_ok() {
+        // Rust unit tests live in `src/**` (`#[cfg(test)] mod tests`), which is not a test path
+        let d = format!("diff --git a/src/walk.rs b/src/walk.rs\n--- a/src/walk.rs\n+++ b/src/walk.rs\n@@ -5,1 +5,1 @@\n-        assert_eq!(a, b);\n+        {}\n", ["assert!(", "tru", "e);"].concat());
+        assert!(rules(&analyze_diff(&d)).contains(&"trivial-assertion"));
+        let d = format!("diff --git a/test/a.js b/test/a.js\n--- a/test/a.js\n+++ b/test/a.js\n@@ -5,1 +5,1 @@\n-    assert.equal(a, b);\n+    {}\n", ["assert.ok(", "tru", "e);"].concat());
+        assert!(rules(&analyze_diff(&d)).contains(&"trivial-assertion"));
+    }
+
+    #[test]
+    fn benign_additions_to_go_java_cs_tests_are_not_flagged() {
+        for (p, l) in [
+            (
+                "a_test.go",
+                "+func TestNew(t *testing.T) {\n+\tif got != want { t.Errorf(\"x\") }\n+}\n",
+            ),
+            (
+                "src/test/java/AT.java",
+                "+  @Test\n+  public void testNew() { assertEquals(1, 1); }\n",
+            ),
+            (
+                "X.Tests/AT.cs",
+                "+        [Fact]\n+        public void TestNew() { Assert.Equal(1, 1); }\n",
+            ),
+        ] {
+            let d = format!("diff --git a/{p} b/{p}\n--- a/{p}\n+++ b/{p}\n@@ -0,0 +1,3 @@\n{l}");
+            assert!(
+                analyze_diff(&d).is_empty(),
+                "{p}: {:?}",
+                analyze_diff(&d).iter().map(|f| &f.rule).collect::<Vec<_>>()
+            );
+        }
     }
 }
