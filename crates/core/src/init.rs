@@ -43,7 +43,7 @@ fn server_entry() -> Value {
 }
 
 fn merge_json(path: &Path, rep: &mut InitReport, dry: bool) -> Result<()> {
-    let rel = path.display().to_string();
+    let rel = shown(path);
     let mut doc: Value = match std::fs::read_to_string(path) {
         Ok(s) => serde_json::from_str(&s)
             .with_context(|| format!("{rel} exists but is not valid JSON; not touching it"))?,
@@ -82,7 +82,7 @@ fn merge_json(path: &Path, rep: &mut InitReport, dry: bool) -> Result<()> {
 }
 
 fn upsert_block(path: &Path, rep: &mut InitReport, dry: bool, create: bool) -> Result<()> {
-    let rel = path.display().to_string();
+    let rel = shown(path);
     let existing = std::fs::read_to_string(path).ok();
     if existing.is_none() && !create {
         return Ok(());
@@ -104,6 +104,62 @@ fn upsert_block(path: &Path, rep: &mut InitReport, dry: bool, create: bool) -> R
     }
     rep.written.push(rel);
     Ok(())
+}
+
+/// Drop the Windows verbatim prefix that `canonicalize` adds: `\\?\C:\x` -> `C:\x`,
+/// `\\?\UNC\srv\share` -> `\\srv\share`. Other verbatim forms (`\\?\Volume{..}\`) have no
+/// plain spelling and are returned unchanged, as is every non-verbatim path.
+pub fn strip_verbatim(p: &str) -> String {
+    if let Some(rest) = p.strip_prefix(r"\\?\UNC\") {
+        return format!(r"\\{rest}");
+    }
+    if let Some(rest) = p.strip_prefix(r"\\?\") {
+        let b = rest.as_bytes();
+        if b.len() >= 2 && b[0].is_ascii_alphabetic() && b[1] == b':' {
+            return rest.to_string();
+        }
+    }
+    p.to_string()
+}
+
+/// `p` for display and for config files (no verbatim prefix).
+fn shown(p: &Path) -> String {
+    strip_verbatim(&p.display().to_string())
+}
+
+/// Encode `s` as a TOML string: a literal string (`'C:\x'`, no escapes, so Windows
+/// backslashes stay readable) when that can hold it, else a basic string with every
+/// character TOML requires escaped (`"`, `\`, control characters).
+pub fn toml_string(s: &str) -> String {
+    if !s.contains('\'') && !s.chars().any(|c| c.is_control() && c != '\t') {
+        return format!("'{s}'");
+    }
+    let mut out = String::with_capacity(s.len() + 2);
+    out.push('"');
+    for c in s.chars() {
+        match c {
+            '"' => out.push_str("\\\""),
+            '\\' => out.push_str("\\\\"),
+            '\n' => out.push_str("\\n"),
+            '\r' => out.push_str("\\r"),
+            '\t' => out.push_str("\\t"),
+            '\u{8}' => out.push_str("\\b"),
+            '\u{c}' => out.push_str("\\f"),
+            c if c.is_control() => out.push_str(&format!("\\u{:04X}", c as u32)),
+            c => out.push(c),
+        }
+    }
+    out.push('"');
+    out
+}
+
+/// The `~/.codex/config.toml` block registering the server for `root` (a path as
+/// `canonicalize` returns it; a Windows verbatim prefix is removed).
+pub fn codex_snippet(root: &str) -> String {
+    format!(
+        "# Codex: add to ~/.codex/config.toml (global; plumb does not edit it)\n[mcp_servers.plumbgraph]\ncommand = \"plumb\"\nargs = [\"mcp\", \"--root\", {}]\n",
+        toml_string(&strip_verbatim(root))
+    )
 }
 
 /// `agents`: which to configure; empty = everything detected (`AGENTS.md` is always written).
@@ -129,10 +185,8 @@ pub fn init(root: &Path, agents: &[String], dry_run: bool) -> Result<InitReport>
         merge_json(&root.join(".cursor/mcp.json"), &mut rep, dry_run)?;
     }
     if want("codex", codex || !agents.is_empty()) || agents.is_empty() {
-        rep.snippets.push(format!(
-            "# Codex: add to ~/.codex/config.toml (global; plumb does not edit it)\n[mcp_servers.plumbgraph]\ncommand = \"plumb\"\nargs = [\"mcp\", \"--root\", \"{}\"]\n",
-            root.display()
-        ));
+        rep.snippets
+            .push(codex_snippet(&root.display().to_string()));
     }
     // keep the local index out of version control, but keep the baseline
     let gi = root.join(".gitignore");
@@ -150,7 +204,7 @@ pub fn init(root: &Path, agents: &[String], dry_run: bool) -> Result<InitReport>
             n.push_str(".plumbgraph/\n");
             std::fs::write(&gi, n)?;
         }
-        rep.written.push(gi.display().to_string());
+        rep.written.push(shown(&gi));
     }
     if rep.written.is_empty() && rep.notes.is_empty() {
         rep.notes.push("already configured".into());
