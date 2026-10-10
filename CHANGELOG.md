@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.2] - 2026-10-10
+
+- Docs only: README now matches the released version, the tested Windows scope, supported weakening languages and known limits.
+
 ## [1.0.1] - 2026-10-10
 
 Fixes for problems found by using v1.0.0 on real projects (Windows, Unity). Not released; the crate version is still 1.0.0.
