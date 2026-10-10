@@ -199,13 +199,82 @@ pub fn default_search_path() -> Vec<PathBuf> {
         .unwrap_or_default()
 }
 
-fn find_program(program: &str, search: &[PathBuf], root: &Path) -> Option<PathBuf> {
+/// Windows `PATHEXT` default, used when the variable is unset or yields nothing usable.
+pub const DEFAULT_PATHEXT: &str = ".COM;.EXE;.BAT;.CMD";
+
+/// Extensions `std::process::Command` can start on Windows (`.bat`/`.cmd` go through
+/// `cmd.exe`). Other `PATHEXT` entries (`.js`, `.vbs`, `.msc`, ...) need a host program,
+/// so a provider found only under such a name could not be run and is not reported.
+const RUNNABLE_EXTS: &[&str] = &[".com", ".exe", ".bat", ".cmd"];
+
+/// Parse a `PATHEXT`-style list (`.COM;.EXE;...`) into lower-case, dot-prefixed,
+/// de-duplicated extensions in their original order, keeping only `RUNNABLE_EXTS`.
+pub fn parse_pathext(raw: &str) -> Vec<String> {
+    let mut out: Vec<String> = vec![];
+    for part in raw.split(';') {
+        let part = part.trim();
+        if part.is_empty() {
+            continue;
+        }
+        let mut e = part.to_ascii_lowercase();
+        if !e.starts_with('.') {
+            e.insert(0, '.');
+        }
+        if RUNNABLE_EXTS.contains(&e.as_str()) && !out.contains(&e) {
+            out.push(e);
+        }
+    }
+    out
+}
+
+/// Executable extensions to try after a bare program name: from `PATHEXT` on Windows,
+/// none elsewhere (Unix looks up the exact name and checks the execute bit).
+pub fn executable_extensions() -> Vec<String> {
+    #[cfg(windows)]
+    {
+        let raw = std::env::var("PATHEXT").unwrap_or_default();
+        let exts = parse_pathext(&raw);
+        if exts.is_empty() {
+            parse_pathext(DEFAULT_PATHEXT)
+        } else {
+            exts
+        }
+    }
+    #[cfg(not(windows))]
+    {
+        Vec::new()
+    }
+}
+
+/// File names to try for `program`: the exact name when there is no extension list or the
+/// name already ends in a listed extension; otherwise `program` + each extension, in order.
+/// The bare name is deliberately not tried when extensions apply: npm puts an
+/// extensionless sh shim next to the `.cmd` one, and Windows cannot run the sh shim.
+fn candidate_names(program: &str, exe_exts: &[String]) -> Vec<String> {
+    let lower = program.to_ascii_lowercase();
+    if exe_exts.is_empty() || exe_exts.iter().any(|e| lower.ends_with(e.as_str())) {
+        return vec![program.to_string()];
+    }
+    exe_exts.iter().map(|e| format!("{program}{e}")).collect()
+}
+
+fn find_program(
+    program: &str,
+    search: &[PathBuf],
+    root: &Path,
+    exe_exts: &[String],
+) -> Option<PathBuf> {
     let mut dirs: Vec<PathBuf> = search.to_vec();
     // project-local JS tooling (tsc, scip-typescript, ast-grep) installed by npm
     dirs.push(root.join("node_modules/.bin"));
+    let names = candidate_names(program, exe_exts);
+    // directory order first, then extension order: the same precedence as cmd.exe
     for d in dirs {
-        let p = d.join(program);
-        if p.is_file() {
+        for name in &names {
+            let p = d.join(name);
+            if !p.is_file() {
+                continue;
+            }
             #[cfg(unix)]
             {
                 use std::os::unix::fs::PermissionsExt;
@@ -253,12 +322,20 @@ fn project_exts(root: &Path) -> std::collections::HashSet<String> {
 }
 
 /// Which providers are installed and relevant. Looks for executables only; runs nothing.
+/// On Windows a bare name such as `cargo` is matched as `cargo.exe`, `cargo.cmd`, ...
+/// following `PATHEXT` (see `executable_extensions`).
 pub fn detect(root: &Path, search: &[PathBuf]) -> Vec<Detected> {
+    detect_with_exts(root, search, &executable_extensions())
+}
+
+/// `detect` with an explicit executable-extension list (`[]` = exact names, the Unix rule).
+/// Lets the Windows lookup rules be tested on any platform.
+pub fn detect_with_exts(root: &Path, search: &[PathBuf], exe_exts: &[String]) -> Vec<Detected> {
     let exts = project_exts(root);
     CATALOG
         .iter()
         .map(|e| {
-            let found = find_program(e.program, search, root);
+            let found = find_program(e.program, search, root, exe_exts);
             Detected {
                 id: e.id.into(),
                 kind: e.kind,
@@ -308,7 +385,7 @@ pub fn run_scip_indexers(
             runs.push(run);
             continue;
         };
-        let Some(prog) = find_program(e.program, search, &root) else {
+        let Some(prog) = find_program(e.program, search, &root, &executable_extensions()) else {
             run.status = "skipped".into();
             run.note = Some(format!("`{}` not found; install: {}", e.program, e.install));
             runs.push(run);
