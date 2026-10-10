@@ -29,7 +29,7 @@ Checked on 2026-10-10, Linux, against the demo app in `examples/demo-app`:
 | official TypeScript SDK `@modelcontextprotocol/sdk` 1.32.1 (`scripts/mcp-sdk-check.mjs`) | `initialize`, `tools/list`, `tools/call` for `find_symbol`, `repo_map`, `dead_code`, `verify`, `resources/list`, `resources/read` ×3 | all succeeded; server reported `plumbgraph 1.0.0`, capabilities `tools` + `resources`; `prompts/list` returns `-32601` (not implemented), as expected |
 | `@modelcontextprotocol/inspector` 2.10.1 in CLI mode: `npx @modelcontextprotocol/inspector --cli plumb mcp --root <dir> --method tools/list` | `tools/list` | returned the 13 tools with input schemas (the inspector declares Node >= 22.19 and warned on Node 20.19, but worked) |
 
-Not tested: Claude Code, Cursor, Claude Desktop, Codex and other agent hosts (the configuration snippets in the README follow their documented `mcpServers` format but were not exercised end-to-end), HTTP/SSE transports (not implemented), Windows.
+Not tested: Claude Code, Cursor, Claude Desktop, Codex and other agent hosts (one other MCP host was driven on Windows 11 by hand; the configuration snippets in the README follow their documented `mcpServers` format but were not exercised end-to-end), HTTP/SSE transports (not implemented); Windows CI (Windows was exercised manually on one machine only, see the README).
 
 Re-run the SDK check yourself:
 
