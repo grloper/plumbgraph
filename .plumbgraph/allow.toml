@@ -1,0 +1,14 @@
+# Allow-list for running `plumb verify` on plumbgraph itself (dogfooding).
+# Every entry is a justified false positive; see docs/DOGFOOD.md.
+
+[[deps_allow]]
+path = "crates/core/tests/fixtures/**"
+reason = "Test fixtures deliberately contain hallucinated/undeclared imports and unresolvable paths; the golden tests assert plumb reports exactly these."
+
+[[deps_allow]]
+path = "examples/demo-app/**"
+reason = "The demo app deliberately imports a hallucinated package (fastjsonx_utils) to show check-deps."
+
+[[allow]]
+path = "examples/demo-app/**"
+reason = "The demo app deliberately contains unused functions to show dead-code."

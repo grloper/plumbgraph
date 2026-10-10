@@ -32,10 +32,21 @@ pub struct AllowEntry {
     pub reason: Option<String>,
 }
 
+/// Suppresses `check-deps` findings for files matching `path` (glob), optionally only for one
+/// `package`. A written `reason` is mandatory so every suppression is auditable.
+#[derive(Debug, Clone, Default, Deserialize)]
+pub struct DepsAllowEntry {
+    pub path: String,
+    pub package: Option<String>,
+    pub reason: String,
+}
+
 #[derive(Debug, Clone, Default, Deserialize)]
 pub struct AllowList {
     #[serde(default)]
     pub allow: Vec<AllowEntry>,
+    #[serde(default)]
+    pub deps_allow: Vec<DepsAllowEntry>,
 }
 
 impl AllowList {
@@ -46,7 +57,29 @@ impl AllowList {
                 anyhow::bail!("allow entry #{} needs `symbol` and/or `path`", i + 1);
             }
         }
+        for (i, e) in a.deps_allow.iter().enumerate() {
+            if e.reason.trim().is_empty() {
+                anyhow::bail!("deps_allow entry #{} needs a non-empty `reason`", i + 1);
+            }
+        }
         Ok(a)
+    }
+
+    /// True when a `check-deps` finding at `path` about `package` is allow-listed.
+    pub fn allows_dep(&self, path: &str, package: Option<&str>) -> bool {
+        self.deps_allow.iter().any(|e| {
+            let path_ok = Glob::new(&e.path)
+                .map(|g| g.compile_matcher().is_match(path))
+                .unwrap_or(false);
+            let pkg_ok = match (&e.package, package) {
+                (None, _) => true,
+                (Some(g), Some(p)) => Glob::new(g)
+                    .map(|g| g.compile_matcher().is_match(p))
+                    .unwrap_or(false),
+                (Some(_), None) => false,
+            };
+            path_ok && pkg_ok
+        })
     }
 
     /// Load `<root>/.plumbgraph/allow.toml` (if present) plus an optional extra file.
@@ -60,11 +93,9 @@ impl AllowList {
             if p.is_file() {
                 let t = std::fs::read_to_string(&p)
                     .with_context(|| format!("reading {}", p.display()))?;
-                all.allow.extend(
-                    Self::parse(&t)
-                        .with_context(|| p.display().to_string())?
-                        .allow,
-                );
+                let parsed = Self::parse(&t).with_context(|| p.display().to_string())?;
+                all.allow.extend(parsed.allow);
+                all.deps_allow.extend(parsed.deps_allow);
             }
         }
         Ok(all)

@@ -1,0 +1,6 @@
+rules:
+  - id: demo-no-eval
+    languages: [python]
+    severity: ERROR
+    message: "eval() on dynamic input is dangerous"
+    pattern: eval(...)

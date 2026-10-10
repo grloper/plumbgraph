@@ -1,126 +1,142 @@
-<p align="center"><img src="assets/logo.svg" width="120" alt="Plumbgraph logo"></p>
+<p align="center"><img src="assets/logo.svg" width="112" alt="Plumbgraph logo: a plumb line through a small code graph"></p>
 
 <h1 align="center">Plumbgraph</h1>
+
 <p align="center"><b>Know your code. Verify the change.</b><br>
-Code intelligence and pre-submit verification for AI coding agents.</p>
+Local code intelligence and a pre-submit gate for AI coding agents, over CLI and MCP.</p>
 
 <p align="center">
-<a href="https://github.com/grloper/plumbgraph/actions/workflows/ci.yml"><img src="https://github.com/grloper/plumbgraph/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-<img src="https://img.shields.io/badge/status-pre--alpha%20v0.2-orange" alt="status: pre-alpha">
-<img src="https://img.shields.io/badge/license-Apache--2.0-blue" alt="license">
+<a href="https://github.com/grloper/plumbgraph/actions/workflows/ci.yml"><img src="https://github.com/grloper/plumbgraph/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue" alt="License: Apache-2.0"></a>
+<img src="https://img.shields.io/badge/version-1.0.0%20(unreleased)-informational" alt="Version 1.0.0, unreleased">
+<img src="https://img.shields.io/badge/rust-1.85%2B-orange?logo=rust" alt="Rust 1.85+">
+<img src="https://img.shields.io/badge/MCP-stdio-5B5BD6" alt="MCP over stdio">
 </p>
 
-> **Status: pre-alpha (v0.2).** Not released: no crate, no binaries, no tags. Heuristic results; every finding says where it came from and how sure it is. See [what does not work yet](#what-does-not-work-yet).
+<p align="center"><img src="docs/demo/verify.svg" alt="Terminal recording of `plumb verify --run --online` on the demo app: a hallucinated import, an unused function, an eval() and a print() are reported; verdict FAIL" width="860"></p>
+<p align="center"><sub>Real output of <code>plumb verify</code> on <a href="examples/demo-app">examples/demo-app</a> (captured by <code>scripts/render-demo.py</code>; raw text in <a href="docs/demo/verify.txt">docs/demo/verify.txt</a>).</sub></p>
 
-Plumbgraph (CLI: `plumb`) indexes your repository with tree-sitter into a small SQLite graph and answers the questions an AI coding agent should ask **before** it submits a change:
+## Why
 
-- Is this code actually used? (`dead-code`)
-- Does every import resolve to a declared, *real* package, or did the model hallucinate one? (`check-deps`)
-- Did the change quietly weaken the tests to get green? (`weakening`)
+AI agents write code fast and check it badly. Plumbgraph answers the questions an agent should ask **before** it says "done", and says how sure it is:
 
-It runs locally, executes none of your project's code, and speaks [MCP](https://modelcontextprotocol.io) over stdio so agents can call it directly.
+- **Is this code used?** `dead-code`, with reachability evidence and false-positive risks.
+- **Is this dependency real?** `check-deps` compares imports with your manifests and, optionally, PyPI / npm / crates.io, so a hallucinated package is caught.
+- **Did the tests get weaker?** `weakening` reads `git diff` for deleted tests, new skips and loosened assertions.
+- **What breaks if I change this?** `impact` lists transitive callers and the tests to run; `map` gives a token-budgeted overview.
+- **One verdict.** `verify` merges all of that with diagnostics, semgrep and ast-grep, diffs against a baseline, and fails only on **new** findings.
 
-## What works (v1.0 candidate)
+It indexes with tree-sitter into a local SQLite file, executes none of your code by default, and every finding carries a `source` and a `confidence`.
 
-New since v0.2: `plumb map`, `plumb impact`, `plumb verify` (baseline-diffing), `plumb doctor`/`enrich` (provider orchestration, execution opt-in), `plumb init`, Go/Java/C# packs, 13 MCP tools. See [CHANGELOG.md](CHANGELOG.md), [docs/LANDSCAPE.md](docs/LANDSCAPE.md) and the measurements in [docs/EVALUATION.md](docs/EVALUATION.md).
+## Quickstart
 
-
-Everything in this table is covered by tests in this repository (see `scripts/verify.sh`).
-
-| Capability | Languages | Notes |
-|---|---|---|
-| `plumb index <path>` | Python, JavaScript, TypeScript/TSX, Rust (+ HTML/config text scanned for name mentions) | Symbols, imports, references, calls where name-resolvable. Incremental (content hash). |
-| `plumb dead-code <path>` | same | Reachability from entry points/tests (`--lib` also treats exports as public API), confidence 0-1 (`high >= 0.9`, `medium >= 0.7`, `low` hidden unless `--min-confidence`), "used only by tests" kept separate, allow-list file and `plumb:keep` comments, evidence and false-positive risks per finding. |
-| `plumb check-deps <path>` | Python, JS/TS, Rust | Imports vs `pyproject.toml`/`requirements.txt`, `package.json`, `Cargo.toml`; registry existence on PyPI / npm / crates.io (`--offline` disables network). Registry errors are never reported as "does not exist". |
-| `plumb weakening --base <rev>` | any language with test files | Parses `git diff`: deleted test files/tests, new skip/ignore/only markers, trivial or fewer/looser assertions. |
-| `plumb find`, `plumb refs` | same as index | Symbol lookup and incoming references with per-edge confidence and source (`scip` when an index resolved it, else name-based). |
-| `plumb diagnostics <path>` | Rust, TypeScript/JavaScript, Python (+ any LSP server) | Normalises real `cargo check`/clippy JSON, `tsc`, `pyright --outputjson`, `ruff --output-format json` output, or LSP `publishDiagnostics`, into findings with `source`, `confidence`, line and column. `--from FORMAT:FILE` only reads saved output; `--run` / `--lsp` execute the project's toolchain and are opt-in. See [docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md). |
-| SCIP overlay (`index.scip`, `--scip`, `plumb scip`) | rust-analyzer, scip-typescript, scip-python indexes | Replaces name-based edges with compiler-grade ones where the index resolved a reference, for `refs` and `dead-code`; findings say `scip` or `t0-treesitter`. Falls back per reference. See [docs/SCIP.md](docs/SCIP.md). |
-| `plumb mcp` | | MCP server over stdio exposing the tools above plus `diagnostics` and `scip_status`. Hand-rolled minimal JSON-RPC 2.0 (`initialize`, `ping`, `tools/list`, `tools/call`). |
-
-Every finding carries `source` (e.g. `t0-treesitter`, `scip`, `compiler:rustc`, `lint:ruff`, `typecheck:tsc`, `lsp:rust-analyzer`, `manifest+t0-import`, `git-diff`) and `confidence`. Add `--json` for machine-readable output; `--fail-on high|medium|low` sets the exit code for CI.
-
-Example:
-
-```console
-$ plumb dead-code ./my-project
-MEDIUM 0.77  src/storage/database.js:237  method `ArchiveDatabase.updateMaterialPath` appears unused  [t0-treesitter]
-         why:  no reference edges from any code (0 incoming)
-         why:  not reachable from entry points (...)
-         risk: exported/public: may be used by consumers outside the indexed code
-         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
-```
-
-How well does it do on real code? Only two small sanity runs (name-based and SCIP-assisted) so far, and no measured precision/recall: see [docs/EVALUATION.md](docs/EVALUATION.md).
-
-## Install
-
-Nothing is published yet. Build from source (Rust 1.85+; the pinned toolchain is picked up automatically by `rustup`):
+Nothing is published yet (no crate, no binaries). Build from source with Rust 1.85+:
 
 ```bash
-git clone https://github.com/grloper/plumbgraph
-cd plumbgraph
-cargo install --path crates/cli --locked      # installs `plumb` and `plumbgraph`
-plumb --help
+git clone https://github.com/grloper/plumbgraph && cd plumbgraph
+cargo install --path crates/cli --locked      # installs `plumb` (and `plumbgraph`)
+
+plumb map .                       # ranked, token-budgeted overview
+plumb dead-code .                 # add --lib for libraries (exports = public API)
+plumb check-deps . --online       # sends package names only to the registries
+plumb verify .                    # one pass/fail gate (exit 1 on new findings)
+plumb verify . --run --online     # also run diagnostics, semgrep, ast-grep (trusted code only)
+plumb init                        # write AGENTS.md block + MCP config for your agent
 ```
 
-## Use with an agent (MCP)
+`--json` on any command gives machine-readable output; `--fail-on high|medium|low` sets the exit code.
 
-`plumb mcp` serves over stdio; the project root is `--root` (default: current directory) and tool paths are confined to it. Tools: `index_project`, `find_symbol`, `references`, `dead_code`, `check_dependencies`, `detect_test_weakening`, `scip_status`, `diagnostics`. Results include `untrusted: true`: text derived from repository files is data, not instructions. `references`/`dead_code` use a SCIP index when present (`use_scip=false` to disable) and say so in `index.tiers`. `diagnostics` can ingest saved output always; running tools or language servers (`run`, `lsp`) is refused unless **you** start the server with `plumb mcp --allow-exec`.
-
-**Claude Code**
+### Use with an agent (MCP)
 
 ```bash
 claude mcp add plumbgraph -- plumb mcp --root /path/to/project
 ```
 
-**Cursor** (`.cursor/mcp.json`), **Claude Desktop** and most other clients that use the `mcpServers` format:
+Or in `.cursor/mcp.json`, Claude Desktop and other `mcpServers` clients:
 
 ```json
-{
-  "mcpServers": {
-    "plumbgraph": {
-      "command": "plumb",
-      "args": ["mcp", "--root", "/path/to/project"]
-    }
-  }
-}
+{ "mcpServers": { "plumbgraph": { "command": "plumb", "args": ["mcp", "--root", "/path/to/project"] } } }
 ```
 
-Only the stdio protocol basics are implemented and tested against our own client; please report incompatibilities with specific clients.
+13 tools and 3 resources; running external tools is refused unless **you** start the server with `--allow-exec`. Details and the clients it was actually tested with: [docs/MCP.md](docs/MCP.md).
+
+## See it work
+
+| | |
+|---|---|
+| **Map and impact** | <img src="docs/demo/map-impact.svg" alt="plumb map and plumb impact on the demo app" width="520"> |
+| **SCIP makes it precise** | <img src="docs/demo/scip.svg" alt="plumb enrich runs scip-python; dead-code then reports the finding from SCIP" width="520"> |
+
+All images are renderings of real runs; regenerate them with `scripts/render-demo.py`.
+
+## How it works
+
+```mermaid
+flowchart LR
+  SRC[Source files] -->|tree-sitter packs| DB[(SQLite graph<br/>edges carry source + confidence)]
+  SCIP[SCIP indexes<br/>optional] -->|overlay| DB
+  DB --> ENG[dead-code · map · impact]
+  MAN[Manifests + registries] --> DEPS[check-deps]
+  GIT[git diff] --> WK[weakening]
+  TOOLS[clippy · tsc · ruff · pyright · LSP<br/>semgrep · ast-grep<br/>opt-in subprocesses] --> V
+  ENG --> V[verify<br/>baseline diff]
+  DEPS --> V
+  WK --> V
+  V --> OUT[plumb CLI / MCP server]
+```
+
+More in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+## What works
+
+| Capability | Languages | Notes |
+|---|---|---|
+| `index`, `find`, `refs` | Python, JavaScript, TypeScript/TSX, Rust, Go, Java, C# | Tier-0 (tree-sitter, name-based). Import resolution varies by language; C# imports are not resolved to files. |
+| `dead-code` | same | Reachability from entry points and tests; confidence 0-1; `--lib`, allow-list (`.plumbgraph/allow.toml`), `plumb:keep` comments; evidence and false-positive risks per finding. |
+| `check-deps` | Python, JS/TS, Rust | Imports vs manifests; registry existence checks are opt-in (`--online`), and registry errors are never reported as "does not exist". |
+| `weakening` | any language with test files | Heuristic, line-based `git diff` analysis. |
+| `map`, `impact` | all of the above | PageRank-ranked map under a hard token budget; reverse reachability with tests to run. |
+| `verify`, `doctor`, `enrich`, `init` | | Baseline-diffing gate; provider detection; opt-in SCIP indexers; agent config writer. |
+| SCIP overlay | rust-analyzer, scip-typescript, scip-python indexes | Compiler-grade edges where the index resolved a reference, per-reference fallback ([docs/SCIP.md](docs/SCIP.md)). Exercised on toy projects with scip-python and scip-typescript. |
+| Diagnostics | Rust, TS/JS, Python, any LSP | Normalised cargo/clippy, tsc, pyright, ruff, LSP `publishDiagnostics` ([docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md)). |
+| Rule engines | semgrep, ast-grep | Run as subprocesses with `--run`; semgrep needs `.semgrep.yml` or `--semgrep-config`, ast-grep needs `sgconfig.yml`. |
+
+## How it compares
+
+Facts below come from each project's own README/docs on 2026-10-10 (links in [docs/LANDSCAPE.md](docs/LANDSCAPE.md)); we did not benchmark any of them, and "not documented" means we did not find it, not that it is absent. Star counts are not used.
+
+| | **Plumbgraph** | [Serena](https://github.com/oraios/serena) | [CodeGraph](https://github.com/colbymchenry/codegraph) | [Aider repo map](https://aider.chat/docs/repomap.html) | [Sourcegraph](https://sourcegraph.com/docs/code-navigation) |
+|---|---|---|---|---|---|
+| Main job | Verify a change (dead code, fake deps, weakened tests) plus navigation | Semantic retrieval and editing for agents | Pre-indexed code knowledge graph for agents | Give the LLM a ranked map of the repo | Code search and navigation platform |
+| How it analyses | tree-sitter; optional SCIP and LSP-diagnostics overlays | Language servers (LSP) | Local code graph (see its docs for details) | tree-sitter definitions/references, graph ranking | Search-based, plus precise navigation from SCIP indexes |
+| Interface | CLI, MCP (stdio) | MCP | MCP, CLI | Inside aider | Web UI, API; MCP server on the enterprise plan |
+| Runs locally, no service | Yes | Yes | Yes ("100 % local") | Yes | Self-hosted or single-tenant cloud |
+| Dead-code / hallucinated-dependency / test-weakening checks | Yes | Not documented | Not documented | No (not its purpose) | Not documented |
+| Confidence and source on every result | Yes | Not documented | Not documented | n/a | n/a |
+| Precise cross-references | Only with a SCIP index; name-based otherwise | Yes, via LSP | Not verified | Not type-resolved (tree-sitter) | Yes, with SCIP indexes |
+| License | Apache-2.0 | GPL-3.0-or-later (app), per its README | MIT | Apache-2.0 | Commercial (enterprise from $16K/year, pricing page) |
+
+Use them together: if you need precise navigation and editing today, an LSP-backed tool such as Serena will beat our tier-0 graph; Plumbgraph's niche is the verification side and honest provenance.
 
 ## What does not work yet
 
-- **Precise only where you supply an index.** Without a SCIP index, analysis is tree-sitter and name based: no type information, no cross-language edges, overloaded or common names produce ambiguous, lower-confidence edges. With one, precision depends on the indexer (calls on untyped receivers in JS/Python are often not resolved and stay name-based). Plumbgraph never runs an indexer. See [docs/SCIP.md](docs/SCIP.md).
-- **Diagnostics are passthrough with fixed confidences** (not calibrated), only for cargo/clippy, tsc, pyright, ruff and LSP push diagnostics; baseline diffing is done by `plumb verify` ([docs/DIAGNOSTICS.md](docs/DIAGNOSTICS.md)).
-- Dynamic features (reflection, `getattr`, `eval`, DI containers, item-generating macros, framework magic) are invisible; they lower confidence but are not understood.
-- Dead-code recall is **not measured**; precision was only sanity-checked on two small repos, name-based vs SCIP on the same two ([docs/EVALUATION.md](docs/EVALUATION.md)). scip-python was only seen working on a toy and crashed on one real directory.
-- Language packs can only choose among the built-in grammars; runtime-loaded grammars are not implemented ([docs/PACKS.md](docs/PACKS.md)).
-- Go, Java, C# are tier-0 (name-based) only; C# imports are not resolved to files. Monorepo/workspace resolution is basic.
-- MCP resources/prompts are not implemented (tools only).
-- Benchmarks are small (5 repos, single run); dead-code precision on Go/Java was not hand-reviewed.
-- `weakening` is heuristic (line-based); it cannot know that a deleted test was redundant.
-- MCP: stdio only, tools only (no resources/prompts), protocol version `2024-11-05`.
-- No releases, no packaging, no Windows testing.
+- Without a SCIP index, analysis is **name-based**: no types, no cross-language edges; common names give ambiguous, lower-confidence edges.
+- **Dead-code precision is low on libraries in the default (app) mode** and recall is unmeasured on real code. Hand review of 76 findings on chi and gson found 1 real unused function; four systematic false-positive classes were fixed ([docs/EVALUATION.md](docs/EVALUATION.md)). Use `--lib` for libraries.
+- Reflection, `eval`, DI containers, macros and framework magic are invisible (they lower confidence but are not understood).
+- Go, Java, C# are tier-0 only; C# was not benchmarked on a real repository.
+- SCIP: rust-analyzer's SCIP output, scip-go, scip-java and scip-dotnet were not run; scip-python and scip-typescript only on toys.
+- MCP: stdio only, tools and resources only (no prompts). Tested with the official TypeScript SDK and the MCP inspector CLI; agent hosts were not tested.
+- `weakening` is line-based and heuristic. No Windows testing. No releases or packages yet.
 
-## Roadmap
+## Documentation
 
-Directional, not promises.
-
-1. Harden v0.1: more fixtures per language, real-world evaluation with measured precision/recall.
-2. ~~Semantic tier: SCIP ingestion and diagnostics~~ (v0.2, see above). Next: baseline-diffing of diagnostics, SCIP implementation relationships, a managed LSP pool, more indexers/languages.
-3. More languages via runtime-loadable packs.
-4. Pre-submit "verify the change" bundle: one call that runs dead-code on the diff, dependency check, weakening and reports a single verdict.
-5. Releases, prebuilt binaries, crates.io (owner decision).
-
-## How it relates to other tools
-
-Plumbgraph is complementary to, not a replacement for, tools such as [Serena](https://github.com/oraios/serena) (semantic, LSP-backed code navigation and editing for agents) and code-graph MCP servers like CodeGraph: those focus on helping an agent *navigate and edit*. Plumbgraph's focus is the *verification* side (dead code, hallucinated or undeclared dependencies, weakened tests) with an explicit confidence on every finding, and a deliberately small local tree-sitter core. Use them together; if you need precise cross-reference navigation today, an LSP-backed tool will be more accurate than our tier-0 graph. Dedicated linters and dead-code tools (vulture, knip, `cargo udeps`, ...) are more mature per language; Plumbgraph's angle is one agent-facing interface across languages.
+[Docs index](docs/README.md) · [Architecture](docs/ARCHITECTURE.md) · [MCP](docs/MCP.md) · [SCIP](docs/SCIP.md) · [Diagnostics](docs/DIAGNOSTICS.md) · [Language packs](docs/PACKS.md) · [Evaluation](docs/EVALUATION.md) · [Landscape](docs/LANDSCAPE.md) · [Changelog](CHANGELOG.md)
 
 ## Development
 
 ```bash
-scripts/verify.sh          # fmt, clippy -D warnings, tests, test-integrity, cargo-deny/audit if installed
+scripts/verify.sh            # fmt, clippy -D warnings, tests, test-integrity, cargo-deny/audit if installed
+plumb verify .               # plumbgraph checks itself (allow-list with reasons in .plumbgraph/allow.toml)
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md), [AGENTS.md](AGENTS.md), [SECURITY.md](SECURITY.md). Licensed under [Apache-2.0](LICENSE).
+See [CONTRIBUTING.md](CONTRIBUTING.md), [AGENTS.md](AGENTS.md) and [SECURITY.md](SECURITY.md). Licensed under [Apache-2.0](LICENSE).

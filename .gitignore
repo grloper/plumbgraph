@@ -1,7 +1,8 @@
 /target
-.plumbgraph/index.db*
-.plumbgraph/registry-cache.json
+**/.plumbgraph/*
+!**/.plumbgraph/allow.toml
 *.db-wal
 *.db-shm
 .DS_Store
 scripts/__pycache__/
+node_modules/

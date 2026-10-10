@@ -1,0 +1,20 @@
+$ plumb map --tokens 300
+# plumb map: 2 files, 5 of 5 symbols (~55 tokens, budget 300)
+src/app.py
+  7: def fetch_user(user_id)
+  12: def format_user(user)
+  16: def legacy_export(users)
+  21: def main()
+src/calc.py
+  4: def run_expression(expr)
+$ plumb impact format_user
+changed: format_user
+d1 0.85 function test_format_user  tests/test_app.py:4  via format_user  (test)  [t0-treesitter]
+d1 0.80 function legacy_export  src/app.py:16  via format_user  [t0-treesitter]
+d1 0.80 function main  src/app.py:21  via format_user  [t0-treesitter]
+
+3 affected symbol(s) in 2 file(s); module-level dependents: 1
+tests to run: tests/test_app.py
+note: reverse reachability over resolved call/reference edges: dynamic dispatch, reflection and code outside the index are invisible
+note: confidence is the product of edge confidences along the best path found; it is a heuristic, not a probability
+note: tests_to_run lists test files that reach a changed symbol through the graph; absence is not proof a test is unaffected

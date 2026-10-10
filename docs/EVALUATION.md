@@ -138,4 +138,46 @@ Raw data: [docs/bench/results-2026-10-10.json](bench/results-2026-10-10.json), p
 
 **Seeded recall.** In each repo, 20 uniquely named dead functions and 20 live ones (called from live code) were injected in the repo's own language (outside test/example/bench/fixture paths). All 20/20 dead were found at the default threshold and 0/20 live were flagged. This is a synthetic, easy test (unique names, simple call shapes); it shows the pipeline works, not real-world recall.
 
-**Not measured:** precision of the dead-code findings on chi and gson (19 and 28 findings were not hand-reviewed), the Go/Java/C# cases beyond fixtures (C# was not benchmarked on a real repository; no C# import resolution), real-tokenizer map sizes, whether maps improve agent task success, and any run of external providers (semgrep, ast-grep, SCIP indexers) inside `verify`; those paths are covered by fixture/fake-tool tests only. `verify` on plumbgraph itself exits 1 because `check-deps` reports 10 findings, not triaged here.
+**Not measured:** precision of the dead-code findings on chi and gson (19 and 28 findings were not hand-reviewed), the Go/Java/C# cases beyond fixtures (C# was not benchmarked on a real repository; no C# import resolution), real-tokenizer map sizes, whether maps improve agent task success, and any run of external providers (semgrep, ast-grep, SCIP indexers) inside `verify`; those paths are covered by fixture/fake-tool tests only. (Superseded by the dogfooding section below: `verify` on plumbgraph itself now passes.)
+
+
+## v1.0 candidate: hand review of dead-code findings on chi and gson, and dogfooding (2026-10-10)
+
+This section replaces the "not hand-reviewed" caveat above for chi and gson. Reviewer: the maintainers' agent, reading each finding's source and grepping for the name. Small samples, two libraries, one reviewer: treat the numbers as an honest anecdote, not a benchmark. Raw findings were produced by `plumb dead-code <repo> --include-low` on shallow clones of `go-chi/chi` and `google/gson` at their default branches on 2026-10-10.
+
+**chi (Go), app mode (the default): 52 findings (19 medium, 33 low); 40 reviewed (all 19 medium + 21 low).** One was genuinely unused (`PresentError` in `_examples/versions/data/errors.go`, exported, zero references anywhere). The other 39 were not dead code: they are exported middleware (`BasicAuth`, `Compress`, ...) that chi exports for *users*, used only by tests, or private helpers (`basicAuthFailed`, `walkXFF`, `encoderGzip`, ...) whose only callers are those exported functions. App mode treats only `main`/`init`/tests as entry points, so a library's public API is "unreachable". Measured precision in app mode on a library: **1/40 = 2.5 %**. With `--lib` (exports are public API) chi reports **0** findings, so precision is undefined there and recall on chi is unknown.
+
+**gson (Java), app mode: 106 findings (28 medium, 78 low) before fixes; 36 distinct findings reviewed.** None was genuinely dead. Systematic false positives found and fixed (each with a failing-then-passing unit test in `crates/core/src/extract.rs`):
+
+| false positive | cause | fix |
+|---|---|---|
+| `writeReplace` / `readObject` (Java serialization hooks), 4 findings | invoked reflectively by `java.io` | recognised as entry points (`writeReplace`, `readResolve`, `readObject`, `writeObject`, `readObjectNoData`) |
+| `@BeforeExperiment setUp()` and the helpers only it calls (`getResourceFile`, `resourceToString`), 6 findings | framework-annotated methods are called by the framework | Java methods carrying any annotation other than a compiler/lint marker (`@Override`, `@Deprecated`, `@SuppressWarnings`, `@SafeVarargs`, `@FunctionalInterface`, nullness markers, ...) are treated as entry points |
+| helpers called from `public static void main` (Java) / `static void Main` (C#) | `main` was only an entry for free functions | Java `main` and C# `Main` methods are entry points |
+
+After the fixes `--lib` on gson reports **0** findings (was 11, all false). App mode on gson still reports 23 medium findings, all of which are private helpers of public API or of `Main.runTests` (invoked from another module's test): not dead code. Not fixed: Caliper-style `timeXxx` methods without annotations (2 findings, reflection by naming convention; tier-0 cannot know).
+
+**Rust (plumbgraph itself).** `const END` in `init.rs` was reported unused because it is only used through a format-string capture (`format!("...{END}")`). Fixed: identifiers inside Rust string literals' `{name}` / `{name:fmt}` placeholders now count as references (test `rust_inline_format_args_are_references`; `{{` escapes are ignored). The same bug could never have been seen by name-only search.
+
+**Tool change driven by the above.** In app mode, when findings include exported symbols, `plumb dead-code` now prints a note suggesting `--lib` (it is also in the JSON `limitations`). The extractor version was bumped, so existing `.plumbgraph/index.db` files are rebuilt on upgrade.
+
+**What this does and does not show.** It shows that default (app) mode is the wrong mode for libraries and that the tool says so now; it exposed four systematic Java/Rust false-positive classes. It does *not* show recall on real code (still only the synthetic seeded test above), and only 1 of the 76 reviewed findings (an unused example function in chi) was real unused code on these two well-maintained libraries.
+
+### Dogfood: `plumb verify` on plumbgraph itself
+
+Before: `check-deps` reported 10 findings and `dead-code` 1, all but one inside `crates/core/tests/fixtures/` (fixtures that *intentionally* contain hallucinated imports, undeclared packages and unresolvable paths; the golden tests assert plumb reports exactly these). Triage:
+
+| finding(s) | verdict | action |
+|---|---|---|
+| 10 × check-deps under `crates/core/tests/fixtures/**` (numpy, totallyfakepkg, hallucinated-lib-xyz, express, lodash, jest, rand, `./nope.js`, `missing_mod`, `.`) | false positives by construction | `.plumbgraph/allow.toml` entry with a written reason; new `[[deps_allow]]` section (path glob, optional package glob, **mandatory reason**; tested) |
+| `const END` unused | real bug in plumb (see above) | fixed in the analyzer, not allow-listed |
+
+After: `plumb verify .` → `verify: PASS (0 new ...)`, exit 0. The demo app in `examples/demo-app` deliberately contains a hallucinated import and an unused function and is allow-listed the same way.
+
+### Real external tools through `plumb verify` / `plumb enrich` (2026-10-10, Linux)
+
+Run on `examples/demo-app` (Python) with semgrep 1.180.0, ast-grep (pip `ast-grep-cli`), ruff and scip-python 0.6.6; and on a one-file TypeScript project with scip-typescript. Outputs are checked in under [docs/demo](demo) (`*.txt` are the raw captures).
+
+* `plumb verify --run --online`: semgrep (`.semgrep.yml`) and ast-grep (`sgconfig.yml`) ran as subprocesses and their findings were normalised (`[semgrep]`, `[ast-grep]`); ruff diagnostics merged (`[lint:ruff]`); PyPI returned 404 for the hallucinated import.
+* `plumb enrich` ran scip-python (1.3 s); `plumb dead-code` then reported `legacy_export` with `[scip]` and "resolved by SCIP". On the TypeScript toy, scip-typescript made `unusedHelper` a **high** (0.95) finding.
+* Not run: rust-analyzer SCIP (no `rustup` on the test machine, so `rust-analyzer` was unavailable), scip-go, scip-java, scip-dotnet, pyright. Everything with SCIP was only exercised on toy projects here.

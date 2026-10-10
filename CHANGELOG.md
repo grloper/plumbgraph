@@ -13,7 +13,15 @@
 - Incremental indexing: mtime skip, resolve stamp, cached query compilation.
 - docs/LANDSCAPE.md, benchmark script `scripts/bench.py`, results in `docs/bench/`.
 
+- `[[deps_allow]]` allow-list for `check-deps` (path glob, optional package glob, mandatory reason).
+- `examples/demo-app` and `scripts/render-demo.py` / `scripts/render-social.py`: README images generated from real runs.
+- docs: ARCHITECTURE.md, MCP.md (tested against the official TypeScript SDK and the inspector CLI), docs index, hand-review of chi/gson findings in EVALUATION.md.
+- MCP SDK smoke test: `scripts/mcp-sdk-check.mjs`.
+
 ### Fixed
+- Dead code: Rust `{NAME}` inline format captures count as references; Java `main`, C# `Main`, Java serialization hooks and annotation-driven framework methods are entry points. App mode now suggests `--lib` when exported symbols are reported.
+- `plumb verify --fail-on none` prints `REPORT-ONLY` instead of `FAIL`.
+- Extractor version bumped: existing indexes are rebuilt once.
 - Rust `mod` resolution for Cargo targets under `tests/`, `benches/`, `examples/`, `src/bin/`.
 - Argument injection guard for git revisions.
 

@@ -12,6 +12,7 @@ use crate::{Finding, Level};
 use anyhow::{bail, Result};
 use plumbgraph_langs::PackSet;
 use serde::Serialize;
+use std::collections::HashSet;
 use std::path::{Path, PathBuf};
 
 /// Built-in packs plus any packs in `$PLUMB_PACKS_DIR` or `~/.config/plumbgraph/packs`.
@@ -169,6 +170,21 @@ pub fn run_dead_code(t: &Target, p: &DeadCodeParams) -> Result<DeadCodeResult> {
             ));
         }
     }
+    if !p.library_mode {
+        let exported: HashSet<&str> = g
+            .symbols
+            .iter()
+            .filter(|s| s.exported)
+            .map(|s| s.qname.as_str())
+            .collect();
+        let n = findings
+            .iter()
+            .filter(|f| f.symbol.as_deref().is_some_and(|q| exported.contains(q)))
+            .count();
+        if n > 0 {
+            limits.push(format!("{n} finding(s) are exported symbols. If this project is a library, re-run with --lib to treat exported symbols as public API (app mode assumes only main/init/tests are entry points)"));
+        }
+    }
     Ok(DeadCodeResult {
         summary: summarize(&findings),
         findings,
@@ -222,6 +238,11 @@ pub fn run_check_deps(
         rep
     };
     rep.findings.retain(|f| f.confidence >= p.min_confidence);
+    let allow = AllowList::load(&root, None)?;
+    if !allow.deps_allow.is_empty() {
+        rep.findings
+            .retain(|f| !allow.allows_dep(&f.file, f.symbol.as_deref()));
+    }
     Ok(rep)
 }
 

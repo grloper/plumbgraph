@@ -1,28 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="t">
-  <title id="t">Plumbgraph: a plumb line hanging over a small code graph</title>
-  <rect width="256" height="256" rx="48" fill="#1E293B"/>
+  <title id="t">Plumbgraph: a plumb line hanging through a small code graph</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111C33"/>
+      <stop offset="1" stop-color="#0A1020"/>
+    </linearGradient>
+    <linearGradient id="bob" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5EEAD4"/>
+      <stop offset="1" stop-color="#0EA5E9"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="56" fill="url(#bg)"/>
+  <rect x="1.5" y="1.5" width="253" height="253" rx="54.5" fill="none" stroke="#FFFFFF" stroke-opacity=".08" stroke-width="3"/>
   <!-- graph edges -->
-  <g stroke="#475569" stroke-width="5" stroke-linecap="round">
-    <line x1="128" y1="150" x2="62" y2="190"/>
-    <line x1="128" y1="150" x2="194" y2="190"/>
-    <line x1="62" y1="190" x2="104" y2="224"/>
-    <line x1="194" y1="190" x2="152" y2="224"/>
-    <line x1="62" y1="190" x2="194" y2="190" stroke-dasharray="2 10"/>
+  <g stroke="#3B4A6B" stroke-width="5" stroke-linecap="round" fill="none">
+    <line x1="128" y1="86" x2="66" y2="128"/>
+    <line x1="128" y1="86" x2="190" y2="128"/>
+    <line x1="66" y1="128" x2="80" y2="196"/>
+    <line x1="190" y1="128" x2="176" y2="196"/>
   </g>
-  <!-- unreachable node (finding) -->
-  <circle cx="214" cy="104" r="11" fill="none" stroke="#EF4444" stroke-width="5"/>
-  <line x1="206" y1="96" x2="222" y2="112" stroke="#EF4444" stroke-width="5" stroke-linecap="round"/>
+  <!-- unreachable node (a finding) -->
+  <circle cx="208" cy="58" r="11" fill="none" stroke="#F87171" stroke-width="5"/>
+  <line x1="200.5" y1="50.5" x2="215.5" y2="65.5" stroke="#F87171" stroke-width="5" stroke-linecap="round"/>
   <!-- graph nodes -->
-  <g fill="#14B8A6">
-    <circle cx="62" cy="190" r="13"/>
-    <circle cx="194" cy="190" r="13"/>
-    <circle cx="104" cy="224" r="9"/>
-    <circle cx="152" cy="224" r="9"/>
+  <g fill="#38BDF8">
+    <circle cx="66" cy="128" r="12"/>
+    <circle cx="190" cy="128" r="12"/>
   </g>
-  <!-- plumb line -->
-  <line x1="128" y1="28" x2="128" y2="118" stroke="#E2E8F0" stroke-width="5" stroke-linecap="round"/>
-  <circle cx="128" cy="28" r="7" fill="#E2E8F0"/>
-  <!-- bob -->
-  <path d="M128 112 L148 140 L128 168 L108 140 Z" fill="#F59E0B" stroke="#FBBF24" stroke-width="3" stroke-linejoin="round"/>
-  <circle cx="128" cy="150" r="0" fill="#14B8A6"/>
+  <g fill="#64748B">
+    <circle cx="80" cy="196" r="9"/>
+    <circle cx="176" cy="196" r="9"/>
+  </g>
+  <!-- plumb line + anchor + bob -->
+  <circle cx="128" cy="34" r="9" fill="none" stroke="#E2E8F0" stroke-width="5"/>
+  <line x1="128" y1="43" x2="128" y2="152" stroke="#E2E8F0" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="128" cy="86" r="10" fill="#E2E8F0"/>
+  <path d="M128 148 L154 178 L128 226 L102 178 Z" fill="url(#bob)" stroke="#0A1020" stroke-width="3" stroke-linejoin="round"/>
 </svg>
