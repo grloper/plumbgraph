@@ -12,6 +12,15 @@ use rayon::prelude::*;
 use rusqlite::params;
 use serde::Serialize;
 use sha2::{Digest, Sha256};
+
+/// Lower-case hex of a digest (sha2 0.11 digests no longer implement `LowerHex`).
+fn hex(bytes: &[u8]) -> String {
+    use std::fmt::Write as _;
+    bytes.iter().fold(String::new(), |mut a, b| {
+        let _ = write!(a, "{b:02x}");
+        a
+    })
+}
 use std::collections::{HashMap, HashSet};
 use std::path::{Path, PathBuf};
 
@@ -295,7 +304,7 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
             h.update(EXTRACTOR_VERSION.as_bytes());
             h.update(e.pack.as_bytes());
             h.update(&bytes);
-            let hash = format!("{:x}", h.finalize());
+            let hash = hex(h.finalize().as_slice());
             let text = if bytes.len() > MAX_FILE_BYTES {
                 None
             } else {
@@ -443,7 +452,7 @@ pub fn index_project(root: &Path, opts: &IndexOptions) -> Result<IndexStats> {
             h.update(rel_path(&root, m).as_bytes());
             h.update(std::fs::read(m).unwrap_or_default());
         }
-        let stamp = format!("{:x}", h.finalize());
+        let stamp = hex(h.finalize().as_slice());
         let unchanged = removed.is_empty()
             && results.is_empty()
             && store.meta("resolve_stamp").as_deref() == Some(stamp.as_str())
