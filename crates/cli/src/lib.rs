@@ -81,6 +81,9 @@ enum Cmd {
         /// Only report files under this project-relative prefix
         #[arg(long)]
         only: Option<String>,
+        /// Print at most N findings (highest confidence first); 0 = all. Totals and the exit code always cover every finding.
+        #[arg(long, default_value_t = 200)]
+        max_findings: usize,
         /// Exit with status 1 when a finding of at least this level exists
         #[arg(long, value_enum, default_value = "none")]
         fail_on: FailOn,
@@ -100,6 +103,9 @@ enum Cmd {
         no_check_declared: bool,
         #[arg(long)]
         only: Option<String>,
+        /// Print at most N findings (highest confidence first); 0 = all. The exit code always covers every finding.
+        #[arg(long, default_value_t = 200)]
+        max_findings: usize,
         #[arg(long, value_enum, default_value = "none")]
         fail_on: FailOn,
     },
@@ -315,6 +321,51 @@ fn print_json<T: serde::Serialize>(v: &T) -> Result<()> {
     Ok(())
 }
 
+/// Highest-confidence-first view of at most `max` findings (0 = all) plus how many were left out.
+fn capped(findings: &[Finding], max: usize) -> (Vec<&Finding>, usize) {
+    let mut v: Vec<&Finding> = findings.iter().collect();
+    if max == 0 || v.len() <= max {
+        return (v, 0);
+    }
+    v.sort_by(|a, b| {
+        b.confidence
+            .partial_cmp(&a.confidence)
+            .unwrap_or(std::cmp::Ordering::Equal)
+    });
+    let hidden = v.len() - max;
+    v.truncate(max);
+    (v, hidden)
+}
+
+fn note_hidden(hidden: usize) {
+    if hidden > 0 {
+        println!("\n... {hidden} more finding(s) not shown (lowest confidence last); use --max-findings 0 to print all, or --only <path> to narrow down");
+    }
+}
+
+/// JSON output with `findings` capped; `summary`/totals still describe everything and a
+/// `truncated` object says what was left out.
+fn print_json_capped<T: serde::Serialize>(r: &T, max: usize) -> Result<()> {
+    let mut v = serde_json::to_value(r)?;
+    if let Some(arr) = v.get_mut("findings").and_then(|f| f.as_array_mut()) {
+        let total = arr.len();
+        if max > 0 && total > max {
+            arr.sort_by(|a, b| {
+                let c = |x: &serde_json::Value| x["confidence"].as_f64().unwrap_or(0.0);
+                c(b).partial_cmp(&c(a)).unwrap_or(std::cmp::Ordering::Equal)
+            });
+            arr.truncate(max);
+            v["truncated"] = serde_json::json!({
+                "shown": max,
+                "total": total,
+                "hint": "output capped, lowest confidence findings omitted; pass --max-findings 0 for everything or --only <path> to narrow down"
+            });
+        }
+    }
+    println!("{}", serde_json::to_string_pretty(&v)?);
+    Ok(())
+}
+
 fn render(f: &Finding) {
     let loc = match f.column {
         Some(c) => format!("{}:{}:{}", f.file, f.line, c),
@@ -385,6 +436,7 @@ fn run(cli: Cli) -> Result<bool> {
             no_test_only,
             only,
             fail_on,
+            max_findings,
             scip,
         } => {
             let p = DeadCodeParams {
@@ -398,11 +450,13 @@ fn run(cli: Cli) -> Result<bool> {
             };
             let r = ops::run_dead_code(&target(path), &p)?;
             if json {
-                print_json(&r)?;
+                print_json_capped(&r, max_findings)?;
             } else {
-                for f in &r.findings {
+                let (shown, hidden) = capped(&r.findings, max_findings);
+                for f in &shown {
                     render(f);
                 }
+                note_hidden(hidden);
                 println!(
                     "\n{} finding(s): {} high, {} medium, {} low  (indexed {} files, {} symbols)",
                     r.summary.total,
@@ -432,6 +486,7 @@ fn run(cli: Cli) -> Result<bool> {
             no_check_declared,
             only,
             fail_on,
+            max_findings,
         } => {
             let p = DepsParams {
                 offline,
@@ -441,11 +496,13 @@ fn run(cli: Cli) -> Result<bool> {
             };
             let r = ops::run_check_deps(&target(path), &p, None)?;
             if json {
-                print_json(&r)?;
+                print_json_capped(&r, max_findings)?;
             } else {
-                for f in &r.findings {
+                let (shown, hidden) = capped(&r.findings, max_findings);
+                for f in &shown {
                     render(f);
                 }
+                note_hidden(hidden);
                 let unknown = r
                     .lookups
                     .iter()
@@ -959,6 +1016,21 @@ nothing was executed. `plumb enrich` runs SCIP indexers; `plumb verify --run` ru
 }
 
 pub fn main_entry() -> ExitCode {
+    // Rust ignores SIGPIPE, so `plumb ... | head` makes println! panic with a backtrace hint.
+    // A closed stdout is the reader's choice, not an error: exit quietly like other Unix tools.
+    let default_hook = std::panic::take_hook();
+    std::panic::set_hook(Box::new(move |info| {
+        let msg = info
+            .payload()
+            .downcast_ref::<String>()
+            .map(|s| s.as_str())
+            .or_else(|| info.payload().downcast_ref::<&str>().copied())
+            .unwrap_or("");
+        if msg.contains("failed printing to std") && msg.contains("Broken pipe") {
+            std::process::exit(141);
+        }
+        default_hook(info);
+    }));
     let cli = Cli::parse();
     match run(cli) {
         Ok(false) => ExitCode::SUCCESS,
