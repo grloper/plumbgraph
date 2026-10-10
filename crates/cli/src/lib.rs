@@ -58,6 +58,9 @@ enum Cmd {
         force: bool,
     },
     /// Report unused code with confidence levels
+    #[command(
+        after_help = "Unity (C#): engine callbacks, partial classes, scenes/prefabs and other limits are documented in docs/PACKS.md#unity-c (https://github.com/grloper/plumbgraph/blob/main/docs/PACKS.md#unity-c). Do not mass-delete HIGH findings under Assets/ without checking."
+    )]
     DeadCode {
         path: PathBuf,
         /// Treat exported symbols as public API (entry points)
@@ -78,6 +81,9 @@ enum Cmd {
         /// Do not report symbols used only by tests
         #[arg(long)]
         no_test_only: bool,
+        /// Print debug notes (e.g. `unity-message@partial-merged`: a message suppressed by merging partial class parts)
+        #[arg(long)]
+        verbose: bool,
         /// Only report files under this project-relative prefix
         #[arg(long)]
         only: Option<String>,
@@ -445,6 +451,7 @@ fn run(cli: Cli) -> Result<bool> {
             kinds,
             allow_file,
             no_test_only,
+            verbose,
             only,
             fail_on,
             max_findings,
@@ -468,6 +475,11 @@ fn run(cli: Cli) -> Result<bool> {
                     render(f);
                 }
                 note_hidden(hidden);
+                if verbose {
+                    for n in &r.notes {
+                        println!("debug: {n}");
+                    }
+                }
                 println!(
                     "\n{} finding(s): {} high, {} medium, {} low  (indexed {} files, {} symbols)",
                     r.summary.total,
@@ -486,6 +498,11 @@ fn run(cli: Cli) -> Result<bool> {
                 }
                 if let Some(l) = r.limitations.iter().find(|l| l.contains("--lib")) {
                     println!("note: {l}");
+                }
+                for l in [ops::UNITY_PACK_NOTE, ops::UNITY_MASS_DELETE_NOTE] {
+                    if r.limitations.iter().any(|x| x == l) {
+                        println!("note: {l}");
+                    }
                 }
             }
             Ok(fail_on.tripped(&r.findings))
@@ -933,6 +950,9 @@ verify: {}  ({} new, {} baselined, {} fixed since baseline; fail-on {})",
                         }
                     );
                 }
+                if let Some(w) = plumbgraph_core::providers::self_overwrite_warning() {
+                    println!("\nwarning: {w}");
+                }
                 println!("
 nothing was executed. `plumb enrich` runs SCIP indexers; `plumb verify --run` runs diagnostics tools and rule engines.");
             }
@@ -1019,11 +1039,7 @@ nothing was executed. `plumb enrich` runs SCIP indexers; `plumb verify --run` ru
                 plumbgraph_mcp::Server::new(&root, cli.db.clone())?.with_allow_exec(allow_exec);
             let stdin = std::io::stdin();
             let stdout = std::io::stdout();
-            eprintln!(
-                "plumbgraph MCP server (stdio) root={} allow_exec={}",
-                root.display(),
-                allow_exec
-            );
+            eprintln!("{}", plumbgraph_mcp::startup_line(&root, allow_exec));
             server.serve(stdin.lock(), stdout.lock())?;
             Ok(false)
         }

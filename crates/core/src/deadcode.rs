@@ -248,6 +248,50 @@ fn reach(
 }
 
 pub fn dead_code(g: &Graph, opts: &DeadCodeOptions) -> Vec<Finding> {
+    dead_code_with_notes(g, opts).0
+}
+
+/// How the parts of a `partial` C# type add up to a Unity host decision.
+#[derive(Debug, Clone, PartialEq)]
+enum UnityHost {
+    /// Some part (directly, or through a resolved base chain) derives from a Unity base.
+    Proven(String),
+    /// No Unity base anywhere, and every base type resolved to a non-Unity class (or there is none).
+    NotUnity,
+    /// A base type outside the index could still be a Unity type.
+    Unresolved(String),
+}
+
+fn path_root(path: &str) -> &str {
+    // monorepos can hold several Unity projects: the part set is scoped to the `Assets/` root
+    match path.find("Assets/") {
+        Some(i) if i == 0 || path.as_bytes()[i - 1] == b'/' => &path[..i],
+        _ => "",
+    }
+}
+
+fn unity_tokens(u: &Option<String>) -> (bool, Option<&str>, Vec<&str>) {
+    let mut partial = false;
+    let mut base = None;
+    let mut bases = vec![];
+    for t in u.as_deref().unwrap_or("").split_whitespace() {
+        if t == "partial" {
+            partial = true;
+        } else if let Some(b) = t.strip_prefix("base-unity:") {
+            base = Some(b);
+        } else if let Some(b) = t.strip_prefix("bases:") {
+            bases = b.split(',').collect();
+        }
+    }
+    (partial, base, bases)
+}
+
+fn interface_like(b: &str) -> bool {
+    let mut c = b.chars();
+    c.next() == Some('I') && c.next().is_some_and(|x| x.is_ascii_uppercase())
+}
+
+pub fn dead_code_with_notes(g: &Graph, opts: &DeadCodeOptions) -> (Vec<Finding>, Vec<String>) {
     let n = g.symbols.len();
     let file_by_id: HashMap<i64, &crate::store::FileRow> =
         g.files.iter().map(|f| (f.id, f)).collect();
@@ -278,6 +322,103 @@ pub fn dead_code(g: &Graph, opts: &DeadCodeOptions) -> Vec<Finding> {
                 .map(|f| f.is_test)
                 .unwrap_or(false)
     };
+
+    // ---- Unity partial merge -------------------------------------------------------------
+    // class parts by (Assets root, qname)
+    let mut class_parts: HashMap<(String, String), Vec<usize>> = HashMap::new();
+    let mut classes_by_name: HashMap<(String, String), Vec<usize>> = HashMap::new();
+    for (i, s) in g.symbols.iter().enumerate() {
+        if s.kind == "class" && s.unity.is_some() {
+            let path = file_by_id
+                .get(&s.file_id)
+                .map(|f| f.path.as_str())
+                .unwrap_or("");
+            let root = path_root(path).to_string();
+            class_parts
+                .entry((root.clone(), s.qname.clone()))
+                .or_default()
+                .push(i);
+            classes_by_name
+                .entry((root, s.name.clone()))
+                .or_default()
+                .push(i);
+        }
+    }
+    // does any class named `name` (in this root) resolve to a Unity base through its parts/bases?
+    fn host_of(
+        g: &Graph,
+        root: &str,
+        parts: &[usize],
+        classes_by_name: &HashMap<(String, String), Vec<usize>>,
+        seen: &mut HashSet<usize>,
+    ) -> UnityHost {
+        let mut unresolved: Option<String> = None;
+        for &p in parts {
+            if !seen.insert(p) {
+                continue;
+            }
+            let (_, base, bases) = unity_tokens(&g.symbols[p].unity);
+            if let Some(b) = base {
+                return UnityHost::Proven(format!("derives from {b}"));
+            }
+            for b in bases {
+                if interface_like(b) {
+                    continue;
+                }
+                match classes_by_name.get(&(root.to_string(), b.to_string())) {
+                    Some(v) => match host_of(g, root, v, classes_by_name, seen) {
+                        UnityHost::Proven(w) => {
+                            return UnityHost::Proven(format!("derives from {b} ({w})"))
+                        }
+                        UnityHost::Unresolved(u) => unresolved = unresolved.or(Some(u)),
+                        UnityHost::NotUnity => {}
+                    },
+                    None => unresolved = unresolved.or(Some(b.to_string())),
+                }
+            }
+        }
+        match unresolved {
+            Some(u) => UnityHost::Unresolved(u),
+            None => UnityHost::NotUnity,
+        }
+    }
+    let mut notes: Vec<String> = vec![];
+    let mut unity_merged_live: HashSet<usize> = HashSet::new();
+    let mut unity_unresolved: HashMap<usize, String> = HashMap::new();
+    for (i, s) in g.symbols.iter().enumerate() {
+        if s.unity.as_deref() != Some("msg") {
+            continue;
+        }
+        let Some(p) = parent_of[i] else { continue };
+        let path = file_by_id
+            .get(&s.file_id)
+            .map(|f| f.path.as_str())
+            .unwrap_or("");
+        let root = path_root(path);
+        let under_assets = path.starts_with("Assets/") || path.contains("/Assets/");
+        let key = (root.to_string(), g.symbols[p].qname.clone());
+        let parts = class_parts.get(&key).cloned().unwrap_or_default();
+        match host_of(g, root, &parts, &classes_by_name, &mut HashSet::new()) {
+            UnityHost::Proven(why) => {
+                unity_merged_live.insert(i);
+                // the other parts of the type are as live as the part with the message
+                unity_merged_live.extend(parts.iter().copied());
+                notes.push(format!(
+                    "unity-message@partial-merged {} ({}:{}): host type `{}` {} across {} part(s)",
+                    s.qname,
+                    path,
+                    s.start_line,
+                    g.symbols[p].qname,
+                    why,
+                    parts.len()
+                ));
+            }
+            UnityHost::Unresolved(u) if under_assets => {
+                unity_unresolved.insert(i, u);
+            }
+            _ => {}
+        }
+    }
 
     // adjacency (edges whose source is a symbol) + module-level edges
     let mut adj: Vec<Vec<usize>> = vec![vec![]; n];
@@ -344,6 +485,10 @@ pub fn dead_code(g: &Graph, opts: &DeadCodeOptions) -> Vec<Finding> {
         }
         if s.parent_idx.is_none() && html_names.contains(s.name.as_str()) {
             // referenced from an .html file (inline <script>, onclick handlers, ...)
+            prod_roots.push(i);
+            continue;
+        }
+        if unity_merged_live.contains(&i) {
             prod_roots.push(i);
             continue;
         }
@@ -430,7 +575,10 @@ pub fn dead_code(g: &Graph, opts: &DeadCodeOptions) -> Vec<Finding> {
         {
             continue;
         }
-        if !opts.kinds.iter().any(|k| k == &s.kind) || s.entry.is_some() {
+        if !opts.kinds.iter().any(|k| k == &s.kind)
+            || s.entry.is_some()
+            || unity_merged_live.contains(&i)
+        {
             continue;
         }
         if let Some(p) = &opts.path_prefix {
@@ -457,6 +605,7 @@ pub fn dead_code(g: &Graph, opts: &DeadCodeOptions) -> Vec<Finding> {
             &string_names,
             &imported_names,
             g.scip_symbols.contains(&s.id),
+            unity_unresolved.get(&i).map(|x| x.as_str()),
         ));
     }
     out.retain(|f| f.confidence >= opts.min_confidence);
@@ -467,7 +616,8 @@ pub fn dead_code(g: &Graph, opts: &DeadCodeOptions) -> Vec<Finding> {
             .then(a.file.cmp(&b.file))
             .then(a.line.cmp(&b.line))
     });
-    out
+    notes.sort();
+    (out, notes)
 }
 
 #[allow(clippy::too_many_arguments)]
@@ -485,6 +635,7 @@ fn score(
     string_names: &HashSet<&str>,
     imported_names: &HashSet<&str>,
     scip: bool,
+    unity_unresolved: Option<&str>,
 ) -> Finding {
     let name = s.name.as_str();
     let other_refs = refs_by_name
@@ -579,6 +730,15 @@ fn score(
         fp.push("tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files".into());
     }
     let mut conf = ((0.70 + bonus) * (1.0 - pen)).clamp(0.0, 0.99);
+    if let Some(base) = unity_unresolved {
+        // an exact Unity message name on a type whose Unity-ness cannot be decided: never HIGH
+        fp.push(format!(
+            "unity-message-name-but-host-type-unresolved: `{}` is a Unity message name and its host type derives from `{}`, which is not in the indexed code, so it may be a Unity component (the engine calls it by name)",
+            sanitize(name),
+            sanitize(base)
+        ));
+        conf = conf.min(0.85);
+    }
     if !dead {
         conf = conf.min(0.85);
     }

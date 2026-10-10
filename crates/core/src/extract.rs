@@ -272,7 +272,7 @@ const UNITY_BASES: &[&str] = &[
     "StateMachineBehaviour",
     "UIBehaviour",
 ];
-const UNITY_EDITOR_BASES: &[&str] = &["Editor", "EditorWindow"];
+const UNITY_EDITOR_BASES: &[&str] = &["Editor", "EditorWindow", "ScriptableWizard"];
 
 /// Methods the Unity engine calls by name (reflection on the message name, not a virtual call).
 /// MonoBehaviour / ScriptableObject messages, physics (3D and 2D), rendering, input, animation,
@@ -353,6 +353,9 @@ const UNITY_MESSAGES: &[&str] = &[
     "OnHierarchyChange",
     "OnProjectChange",
     "OnInspectorUpdate",
+    "OnWizardCreate",
+    "OnWizardUpdate",
+    "OnWizardOtherButton",
     "AddItemsToMenu",
     "OnBeforeSerialize",
     "OnAfterDeserialize",
@@ -468,6 +471,24 @@ fn cs_base_names(class_node: Node, src: &[u8]) -> Vec<String> {
     out
 }
 
+/// A Unity base type declared by this single class part: `Some(reason)` for the directly named
+/// bases (`MonoBehaviour`, ...; `Editor`/`EditorWindow`/`ScriptableWizard` only in a Unity file).
+fn unity_base_of_part(class_node: Node, src: &[u8], in_unity_file: bool) -> Option<String> {
+    let bases = cs_base_names(class_node, src);
+    if let Some(b) = bases.iter().find(|b| UNITY_BASES.contains(&b.as_str())) {
+        return Some(b.clone());
+    }
+    if in_unity_file {
+        if let Some(b) = bases
+            .iter()
+            .find(|b| UNITY_EDITOR_BASES.contains(&b.as_str()))
+        {
+            return Some(b.clone());
+        }
+    }
+    None
+}
+
 /// How a C# class relates to Unity: `Some(reason)` when its methods may be called by the engine.
 fn unity_class(
     class_node: Node,
@@ -476,16 +497,8 @@ fn unity_class(
     in_unity_file: bool,
 ) -> Option<String> {
     let bases = cs_base_names(class_node, src);
-    if let Some(b) = bases.iter().find(|b| UNITY_BASES.contains(&b.as_str())) {
+    if let Some(b) = unity_base_of_part(class_node, src, in_unity_file) {
         return Some(format!("derives from {b}"));
-    }
-    if in_unity_file {
-        if let Some(b) = bases
-            .iter()
-            .find(|b| UNITY_EDITOR_BASES.contains(&b.as_str()))
-        {
-            return Some(format!("derives from {b}"));
-        }
     }
     // .NET naming: `IDisposable`, `IComparable<T>`. A class lists its base class first and
     // cannot reach MonoBehaviour through an interface.
@@ -824,6 +837,7 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
         let mut decorated = false;
         let mut subclass_method = false;
         let mut framework_risk: Option<String> = None;
+        let mut unity: Option<String> = None;
 
         match family {
             Family::Python => {
@@ -930,6 +944,22 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
                     }) {
                         decorated = true;
                     }
+                    if is_csharp && kind == "class" {
+                        let bases = cs_base_names(d.def, src);
+                        let mut toks: Vec<String> = vec![];
+                        if has("partial") {
+                            toks.push("partial".into());
+                        }
+                        if let Some(b) = unity_base_of_part(d.def, src, cs_unity_file) {
+                            toks.push(format!("base-unity:{b}"));
+                        }
+                        if !bases.is_empty() {
+                            toks.push(format!("bases:{}", bases.join(",")));
+                        }
+                        if !toks.is_empty() {
+                            unity = Some(toks.join(" "));
+                        }
+                    }
                     if kind == "method" {
                         let parent_name = parent.map(|p| syms[p].name.clone());
                         if parent_name.as_deref() == Some(name.as_str()) {
@@ -963,10 +993,33 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
                                 }
                             }
                         }
+                        // `partial` owner, or a class under Assets/ with only an indirect base: the
+                        // Unity base may be declared in another part/file/type, so the decision is
+                        // deferred to the dead-code pass, which merges parts and walks the base
+                        // chain in the index (`unity = "msg"`).
+                        let owner_partial = parent
+                            .filter(|&p| syms[p].kind == "class")
+                            .is_some_and(|p| {
+                                cl_modifiers(defs[p].def, src)
+                                    .iter()
+                                    .any(|m| m == "partial")
+                            });
+                        let owner_proven = parent.is_some_and(|p| {
+                            unity_base_of_part(defs[p].def, src, cs_unity_file).is_some()
+                        });
                         let unity_owner = parent
                             .filter(|&p| syms[p].kind == "class")
                             .and_then(|p| unity_class(defs[p].def, src, rel_path, cs_unity_file));
-                        if let (Some(why), true) = (unity_owner, kind == "method" && !has("static"))
+                        if (owner_partial || unity_owner.is_some())
+                            && !owner_proven
+                            && kind == "method"
+                            && !has("static")
+                            && entry.is_none()
+                            && UNITY_MESSAGES.contains(&name.as_str())
+                        {
+                            unity = Some("msg".into());
+                        } else if let (Some(why), true) =
+                            (unity_owner, kind == "method" && !has("static"))
                         {
                             if UNITY_MESSAGES.contains(&name.as_str()) {
                                 if entry.is_none() {
@@ -1164,6 +1217,7 @@ pub fn extract(pack: &Pack, rel_path: &str, source: &str) -> Result<FileFacts> {
             decorated,
             subclass_method,
             framework_risk,
+            unity,
             keep,
             parent,
         });

@@ -27,6 +27,12 @@ pub struct SymbolFact {
     /// scene). The text becomes a dead-code `fp_risk` and lowers confidence.
     #[serde(default)]
     pub framework_risk: Option<String>,
+    /// C# Unity facts consumed by the dead-code pass (space-separated tokens). On a class part:
+    /// `partial`, `base-unity:<Base>` (this part declares a Unity base), `bases:<A,B>` (every
+    /// base type name). On a non-static, message-named method of a `partial` class whose own part
+    /// does not prove a Unity base: `msg` (resolved after merging all parts).
+    #[serde(default)]
+    pub unity: Option<String>,
     /// `plumb:keep(reason)` annotation text.
     pub keep: Option<String>,
     /// Index of the lexically enclosing symbol in the same file.

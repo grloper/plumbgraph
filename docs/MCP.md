@@ -2,6 +2,8 @@
 
 `plumb mcp` serves [MCP](https://modelcontextprotocol.io) over stdio (JSON-RPC 2.0, protocol version `2024-11-05`). The project root is `--root` (default: current directory); path arguments are confined to it. Nothing is executed unless you start the server with `--allow-exec`.
 
+`--root` should point at the workspace repository the agent is working on (a different checkout answers about different code). `initialize` returns `serverInfo.version` (the running binary's version); the startup line on stderr is `plumbgraph MCP server v<version> pid=<pid> (stdio) root=... allow_exec=...`. On Windows the running server keeps `plumb.exe` open: stop it before `cargo install` (see the README).
+
 ## Tools (13)
 
 `index_project`, `find_symbol`, `references`, `dead_code`, `check_dependencies`, `detect_test_weakening`, `scip_status`, `diagnostics`, `repo_map`, `impact`, `verify`, `providers`, `enrich`.
