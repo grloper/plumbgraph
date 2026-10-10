@@ -75,7 +75,7 @@ impl Server {
              "min_severity":{"enum":["info","warning","error"],"default":"warning"},
              "max_results":{"type":"integer","default":100,"maximum":1000}},"additionalProperties":false}},
           {"name":"repo_map","description":"Compact repo map for orientation: the most important symbols (personalised PageRank over resolved reference edges), one signature line each, grouped by file and cut to a hard token budget (estimated as chars/4). Pass `changed` (a git revision, e.g. HEAD) to boost files you are editing. Call this first in a new codebase.",
-           "inputSchema":{"type":"object","properties":{"tokens":{"type":"integer","default":1500,"minimum":100,"maximum":20000},"changed":{"type":"string","description":"Git revision; files changed vs it are boosted"},"focus":{"type":"array","items":{"type":"string"},"description":"Project-relative files to boost"},"include_tests":{"type":"boolean","default":false},"use_scip":{"type":"boolean","default":true}},"additionalProperties":false}},
+           "inputSchema":{"type":"object","properties":{"tokens":{"type":"integer","default":1500,"minimum":100,"maximum":20000},"changed":{"type":"string","description":"Git revision; files changed vs it are boosted"},"focus":{"type":"array","items":{"type":"string"},"description":"Project-relative files to boost"},"include_tests":{"type":"boolean","default":false},"format":{"type":"string","enum":["text","json"],"default":"text","description":"text (default): only the budgeted `text` map; json: also the per-symbol structure with ranks (about 4x the tokens)"},"use_scip":{"type":"boolean","default":true}},"additionalProperties":false}},
           {"name":"impact","description":"What breaks if this changes: transitive callers/referrers of a symbol (`symbol`) or of the symbols touched by the working-tree diff (`diff_base`, default HEAD when `symbol` is absent), with distance, path confidence and source, plus test files that reach the change. Reverse reachability over resolved edges; not a proof.",
            "inputSchema":{"type":"object","properties":{"symbol":{"type":"string"},"diff_base":{"type":"string"},"depth":{"type":"integer","default":4,"maximum":10},"min_confidence":{"type":"number","default":0.3},"max_results":{"type":"integer","default":100,"maximum":1000},"use_scip":{"type":"boolean","default":true}},"additionalProperties":false}},
           {"name":"verify","description":"The pre-submit gate. Runs dead-code, dependency-hallucination and test-weakening checks (and merges saved diagnostics via `inputs`), then diffs against the baseline (plumb-baseline.json): only NEW findings fail (`verdict`). Call before telling the user you are done. `run` (execute diagnostics tools, semgrep, ast-grep) and `update_baseline` are refused unless the operator started the server with --allow-exec.",
@@ -356,7 +356,12 @@ impl Server {
                     include_tests: b("include_tests", false),
                     scip: self.scip_opts(args)?,
                 };
-                let r = plumbgraph_core::map::run_map(&self.target(), &p).map_err(err)?;
+                let mut r = plumbgraph_core::map::run_map(&self.target(), &p).map_err(err)?;
+                // The hard token budget applies to `text`; the structured symbol list is ~4x larger,
+                // so it is opt-in (an agent pays for every byte returned).
+                if s("format") != Some("json") {
+                    r.files.clear();
+                }
                 let tiers = self.tiers(r.edge_source.starts_with("scip"));
                 Ok(json!({"data": r, "truncated": false, "index": {"tiers": tiers}}))
             }
@@ -944,6 +949,13 @@ mod v02_tests {
         let d = &r["structuredContent"]["data"];
         assert!(d["tokens_estimated"].as_u64().unwrap() <= 200);
         assert!(d["text"].as_str().unwrap().contains("a.py"));
+        // default payload is the budgeted text only; the structured list is opt-in
+        assert_eq!(d["files"].as_array().unwrap().len(), 0);
+        let r = tool(&s, "repo_map", json!({"tokens": 200, "format": "json"}));
+        assert!(!r["structuredContent"]["data"]["files"]
+            .as_array()
+            .unwrap()
+            .is_empty());
         let r = tool(&s, "repo_map", json!({"focus":["../etc/passwd"]}));
         assert_eq!(r["isError"], true);
         let r = tool(&s, "impact", json!({"symbol":"used"}));

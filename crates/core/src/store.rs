@@ -8,7 +8,7 @@ use std::path::Path;
 
 pub const SCHEMA_VERSION: &str = "2";
 /// Bump when extraction logic changes so cached facts are re-extracted.
-pub const EXTRACTOR_VERSION: &str = "5";
+pub const EXTRACTOR_VERSION: &str = "6";
 
 pub struct Store {
     pub conn: Connection,
