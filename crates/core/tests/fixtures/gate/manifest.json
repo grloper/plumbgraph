@@ -1,0 +1,17 @@
+{
+  "corpus_version": 1,
+  "network": "disabled",
+  "external_providers": "never executed",
+  "cases": {
+    "clean-change": "pass",
+    "fake-dependency": "fail",
+    "assertion-weakening": "fail",
+    "test-deletion": "fail",
+    "legitimate-refactor": "pass",
+    "invalid-git-base": "incomplete",
+    "malformed-diagnostic": "incomplete",
+    "malformed-scip": "incomplete",
+    "baseline-maintenance": "baseline-updated",
+    "hostile-baseline-edit": "fail"
+  }
+}

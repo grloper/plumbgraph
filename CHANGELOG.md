@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Verify schema 2 separates pass, findings failure, incomplete analysis, and non-certifying baseline maintenance. Required failures and invalid Git bases no longer pass.
+- Independent per-check enforcement; dead code is advisory by default. CLI/MCP library mode and policy agree; baseline-write authority is separate from execution.
+- Pinned Git baseline mode, atomic maintenance, explicit baseline read errors, preserved unobserved provider entries, complete totals and coverage caveats.
+- Provider exit/output failure handling and an offline gate regression corpus.
+- Init checks actual Git worktree status rather than any ancestor named `.git`.
+- See [migration details](docs/VERIFY.md) before upgrading gate consumers.
+
 ## [1.0.3] - 2026-10-10
 
 Fixes for false positives and install problems found by running 1.0.2 on a real Unity project (`Assets/UYF`).

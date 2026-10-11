@@ -556,7 +556,7 @@ fn verify_exit_codes_and_baseline_flow() {
     git(t.path(), &["commit", "-q", "-m", "i"]);
     let run = |extra: &[&str]| {
         plumb()
-            .args(["verify"])
+            .args(["verify", "--enforce-dead-code"])
             .arg(t.path())
             .args(extra)
             .output()
@@ -573,7 +573,8 @@ fn verify_exit_codes_and_baseline_flow() {
     );
     assert!(String::from_utf8_lossy(&out.stdout).contains("nothing was executed"));
     let out = run(&["--update-baseline"]);
-    assert_eq!(out.status.code(), Some(0));
+    assert_eq!(out.status.code(), Some(1));
+    assert!(String::from_utf8_lossy(&out.stdout).contains("BASELINE-UPDATED"));
     assert!(t.path().join("plumb-baseline.json").is_file());
     let out = run(&[]);
     assert_eq!(
@@ -708,8 +709,17 @@ fn closed_stdout_pipe_does_not_panic() {
 #[test]
 fn verify_output_is_capped_but_verdict_counts_everything() {
     let t = many_dead();
+    git(t.path(), &["init", "-q"]);
+    git(t.path(), &["add", "-A"]);
+    git(t.path(), &["commit", "-q", "-m", "i"]);
     let out = plumb()
-        .args(["--json", "verify", "--max-findings", "5"])
+        .args([
+            "--json",
+            "verify",
+            "--enforce-dead-code",
+            "--max-findings",
+            "5",
+        ])
         .arg(t.path())
         .output()
         .unwrap();
@@ -796,4 +806,116 @@ fn dead_code_verbose_prints_unity_partial_merge_notes() {
     // without --verbose the note is not printed
     let out = plumb().args(["dead-code"]).arg(t.path()).output().unwrap();
     assert!(!String::from_utf8_lossy(&out.stdout).contains("partial-merged"));
+}
+
+#[test]
+fn verify_incomplete_and_report_only_cannot_succeed() {
+    let t = project();
+    let out = plumb()
+        .args(["--json", "verify"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    let v: serde_json::Value = serde_json::from_slice(&out.stdout).unwrap();
+    assert_eq!(v["verdict"], "incomplete");
+    assert_eq!(out.status.code(), Some(1));
+    let out = plumb()
+        .args(["verify", "--fail-on", "none"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    assert_eq!(out.status.code(), Some(2));
+    assert!(!t.path().join("plumb-baseline.json").exists());
+}
+
+#[test]
+fn verify_policy_flags_and_library_mode() {
+    let t = tempfile::tempdir().unwrap();
+    write(t.path(), "lib.py", "def public_api():\n    return 1\n");
+    git(t.path(), &["init", "-q"]);
+    git(t.path(), &["add", "-A"]);
+    git(t.path(), &["commit", "-q", "-m", "i"]);
+    let run = |extra: &[&str]| {
+        plumb()
+            .args([
+                "--json",
+                "verify",
+                "--enforce-dead-code",
+                "--dependencies",
+                "high",
+                "--weakening",
+                "medium",
+                "--diagnostics",
+                "low",
+                "--rules",
+                "high",
+            ])
+            .arg(t.path())
+            .args(extra)
+            .output()
+            .unwrap()
+    };
+    let app = run(&[]);
+    let lib = run(&["--lib"]);
+    assert_eq!(app.status.code(), Some(1));
+    assert_eq!(
+        lib.status.code(),
+        Some(0),
+        "{}",
+        String::from_utf8_lossy(&lib.stdout)
+    );
+    let v: serde_json::Value = serde_json::from_slice(&lib.stdout).unwrap();
+    assert_eq!(v["verdict"], "pass");
+}
+
+#[test]
+fn verify_trusted_baseline_rejects_maintenance() {
+    let t = project();
+    let out = plumb()
+        .args(["verify", "--trusted-baseline", "HEAD", "--update-baseline"])
+        .arg(t.path())
+        .output()
+        .unwrap();
+    assert_eq!(out.status.code(), Some(2));
+    assert!(!t.path().join("plumb-baseline.json").exists());
+}
+
+#[test]
+fn verify_trusted_commit_ignores_rewritten_working_baseline() {
+    let t = project();
+    git(t.path(), &["init", "-q"]);
+    git(t.path(), &["add", "-A"]);
+    git(t.path(), &["commit", "-q", "-m", "initial"]);
+    let run = |extra: &[&str]| {
+        plumb()
+            .args(["--json", "verify", "--enforce-dead-code"])
+            .arg(t.path())
+            .args(extra)
+            .output()
+            .unwrap()
+    };
+    assert_eq!(run(&["--update-baseline"]).status.code(), Some(1));
+    git(t.path(), &["add", "plumb-baseline.json"]);
+    git(t.path(), &["commit", "-q", "-m", "baseline"]);
+    let sha = Command::new("git")
+        .arg("-C")
+        .arg(t.path())
+        .args(["rev-parse", "HEAD"])
+        .output()
+        .unwrap();
+    assert!(sha.status.success());
+    let sha = String::from_utf8(sha.stdout).unwrap();
+    assert!(run(&["--trusted-baseline", sha.trim()]).status.success());
+    write(t.path(), "new.py", "def _new_unused():\n    return 2\n");
+    assert_eq!(run(&["--update-baseline"]).status.code(), Some(1));
+    assert!(run(&[]).status.success());
+    let trusted = run(&["--trusted-baseline", sha.trim()]);
+    assert_eq!(trusted.status.code(), Some(1));
+    let v: serde_json::Value = serde_json::from_slice(&trusted.stdout).unwrap();
+    assert_eq!(v["verdict"], "fail");
+    assert!(v["new"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .any(|f| f["symbol"] == "_new_unused"));
 }

@@ -654,6 +654,7 @@ dependencies = [
  "plumbgraph-core",
  "protobuf",
  "scip",
+ "serde",
  "serde_json",
  "tempfile",
 ]

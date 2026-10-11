@@ -24,7 +24,7 @@ AI agents write code fast and check it badly. Plumbgraph answers the questions a
 - **Is this dependency real?** `check-deps` compares imports with your manifests and, optionally, PyPI / npm / crates.io, so a hallucinated package is caught.
 - **Did the tests get weaker?** `weakening` reads `git diff` for deleted tests, new skips and loosened assertions.
 - **What breaks if I change this?** `impact` lists transitive callers and the tests to run; `map` gives a token-budgeted overview.
-- **One verdict.** `verify` merges all of that with diagnostics, semgrep and ast-grep, diffs against a baseline, and fails only on **new** findings.
+- **One verdict.** `verify` merges all of that with diagnostics, semgrep and ast-grep, diffs against a baseline, and distinguishes enforcing findings from incomplete checks. Dead-code findings are advisory by default; [trusted gate and migration](docs/VERIFY.md).
 
 It indexes with tree-sitter into a local SQLite file, executes none of your code by default, and every finding carries a `source` and a `confidence`.
 
@@ -40,7 +40,7 @@ cargo install --path crates/cli --locked      # installs `plumb` (and `plumbgrap
 plumb map . --tokens 1500         # ranked overview under a hard token budget (--budget is an alias)
 plumb dead-code .                 # add --lib for libraries (exports = public API)
 plumb check-deps . --online       # sends package names only to the registries
-plumb verify .                    # one pass/fail gate (exit 1 on new findings)
+plumb verify .                    # selected-check gate (exit 0 only on pass)
 plumb verify . --run --online     # also run diagnostics, semgrep, ast-grep (trusted code only)
 plumb init --dry-run              # preview: AGENTS.md block, MCP config, .gitignore lines
 plumb init                        # write them
@@ -48,7 +48,7 @@ plumb init                        # write them
 
 In a git work tree `plumb init` adds `.plumbgraph/*` and `!.plumbgraph/allow.toml` to `<project>/.gitignore` (the index is a local cache; the allow-list is meant to be committed). An existing `.plumbgraph` entry is left alone, a `.gitignore` that is not UTF-8 is never rewritten, and `--no-gitignore` skips this step.
 
-`--json` on any command gives machine-readable output; `--fail-on high|medium|low` sets the exit code.
+`--json` on any command gives machine-readable output. For `verify`, per-check policy controls enforcement and `--fail-on` applies only to opted-in dead code; see [schema 2 migration](docs/VERIFY.md).
 
 ### Windows
 

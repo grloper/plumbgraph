@@ -3,7 +3,7 @@ use plumbgraph_core::diagnostics::Format;
 use plumbgraph_core::ops::{DiagInput, ScipOpts, Target};
 use plumbgraph_core::providers;
 use plumbgraph_core::rules;
-use plumbgraph_core::verify::{run_verify, VerifyParams};
+use plumbgraph_core::verify::{run_verify, VerifyParams, VerifyPolicy};
 use plumbgraph_core::Level;
 use std::path::{Path, PathBuf};
 use std::process::Command;
@@ -45,6 +45,10 @@ fn project() -> tempfile::TempDir {
 fn params() -> VerifyParams {
     VerifyParams {
         scip: ScipOpts::disabled(),
+        policy: VerifyPolicy {
+            enforce_dead_code: true,
+            ..Default::default()
+        },
         ..Default::default()
     }
 }
