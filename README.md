@@ -34,13 +34,13 @@ Source releases are on [GitHub](https://github.com/grloper/plumbgraph/releases) 
 
 ```bash
 git clone https://github.com/grloper/plumbgraph && cd plumbgraph
-git checkout v1.0.3                           # latest release (or stay on main)
+git checkout v1.0.3                           # latest release; the schema 2 gate below is on main (CHANGELOG: Unreleased)
 cargo install --path crates/cli --locked      # installs `plumb` (and `plumbgraph`)
 
 plumb map . --tokens 1500         # ranked overview under a hard token budget (--budget is an alias)
 plumb dead-code .                 # add --lib for libraries (exports = public API)
 plumb check-deps . --online       # sends package names only to the registries
-plumb verify .                    # selected-check gate (exit 0 only on pass)
+plumb verify .                    # selected-check gate (exit 0 only on verdict `pass`; needs a Git base)
 plumb verify . --run --online     # also run diagnostics, semgrep, ast-grep (trusted code only)
 plumb init --dry-run              # preview: AGENTS.md block, MCP config, .gitignore lines
 plumb init                        # write them
@@ -48,7 +48,25 @@ plumb init                        # write them
 
 In a git work tree `plumb init` adds `.plumbgraph/*` and `!.plumbgraph/allow.toml` to `<project>/.gitignore` (the index is a local cache; the allow-list is meant to be committed). An existing `.plumbgraph` entry is left alone, a `.gitignore` that is not UTF-8 is never rewritten, and `--no-gitignore` skips this step.
 
-`--json` on any command gives machine-readable output. For `verify`, per-check policy controls enforcement and `--fail-on` applies only to opted-in dead code; see [schema 2 migration](docs/VERIFY.md).
+`--json` on any command gives machine-readable output.
+
+### The verify gate (on `main`, CHANGELOG [Unreleased](CHANGELOG.md#unreleased))
+
+`plumb verify --json` reports `schema_version: 2` with one verdict. It is a gate over the checks you selected, not proof that the change is correct or that code is safe to delete.
+
+| Verdict | Meaning | Exit |
+|---|---|---|
+| `pass` | Selected checks completed; no new enforcing finding | 0 |
+| `fail` | New enforcing findings (including diff-based test weakening) | 1 |
+| `incomplete` | A required check failed, timed out or could not run, or the Git base is missing or invalid | 1 |
+| `baseline-updated` | `--update-baseline` succeeded; it does not certify the change | 1 |
+
+- **Fail-closed:** an incomplete required check or an invalid Git base never passes. Invalid arguments and unreadable or malformed baselines are request errors (CLI exit 2, MCP `isError: true`), not reports.
+- **Dead code is advisory** unless you opt in with `--enforce-dead-code` (CLI) or `policy.enforce_dead_code` (MCP). `--fail-on low|medium|high` then sets the threshold for that dead code only, and `--fail-on none` is rejected. Dependencies, weakening, diagnostics and rules have their own thresholds (`--dependencies`, `--weakening`, `--diagnostics`, `--rules`; default `medium`).
+- **Baselines:** `--update-baseline` writes `plumb-baseline.json` only after a complete analysis and always exits 1. For release or CI review, `--trusted-baseline <full commit id>` reads the baseline from that commit and uses it as the weakening diff base. It rejects short hashes and branch names, and it does not sandbox hostile repository content.
+- **MCP:** baseline writes need the operator flag `plumb mcp --allow-baseline-update`, which is separate from `--allow-exec`; an agent cannot grant either. An MCP tool response with `isError: false` is not a pass: check `data.verdict == "pass"`.
+
+Details and migration notes: [docs/VERIFY.md](docs/VERIFY.md).
 
 ### Windows
 
@@ -72,7 +90,7 @@ Or in `.cursor/mcp.json`, Claude Desktop and other `mcpServers` clients:
 { "mcpServers": { "plumbgraph": { "command": "plumb", "args": ["mcp", "--root", "/path/to/project"] } } }
 ```
 
-13 tools and 3 resources; running external tools is refused unless **you** start the server with `--allow-exec`. Details and the clients it was tested with: [docs/MCP.md](docs/MCP.md).
+13 tools and 3 resources; running external tools is refused unless **you** start the server with `--allow-exec`, and baseline writes unless you also pass `--allow-baseline-update`. Details and the clients it was tested with: [docs/MCP.md](docs/MCP.md).
 
 ## See it work
 
@@ -145,7 +163,7 @@ Use them together: if you need precise navigation and editing today, an LSP-back
 
 ## Documentation
 
-[Docs index](docs/README.md) · [Architecture](docs/ARCHITECTURE.md) · [MCP](docs/MCP.md) · [SCIP](docs/SCIP.md) · [Diagnostics](docs/DIAGNOSTICS.md) · [Language packs](docs/PACKS.md) · [Validation](docs/VALIDATION.md) · [Strategy](docs/STRATEGY.md) · [Evaluation](docs/EVALUATION.md) · [Landscape](docs/LANDSCAPE.md) · [Changelog](CHANGELOG.md)
+[Docs index](docs/README.md) · [Architecture](docs/ARCHITECTURE.md) · [Verify gate](docs/VERIFY.md) · [MCP](docs/MCP.md) · [SCIP](docs/SCIP.md) · [Diagnostics](docs/DIAGNOSTICS.md) · [Language packs](docs/PACKS.md) · [Validation](docs/VALIDATION.md) · [Strategy](docs/STRATEGY.md) · [Evaluation](docs/EVALUATION.md) · [Landscape](docs/LANDSCAPE.md) · [Changelog](CHANGELOG.md)
 
 ## Development
 

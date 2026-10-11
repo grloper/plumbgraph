@@ -3,6 +3,7 @@
 | Doc | What it covers |
 |---|---|
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Data flow: extractor, SQLite graph, SCIP overlay, providers, engines, CLI/MCP |
+| [VERIFY.md](VERIFY.md) | Verify schema 2: verdicts, exit codes, per-check policy, baselines, trusted baseline |
 | [MCP.md](MCP.md) | MCP tools and resources, clients it was tested against |
 | [SCIP.md](SCIP.md) | Precise references from SCIP indexes; per-reference fallback |
 | [DIAGNOSTICS.md](DIAGNOSTICS.md) | Normalised compiler / linter / LSP diagnostics |
