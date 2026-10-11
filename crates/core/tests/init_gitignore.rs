@@ -174,3 +174,43 @@ fn outside_git_nothing_is_written_and_the_report_says_why() {
         rep.notes
     );
 }
+
+#[test]
+fn empty_git_directory_is_not_a_work_tree() {
+    let t = tempfile::tempdir().unwrap();
+    std::fs::create_dir(t.path().join(".git")).unwrap();
+    let rep = init(t.path(), &[], false).unwrap();
+    assert!(!t.path().join(".gitignore").exists());
+    assert!(rep.notes.iter().any(|n| n.contains("not inside a git")));
+}
+
+#[test]
+fn linked_worktree_gitfile_is_recognized() {
+    let t = repo();
+    assert!(git(
+        t.path(),
+        &[
+            "-c",
+            "user.name=Test",
+            "-c",
+            "user.email=test@example.invalid",
+            "commit",
+            "--allow-empty",
+            "-qm",
+            "initial"
+        ]
+    )
+    .status
+    .success());
+    let linked = tempfile::tempdir().unwrap();
+    let path = linked.path().join("checkout");
+    assert!(git(
+        t.path(),
+        &["worktree", "add", "--detach", path.to_str().unwrap()]
+    )
+    .status
+    .success());
+    assert!(path.join(".git").is_file());
+    init(&path, &[], false).unwrap();
+    assert!(path.join(".gitignore").is_file());
+}

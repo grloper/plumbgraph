@@ -48,6 +48,24 @@ impl FailOn {
     }
 }
 
+/// Verify never accepts a report-only escape hatch.
+#[derive(Clone, Copy, clap::ValueEnum)]
+enum VerifyLevel {
+    Low,
+    Medium,
+    High,
+}
+
+impl From<VerifyLevel> for Level {
+    fn from(value: VerifyLevel) -> Self {
+        match value {
+            VerifyLevel::Low => Level::Low,
+            VerifyLevel::Medium => Level::Medium,
+            VerifyLevel::High => Level::High,
+        }
+    }
+}
+
 #[derive(Subcommand)]
 enum Cmd {
     /// Build or refresh the code graph for a project directory
@@ -243,15 +261,33 @@ enum Cmd {
         /// Baseline file (default <path>/plumb-baseline.json)
         #[arg(long)]
         baseline: Option<PathBuf>,
-        /// Write the current findings as the new baseline (exit 0)
+        /// Write the current findings as the new baseline (maintenance result; nonzero exit)
         #[arg(long)]
         update_baseline: bool,
         /// Print at most N new findings (highest confidence first); 0 = all. Verdict and counts always cover every finding.
         #[arg(long, default_value_t = 200)]
         max_findings: usize,
-        /// Fail when a new finding of at least this level exists
+        /// Read the baseline from this immutable full Git commit ID; also the weakening diff base
+        #[arg(long, conflicts_with_all = ["baseline", "update_baseline"])]
+        trusted_baseline: Option<String>,
+        /// Enforce dead-code findings, including name-based tier-0 findings
+        #[arg(long)]
+        enforce_dead_code: bool,
+        /// Dependency finding threshold
         #[arg(long, value_enum, default_value = "medium")]
-        fail_on: FailOn,
+        dependencies: VerifyLevel,
+        /// Test-weakening finding threshold
+        #[arg(long, value_enum, default_value = "medium")]
+        weakening: VerifyLevel,
+        /// Diagnostics finding threshold
+        #[arg(long, value_enum, default_value = "medium")]
+        diagnostics: VerifyLevel,
+        /// Rule-engine finding threshold
+        #[arg(long, value_enum, default_value = "medium")]
+        rules: VerifyLevel,
+        /// Threshold for explicitly enforced dead code
+        #[arg(long, value_enum, default_value = "medium")]
+        fail_on: VerifyLevel,
         /// semgrep config (file, dir or registry pack such as p/ci; registry packs need network)
         #[arg(long)]
         semgrep_config: Option<String>,
@@ -300,6 +336,9 @@ enum Cmd {
         /// agent asks. Off by default: a repository must not be able to enable this itself.
         #[arg(long)]
         allow_exec: bool,
+        /// Permit baseline maintenance writes, independently of tool execution
+        #[arg(long)]
+        allow_baseline_update: bool,
     },
 }
 
@@ -831,6 +870,12 @@ fn run(cli: Cli) -> Result<bool> {
             online,
             baseline,
             update_baseline,
+            trusted_baseline,
+            enforce_dead_code,
+            dependencies,
+            weakening,
+            diagnostics,
+            rules,
             fail_on,
             max_findings,
             semgrep_config,
@@ -838,7 +883,7 @@ fn run(cli: Cli) -> Result<bool> {
             timeout_secs,
             scip,
         } => {
-            use plumbgraph_core::verify::{run_verify, VerifyParams};
+            use plumbgraph_core::verify::{run_verify, VerifyParams, VerifyPolicy};
             let mut inputs = vec![];
             for spec in &from {
                 let (fmt, file) = spec
@@ -862,11 +907,15 @@ fn run(cli: Cli) -> Result<bool> {
                     diag_inputs: inputs,
                     baseline,
                     update_baseline,
-                    fail_on: match fail_on {
-                        FailOn::None | FailOn::Low => Level::Low,
-                        FailOn::Medium => Level::Medium,
-                        FailOn::High => Level::High,
+                    trusted_baseline,
+                    policy: VerifyPolicy {
+                        enforce_dead_code,
+                        dependencies: dependencies.into(),
+                        weakening: weakening.into(),
+                        diagnostics: diagnostics.into(),
+                        rules: rules.into(),
                     },
+                    fail_on: fail_on.into(),
                     semgrep_config,
                     timeout: std::time::Duration::from_secs(timeout_secs),
                     scip: scip.opts(),
@@ -896,19 +945,15 @@ fn run(cli: Cli) -> Result<bool> {
                 }
                 println!(
                     "
-verify: {}  ({} new, {} baselined, {} fixed since baseline; fail-on {})",
-                    if matches!(fail_on, FailOn::None) {
-                        "REPORT-ONLY".to_string()
-                    } else {
-                        r.verdict.to_uppercase()
-                    },
+verify: {}  ({} new, {} baselined, {} fixed since baseline; dead-code {})",
+                    r.verdict.to_uppercase(),
                     r.new.len(),
                     r.baselined,
                     r.fixed,
-                    if matches!(fail_on, FailOn::None) {
-                        "none"
-                    } else {
+                    if r.policy.enforce_dead_code {
                         r.fail_on.as_str()
+                    } else {
+                        "advisory"
                     }
                 );
                 if r.baseline_updated {
@@ -921,10 +966,10 @@ verify: {}  ({} new, {} baselined, {} fixed since baseline; fail-on {})",
                     println!("note: {l}");
                 }
                 if !r.executed {
-                    println!("note: nothing was executed (no --run).");
+                    println!("note: no external project process was started.");
                 }
             }
-            Ok(r.verdict == "fail" && !matches!(fail_on, FailOn::None))
+            Ok(r.verdict != "pass")
         }
         Cmd::Doctor { path } => {
             let det = plumbgraph_core::providers::detect(
@@ -1034,12 +1079,20 @@ nothing was executed. `plumb enrich` runs SCIP indexers; `plumb verify --run` ru
             }
             Ok(false)
         }
-        Cmd::Mcp { root, allow_exec } => {
-            let server =
-                plumbgraph_mcp::Server::new(&root, cli.db.clone())?.with_allow_exec(allow_exec);
+        Cmd::Mcp {
+            root,
+            allow_exec,
+            allow_baseline_update,
+        } => {
+            let server = plumbgraph_mcp::Server::new(&root, cli.db.clone())?
+                .with_allow_exec(allow_exec)
+                .with_allow_baseline_update(allow_baseline_update);
             let stdin = std::io::stdin();
             let stdout = std::io::stdout();
-            eprintln!("{}", plumbgraph_mcp::startup_line(&root, allow_exec));
+            eprintln!(
+                "{} allow_baseline_update={allow_baseline_update}",
+                plumbgraph_mcp::startup_line(&root, allow_exec)
+            );
             server.serve(stdin.lock(), stdout.lock())?;
             Ok(false)
         }

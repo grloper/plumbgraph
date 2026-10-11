@@ -38,3 +38,7 @@ cargo build --release
 (cd scripts && npm install)
 node scripts/mcp-sdk-check.mjs target/release/plumb examples/demo-app
 ```
+
+## Verify schema 2
+
+See [trusted verification and migration](VERIFY.md) for verdicts, per-check policy, `mode: "lib"`, pinned `trusted_baseline`, and the separate operator `--allow-baseline-update` authority. A tool response with `isError: false` does not certify the gate: require `data.verdict == "pass"`.

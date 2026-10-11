@@ -74,7 +74,13 @@ pub(crate) fn open_graph_scip(
             let mut idxs = vec![];
             for p in &paths {
                 // explicit paths must load; auto-detected ones too: a broken index must be visible
-                idxs.push(scip::load(p)?);
+                let canonical = p.canonicalize()?;
+                anyhow::ensure!(
+                    canonical.starts_with(&root),
+                    "SCIP index must stay inside project root: {}",
+                    sanitize(&p.display().to_string())
+                );
+                idxs.push(scip::load(&canonical)?);
             }
             scip_stats = Some(scip::apply(&mut g, &idxs, &root));
         }

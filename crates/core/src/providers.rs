@@ -431,7 +431,7 @@ pub fn run_scip_indexers(
             Exec::NotFound => {
                 run.status = "skipped".into();
             }
-            Exec::Failed(m) => {
+            Exec::Failed(m) | Exec::Incomplete(m) => {
                 run.status = "failed".into();
                 run.note = Some(sanitize(&m));
             }

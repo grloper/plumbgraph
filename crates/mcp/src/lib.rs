@@ -3,7 +3,8 @@
 //! Hand-rolled instead of using the `rmcp` crate: rmcp 3.x requires Rust 1.88 while this
 //! workspace targets 1.85 and the server only needs `initialize`, `ping`, `tools/list` and
 //! `tools/call`. Tools are read-only. The server executes project toolchains only for
-//! `diagnostics` with `run`/`lsp`, and only when started with `--allow-exec`.
+//! diagnostics and enrichment only when started with `--allow-exec`. Baseline maintenance
+//! writes separately require `--allow-baseline-update`.
 
 use plumbgraph_core::diagnostics::Format;
 use plumbgraph_core::ops::{
@@ -35,6 +36,65 @@ pub struct Server {
     root: PathBuf,
     db: Option<PathBuf>,
     allow_exec: bool,
+    allow_baseline_update: bool,
+}
+
+/// Validate the entire gate request before any reads, execution, or maintenance.
+#[derive(serde::Deserialize)]
+#[serde(default, deny_unknown_fields)]
+struct VerifyRequest {
+    base: String,
+    fail_on: plumbgraph_core::Level,
+    policy: plumbgraph_core::verify::VerifyPolicy,
+    mode: VerifyMode,
+    #[serde(deserialize_with = "present_string")]
+    trusted_baseline: Option<String>,
+    inputs: Vec<VerifyInput>,
+    online: bool,
+    run: bool,
+    update_baseline: bool,
+    max_results: usize,
+    use_scip: bool,
+    scip: Vec<String>,
+}
+
+impl Default for VerifyRequest {
+    fn default() -> Self {
+        Self {
+            base: "HEAD".into(),
+            fail_on: plumbgraph_core::Level::Medium,
+            policy: plumbgraph_core::verify::VerifyPolicy::default(),
+            mode: VerifyMode::App,
+            trusted_baseline: None,
+            inputs: vec![],
+            online: false,
+            run: false,
+            update_baseline: false,
+            max_results: 100,
+            use_scip: true,
+            scip: vec![],
+        }
+    }
+}
+
+fn present_string<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> Result<Option<String>, D::Error> {
+    <String as serde::Deserialize>::deserialize(deserializer).map(Some)
+}
+
+#[derive(serde::Deserialize)]
+#[serde(rename_all = "lowercase")]
+enum VerifyMode {
+    App,
+    Lib,
+}
+
+#[derive(serde::Deserialize)]
+#[serde(deny_unknown_fields)]
+struct VerifyInput {
+    format: String,
+    file: String,
 }
 
 fn rpc_error(id: Value, code: i64, msg: &str) -> Value {
@@ -50,12 +110,19 @@ impl Server {
             root,
             db,
             allow_exec: false,
+            allow_baseline_update: false,
         })
     }
 
     /// Permit `diagnostics` to run toolchains / language servers (set by the operator, never by a tool call).
     pub fn with_allow_exec(mut self, allow: bool) -> Self {
         self.allow_exec = allow;
+        self
+    }
+
+    /// Permit baseline writes independently of execution (operator-only authority).
+    pub fn with_allow_baseline_update(mut self, allow: bool) -> Self {
+        self.allow_baseline_update = allow;
         self
     }
 
@@ -90,8 +157,23 @@ impl Server {
            "inputSchema":{"type":"object","properties":{"tokens":{"type":"integer","default":1500,"minimum":100,"maximum":20000},"changed":{"type":"string","description":"Git revision; files changed vs it are boosted"},"focus":{"type":"array","items":{"type":"string"},"description":"Project-relative files to boost"},"include_tests":{"type":"boolean","default":false},"format":{"type":"string","enum":["text","json"],"default":"text","description":"text (default): only the budgeted `text` map; json: also the per-symbol structure with ranks (about 4x the tokens)"},"use_scip":{"type":"boolean","default":true}},"additionalProperties":false}},
           {"name":"impact","description":"What breaks if this changes: transitive callers/referrers of a symbol (`symbol`) or of the symbols touched by the working-tree diff (`diff_base`, default HEAD when `symbol` is absent), with distance, path confidence and source, plus test files that reach the change. Reverse reachability over resolved edges; not a proof.",
            "inputSchema":{"type":"object","properties":{"symbol":{"type":"string"},"diff_base":{"type":"string"},"depth":{"type":"integer","default":4,"maximum":10},"min_confidence":{"type":"number","default":0.3},"max_results":{"type":"integer","default":100,"maximum":1000},"use_scip":{"type":"boolean","default":true}},"additionalProperties":false}},
-          {"name":"verify","description":"The pre-submit gate. Runs dead-code, dependency-hallucination and test-weakening checks (and merges saved diagnostics via `inputs`), then diffs against the baseline (plumb-baseline.json): only NEW findings fail (`verdict`). Call before telling the user you are done. `run` (execute diagnostics tools, semgrep, ast-grep) and `update_baseline` are refused unless the operator started the server with --allow-exec.",
-           "inputSchema":{"type":"object","properties":{"base":{"type":"string","default":"HEAD","description":"git revision the working tree is compared to for test weakening (e.g. origin/main)"},"fail_on":{"enum":["low","medium","high"],"default":"medium"},"inputs":{"type":"array","items":{"type":"object","properties":{"format":{"enum":["cargo-json","ruff-json","pyright-json","tsc"]},"file":{"type":"string"}},"required":["format","file"]}},"online":{"type":"boolean","default":false,"description":"look up package names on public registries"},"run":{"type":"boolean","default":false},"update_baseline":{"type":"boolean","default":false},"max_results":{"type":"integer","default":100,"maximum":1000},"use_scip":{"type":"boolean","default":true}},"additionalProperties":false}},
+          {"name":"verify","description":"Pre-submit gate over dependencies, test weakening, diagnostics and rules; dead code is advisory unless policy.enforce_dead_code is true. Only verdict pass is success; failed or unavailable required checks are incomplete. run requires --allow-exec; update_baseline separately requires --allow-baseline-update and returns baseline-updated, never pass. trusted_baseline loads plumb-baseline.json from an immutable full Git commit ID.",
+           "inputSchema":{"type":"object","properties":{
+             "base":{"type":"string","default":"HEAD","description":"Git revision for test weakening"},
+             "fail_on":{"enum":["low","medium","high"],"default":"medium","description":"Threshold for explicitly enforced dead code"},
+             "policy":{"type":"object","properties":{
+               "enforce_dead_code":{"type":"boolean","default":false},
+               "dependencies":{"enum":["low","medium","high"],"default":"medium"},
+               "weakening":{"enum":["low","medium","high"],"default":"medium"},
+               "diagnostics":{"enum":["low","medium","high"],"default":"medium"},
+               "rules":{"enum":["low","medium","high"],"default":"medium"}
+             },"additionalProperties":false},
+             "mode":{"enum":["app","lib"],"default":"app"},
+             "trusted_baseline":{"type":"string","description":"Immutable full Git commit ID containing plumb-baseline.json; also the weakening diff base; incompatible with update_baseline"},
+             "inputs":{"type":"array","items":{"type":"object","properties":{"format":{"enum":["cargo-json","ruff-json","pyright-json","tsc"]},"file":{"type":"string"}},"required":["format","file"],"additionalProperties":false}},
+             "online":{"type":"boolean","default":false,"description":"Look up package names on public registries"},
+             "run":{"type":"boolean","default":false},"update_baseline":{"type":"boolean","default":false},
+             "max_results":{"type":"integer","default":100,"minimum":1,"maximum":1000},"use_scip":scip_flag,"scip":scip_paths},"additionalProperties":false}},
           {"name":"providers","description":"Which external providers (SCIP indexers, compilers/linters, semgrep, ast-grep, language servers) are installed and relevant to this project, with install hints. Looks for executables only; runs nothing.",
            "inputSchema":{"type":"object","properties":{},"additionalProperties":false}},
           {"name":"enrich","description":"Run installed SCIP indexers (catalog ids from `providers`) to write .plumbgraph/scip/*.scip, which later calls pick up for precise references. Executes the indexer (may run project build scripts): refused unless the operator started the server with --allow-exec.",
@@ -397,57 +479,59 @@ impl Server {
             }
             "verify" => {
                 use plumbgraph_core::verify::{run_verify, VerifyParams};
-                let run = b("run", false);
-                let update = b("update_baseline", false);
-                if (run || update) && !self.allow_exec {
-                    return Err("`run` and `update_baseline` need the operator to start the server with --allow-exec".into());
+                let request: VerifyRequest = serde_json::from_value(args.clone())
+                    .map_err(|e| format!("invalid verify arguments: {e}"))?;
+                if !(1..=1000).contains(&request.max_results) {
+                    return Err("`max_results` must be between 1 and 1000".into());
                 }
-                let mut inputs = vec![];
-                if let Some(a) = args.get("inputs").and_then(|v| v.as_array()) {
-                    for i in a {
-                        let fmt = i["format"]
-                            .as_str()
-                            .ok_or("`inputs[].format` is required")?;
-                        let file = i["file"].as_str().ok_or("`inputs[].file` is required")?;
-                        let path = self.confine_file(file)?;
-                        let format: plumbgraph_core::diagnostics::Format =
-                            fmt.parse().map_err(|e: anyhow::Error| err(e))?;
-                        let text = std::fs::read_to_string(&path)
-                            .map_err(|e| sanitize(&format!("reading {}: {e}", path.display())))?;
-                        inputs.push(ops::DiagInput {
-                            format,
-                            label: file.to_string(),
-                            text,
-                        });
-                    }
+                if request.run && !self.allow_exec {
+                    return Err(
+                        "`run` needs the operator to start the server with --allow-exec".into(),
+                    );
                 }
-                let fail_on = match s("fail_on").unwrap_or("medium") {
-                    "low" => plumbgraph_core::Level::Low,
-                    "medium" => plumbgraph_core::Level::Medium,
-                    "high" => plumbgraph_core::Level::High,
-                    _ => return Err("`fail_on` must be low, medium or high".into()),
-                };
-                let base = s("base").unwrap_or("HEAD");
-                if base.starts_with('-') {
+                if request.update_baseline && !self.allow_baseline_update {
+                    return Err("`update_baseline` needs the operator to start the server with --allow-baseline-update".into());
+                }
+                if request.base.starts_with('-') {
                     return Err("invalid `base` revision".into());
                 }
+                let mut inputs = vec![];
+                for input in request.inputs {
+                    let path = self.confine_file(&input.file)?;
+                    let format: Format = input.format.parse().map_err(|e: anyhow::Error| err(e))?;
+                    let text = std::fs::read_to_string(&path)
+                        .map_err(|e| sanitize(&format!("reading {}: {e}", path.display())))?;
+                    inputs.push(ops::DiagInput {
+                        format,
+                        label: input.file,
+                        text,
+                    });
+                }
+                let mut paths = vec![];
+                for path in request.scip {
+                    paths.push(self.confine_file(&path)?);
+                }
                 let p = VerifyParams {
-                    base: base.to_string(),
-                    run,
-                    online_deps: b("online", false),
+                    base: request.base,
+                    run: request.run,
+                    online_deps: request.online,
                     diag_inputs: inputs,
                     baseline: None,
-                    update_baseline: update,
-                    fail_on,
+                    update_baseline: request.update_baseline,
+                    trusted_baseline: request.trusted_baseline,
+                    policy: request.policy,
+                    fail_on: request.fail_on,
                     semgrep_config: None,
                     timeout: std::time::Duration::from_secs(120),
-                    scip: self.scip_opts(args)?,
-                    library_mode: false,
+                    scip: ScipOpts {
+                        paths,
+                        disable: !request.use_scip,
+                    },
+                    library_mode: matches!(request.mode, VerifyMode::Lib),
                 };
                 let mut r = run_verify(&self.target(), &p).map_err(err)?;
-                let max = u("max_results", 100).clamp(1, 1000);
-                let truncated = r.new.len() > max;
-                r.new.truncate(max);
+                let truncated = r.new.len() > request.max_results;
+                r.new.truncate(request.max_results);
                 let executed = r.executed;
                 Ok(json!({"data": r, "truncated": truncated, "executed": executed}))
             }
@@ -999,8 +1083,9 @@ mod v02_tests {
     #[test]
     fn verify_providers_enrich_and_resources() {
         let t = project();
+        init_git(t.path());
         let s = server(&t);
-        let r = tool(&s, "verify", json!({}));
+        let r = tool(&s, "verify", json!({"policy":{"enforce_dead_code":true}}));
         assert_eq!(r["isError"], false, "{r}");
         let d = &r["structuredContent"]["data"];
         assert_eq!(d["verdict"], "fail");
@@ -1010,7 +1095,7 @@ mod v02_tests {
             .unwrap()
             .iter()
             .any(|f| f["symbol"] == "_lonely_helper"));
-        // executing or writing needs --allow-exec
+        // Execution and baseline writes have separate operator authorities.
         for args in [json!({"run": true}), json!({"update_baseline": true})] {
             let r = tool(&s, "verify", args);
             assert_eq!(r["isError"], true);
@@ -1025,10 +1110,26 @@ mod v02_tests {
             json!({"inputs":[{"format":"tsc","file":"/etc/passwd"}]}),
         );
         assert_eq!(r["isError"], true);
-        let s2 = server(&t).with_allow_exec(true);
-        let r = tool(&s2, "verify", json!({"update_baseline": true}));
+        let exec_only = server(&t).with_allow_exec(true);
+        assert_eq!(
+            tool(&exec_only, "verify", json!({"update_baseline":true}))["isError"],
+            true
+        );
+        let write_only = server(&t).with_allow_baseline_update(true);
+        assert_eq!(
+            tool(&write_only, "verify", json!({"run":true}))["isError"],
+            true
+        );
+        let s2 = server(&t)
+            .with_allow_exec(true)
+            .with_allow_baseline_update(true);
+        let r = tool(&write_only, "verify", json!({"update_baseline": true}));
         assert_eq!(r["isError"], false, "{r}");
         assert!(t.path().join("plumb-baseline.json").is_file());
+        assert_eq!(
+            r["structuredContent"]["data"]["verdict"],
+            "baseline-updated"
+        );
         let r = tool(&s2, "verify", json!({}));
         assert_eq!(r["structuredContent"]["data"]["verdict"], "pass");
         let r = tool(&s, "providers", json!({}));
@@ -1052,5 +1153,204 @@ mod v02_tests {
             .contains("a.py"));
         let bad = s.handle(&json!({"jsonrpc":"2.0","id":3,"method":"resources/read","params":{"uri":"file:///etc/passwd"}})).unwrap();
         assert!(bad["error"].is_object());
+    }
+    fn init_git(root: &Path) {
+        for args in [
+            vec!["init", "-q"],
+            vec!["add", "-A"],
+            vec!["commit", "-q", "-m", "initial"],
+        ] {
+            assert!(std::process::Command::new("git")
+                .arg("-C")
+                .arg(root)
+                .args(args)
+                .env("GIT_AUTHOR_NAME", "test")
+                .env("GIT_AUTHOR_EMAIL", "test@example.com")
+                .env("GIT_COMMITTER_NAME", "test")
+                .env("GIT_COMMITTER_EMAIL", "test@example.com")
+                .status()
+                .unwrap()
+                .success());
+        }
+    }
+
+    #[test]
+    fn verify_schema_and_policy_parity() {
+        let tools = Server::tools();
+        let verify = tools
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|t| t["name"] == "verify")
+            .unwrap();
+        let props = &verify["inputSchema"]["properties"];
+        for field in ["mode", "scip", "trusted_baseline", "policy"] {
+            assert!(props.get(field).is_some(), "missing {field}");
+        }
+        for field in [
+            "enforce_dead_code",
+            "dependencies",
+            "weakening",
+            "diagnostics",
+            "rules",
+        ] {
+            assert!(
+                props["policy"]["properties"].get(field).is_some(),
+                "missing {field}"
+            );
+        }
+        let t = project();
+        init_git(t.path());
+        let s = server(&t);
+        let default = tool(&s, "verify", json!({}));
+        assert_eq!(default["structuredContent"]["data"]["verdict"], "pass");
+        let strict = tool(
+            &s,
+            "verify",
+            json!({"policy":{"enforce_dead_code":true,"dependencies":"high","weakening":"low","diagnostics":"medium","rules":"high"}}),
+        );
+        assert_eq!(strict["structuredContent"]["data"]["verdict"], "fail");
+        for args in [
+            json!({"policy":{"dependencies":"none"}}),
+            json!({"policy":{"unknown":true}}),
+            json!({"trusted_baseline":false}),
+            json!({"mode":"invalid"}),
+            json!({"fail_on":"none"}),
+            json!({"scip":["missing.scip"]}),
+        ] {
+            assert_eq!(tool(&s, "verify", args)["isError"], true);
+        }
+    }
+
+    #[test]
+    fn verify_library_mode_preserves_public_api() {
+        let t = tempfile::tempdir().unwrap();
+        std::fs::write(t.path().join("lib.py"), "def public_api():\n    return 1\n").unwrap();
+        init_git(t.path());
+        let s = server(&t);
+        let app = tool(
+            &s,
+            "verify",
+            json!({"mode":"app","policy":{"enforce_dead_code":true}}),
+        );
+        let lib = tool(
+            &s,
+            "verify",
+            json!({"mode":"lib","policy":{"enforce_dead_code":true}}),
+        );
+        assert_eq!(app["structuredContent"]["data"]["verdict"], "fail");
+        assert_eq!(lib["structuredContent"]["data"]["verdict"], "pass");
+    }
+
+    #[test]
+    fn verify_trusted_baseline_cannot_be_updated() {
+        let t = project();
+        init_git(t.path());
+        let s = server(&t).with_allow_baseline_update(true);
+        assert_eq!(
+            tool(
+                &s,
+                "verify",
+                json!({"trusted_baseline":"HEAD","update_baseline":true})
+            )["isError"],
+            true
+        );
+        assert!(!t.path().join("plumb-baseline.json").exists());
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn verify_default_baseline_symlink_cannot_escape_root() {
+        let t = project();
+        init_git(t.path());
+        let outside = tempfile::tempdir().unwrap();
+        let file = outside.path().join("baseline.json");
+        std::fs::write(&file, "outside sentinel").unwrap();
+        std::os::unix::fs::symlink(&file, t.path().join("plumb-baseline.json")).unwrap();
+        let s = server(&t).with_allow_baseline_update(true);
+        for args in [json!({}), json!({"update_baseline":true})] {
+            assert_eq!(tool(&s, "verify", args)["isError"], true);
+        }
+        assert_eq!(std::fs::read_to_string(file).unwrap(), "outside sentinel");
+    }
+    #[test]
+    fn verify_rejects_malformed_requests_before_running_any_checks() {
+        let t = project();
+        init_git(t.path());
+        let s = server(&t)
+            .with_allow_exec(true)
+            .with_allow_baseline_update(true);
+        let malformed = [
+            json!({"unknown":true}),
+            json!({"inputs":"missing.json"}),
+            json!({"inputs":{}}),
+            json!({"inputs":[null]}),
+            json!({"inputs":[{}]}),
+            json!({"inputs":[{"format":"tsc","file":"a.py","extra":true}]}),
+            json!({"inputs":[{"format":false,"file":"a.py"}]}),
+            json!({"inputs":[{"format":"tsc","file":false}]}),
+            json!({"run":"true"}),
+            json!({"mode":false}),
+            json!({"fail_on":false}),
+            json!({"base":1}),
+            json!({"online":"true"}),
+            json!({"update_baseline":"false"}),
+            json!({"use_scip":"false"}),
+            json!({"scip":"missing.scip"}),
+            json!({"scip":[1]}),
+            json!({"policy":true}),
+            json!({"policy":{"enforce_dead_code":"false"}}),
+            json!({"policy":{"dependencies":false}}),
+            json!({"policy":{"typo":true}}),
+            json!({"max_results":0}),
+            json!({"max_results":1001}),
+            json!({"max_results":-1}),
+            json!({"max_results":1.5}),
+        ];
+        for args in [json!(null), json!([]), json!("verify")] {
+            let response = s
+                .handle(&json!({"jsonrpc":"2.0", "id":1, "method":"tools/call",
+                "params":{"name":"verify", "arguments":args}}))
+                .unwrap();
+            assert!(
+                response["error"].is_object(),
+                "accepted malformed arguments: {response}"
+            );
+        }
+        for args in malformed {
+            let result = tool(&s, "verify", args.clone());
+            assert_eq!(result["isError"], true, "accepted {args}: {result}");
+        }
+        for field in [
+            "base",
+            "fail_on",
+            "policy",
+            "mode",
+            "trusted_baseline",
+            "inputs",
+            "online",
+            "run",
+            "update_baseline",
+            "max_results",
+            "use_scip",
+            "scip",
+        ] {
+            let args = json!({field: null});
+            let result = tool(&s, "verify", args.clone());
+            assert_eq!(result["isError"], true, "accepted {args}: {result}");
+        }
+        for field in [
+            "enforce_dead_code",
+            "dependencies",
+            "weakening",
+            "diagnostics",
+            "rules",
+        ] {
+            let args = json!({"policy": {field: null}});
+            let result = tool(&s, "verify", args.clone());
+            assert_eq!(result["isError"], true, "accepted {args}: {result}");
+        }
+        assert!(!t.path().join("plumb-baseline.json").exists());
+        assert!(!t.path().join("db/i.db").exists());
     }
 }
