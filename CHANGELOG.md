@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## [1.1.0] - 2026-10-11
+
+#### Breaking changes
+- Verify report schema is now **2**. Consumers must read the separate outcomes: pass, findings failure, incomplete analysis, and non-certifying baseline maintenance.
+- `--update-baseline` now exits 1: it is maintenance, not a passing verification.
+- `--fail-on` applies only to dead code that is explicitly opted in; dead code is advisory by default.
+- MCP baseline writes require `--allow-baseline-update` (baseline-write authority is separate from execution).
+
+#### Changed
 - Verify schema 2 separates pass, findings failure, incomplete analysis, and non-certifying baseline maintenance. Required failures and invalid Git bases no longer pass.
 - Independent per-check enforcement; dead code is advisory by default. CLI/MCP library mode and policy agree; baseline-write authority is separate from execution.
 - Pinned Git baseline mode, atomic maintenance, explicit baseline read errors, preserved unobserved provider entries, complete totals and coverage caveats.

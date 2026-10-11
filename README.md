@@ -34,7 +34,7 @@ Source releases are on [GitHub](https://github.com/grloper/plumbgraph/releases) 
 
 ```bash
 git clone https://github.com/grloper/plumbgraph && cd plumbgraph
-git checkout v1.0.3                           # latest release; the schema 2 gate below is on main (CHANGELOG: Unreleased)
+git checkout v1.1.0                           # latest release
 cargo install --path crates/cli --locked      # installs `plumb` (and `plumbgraph`)
 
 plumb map . --tokens 1500         # ranked overview under a hard token budget (--budget is an alias)
