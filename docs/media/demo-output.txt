@@ -1,0 +1,170 @@
+# Real output of plumb 1.1.0 (built from this repo's v1.1.0 tag) on a throwaway copy of the PlayGoblin CLI.
+# Captured by docs/media (see article). Lines are verbatim; the 'agent' section follows an edit I made by hand.
+
+===== map
+$ plumb map . --tokens 300    (exit 0)
+# plumb map: 9 files, 16 of 90 symbols (~284 tokens, budget 300)
+playgoblin/model.py
+  14: class Finding
+  37: class Event
+  58: class Run
+  65: def run_id(self) -> str
+  73: def load_run(directory: Path) -> Run
+playgoblin/client.py
+  14: class PlayGoblinError(RuntimeError)
+  23: def _request(self, method: str, path: str, body: dict | None = None) -> dict
+  46: def events(self, since: int = 0, max_events: int = 1000) -> dict
+playgoblin/writer.py
+  35: def event(self, type: str, detail: str | None = None, pos: Sequence[float] | None = None, t: float | None = None, **data…
+  50: def error(self, message: str, count: int = 1, kind: str = "error", first_t: float = 0.0, last_t: float | None = None, po…
+playgoblin/config.py
+  11: class Config
+playgoblin/cli.py
+  104: def main(argv: list[str] | None = None) -> int
+playgoblin/pipeline.py
+  12: def analyze(run_dirs: list[Path], out_dir: Path, config: Config, summarize=None) -> tuple[list[Finding], dict[str, Path]…
+playgoblin/report.py
+  50: def seen(f: Finding) -> str
+playgoblin/mcp_server.py
+  103: def handle(msg: dict) -> dict | None
+playgoblin/frames.py
+  23: class FrameStats
+
+$ plumb impact load_run    (exit 0)
+changed: load_run
+d1 0.85 function analyze  playgoblin/pipeline.py:12  via load_run  [t0-treesitter]
+d1 0.85 function _run  tests/test_inputs.py:7  via load_run  (test)  [t0-treesitter]
+d1 0.85 function test_truncated_last_event_line_does_not_break_loading  tests/test_pipeline.py:100  via load_run  (test)  [t0-treesitter]
+d1 0.85 function test_not_a_run_directory_is_a_clear_error  tests/test_pipeline.py:107  via load_run  (test)  [t0-treesitter]
+d1 0.85 function test_one_finding_per_actor  tests/test_prototype_look.py:13  via load_run  (test)  [t0-treesitter]
+d1 0.85 function test_unknown_reason_not_dropped  tests/test_prototype_look.py:22  via load_run  (test)  [t0-treesitter]
+d1 0.85 function test_cap_is_reported  tests/test_prototype_look.py:27  via load_run  (test)  [t0-treesitter]
+d1 0.85 function test_registered_and_clean_run  tests/test_prototype_look.py:32  via load_run  (test)  [t0-treesitter]
+d2 0.72 function cmd_report  playgoblin/cli.py:50  via analyze  [t0-treesitter]
+d2 0.72 function run_walks  playgoblin/service.py:13  via analyze  [t0-treesitter]
+d2 0.72 function build_report  playgoblin/service.py:35  via analyze  [t0-treesitter]
+d2 0.72 function test_a_run_written_by_the_writer_produces_findings  tests/test_ai.py:45  via analyze  (test)  [t0-treesitter]
+d2 0.72 function _report  tests/test_coverage.py:8  via analyze  (test)  [t0-treesitter]
+d2 0.72 function findings_of  tests/test_pipeline.py:18  via analyze  (test)  [t0-treesitter]
+d2 0.72 function test_clean_run_has_no_findings_and_says_so  tests/test_pipeline.py:93  via analyze  (test)  [t0-treesitter]
+d2 0.72 function test_findings_get_nearby_frames_and_a_clip  tests/test_pipeline.py:159  via analyze  (test)  [t0-treesitter]
+d2 0.72 function test_report_files_are_self_consistent  tests/test_pipeline.py:175  via analyze  (test)  [t0-treesitter]
+d2 0.72 function findings_of  tests/test_week3.py:21  via analyze  (test)  [t0-treesitter]
+d2 0.72 function make_report  tests/test_week3.py:58  via analyze  (test)  [t0-treesitter]
+d2 0.68 function test_dead_input  tests/test_inputs.py:15  via _run  (test)  [t0-treesitter]
+d2 0.68 function test_no_movement  tests/test_inputs.py:24  via _run  (test)  [t0-treesitter]
+d2 0.68 function test_movement_ok  tests/test_inputs.py:30  via _run  (test)  [t0-treesitter]
+d2 0.68 function test_engine_noise_collapsed  tests/test_inputs.py:35  via _run  (test)  [t0-treesitter]
+d2 0.68 function test_engine_noise_not_collapsed_for_unity  tests/test_inputs.py:45  via _run  (test)  [t0-treesitter]
+d3 0.61 function cmd_run  playgoblin/cli.py:65  via run_walks  [t0-treesitter]
+d3 0.61 function call_tool  playgoblin/mcp_server.py:80  via run_walks  [t0-treesitter]
+d3 0.61 function test_file_issues_json_dry_run  tests/test_ai.py:31  via make_report  (test)  [t0-treesitter]
+d3 0.61 function test_mcp_file_issues_is_a_dry_run_unless_confirmed  tests/test_ai.py:91  via make_report  (test)  [t0-treesitter]
+d3 0.58 function main  playgoblin/cli.py:104  via cmd_report  [t0-treesitter]
+d3 0.58 function test_report_shows_coverage_and_cells  tests/test_coverage.py:22  via _report  (test)  [t0-treesitter]
+d3 0.58 function test_low_coverage_is_flagged  tests/test_coverage.py:31  via _report  (test)  [t0-treesitter]
+d3 0.58 function test_coverage_falls_back_to_run_end_event  tests/test_coverage.py:37  via _report  (test)  [t0-treesitter]
+d3 0.58 function test_missing_coverage_prints_question_mark  tests/test_coverage.py:44  via _report  (test)  [t0-treesitter]
+d3 0.58 function test_exception_becomes_a_critical_finding  tests/test_pipeline.py:23  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_ignore_list_hides_matching_errors  tests/test_pipeline.py:30  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_same_error_in_two_runs_is_merged_and_counted  tests/test_pipeline.py:44  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_lone_stuck_is_unconfirmed_but_kept  tests/test_pipeline.py:51  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_repeated_stuck_in_same_place_is_confirmed  tests/test_pipeline.py:57  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_stuck_in_two_runs_is_confirmed_and_high_confidence  tests/test_pipeline.py:63  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_stuck_spots_far_apart_stay_separate  tests/test_pipeline.py:70  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_fall_and_trapped_findings  tests/test_pipeline.py:75  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_setup_error_is_reported  tests/test_pipeline.py:87  via findings_of  (test)  [t0-treesitter]
+d3 0.58 method   TestFrames.test_black_screen_is_blank_but_dark_textured_scene_is_not  tests/test_pipeline.py:116  via findings_of  (test)  [t0-treesitter]
+d3 0.58 method   TestFrames.test_flat_gray_sky_screen_is_blank  tests/test_pipeline.py:123  via findings_of  (test)  [t0-treesitter]
+d3 0.58 method   TestFrames.test_blank_frames_next_to_a_scene_change_are_skipped  tests/test_pipeline.py:127  via findings_of  (test)  [t0-treesitter]
+d3 0.58 method   TestFrames.test_magenta_area_is_a_debug_leftover  tests/test_pipeline.py:132  via findings_of  (test)  [t0-treesitter]
+d3 0.58 method   TestFrames.test_brand_pink_walls_are_not_missing_material  tests/test_pipeline.py:141  via findings_of  (test)  [t0-treesitter]
+d3 0.58 method   TestFrames.test_blank_frames_far_apart_merge_into_one_counted_finding  tests/test_pipeline.py:150  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_findings_are_ordered_by_severity_then_confirmation  tests/test_pipeline.py:186  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_fps_drops_become_one_finding_and_respect_a_stricter_budget  tests/test_week3.py:25  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_placeholder_text_is_a_debug_leftover  tests/test_week3.py:32  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_dead_button_finding  tests/test_week3.py:39  via findings_of  (test)  [t0-treesitter]
+d3 0.58 function test_file_issues_is_a_dry_run_by_default  tests/test_week3.py:64  via make_report  (test)  [t0-treesitter]
+d3 0.58 function test_file_issues_with_yes_creates_issues_with_a_fingerprint  tests/test_week3.py:73  via make_report  (test)  [t0-treesitter]
+d3 0.58 function test_file_issues_skips_findings_that_are_already_filed  tests/test_week3.py:82  via make_report  (test)  [t0-treesitter]
+d3 0.58 function test_lowercase_exception_kind_from_the_engines_is_critical  tests/test_week3.py:164  via findings_of  (test)  [t0-treesitter]
+d4 0.49 function handle  playgoblin/mcp_server.py:103  via call_tool  [t0-treesitter]
+d4 0.49 function test_report_json_is_one_parseable_document  tests/test_ai.py:15  via main  (test)  [t0-treesitter]
+d4 0.49 function test_run_json_keeps_progress_off_stdout  tests/test_ai.py:22  via main  (test)  [t0-treesitter]
+d4 0.49 function test_cli_report_end_to_end  tests/test_pipeline.py:194  via main  (test)  [t0-treesitter]
+d4 0.49 function test_cli_report_on_a_bad_path_exits_nonzero  tests/test_pipeline.py:202  via main  (test)  [t0-treesitter]
+d4 0.49 function test_cli_run_talks_to_the_api_and_writes_a_report  tests/test_pipeline.py:249  via main  (test)  [t0-treesitter]
+d4 0.49 function test_cli_run_without_unity_exits_nonzero  tests/test_pipeline.py:263  via main  (test)  [t0-treesitter]
+d4 0.49 function test_summary_prints_on_a_legacy_codepage_console  tests/test_pipeline.py:268  via main  (test)  [t0-treesitter]
+d4 0.49 function test_file_issues_without_a_report_is_a_clear_error  tests/test_week3.py:92  via main  (test)  [t0-treesitter]
+d4 0.49 function test_summary_anthropic_and_report_escapes_it  tests/test_week3.py:137  via main  (test)  [t0-treesitter]
+d4 0.49 function test_summary_without_configuration_explains_itself  tests/test_week3.py:150  via main  (test)  [t0-treesitter]
+d4 0.49 function test_no_summary_means_no_network  tests/test_week3.py:158  via main  (test)  [t0-treesitter]
+
+68 affected symbol(s) in 11 file(s); module-level dependents: 1
+tests to run: tests/test_ai.py tests/test_coverage.py tests/test_inputs.py tests/test_pipeline.py tests/test_prototype_look.py tests/test_week3.py
+note: reverse reachability over resolved call/reference edges: dynamic dispatch, reflection and code outside the index are invisible
+note: confidence is the product of edge confidences along the best path found; it is a heuristic, not a probability
+note: tests_to_run lists test files that reach a changed symbol through the graph; absence is not proof a test is unaffected
+
+===== clean
+$ plumb verify .    (exit 0)
+
+  dead-code        ran      0 finding(s)
+  check-deps       ran      0 finding(s)  (offline: manifests and local resolution only; pass --online to check registries)
+  test-weakening   ran      0 finding(s)  (vs HEAD)
+  diagnostics      skipped  0 finding(s)  (no saved output (--from) and --run not given; nothing was executed)
+  rule-engines     skipped  0 finding(s)  (semgrep / ast-grep run only with --run)
+
+verify: PASS  (0 new, 0 baselined, 0 fixed since baseline; dead-code advisory)
+note: baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new
+note: a pass covers the selected checks only; skipped optional checks provide no assurance
+note: tier-0 (tree-sitter, name-based) analysis: no type information, reflection or macro expansion; no SCIP index was used
+note: never delete on `medium` or `low` findings without checking usages yourself; `high` means no use was found in indexed code, not that deletion is proven safe
+note: files excluded by .gitignore, vendor/build directories and files over 2 MiB are not indexed
+note: dead-code findings are advisory by default, including SCIP findings: coverage does not prove safe deletion; opt in with --enforce-dead-code after review
+note: no baseline found at \\?\C:\pg\lv\playgoblin-cli\plumb-baseline.json: every finding counts as new (create one with --update-baseline)
+note: no external project process was started.
+
+===== agent
+$ git diff --stat    (exit 0)
+ playgoblin/service.py  | 6 ++++++
+ tests/test_pipeline.py | 2 +-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+$ plumb verify . --online    (exit 1)
+HIGH   0.95  playgoblin/service.py:42  function `_legacy_normalize` appears unused  [t0-treesitter]
+         why:  no reference edges from any code (0 incoming)
+         why:  not reachable from entry points (main, tests, module-level code, exported API in --mode lib, keep/allow-list)
+         why:  private to its module/crate (complete scope visibility)
+         why:  the name `_legacy_normalize` occurs nowhere else in the indexed code (identifiers, strings, import lists)
+         risk: tier-0 analysis is name-based: it does not see reflection, macros, or code outside the indexed files
+HIGH   0.95  tests/test_pipeline.py:99  skip/xfail marker added  [git-diff]
+         why:  added line: `@pytest.mark.skip(reason="flaky")`
+         risk: conditional skips (e.g. platform-specific) can be legitimate
+MEDIUM 0.70  playgoblin/service.py:6  `pgraph_fastjson` is not declared and does not exist on pypi  [registry:pypi]
+         why:  `pgraph_fastjson` is imported at playgoblin/service.py:6
+         why:  not declared in any pypi manifest covering this file
+         why:  pypi returned 404 for `pgraph_fastjson`
+         risk: a Python import name can differ from its distribution name (known mappings are built in; others are not)
+LOW    0.55  tests/test_pipeline.py:97  net 1 fewer assertion(s) in this file (1 removed, 0 added)  [git-diff]
+         why:  1 assertion line(s) removed, 0 added
+         risk: assertions may have moved to helpers or been consolidated
+         risk: line-based count; refactors can change it without weakening
+
+  dead-code        ran      1 finding(s)
+  check-deps       ran      1 finding(s)
+  test-weakening   ran      2 finding(s)  (vs HEAD)
+  diagnostics      skipped  0 finding(s)  (no saved output (--from) and --run not given; nothing was executed)
+  rule-engines     skipped  0 finding(s)  (semgrep / ast-grep run only with --run)
+
+verify: FAIL  (4 new, 0 baselined, 0 fixed since baseline; dead-code advisory)
+note: baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new
+note: a pass covers the selected checks only; skipped optional checks provide no assurance
+note: tier-0 (tree-sitter, name-based) analysis: no type information, reflection or macro expansion; no SCIP index was used
+note: never delete on `medium` or `low` findings without checking usages yourself; `high` means no use was found in indexed code, not that deletion is proven safe
+note: files excluded by .gitignore, vendor/build directories and files over 2 MiB are not indexed
+note: dead-code findings are advisory by default, including SCIP findings: coverage does not prove safe deletion; opt in with --enforce-dead-code after review
+note: no baseline found at \\?\C:\pg\lv\playgoblin-cli\plumb-baseline.json: every finding counts as new (create one with --update-baseline)
+note: no external project process was started.
+
