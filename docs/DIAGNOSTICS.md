@@ -21,6 +21,7 @@ $ plumb diagnostics . --lsp "rust-analyzer" --lsp-file src/lib.rs --timeout-secs
 ## Execution model
 
 - `--from` only reads files. `executed` is `false` in the report.
+- `plumb verify --fresh-diagnostics` (MCP `policy.fresh_diagnostics`) is the read-back mode for the gate: diagnostics evidence counts toward a verify `pass` only when freshly executed. Saved `--from` output alone turns a would-be pass into `incomplete`; saved findings that trip a threshold still fail. Default verify behavior is unchanged; see docs/VERIFY.md.
 - `--run` starts `cargo check` + `clippy` (if `Cargo.toml`), `tsc` (if `tsconfig.json`, preferring `node_modules/.bin/tsc`), `ruff` + `pyright` (Python project files). **`cargo check` runs build scripts and proc-macros; `node_modules/.bin/tsc` is repository-supplied code.** Missing tools are reported as `skipped`, never as failures; a tool that cannot be parsed or times out is `failed`/`timeout`.
 - `--lsp CMD` starts the language server, sends `initialize`/`didOpen` for the chosen files (default: up to 100 source files), collects `textDocument/publishDiagnostics`, waits until every file was reported on, the server has been quiet for 1.2 s and any work-done-progress / `experimental/serverStatus` loading phase has ended (or the timeout), then shuts it down. Files must be inside the root.
 - MCP: `inputs` is always allowed (paths confined to the root). `run` and `lsp` are refused unless the **operator** started the server with `plumb mcp --allow-exec`; a repository or a prompt cannot turn it on.

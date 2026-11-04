@@ -710,3 +710,87 @@ fn verify_refuses_cache_and_policy_symlink_escapes_before_indexing() {
         assert_eq!(std::fs::read_to_string(&victim).unwrap(), "unchanged");
     }
 }
+
+fn clean_saved_diagnostics() -> DiagInput {
+    DiagInput {
+        format: Format::Ruff,
+        label: "clean.json".into(),
+        text: "[]".into(),
+    }
+}
+
+#[test]
+fn fresh_diagnostics_saved_only_clean_cannot_pass() {
+    let t = project();
+    let mut p = params();
+    p.diag_inputs = vec![clean_saved_diagnostics()];
+    p.policy.fresh_diagnostics = true;
+    let r = run(t.path(), p);
+    assert_eq!(r.verdict, "incomplete", "{r:?}");
+    assert!(
+        r.limitations
+            .iter()
+            .any(|l| l.contains("fresh-diagnostics")),
+        "the block must be explained in limitations: {:?}",
+        r.limitations
+    );
+    assert!(!r.executed, "saved input must not count as execution");
+}
+
+#[test]
+fn default_mode_saved_clean_still_passes() {
+    let t = project();
+    let mut p = params();
+    p.diag_inputs = vec![clean_saved_diagnostics()];
+    let r = run(t.path(), p);
+    assert_eq!(r.verdict, "pass", "{r:?}");
+}
+
+#[test]
+fn fresh_diagnostics_saved_findings_still_fail() {
+    // Fail-closed precedence: a real problem in saved output still fails;
+    // only a would-be pass is downgraded to incomplete.
+    let t = project();
+    let mut p = params();
+    p.diag_inputs = vec![diagnostic("diagnostic.json")];
+    p.policy.fresh_diagnostics = true;
+    let r = run(t.path(), p);
+    assert_eq!(r.verdict, "fail", "{r:?}");
+    assert!(r.new.iter().any(|f| f.category == "diagnostic"));
+}
+
+#[test]
+fn fresh_diagnostics_fresh_run_passes() {
+    // Needs the same toolchain verify.sh needs (cargo + clippy): the gate
+    // must really execute the compiler, not ingest a saved file.
+    let t = tempfile::tempdir().unwrap();
+    put(
+        t.path(),
+        "Cargo.toml",
+        b"[package]\nname = \"freshprobe\"\nversion = \"0.1.0\"\nedition = \"2021\"\n",
+    );
+    put(t.path(), "src/lib.rs", b"pub fn one() -> i32 {\n    1\n}\n");
+    put(t.path(), BASELINE_FILE, fixture("empty-baseline.json"));
+    git(t.path(), &["init", "-q"]);
+    commit(t.path());
+    let mut p = params();
+    p.run = true;
+    p.policy.fresh_diagnostics = true;
+    let report = run_verify(
+        &Target {
+            root: t.path().into(),
+            db: None,
+        },
+        &p,
+    )
+    .unwrap();
+    assert_eq!(report.verdict, "pass", "{report:?}");
+    assert!(
+        report.executed,
+        "fresh mode must have executed a diagnostics tool: {report:?}"
+    );
+    assert!(report
+        .steps
+        .iter()
+        .any(|s| s.name == "diagnostics" && s.status == "ran"));
+}

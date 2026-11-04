@@ -29,6 +29,10 @@ pub struct VerifyPolicy {
     pub weakening: Level,
     pub diagnostics: Level,
     pub rules: Level,
+    /// Read-back mode: diagnostics evidence counts toward `pass` only when it was
+    /// freshly executed (`--run` / LSP). Saved `--from` output alone cannot
+    /// certify a pass; a would-be pass becomes `incomplete` instead.
+    pub fresh_diagnostics: bool,
 }
 
 impl Default for VerifyPolicy {
@@ -39,6 +43,7 @@ impl Default for VerifyPolicy {
             weakening: Level::Medium,
             diagnostics: Level::Medium,
             rules: Level::Medium,
+            fresh_diagnostics: false,
         }
     }
 }
@@ -231,6 +236,9 @@ pub fn run_verify(t: &Target, p: &VerifyParams) -> Result<VerifyReport> {
     let mut all: Vec<Finding> = vec![];
     let mut diff_based: Vec<Finding> = vec![];
     let mut executed = false;
+    // Diagnostics ran but no tool was freshly executed: every diagnostic
+    // input was saved output. Only meaningful when fresh mode is on.
+    let mut diag_saved_only = false;
     let mut limitations = vec![
         "baseline fingerprints ignore line numbers; renaming a symbol or file makes its findings new".into(),
         "a pass covers the selected checks only; skipped optional checks provide no assurance".into(),
@@ -345,6 +353,9 @@ pub fn run_verify(t: &Target, p: &VerifyParams) -> Result<VerifyReport> {
         match ops::run_diagnostics(&root, &dparams) {
             Ok(r) => {
                 executed |= r.executed;
+                if !p.diag_inputs.is_empty() && !r.executed {
+                    diag_saved_only = true;
+                }
                 let note = r
                     .tools
                     .iter()
@@ -448,10 +459,18 @@ pub fn run_verify(t: &Target, p: &VerifyParams) -> Result<VerifyReport> {
                 .or_insert_with(|| entry.clone());
         }
     }
-    let incomplete = steps
+    let step_failed = steps
         .iter()
         .any(|s| matches!(s.status.as_str(), "failed" | "timeout" | "incomplete"));
     let weakening_tripped = diff_based.iter().any(|f| f.level >= p.policy.weakening);
+    // A real failure outranks a fresh-evidence block: saved findings still count
+    // against the gate. Only a would-be pass is downgraded to incomplete, so a
+    // saved green file can never manufacture a pass in fresh mode.
+    // (`new` gains `diff_based` below; `enforced` is per-finding, so computing
+    // the trip here is identical to computing it after the extend.)
+    let tripped = new.iter().any(|f| enforced(f, p)) || diff_based.iter().any(|f| enforced(f, p));
+    let fresh_blocked = p.policy.fresh_diagnostics && diag_saved_only;
+    let incomplete = step_failed || (fresh_blocked && !weakening_tripped && !tripped);
     let total = all.len() + diff_based.len();
     let mut baseline_updated = false;
     if p.update_baseline && !incomplete && !weakening_tripped {
@@ -469,7 +488,9 @@ pub fn run_verify(t: &Target, p: &VerifyParams) -> Result<VerifyReport> {
             .then(a.file.cmp(&b.file))
             .then(a.line.cmp(&b.line))
     });
-    let tripped = new.iter().any(|f| enforced(f, p));
+    if fresh_blocked {
+        limitations.push("fresh-diagnostics: diagnostics evidence was saved output (--from) and no diagnostics tool was freshly executed, so this run cannot certify a pass; re-run with --run for fresh evidence".into());
+    }
     if baseline_unobserved > 0 {
         limitations.push(format!("{baseline_unobserved} unobserved baseline entries are retained conservatively; they are not certified fixed by this run"));
     }

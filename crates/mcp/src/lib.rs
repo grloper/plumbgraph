@@ -157,7 +157,7 @@ impl Server {
            "inputSchema":{"type":"object","properties":{"tokens":{"type":"integer","default":1500,"minimum":100,"maximum":20000},"changed":{"type":"string","description":"Git revision; files changed vs it are boosted"},"focus":{"type":"array","items":{"type":"string"},"description":"Project-relative files to boost"},"include_tests":{"type":"boolean","default":false},"format":{"type":"string","enum":["text","json"],"default":"text","description":"text (default): only the budgeted `text` map; json: also the per-symbol structure with ranks (about 4x the tokens)"},"use_scip":{"type":"boolean","default":true}},"additionalProperties":false}},
           {"name":"impact","description":"What breaks if this changes: transitive callers/referrers of a symbol (`symbol`) or of the symbols touched by the working-tree diff (`diff_base`, default HEAD when `symbol` is absent), with distance, path confidence and source, plus test files that reach the change. Reverse reachability over resolved edges; not a proof.",
            "inputSchema":{"type":"object","properties":{"symbol":{"type":"string"},"diff_base":{"type":"string"},"depth":{"type":"integer","default":4,"maximum":10},"min_confidence":{"type":"number","default":0.3},"max_results":{"type":"integer","default":100,"maximum":1000},"use_scip":{"type":"boolean","default":true}},"additionalProperties":false}},
-          {"name":"verify","description":"Pre-submit gate over dependencies, test weakening, diagnostics and rules; dead code is advisory unless policy.enforce_dead_code is true. Only verdict pass is success; failed or unavailable required checks are incomplete. run requires --allow-exec; update_baseline separately requires --allow-baseline-update and returns baseline-updated, never pass. trusted_baseline loads plumb-baseline.json from an immutable full Git commit ID.",
+          {"name":"verify","description":"Pre-submit gate over dependencies, test weakening, diagnostics and rules; dead code is advisory unless policy.enforce_dead_code is true. Only verdict pass is success; failed or unavailable required checks are incomplete. run requires --allow-exec; update_baseline separately requires --allow-baseline-update and returns baseline-updated, never pass. trusted_baseline loads plumb-baseline.json from an immutable full Git commit ID. policy.fresh_diagnostics requires diagnostics evidence to be freshly executed: saved-only inputs cannot produce a pass (verdict incomplete).",
            "inputSchema":{"type":"object","properties":{
              "base":{"type":"string","default":"HEAD","description":"Git revision for test weakening"},
              "fail_on":{"enum":["low","medium","high"],"default":"medium","description":"Threshold for explicitly enforced dead code"},
@@ -166,7 +166,8 @@ impl Server {
                "dependencies":{"enum":["low","medium","high"],"default":"medium"},
                "weakening":{"enum":["low","medium","high"],"default":"medium"},
                "diagnostics":{"enum":["low","medium","high"],"default":"medium"},
-               "rules":{"enum":["low","medium","high"],"default":"medium"}
+               "rules":{"enum":["low","medium","high"],"default":"medium"},
+               "fresh_diagnostics":{"type":"boolean","default":false,"description":"Diagnostics evidence counts toward pass only when freshly executed; saved-only inputs yield incomplete, never pass"}
              },"additionalProperties":false},
              "mode":{"enum":["app","lib"],"default":"app"},
              "trusted_baseline":{"type":"string","description":"Immutable full Git commit ID containing plumb-baseline.json; also the weakening diff base; incompatible with update_baseline"},
@@ -1193,6 +1194,7 @@ mod v02_tests {
             "weakening",
             "diagnostics",
             "rules",
+            "fresh_diagnostics",
         ] {
             assert!(
                 props["policy"]["properties"].get(field).is_some(),
@@ -1345,6 +1347,7 @@ mod v02_tests {
             "weakening",
             "diagnostics",
             "rules",
+            "fresh_diagnostics",
         ] {
             let args = json!({"policy": {field: null}});
             let result = tool(&s, "verify", args.clone());
