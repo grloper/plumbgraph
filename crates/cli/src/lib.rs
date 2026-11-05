@@ -282,6 +282,10 @@ enum Cmd {
         /// Diagnostics finding threshold
         #[arg(long, value_enum, default_value = "medium")]
         diagnostics: VerifyLevel,
+        /// Read-back mode: diagnostics evidence counts toward `pass` only when
+        /// freshly executed (`--run`). Saved `--from` output alone cannot pass.
+        #[arg(long)]
+        fresh_diagnostics: bool,
         /// Rule-engine finding threshold
         #[arg(long, value_enum, default_value = "medium")]
         rules: VerifyLevel,
@@ -875,6 +879,7 @@ fn run(cli: Cli) -> Result<bool> {
             dependencies,
             weakening,
             diagnostics,
+            fresh_diagnostics,
             rules,
             fail_on,
             max_findings,
@@ -914,6 +919,7 @@ fn run(cli: Cli) -> Result<bool> {
                         weakening: weakening.into(),
                         diagnostics: diagnostics.into(),
                         rules: rules.into(),
+                        fresh_diagnostics,
                     },
                     fail_on: fail_on.into(),
                     semgrep_config,

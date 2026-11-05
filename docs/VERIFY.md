@@ -28,6 +28,26 @@ plumb verify . --dependencies medium --weakening medium --diagnostics high --rul
 
 `--fail-on` now controls only explicitly enforced dead code. It no longer raises every check's threshold, and `verify --fail-on none` is rejected. Other CLI commands retain their existing flags. Dependency, weakening, diagnostics and rule thresholds default independently to `medium`. MCP uses `mode: "lib"` and `policy: {"enforce_dead_code": true, "dependencies": "medium", "weakening": "medium", "diagnostics": "high", "rules": "medium"}` with `fail_on: "high"`. Unknown policy keys and invalid thresholds are rejected. Report `policy` records the effective values.
 
+### Fresh diagnostics (read-back mode)
+
+By default, saved diagnostics output (`--from`) is evidence like any other: a saved green file contributes to a `pass` even though the gate never ran the compiler. That is the gap this mode closes. Opt in with:
+
+```sh
+plumb verify . --fresh-diagnostics --run
+```
+
+or MCP `policy: {"fresh_diagnostics": true}` (with `run: true` for fresh evidence; `run` still needs the operator flag `plumb mcp --allow-exec`).
+
+Rules, in order:
+
+- Diagnostics evidence counts toward `pass` only when at least one diagnostics tool was freshly executed in this run. Saved `--from` input alone can never produce a pass: a would-be pass becomes `incomplete`, with a `fresh-diagnostics` limitation explaining why.
+- Saved findings still count against the gate. If saved output trips an enforcing threshold, the verdict is `fail`, not `incomplete`: a real problem outranks the freshness block.
+- Fresh mode governs supplied evidence, not absence. If no diagnostics were requested at all, the step stays `skipped` and a pass still covers only the selected checks, as before.
+- A fresh-blocked run that would otherwise pass is `incomplete`, so it cannot write a baseline either. Maintenance runs with tripping findings follow the existing maintenance rules.
+- Default behavior is unchanged: without the flag, saved output can still contribute to a pass, exactly as before.
+
+Limits of the mode itself: it proves the gate executed a tool in this run, not that the tool was the right one, correctly configured, or run against the current tree. A fresh run against stale files, or a tool that exits 0 without checking anything, still passes. It also does not cover other saved inputs: baselines remain caller-supplied unless `--trusted-baseline` pins them.
+
 ## Baselines and authority
 
 The baseline file format remains version 1. Line-independent fingerprints and multiplicity are retained. An absent implicit `plumb-baseline.json` starts empty; an explicitly supplied missing baseline is an error except when intentionally creating it with maintenance. Relative baseline paths resolve from the project root. Malformed JSON, unsupported versions and filesystem read failures are errors. Baseline paths must remain inside the project root and symlinks are rejected.
@@ -50,6 +70,6 @@ This is deliberately a bounded trust mechanism: the operator must supply trusted
 
 ## Limits
 
-Saved diagnostics are evidence supplied by the caller, not a fresh compiler run. Offline dependency checks cannot establish public registry existence. Passing optional checks requires `--run` and/or saved output; online dependency validation requires `--online`. Name-based and partially covered SCIP results retain their coverage limitations. Windows/macOS native execution and production editor-host integration need separate validation; Linux tests do not certify those platforms.
+Saved diagnostics are evidence supplied by the caller, not a fresh compiler run. Offline dependency checks cannot establish public registry existence. Passing optional checks requires `--run` and/or saved output; online dependency validation requires `--online`. In fresh-diagnostics mode (`--fresh-diagnostics`, MCP `policy.fresh_diagnostics`), saved-only diagnostics cannot produce a pass; see "Fresh diagnostics (read-back mode)" above. Name-based and partially covered SCIP results retain their coverage limitations. Windows/macOS native execution and production editor-host integration need separate validation; Linux tests do not certify those platforms.
 
 SCIP inputs must resolve within the project root, including auto-discovered indexes. Verify rejects symlinked cache/policy paths before opening them. Tool timeouts stop the direct child and bound output collection; they do not guarantee termination of every descendant process. Execute untrusted toolchains only in a suitable external sandbox.
