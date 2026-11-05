@@ -10,6 +10,7 @@ publish.workspace = true
 
 [dependencies]
 anyhow.workspace = true
+ed25519-dalek.workspace = true
 globset.workspace = true
 ignore.workspace = true
 plumbgraph-langs.workspace = true

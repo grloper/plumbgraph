@@ -20,6 +20,7 @@ pub mod registry;
 pub mod resolve;
 pub mod rules;
 pub mod scip;
+pub mod spv;
 pub mod store;
 pub mod verify;
 pub mod weakening;
