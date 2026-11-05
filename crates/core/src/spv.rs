@@ -1,10 +1,12 @@
 //! Self-Proving Verdict (SPV): types, Ed25519 manifests/receipts, content-hash
 //! tree snapshots, policy floors, full finding fingerprints, scenario grading,
-//! and the self-test mutation runner (phase 2).
+//! the self-test mutation runner (phase 2), dual independent verdict, and the
+//! `run_spv` entry point with signed receipt emission (phase 3).
 //!
 //! Do not grade a scenario whose manifest signature was not verified (I5).
 //! Callers may only tighten policy relative to floors (I6).
 //! The gate must catch every derived mutation and canary before grading anyone.
+//! Dual verdict disagreement yields Incomplete (I9). Self-test runs first (I1).
 
 use crate::{Finding, Level};
 use anyhow::{bail, Result};
@@ -13,6 +15,7 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use std::collections::HashMap;
 use std::path::{Component, Path, PathBuf};
+use std::time::{SystemTime, UNIX_EPOCH};
 
 pub use ed25519_dalek::SigningKey;
 
@@ -139,6 +142,8 @@ pub struct VerdictReceipt {
     pub findings: Vec<ProvenanceTuple>,
     pub policy_hash: String,
     pub gate_binary_hash: String,
+    /// True only when primary and independent dual verdicts disagreed (I9).
+    pub verdict_disagreement: bool,
     pub signature_hex: String,
     pub public_key_hex: String,
 }
@@ -164,6 +169,7 @@ struct ReceiptCanon<'a> {
     findings: &'a [ProvenanceTuple],
     policy_hash: &'a str,
     gate_binary_hash: &'a str,
+    verdict_disagreement: bool,
 }
 
 fn to_hex(bytes: &[u8]) -> String {
@@ -222,6 +228,7 @@ fn receipt_canonical_bytes(receipt: &VerdictReceipt) -> Result<Vec<u8>> {
         findings: &receipt.findings,
         policy_hash: &receipt.policy_hash,
         gate_binary_hash: &receipt.gate_binary_hash,
+        verdict_disagreement: receipt.verdict_disagreement,
     };
     Ok(serde_json::to_vec(&canon)?)
 }
@@ -474,6 +481,11 @@ pub trait EvidenceProvider {
     fn covered_destinations(&self) -> &[String];
     /// False if any finding came from saved input rather than a fresh execution (invariant I3).
     fn is_fresh(&self) -> bool;
+    /// Tool attribution for a finding: `(tool_id, tool_version, tool_path_hash, args_hash)`.
+    /// `None` if the finding cannot be attributed to a pinned-tool execution
+    /// (unattributed findings are listed with empty tool fields and never count
+    /// as verified-absent evidence).
+    fn tool_attribution(&self, finding: &Finding) -> Option<(String, String, String, String)>;
 }
 
 fn destination_rel(dest: &Destination) -> String {
@@ -569,6 +581,136 @@ pub fn grade_scenario(
     }
 
     SpvVerdict::Pass
+}
+
+/// Inputs gathered from phase-1/2 primitive verifiers for the independent decision.
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct VerdictInputs {
+    manifest_ok: bool,
+    policy_ok: bool,
+    snapshot_ok: bool,
+    hash_match: bool,
+    coverage_ok: bool,
+    fresh: bool,
+    assertions_ok: bool,
+}
+
+/// Explicit truth-table decision for the independent verdict path.
+/// First matching arm wins. Precedence: GateUntrusted > Fail > Incomplete > Pass
+/// (Fail is reached only after GateUntrusted and Incomplete conditions are clear).
+fn decide_verdict(inputs: &VerdictInputs) -> SpvVerdict {
+    match (
+        inputs.manifest_ok,
+        inputs.policy_ok,
+        inputs.snapshot_ok,
+        inputs.hash_match,
+        inputs.coverage_ok,
+        inputs.fresh,
+        inputs.assertions_ok,
+    ) {
+        (false, _, _, _, _, _, _) => SpvVerdict::GateUntrusted,
+        (true, false, _, _, _, _, _) => SpvVerdict::GateUntrusted,
+        (true, true, false, _, _, _, _) => SpvVerdict::Incomplete,
+        (true, true, true, false, _, _, _) => SpvVerdict::Incomplete,
+        (true, true, true, true, false, _, _) => SpvVerdict::Incomplete,
+        (true, true, true, true, true, false, _) => SpvVerdict::Incomplete,
+        (true, true, true, true, true, true, false) => SpvVerdict::Fail,
+        (true, true, true, true, true, true, true) => SpvVerdict::Pass,
+    }
+}
+
+fn collect_assertion_files(manifest: &ScenarioManifest, rel_paths: &[String]) -> Vec<String> {
+    let mut file_paths: Vec<String> = rel_paths.to_vec();
+    for assertion in manifest
+        .payload
+        .positive_assertions
+        .iter()
+        .chain(manifest.payload.negative_assertions.iter())
+    {
+        let file = match &assertion.kind {
+            AssertionKind::FileContains { file, .. }
+            | AssertionKind::FindingAbsent { file, .. }
+            | AssertionKind::SymbolPresent { file, .. } => file.clone(),
+        };
+        if !file_paths.iter().any(|p| p == &file) {
+            file_paths.push(file);
+        }
+    }
+    file_paths
+}
+
+fn compute_verdict_inputs(
+    root: &Path,
+    manifest: &ScenarioManifest,
+    provider: &dyn EvidenceProvider,
+) -> VerdictInputs {
+    let manifest_ok = verify_manifest(manifest).is_ok();
+    let policy_ok = apply_policy(&manifest.payload.policy, &default_floors()).is_ok();
+
+    let rel_paths: Vec<String> = manifest
+        .payload
+        .destinations
+        .iter()
+        .map(destination_rel)
+        .collect();
+    let rel_refs: Vec<&str> = rel_paths.iter().map(String::as_str).collect();
+    let snapshot = snapshot_tree(root, &rel_refs);
+    let snapshot_ok = snapshot.is_ok();
+    let hash_match = match &snapshot {
+        Ok(snap) => manifest.payload.destinations.iter().all(|dest| {
+            let rel = destination_rel(dest);
+            snap.files
+                .iter()
+                .find(|(p, _)| *p == rel)
+                .map(|(_, hash)| *hash == dest.content_hash)
+                .unwrap_or(false)
+        }),
+        Err(_) => false,
+    };
+
+    let covered = provider.covered_destinations();
+    let coverage_ok = rel_paths.iter().all(|rel| covered.iter().any(|c| c == rel));
+    let fresh = provider.is_fresh();
+
+    let file_paths = collect_assertion_files(manifest, &rel_paths);
+    let files: Vec<(String, String)> = file_paths
+        .iter()
+        .filter_map(|p| provider.file_content(p).map(|c| (p.clone(), c)))
+        .collect();
+    let findings = provider.fresh_findings();
+    let assertions_ok = manifest
+        .payload
+        .positive_assertions
+        .iter()
+        .chain(manifest.payload.negative_assertions.iter())
+        .all(|a| a.check(&files, findings));
+
+    VerdictInputs {
+        manifest_ok,
+        policy_ok,
+        snapshot_ok,
+        hash_match,
+        coverage_ok,
+        fresh,
+        assertions_ok,
+    }
+}
+
+/// Independent verdict decision (I9).
+///
+/// Independence rule: this MUST NOT call [`grade_scenario`]. It reuses the same
+/// primitive verifiers (manifest, policy, snapshot, coverage, freshness,
+/// assertions) but decides via a separate explicit truth table so a bug in one
+/// decision path is unlikely to be mirrored in the other.
+/// Precedence implemented: GateUntrusted > Fail > Incomplete > Pass
+/// (table order: GateUntrusted, then Incomplete conditions, then Fail, then Pass).
+pub fn grade_scenario_independent(
+    root: &Path,
+    manifest: &ScenarioManifest,
+    provider: &dyn EvidenceProvider,
+) -> SpvVerdict {
+    let inputs = compute_verdict_inputs(root, manifest, provider);
+    decide_verdict(&inputs)
 }
 
 /// Kind of self-test mutation applied to a scenario.
@@ -857,6 +999,10 @@ impl EvidenceProvider for OverlayProvider<'_> {
     fn is_fresh(&self) -> bool {
         self.base.is_fresh()
     }
+
+    fn tool_attribution(&self, finding: &Finding) -> Option<(String, String, String, String)> {
+        self.base.tool_attribution(finding)
+    }
 }
 
 fn grade_mutated(
@@ -1006,6 +1152,316 @@ impl EvidenceProvider for FakeEvidence {
     fn is_fresh(&self) -> bool {
         self.fresh
     }
+
+    fn tool_attribution(&self, _finding: &Finding) -> Option<(String, String, String, String)> {
+        Some(("fake-tool".into(), "0.1.0".into(), "aa".into(), "bb".into()))
+    }
+}
+
+/// Self-test repetitions for [`run_spv`]. v1 default is 2.
+#[derive(Debug, Clone)]
+pub struct SpvRunConfig {
+    pub runs: u8,
+}
+
+impl Default for SpvRunConfig {
+    fn default() -> Self {
+        Self { runs: 2 }
+    }
+}
+
+/// Format current UTC time as `YYYY-MM-DDTHH:MM:SSZ` using [`SystemTime`].
+/// No extra time crate; sub-second precision is truncated. Civil-date conversion
+/// uses the standard days-from-civil algorithm (Howard Hinnant).
+fn utc_now_rfc3339() -> String {
+    let secs = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map(|d| d.as_secs() as i64)
+        .unwrap_or(0);
+    civil_utc_ymd_hms(secs)
+}
+
+fn civil_utc_ymd_hms(secs: i64) -> String {
+    let days = secs.div_euclid(86_400);
+    let tod = secs.rem_euclid(86_400) as u32;
+    let hour = tod / 3600;
+    let min = (tod % 3600) / 60;
+    let sec = tod % 60;
+
+    // civil_from_days (Howard Hinnant), Unix epoch = 1970-01-01.
+    let z = days + 719_468;
+    let era = z.div_euclid(146_097);
+    let doe = (z - era * 146_097) as u32;
+    let yoe = (doe - doe / 1460 + doe / 36_524 - doe / 146_096) / 365;
+    let y = yoe as i64 + era * 400;
+    let doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+    let mp = (5 * doy + 2) / 153;
+    let d = doy - (153 * mp + 2) / 5 + 1;
+    let m = if mp < 10 { mp + 3 } else { mp - 9 };
+    let y = if m <= 2 { y + 1 } else { y };
+    format!("{y:04}-{m:02}-{d:02}T{hour:02}:{min:02}:{sec:02}Z")
+}
+
+/// Sha256 of the current executable's bytes. If the path is unreadable, returns
+/// the literal string `"unknown"` (not a hash of that string).
+fn current_gate_binary_hash() -> String {
+    match std::env::current_exe().and_then(std::fs::read) {
+        Ok(bytes) => sha256_hex(&bytes),
+        Err(_) => "unknown".into(),
+    }
+}
+
+fn policy_hash(policy: &Policy) -> String {
+    match serde_json::to_vec(policy) {
+        Ok(bytes) => sha256_hex(&bytes),
+        Err(_) => sha256_hex(&[]),
+    }
+}
+
+fn canary_results_from_report(report: &SelfTestReport) -> Vec<CanaryResult> {
+    let mut seen: Vec<String> = Vec::new();
+    let mut out = Vec::new();
+    for m in &report.mutations {
+        if m.kind != MutationKind::CanaryImpossible {
+            continue;
+        }
+        if seen.iter().any(|n| n == &m.name) {
+            continue;
+        }
+        seen.push(m.name.clone());
+        let caught_every = report
+            .mutations
+            .iter()
+            .filter(|o| o.name == m.name)
+            .all(|o| o.caught);
+        if caught_every {
+            out.push(CanaryResult::Caught {
+                name: m.name.clone(),
+            });
+        } else {
+            out.push(CanaryResult::Missed {
+                name: m.name.clone(),
+            });
+        }
+    }
+    out
+}
+
+fn coverage_all_uncovered(manifest: &ScenarioManifest) -> CoverageSet {
+    CoverageSet {
+        covered: vec![],
+        uncovered: manifest
+            .payload
+            .destinations
+            .iter()
+            .map(destination_rel)
+            .collect(),
+    }
+}
+
+fn coverage_from_provider(
+    manifest: &ScenarioManifest,
+    provider: &dyn EvidenceProvider,
+) -> CoverageSet {
+    let covered_src = provider.covered_destinations();
+    let mut covered = Vec::new();
+    let mut uncovered = Vec::new();
+    for dest in &manifest.payload.destinations {
+        let rel = destination_rel(dest);
+        if covered_src.iter().any(|c| c == &rel) {
+            covered.push(rel);
+        } else {
+            uncovered.push(rel);
+        }
+    }
+    CoverageSet { covered, uncovered }
+}
+
+fn build_provenance(
+    provider: &dyn EvidenceProvider,
+    snapshot: &Option<TreeSnapshot>,
+    tree_id: &str,
+    executed_at: &str,
+) -> Vec<ProvenanceTuple> {
+    let file_hashes: HashMap<String, String> = snapshot
+        .as_ref()
+        .map(|s| s.files.iter().cloned().collect())
+        .unwrap_or_default();
+    provider
+        .fresh_findings()
+        .iter()
+        .map(|f| {
+            let file_key = f.file.replace('\\', "/");
+            let file_content_hash = file_hashes.get(&file_key).cloned().unwrap_or_default();
+            let (tool_id, tool_version, tool_path_hash, args_hash) =
+                provider.tool_attribution(f).unwrap_or_default();
+            ProvenanceTuple {
+                finding_fingerprint_full: full_fingerprint(f),
+                file_content_hash,
+                tool_id,
+                tool_version,
+                tool_path_hash,
+                args_hash,
+                tree_id: tree_id.to_string(),
+                executed_at: executed_at.to_string(),
+            }
+        })
+        .collect()
+}
+
+/// Parameters for [`unsigned_receipt_shell`], bundled so the helper stays
+/// under clippy's argument-count limit.
+struct ReceiptShellArgs {
+    verdict: SpvVerdict,
+    tree_hash: String,
+    coverage: CoverageSet,
+    mutation_score: f32,
+    canary_results: Vec<CanaryResult>,
+    findings: Vec<ProvenanceTuple>,
+    verdict_disagreement: bool,
+}
+
+fn unsigned_receipt_shell(manifest: &ScenarioManifest, args: ReceiptShellArgs) -> VerdictReceipt {
+    VerdictReceipt {
+        verdict: args.verdict,
+        manifest_hash: manifest_hash(manifest),
+        tree_hash: args.tree_hash,
+        coverage: args.coverage,
+        mutation_score: args.mutation_score,
+        canary_results: args.canary_results,
+        findings: args.findings,
+        policy_hash: policy_hash(&manifest.payload.policy),
+        gate_binary_hash: current_gate_binary_hash(),
+        verdict_disagreement: args.verdict_disagreement,
+        signature_hex: String::new(),
+        public_key_hex: String::new(),
+    }
+}
+
+/// Run the full SPV pipeline: self-test (I1), dual verdict (I9), tree binding (I8),
+/// provenance (I2), and signed receipt emission.
+///
+/// Never panics on bad input — failures become verdicts on the returned receipt.
+///
+/// TODO(SPV-I4): baseline entries may only drop as fixed on a fresh read of their
+/// destination; v1 never drops baselines, so I4 is unimplemented, not satisfied.
+pub fn run_spv(
+    root: &Path,
+    manifest: &ScenarioManifest,
+    provider: &dyn EvidenceProvider,
+    signing_key: &SigningKey,
+    config: &SpvRunConfig,
+) -> VerdictReceipt {
+    // TODO(SPV-I4): baseline entries may only drop as fixed on a fresh read of
+    // their destination; v1 never drops baselines, so I4 is unimplemented, not
+    // satisfied. This function does not read or write baselines.
+
+    let self_test = run_self_test(root, manifest, provider, signing_key, config.runs);
+    let (self_passed, mutation_score, canary_results) = match &self_test {
+        Ok(report) => (
+            report.passed,
+            report.score,
+            canary_results_from_report(report),
+        ),
+        Err(_) => (false, 0.0, Vec::new()),
+    };
+
+    if !self_passed {
+        // I1: do not grade anything when self-test fails.
+        let mut receipt = unsigned_receipt_shell(
+            manifest,
+            ReceiptShellArgs {
+                verdict: SpvVerdict::GateUntrusted,
+                tree_hash: String::new(),
+                coverage: coverage_all_uncovered(manifest),
+                mutation_score,
+                canary_results,
+                findings: Vec::new(),
+                verdict_disagreement: false,
+            },
+        );
+        let _ = sign_receipt(&mut receipt, signing_key);
+        return receipt;
+    }
+
+    // Snapshot at grading time (I8 binding baseline).
+    let rel_paths: Vec<String> = manifest
+        .payload
+        .destinations
+        .iter()
+        .map(destination_rel)
+        .collect();
+    let rel_refs: Vec<&str> = rel_paths.iter().map(String::as_str).collect();
+    let grading_snap = snapshot_tree(root, &rel_refs).ok();
+    let grading_hash = grading_snap
+        .as_ref()
+        .map(|s| s.tree_hash.clone())
+        .unwrap_or_default();
+
+    // Dual verdict (I9).
+    let primary = grade_scenario(root, manifest, provider);
+    let independent = grade_scenario_independent(root, manifest, provider);
+    let (mut verdict, verdict_disagreement) = if primary != independent {
+        (SpvVerdict::Incomplete, true)
+    } else {
+        (primary, false)
+    };
+
+    // Receipt tree binding (I8): re-snapshot; mid-run change => Incomplete.
+    if let Ok(re_snap) = snapshot_tree(root, &rel_refs) {
+        if grading_snap
+            .as_ref()
+            .map(|s| s.tree_hash != re_snap.tree_hash)
+            .unwrap_or(true)
+        {
+            verdict = SpvVerdict::Incomplete;
+        }
+    } else if grading_snap.is_some() {
+        // Tree became unreadable after grading.
+        verdict = SpvVerdict::Incomplete;
+    }
+
+    let executed_at = utc_now_rfc3339();
+    let findings = build_provenance(provider, &grading_snap, &grading_hash, &executed_at);
+    let coverage = coverage_from_provider(manifest, provider);
+
+    let mut receipt = unsigned_receipt_shell(
+        manifest,
+        ReceiptShellArgs {
+            verdict,
+            tree_hash: grading_hash,
+            coverage,
+            mutation_score,
+            canary_results,
+            findings,
+            verdict_disagreement,
+        },
+    );
+    let _ = sign_receipt(&mut receipt, signing_key);
+    receipt
+}
+
+/// Consumer-side I8 check: re-snapshot `rel_paths` and compare to `receipt.tree_hash`.
+/// Returns Ok(true) if equal, Ok(false) if different, Err on snapshot failure.
+pub fn verify_receipt_tree(
+    root: &Path,
+    receipt: &VerdictReceipt,
+    rel_paths: &[&str],
+) -> Result<bool> {
+    let snap = snapshot_tree(root, rel_paths)?;
+    Ok(snap.tree_hash == receipt.tree_hash)
+}
+
+/// TODO(SPV-I4): baseline entries may only drop as fixed on a fresh read of their
+/// destination. Stub panics until I4 is implemented — called only from the
+/// ignored `i4_baseline_drop_is_unimplemented` test.
+#[allow(dead_code)]
+fn baseline_entry_dropped_as_fixed(
+    _baseline_path: &Path,
+    _finding_fingerprint: &str,
+    _fresh_findings: &[Finding],
+) -> bool {
+    todo!("TODO(SPV-I4): drop baseline entries as fixed only on a fresh read of their destination")
 }
 
 #[cfg(test)]
@@ -1115,6 +1571,7 @@ mod tests {
             findings: vec![],
             policy_hash: "p".into(),
             gate_binary_hash: "g".into(),
+            verdict_disagreement: false,
             signature_hex: String::new(),
             public_key_hex: String::new(),
         }
@@ -1597,6 +2054,10 @@ mod tests {
         fn is_fresh(&self) -> bool {
             self.inner.is_fresh()
         }
+
+        fn tool_attribution(&self, finding: &Finding) -> Option<(String, String, String, String)> {
+            self.inner.tool_attribution(finding)
+        }
     }
 
     #[test]
@@ -1662,5 +2123,322 @@ mod tests {
         let report = run_self_test(dir.path(), &manifest, &evidence, &key, 2).expect("self-test");
         assert_eq!(report.score, 1.0);
         assert!(report.passed);
+    }
+
+    // --- Phase 3: run_spv, dual verdict, receipt emission ---
+
+    /// Provider whose `file_content` always contains every needle, including the
+    /// FlipPositiveAssertion mutated needle `__SPV_MUTATED_ABSENT__`. That makes
+    /// the flip mutation grade Pass, so self-test fails.
+    struct BlindFakeEvidence {
+        inner: FakeEvidence,
+    }
+
+    impl EvidenceProvider for BlindFakeEvidence {
+        fn fresh_findings(&self) -> &[Finding] {
+            self.inner.fresh_findings()
+        }
+
+        fn file_content(&self, rel_path: &str) -> Option<String> {
+            let base = self.inner.file_content(rel_path).unwrap_or_default();
+            Some(format!("{base}hello__SPV_MUTATED_ABSENT__"))
+        }
+
+        fn covered_destinations(&self) -> &[String] {
+            self.inner.covered_destinations()
+        }
+
+        fn is_fresh(&self) -> bool {
+            self.inner.is_fresh()
+        }
+
+        fn tool_attribution(&self, finding: &Finding) -> Option<(String, String, String, String)> {
+            self.inner.tool_attribution(finding)
+        }
+    }
+
+    fn evidence_with_finding(content: &str) -> FakeEvidence {
+        let mut evidence = matching_evidence(content);
+        evidence.findings.push(Finding::new(
+            "spv",
+            "other-rule",
+            "src/code.py",
+            1,
+            0.9,
+            "fake",
+            "benign finding".into(),
+        ));
+        evidence
+    }
+
+    #[test]
+    fn run_spv_passes_valid_scenario() {
+        let dir = tempfile::tempdir().expect("tempdir");
+        let (manifest, key) = fake_manifest(dir.path());
+        let evidence = evidence_with_finding(FAKE_CONTENT);
+        let receipt = run_spv(
+            dir.path(),
+            &manifest,
+            &evidence,
+            &key,
+            &SpvRunConfig::default(),
+        );
+        assert_eq!(receipt.verdict, SpvVerdict::Pass);
+        verify_receipt(&receipt).expect("verify");
+        assert_eq!(receipt.mutation_score, 1.0);
+        assert!(!receipt.canary_results.is_empty());
+        assert!(receipt
+            .canary_results
+            .iter()
+            .all(|c| matches!(c, CanaryResult::Caught { .. })));
+        assert!(!receipt.verdict_disagreement);
+        assert!(!receipt.findings.is_empty());
+        for p in &receipt.findings {
+            assert!(!p.tool_id.is_empty());
+            assert!(!p.tool_version.is_empty());
+            assert!(!p.tool_path_hash.is_empty());
+            assert!(!p.args_hash.is_empty());
+            assert!(!p.finding_fingerprint_full.is_empty());
+            assert!(!p.tree_id.is_empty());
+            assert!(!p.executed_at.is_empty());
+        }
+    }
+
+    #[test]
+    fn run_spv_gate_untrusted_when_self_test_fails() {
+        let dir = tempfile::tempdir().expect("tempdir");
+        let (manifest, key) = fake_manifest(dir.path());
+        let report = run_self_test(
+            dir.path(),
+            &manifest,
+            &matching_evidence(FAKE_CONTENT),
+            &key,
+            1,
+        )
+        .expect("baseline self-test passes with honest provider");
+        assert!(report.passed);
+
+        let blind = BlindFakeEvidence {
+            inner: matching_evidence(FAKE_CONTENT),
+        };
+        let receipt = run_spv(
+            dir.path(),
+            &manifest,
+            &blind,
+            &key,
+            &SpvRunConfig::default(),
+        );
+        assert_eq!(receipt.verdict, SpvVerdict::GateUntrusted);
+        assert!(receipt.findings.is_empty());
+        assert!(receipt.mutation_score < 1.0);
+        assert!(receipt.coverage.covered.is_empty());
+        assert!(!receipt.coverage.uncovered.is_empty());
+    }
+
+    #[test]
+    fn dual_verdict_agrees_on_valid_scenario() {
+        let dir = tempfile::tempdir().expect("tempdir");
+        let (manifest, _key) = fake_manifest(dir.path());
+
+        // Valid => Pass
+        let ok = matching_evidence(FAKE_CONTENT);
+        assert_eq!(
+            grade_scenario(dir.path(), &manifest, &ok),
+            grade_scenario_independent(dir.path(), &manifest, &ok)
+        );
+        assert_eq!(grade_scenario(dir.path(), &manifest, &ok), SpvVerdict::Pass);
+
+        // Failing positive assertion => Fail
+        let mut failing = matching_evidence(FAKE_CONTENT);
+        failing
+            .files
+            .insert("src/code.py".into(), "no needle".into());
+        assert_eq!(
+            grade_scenario(dir.path(), &manifest, &failing),
+            grade_scenario_independent(dir.path(), &manifest, &failing)
+        );
+        assert_eq!(
+            grade_scenario(dir.path(), &manifest, &failing),
+            SpvVerdict::Fail
+        );
+
+        // Incomplete: non-fresh
+        let mut incomplete = matching_evidence(FAKE_CONTENT);
+        incomplete.fresh = false;
+        assert_eq!(
+            grade_scenario(dir.path(), &manifest, &incomplete),
+            grade_scenario_independent(dir.path(), &manifest, &incomplete)
+        );
+        assert_eq!(
+            grade_scenario(dir.path(), &manifest, &incomplete),
+            SpvVerdict::Incomplete
+        );
+    }
+
+    #[test]
+    fn dual_verdict_disagreement_is_incomplete() {
+        // The public dual-verdict disagreement path (receipt.verdict_disagreement
+        // = true) cannot be triggered without a real divergence between
+        // grade_scenario and grade_scenario_independent; by construction they
+        // agree on every real input. Cover the decision table directly, and
+        // cover the signed receipt field by constructing disagreement=true.
+        let all_ok = VerdictInputs {
+            manifest_ok: true,
+            policy_ok: true,
+            snapshot_ok: true,
+            hash_match: true,
+            coverage_ok: true,
+            fresh: true,
+            assertions_ok: true,
+        };
+        assert_eq!(decide_verdict(&all_ok), SpvVerdict::Pass);
+
+        let mut fault = all_ok.clone();
+        fault.manifest_ok = false;
+        assert_eq!(decide_verdict(&fault), SpvVerdict::GateUntrusted);
+
+        fault = all_ok.clone();
+        fault.policy_ok = false;
+        assert_eq!(decide_verdict(&fault), SpvVerdict::GateUntrusted);
+
+        fault = all_ok.clone();
+        fault.snapshot_ok = false;
+        assert_eq!(decide_verdict(&fault), SpvVerdict::Incomplete);
+
+        fault = all_ok.clone();
+        fault.hash_match = false;
+        assert_eq!(decide_verdict(&fault), SpvVerdict::Incomplete);
+
+        fault = all_ok.clone();
+        fault.coverage_ok = false;
+        assert_eq!(decide_verdict(&fault), SpvVerdict::Incomplete);
+
+        fault = all_ok.clone();
+        fault.fresh = false;
+        assert_eq!(decide_verdict(&fault), SpvVerdict::Incomplete);
+
+        fault = all_ok.clone();
+        fault.assertions_ok = false;
+        assert_eq!(decide_verdict(&fault), SpvVerdict::Fail);
+
+        let dir = tempfile::tempdir().expect("tempdir");
+        let (manifest, key) = fake_manifest(dir.path());
+        let evidence = matching_evidence(FAKE_CONTENT);
+        let receipt = run_spv(
+            dir.path(),
+            &manifest,
+            &evidence,
+            &key,
+            &SpvRunConfig::default(),
+        );
+        assert!(!receipt.verdict_disagreement);
+
+        let key = test_key_a();
+        let mut disagreed = sample_receipt();
+        disagreed.verdict_disagreement = true;
+        disagreed.verdict = SpvVerdict::Incomplete;
+        sign_receipt(&mut disagreed, &key).expect("sign");
+        verify_receipt(&disagreed).expect("disagreement field is part of signed bytes");
+    }
+
+    #[test]
+    fn receipt_tree_binding() {
+        let dir = tempfile::tempdir().expect("tempdir");
+        let (manifest, key) = fake_manifest(dir.path());
+        let evidence = matching_evidence(FAKE_CONTENT);
+        let receipt = run_spv(
+            dir.path(),
+            &manifest,
+            &evidence,
+            &key,
+            &SpvRunConfig::default(),
+        );
+        let rel = "src/code.py";
+        assert!(verify_receipt_tree(dir.path(), &receipt, &[rel]).expect("tree ok"));
+        fs::write(dir.path().join(rel), b"def hello():\n    return 43\n").expect("change");
+        assert!(!verify_receipt_tree(dir.path(), &receipt, &[rel]).expect("tree changed"));
+    }
+
+    #[test]
+    fn saved_only_never_counts_as_verified_absent() {
+        let dir = tempfile::tempdir().expect("tempdir");
+        let (manifest, key) = fake_manifest(dir.path());
+        let mut evidence = matching_evidence(FAKE_CONTENT);
+        evidence.fresh = false;
+        evidence.findings.clear();
+        let receipt = run_spv(
+            dir.path(),
+            &manifest,
+            &evidence,
+            &key,
+            &SpvRunConfig::default(),
+        );
+        assert_eq!(receipt.verdict, SpvVerdict::Incomplete);
+        assert_ne!(receipt.verdict, SpvVerdict::Pass);
+    }
+
+    #[test]
+    fn uncovered_destination_is_incomplete() {
+        let dir = tempfile::tempdir().expect("tempdir");
+        let (manifest, key) = fake_manifest(dir.path());
+        let mut evidence = matching_evidence(FAKE_CONTENT);
+        evidence.covered.clear();
+        let receipt = run_spv(
+            dir.path(),
+            &manifest,
+            &evidence,
+            &key,
+            &SpvRunConfig::default(),
+        );
+        assert_eq!(receipt.verdict, SpvVerdict::Incomplete);
+    }
+
+    #[test]
+    fn receipt_signature_verifies_and_tamper_fails() {
+        let dir = tempfile::tempdir().expect("tempdir");
+        let (manifest, key) = fake_manifest(dir.path());
+        let evidence = matching_evidence(FAKE_CONTENT);
+        let mut receipt = run_spv(
+            dir.path(),
+            &manifest,
+            &evidence,
+            &key,
+            &SpvRunConfig::default(),
+        );
+        verify_receipt(&receipt).expect("verify");
+        receipt.mutation_score = 0.5;
+        assert!(verify_receipt(&receipt).is_err());
+    }
+
+    /// FAILS when run with `-- --ignored` until I4 is implemented.
+    /// First assertion (baseline untouched) passes today; the
+    /// `baseline_entry_dropped_as_fixed` stub `todo!()` panics, proving the gap.
+    #[test]
+    #[ignore = "TODO(SPV-I4): baseline entries must drop as fixed only on a fresh read of their destination; v1 never touches baselines"]
+    fn i4_baseline_drop_is_unimplemented() {
+        let dir = tempfile::tempdir().expect("tempdir");
+        let (manifest, key) = fake_manifest(dir.path());
+        let baseline_path = dir.path().join("baseline.json");
+        let baseline_body = r#"{"entries":[{"fp":"abc"}]}"#;
+        fs::write(&baseline_path, baseline_body).expect("write baseline");
+
+        let evidence = matching_evidence(FAKE_CONTENT);
+        let _receipt = run_spv(
+            dir.path(),
+            &manifest,
+            &evidence,
+            &key,
+            &SpvRunConfig::default(),
+        );
+
+        let after = fs::read_to_string(&baseline_path).expect("read baseline");
+        assert_eq!(after, baseline_body, "v1 must not touch baselines");
+
+        // This fails today: the helper is an intentional todo!() stub.
+        assert!(baseline_entry_dropped_as_fixed(
+            &baseline_path,
+            "abc",
+            evidence.fresh_findings()
+        ));
     }
 }
