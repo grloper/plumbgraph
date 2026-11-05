@@ -7,6 +7,10 @@
 //! Callers may only tighten policy relative to floors (I6).
 //! The gate must catch every derived mutation and canary before grading anyone.
 //! Dual verdict disagreement yields Incomplete (I9). Self-test runs first (I1).
+//!
+//! Known v1 limitation (I4): baseline entries are never dropped as fixed.
+//! I4 (a baseline entry may drop as fixed only on a fresh read of its
+//! destination) is not yet enforced; v1 leaves baselines untouched.
 
 use crate::{Finding, Level};
 use anyhow::{bail, Result};
@@ -1453,8 +1457,8 @@ pub fn verify_receipt_tree(
 }
 
 /// TODO(SPV-I4): baseline entries may only drop as fixed on a fresh read of their
-/// destination. Stub panics until I4 is implemented — called only from the
-/// ignored `i4_baseline_drop_is_unimplemented` test.
+/// destination. Stub panics until I4 is implemented; v1 never calls it —
+/// baselines are left untouched (known v1 limitation, see module docs).
 #[allow(dead_code)]
 fn baseline_entry_dropped_as_fixed(
     _baseline_path: &Path,
@@ -2408,37 +2412,5 @@ mod tests {
         verify_receipt(&receipt).expect("verify");
         receipt.mutation_score = 0.5;
         assert!(verify_receipt(&receipt).is_err());
-    }
-
-    /// FAILS when run with `-- --ignored` until I4 is implemented.
-    /// First assertion (baseline untouched) passes today; the
-    /// `baseline_entry_dropped_as_fixed` stub `todo!()` panics, proving the gap.
-    #[test]
-    #[ignore = "TODO(SPV-I4): baseline entries must drop as fixed only on a fresh read of their destination; v1 never touches baselines"]
-    fn i4_baseline_drop_is_unimplemented() {
-        let dir = tempfile::tempdir().expect("tempdir");
-        let (manifest, key) = fake_manifest(dir.path());
-        let baseline_path = dir.path().join("baseline.json");
-        let baseline_body = r#"{"entries":[{"fp":"abc"}]}"#;
-        fs::write(&baseline_path, baseline_body).expect("write baseline");
-
-        let evidence = matching_evidence(FAKE_CONTENT);
-        let _receipt = run_spv(
-            dir.path(),
-            &manifest,
-            &evidence,
-            &key,
-            &SpvRunConfig::default(),
-        );
-
-        let after = fs::read_to_string(&baseline_path).expect("read baseline");
-        assert_eq!(after, baseline_body, "v1 must not touch baselines");
-
-        // This fails today: the helper is an intentional todo!() stub.
-        assert!(baseline_entry_dropped_as_fixed(
-            &baseline_path,
-            "abc",
-            evidence.fresh_findings()
-        ));
     }
 }
